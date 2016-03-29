@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Quote Generator</title>
+	<meta charset="UTF-8">
+	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
+	<style>
+		html, body {
+			 height: 100%;
+			 margin: 0px;
+			}
+	</style>
+	
+	<script>
+		function GetNewQuote(){
+			var Array = [
+				"The world is yours to take apart and put back together again, in any way you choose", "Brandon Walsh",
+				"I have a dream", "Martin Luther King, Jr.",
+				"Shall I close the door?", "James Riven",
+				"You're a right tit", "Sarah Molloy",
+				"Use the force, Luke", "Obi Wan Kenobi"
+
+			];
+			var Selected = (Math.random()*((Array.length/2)-1)).toFixed(0);
+
+			document.getElementById('TheQuote').innerHTML = Array[Selected*2];
+			document.getElementById('TheAuthor').innerHTML = Array[(Selected*2)+1];
+
+			SentencyArray = Array[Selected*2].split(" ");
+			document.getElementById('TweetingButton').href = "https://twitter.com/intent/tweet?text=";
+			document.getElementById('TweetingButton').href = document.getElementById('TweetingButton').href.concat('"')
+			document.getElementById('TweetingButton').href = document.getElementById('TweetingButton').href.concat(SentencyArray[0]);
+
+			for(i = 1; i < SentencyArray.length; i++){
+				document.getElementById('TweetingButton').href = document.getElementById('TweetingButton').href.concat("%20");
+				document.getElementById('TweetingButton').href = document.getElementById('TweetingButton').href.concat(SentencyArray[i]);
+			}	
+
+			document.getElementById('TweetingButton').href = document.getElementById('TweetingButton').href.concat('"')
+			document.getElementById('TweetingButton').href = document.getElementById('TweetingButton').href.concat("-")
+
+			SentencyArray = Array[(Selected*2)+1].split(" ");
+			for(i = 0; i < SentencyArray.length; i++){
+				document.getElementById('TweetingButton').href = document.getElementById('TweetingButton').href.concat("%20");
+				document.getElementById('TweetingButton').href = document.getElementById('TweetingButton').href.concat(SentencyArray[i]);
+			}
+	
+		}
+	</script>
+
+</head>
+
+<body>
+	<h1 style="font-family:Pacifico; text-align:center; font-size:500%;">Quoteables</h1>
+		<table width="100%">
+			<tr>
+				<td width="50%">
+					<div style="float:right;"><svg width="100%" height="40px" viewbox="0 0 300 100">
+						<rect  
+							x="0" 
+							y="0" 
+							height="100" 
+							width="300" 
+							fill=#d0d0d0
+							rx="10%"
+						></rect>
+						<text 
+							x="150" 
+							y="75" 
+							style="fill:#808080; font-size:400%; font-family:Pacifico;"
+							text-anchor="middle"
+						>Quote me!</text>
+
+							<svg 
+							viewbox="0 0 300 100" 
+							style="opacity:0; transition: opacity 0.5s ease;" 
+							onmouseover="this.style.opacity='1';" 
+							onmouseout="this.style.opacity='0';"
+							onmousedown="GetNewQuote();">
+							<rect
+								x="0"
+								y="0"
+								width="300"
+								height="100"
+								fill="rgba(255,255,255,0.65)"
+							></rect>
+						</svg>
+					</svg></div>
+				</td>
+				<td width="50%">
+					<a id="TweetingButton" href="#" style="float:left;"><svg width="100%" height="40px" viewbox="0 0 300 100">
+						<rect  
+							x="0" 
+							y="0" 
+							height="100" 
+							width="300" 
+							fill=#d0d0d0
+							rx="10%"
+						></rect>
+						<text 
+							x="140" 
+							y="75" 
+							style="fill:#808080; font-size:400%; font-family:Pacifico;"
+							text-anchor="middle"
+						>Tweet</text>
+
+							<svg 
+							viewbox="0 0 300 100" 
+							style="opacity:0; transition: opacity 0.5s ease;" 
+							onmouseover="this.style.opacity='1';" 
+							onmouseout="this.style.opacity='0';"
+							>
+							<rect
+								x="0"
+								y="0"
+								width="300"
+								height="100"
+								fill="rgba(0,172,237,0.65)"
+								rx="10%"
+							></rect>
+						</svg>
+					</svg></a>
+				</td>
+			</tr>
+		</table>
+	<p id="TheQuote" style="text-align:center; font-size:150%; margin:24px;">
+	</p>
+	<p id="TheAuthor" style="text-align:center; font-size:100%; margin:0px;">
+	</p>
+
+</body>
+</html>
