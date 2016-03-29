@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<!-- add: xmlns="http://www.w3.org/2000/svg" to SVG element -->
+
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- for JSON -->
+	<script>
+//Globals///////////////////
+	var BackGround_size = 10000;
+	//Viewer Data
+	var XPosition = 0; var YPosition = 0;
+	var ZoomAmount = 1; var ZoomStep = 0.05;
+////////////////////////////
+	//Startup Procedure/////////////////////////////////////////////////
+		function Go(){
+			document.getElementById('MainBackground').style.height = BackGround_size;
+			document.getElementById('MainBackground').style.width = BackGround_size;
+			AdjustWindow();
+			FillWorkspaceBackground();
+		}
+	//Calabrate Viewbox to suit user's window///////////////////////////
+		function AdjustWindow(){
+			var viewbox = [0,0,window.innerWidth,window.innerHeight];
+			document.getElementById('MainSVG').setAttribute("viewBox", "" + viewbox[0] + " " + viewbox[1] + " " + viewbox[2] + " " + viewbox[3]);
+		}
+	//Zoom//////////////////////////////////////////////////////////////
+		function Zoom(data, object){
+			Y_Percent = ((data.clientY - object.getBoundingClientRect().top)/object.getBoundingClientRect().height)*BackGround_size;
+			X_Percent = ((data.clientX - object.getBoundingClientRect().left)/object.getBoundingClientRect().height)*BackGround_size;
+			ZoomStep = ZoomAmount/8;
+
+			if( data.deltaY > 0){//Zoom out
+				ZoomAmount = ZoomAmount - ZoomStep;
+			}
+			else if( data.deltaY < 0 ){//Zoom in
+				ZoomAmount = ZoomAmount + ZoomStep;
+				if( ZoomAmount <= 0){ZoomAmount = ZoomStep;}
+			}
+			XPosition = data.clientX - X_Percent*ZoomAmount;
+			YPosition = data.clientY - Y_Percent*ZoomAmount;
+			UpdateUserView(XPosition,YPosition,ZoomAmount);
+		}
+	//Panning///////////////////////////////////////////////////////////
+	var PositionInsideBox = [0,0]
+	var OldPosition = [0,0];
+	var NewPosition = [0,0];
+		function Pan(event, object){
+			object.setAttributeNS(null,"onmousemove","Pan_Calculate(this)");
+			object.setAttributeNS(null,"onmouseout","Pan_Stop(this)");
+			object.setAttributeNS(null,"onmouseup","Pan_Stop(this)");
+			PositionInsideBox[0] = event.clientX;
+			PositionInsideBox[1] = event.clientY;
+			OldPosition[0] = XPosition;
+			OldPosition[1] = YPosition;
+		}
+
+		function Pan_Calculate(object){
+			XPosition = event.clientX-PositionInsideBox[0]+OldPosition[0];
+			YPosition = event.clientY-PositionInsideBox[1]+OldPosition[1];
+
+			UpdateUserView(XPosition,YPosition,ZoomAmount);
+			NewPosition[0] = XPosition; NewPosition[1] = YPosition;
+		}
+
+		function Pan_Stop(object){
+			object.removeAttributeNS(null, "onmousemove");
+			object.removeAttributeNS(null, "onmouseout");
+			object.removeAttributeNS(null, "onmouseup");
+		}
+
+	//Fill Workspace Background/////////////////////////////////////////
+	function FillWorkspaceBackground(){
+		document.getElementById('WorkspaceBackground').innerHTML = document.getElementById('WorkspaceBackground').innerHTML + '<rect class="SVGItem" x="0" y="0" height="'+BackGround_size+'" width="'+BackGround_size+'" style="fill:rgb(20,20,20);"/>';
+		document.getElementById('WorkspaceBackground').innerHTML = document.getElementById('WorkspaceBackground').innerHTML + '<rect class="SVGItem" x="0" y="0" height="1" width="'+BackGround_size+'" style="fill:rgb(150,150,150);"/>';
+		document.getElementById('WorkspaceBackground').innerHTML = document.getElementById('WorkspaceBackground').innerHTML + '<rect class="SVGItem" x="0" y="'+(BackGround_size-1)+'" height="1" width="'+BackGround_size+'" style="fill:rgb(150,150,150);"/>';
+		document.getElementById('WorkspaceBackground').innerHTML = document.getElementById('WorkspaceBackground').innerHTML + '<rect class="SVGItem" x="0" y="0" height="'+BackGround_size+'" width="1" style="fill:rgb(150,150,150);"/>';
+		document.getElementById('WorkspaceBackground').innerHTML = document.getElementById('WorkspaceBackground').innerHTML + '<rect class="SVGItem" x="'+(BackGround_size-1)+'" y="0" height="'+BackGround_size+'" width="1" style="fill:rgb(150,150,150);"/>';
+	}
+	////////////////////////////////////////////////////////////////////
+		function UpdateUserView(X,Y,Zoom){ChangeCSSCode("Main", ".SVGItem", "transform", "translate(" + X + "px, " + Y + "px) scale(" + Zoom + ")", "");}
+		function ChangeCSSCode(SheetName, SelectorText, Rule, NewValue, Type){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){document.styleSheets[a].cssRules[b].style[Rule] = NewValue + Type;}}}}}
+		function GetCSSCode(SheetName, SelectorText, Rule){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){return document.styleSheets[a].cssRules[b].style[Rule];}}}}}
+	</script>
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+			overflow-x: hidden; overflow-y: hidden;
+			background-color: rgb(15,15,15);
+		}
+
+		#MainBackground{
+			fill:rgba(20,20,20,0);
+		}
+
+		.SVGItem{
+			transform: translate(0px,0px) scale(1);
+			transition: transform 0.1s;
+		}
+
+	</style>
+</head>
+
+<body onLoad="Go()" onresize="AdjustWindow()">
+
+<svg id="MainSVG" height="100%" width="100%">
+<!-- Workspace Background -->
+	<g id="WorkspaceBackground"></g>
+<!-- Workspace Background Cover -->
+	<rect class="SVGItem" id="MainBackground" onmousedown="Pan(event, this)" onwheel="Zoom(event, this)"/>
+	<g id="Workspace">
+		<rect class="SVGItem" x="0" y="0" height="10" width="10" style="fill:rgb(255,100,100);"/>
+		<rect class="SVGItem" x="20" y="0" height="10" width="10" style="fill:rgb(255,255,100);"/>
+		<rect class="SVGItem" x="80" y="0" height="10" width="10" style="fill:rgb(255,255,100);"/>
+		<rect class="SVGItem" x="160" y="0" height="10" width="10" style="fill:rgb(255,255,100);"/>
+		<rect class="SVGItem" x="320" y="0" height="10" width="10" style="fill:rgb(255,255,100);"/>
+		<rect class="SVGItem" x="640" y="0" height="10" width="10" style="fill:rgb(255,255,100);"/>
+
+		<rect class="SVGItem" x="0" y="20" height="10" width="10" style="fill:rgb(255,100,255);"/>
+		<rect class="SVGItem" x="0" y="80" height="10" width="10" style="fill:rgb(255,100,255);"/>
+		<rect class="SVGItem" x="0" y="160" height="10" width="10" style="fill:rgb(255,100,255);"/>
+		<rect class="SVGItem" x="0" y="320" height="10" width="10" style="fill:rgb(255,100,255);"/>
+		<rect class="SVGItem" x="0" y="640" height="10" width="10" style="fill:rgb(255,100,255);"/>
+	</g>
+</svg>
+
+</body>
+</html>
