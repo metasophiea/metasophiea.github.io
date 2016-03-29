@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather</title>
+	<meta charset="UTF-8">
+	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0px;
+			}
+		table{
+			background-color: rgba(255,255,255,0.5);
+		}
+		td{
+			transition: background-color 0.5s;
+			text-align:center;
+			font-family:Raleway;
+		}
+
+		td#Temp:hover{		
+			background-color: rgb(230,230,230);
+		}		
+
+	</style>
+
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	<script>
+		//the API key: 37de64f097dac5deb87dd5e7030804c6
+		//API link: api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&APPID={APIKEY} 
+		//Example: http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=API_ID
+		var API_ID = "37de64f097dac5deb87dd5e7030804c6";
+
+		$(document).ready(function() {go();});
+		var latitude = 0; var longitude = 0; var TempInFahrenheit = false; var mapProp = {center: {lat: latitude, lng: longitude}, zoom:1, mapTypeId:google.maps.MapTypeId.ROADMAP, disableDefaultUI: true};
+		
+
+		function go(){
+			getLocation();
+			document.getElementById("LatLong").innerHTML = "Latitude: " + latitude +" Longitude: "+ longitude;
+			$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
+
+			map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			var MapMarker = new google.maps.Marker({position:{lat: latitude, lng: longitude}, map:map})
+
+			map.addListener('center_changed', function() {
+				latitude = map.getCenter().lat(); longitude = map.getCenter().lng();
+				document.getElementById("LatLong").innerHTML = "Latitude: " + latitude +" <br>Longitude: "+ longitude;
+				MapMarker.setPosition({lat: latitude, lng: longitude});
+				$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
+  			});
+
+
+		}
+
+		function getLocation() {
+    			if (navigator.geolocation) {
+        			navigator.geolocation.getCurrentPosition(GetCurrentPosition_Success, GetCurrentPosition_Failure,{timeout:500});
+    			} else { 
+        			document.getElementById("DataOutput").innerHTML = "Geolocation is not supported by this browser.";
+    			}
+		}
+
+		function GetCurrentPosition_Success(position) {
+			latitude = position.coords.latitude; longitude = position.coords.longitude;
+    			//document.getElementById("DataOutput").innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;	
+			map.panTo({lat: latitude, lng: longitude}); map.setZoom(10);
+		}
+
+		function GetCurrentPosition_Failure(error){	
+			//Default values..
+			latitude = 0; longitude = 0;
+			map.panTo({lat: latitude, lng: longitude}); map.setZoom(1);
+		}
+
+		function DoTheWeatherReport(jsonData){
+			document.getElementById("Weather").innerHTML = "Weather: " + jsonData.weather[0].description;
+			if(TempInFahrenheit){var Temperature = "" + (jsonData.main.temp*(9/5) + 32) + "f";}else{var Temperature = "" + (jsonData.main.temp) + "c";}
+
+			document.getElementById("Temp").innerHTML = "Tempature: " + Temperature;
+			document.getElementById("Main").innerHTML =  "Pressure: " + jsonData.main.pressure + "millibars";
+								     
+
+
+			if(jsonData.wind.deg != undefined){
+				var pointer_angle = jsonData.wind.deg;
+				var pointer_x = Math.sin(Math.PI*(pointer_angle/180))*50 + 50; var pointer_y = 50 - Math.cos(Math.PI*(pointer_angle/180))*50;
+			
+			}else{var pointer_x = 50; var pointer_y = 50;}
+
+			document.getElementById("Wind").innerHTML = "Wind Speed: " + jsonData.wind.speed + "m/s" + "<br>" + 
+				'<svg id="WindDirection" width="25%" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">' + 
+					'<circle cx="50" cy="50" r="50" style="fill:rgb(230,230,230)"></circle>' + 
+					'<line x1="50" y1="0" x2="50" y2="10"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
+					'<line x1="'+(Math.sin(Math.PI*(45/180))*50 + 50)+'" y1="'+(50 - Math.cos(Math.PI*(45/180))*50)+'" x2="'+(Math.sin(Math.PI*(45/180))*45 + 50)+'" y2="'+(50 - Math.cos(Math.PI*(45/180))*45)+'"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
+					'<line x1="100" y1="50" x2="90" y2="50"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
+					'<line x1="'+(Math.sin(Math.PI*(135/180))*50 + 50)+'" y1="'+(50 - Math.cos(Math.PI*(135/180))*50)+'" x2="'+(Math.sin(Math.PI*(135/180))*45 + 50)+'" y2="'+(50 - Math.cos(Math.PI*(135/180))*45)+'"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
+					'<line x1="50" y1="100" x2="50" y2="90"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
+					'<line x1="'+(Math.sin(Math.PI*(225/180))*50 + 50)+'" y1="'+(50 - Math.cos(Math.PI*(225/180))*50)+'" x2="'+(Math.sin(Math.PI*(225/180))*45 + 50)+'" y2="'+(50 - Math.cos(Math.PI*(225/180))*45)+'"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
+					'<line x1="0" y1="50" x2="10" y2="50"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
+					'<line x1="'+(Math.sin(Math.PI*(315/180))*50 + 50)+'" y1="'+(50 - Math.cos(Math.PI*(315/180))*50)+'" x2="'+(Math.sin(Math.PI*(315/180))*45 + 50)+'" y2="'+(50 - Math.cos(Math.PI*(315/180))*45)+'"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
+					'<line x1="50" y1="50" x2=' + pointer_x + ' y2=' + pointer_y + '  style="stroke:rgb(200,0,0);stroke-width:2" />' +				
+				'</svg>'
+			;
+			document.getElementById("Humidity").innerHTML = "Humidity: " + jsonData.main.humidity + "%" + "<br>" + "Cloudage: " + jsonData.clouds.all + "%";
+			document.getElementById("Sys").innerHTML = "Country Code: " + jsonData.sys.country + "<br>" + "Location: " + jsonData.name;
+			UpdateBackground(jsonData.weather[0].icon);
+		}
+
+		function SwitchTempType(){
+			if(TempInFahrenheit){TempInFahrenheit = false;}else{TempInFahrenheit = true;}
+			$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
+		}
+	
+		function UpdateBackground(code){
+			var imageURL = "#";
+			switch(code){
+				case "01d": case "01n":{imageURL = "https://aakashtyagi.files.wordpress.com/2012/01/clear-sky.jpg"; break;}
+				case "02n": case "02d":{imageURL = "https://shawnwashere.files.wordpress.com/2010/03/img_88301.jpg"; break;}
+				case "03d": case "03n":{imageURL = "http://cloud-maven.com/wp-content/uploads/2013/02/DSC05619.jpg"; break;}
+				case "04n": case "04n":{imageURL = "http://www.carlwozniak.com/clouds/Graphics/New%20Pix/clouds09.jpg"; break;}
+				case "09d": case "09n":{imageURL = "https://i.ytimg.com/vi/ITOILbsyon8/maxresdefault.jpg"; break;}
+				case "10n": case "10n":{imageURL = "http://weknowyourdreams.com/images/rain/rain-08.jpg"; break;}
+				case "11d": case "11n":{imageURL = "http://www.hdwallpaperscool.com/wp-content/uploads/2015/09/black-and-blue-high-quality-wallpaper-download-black-and-blue-images-free.jpg"; break;}
+				case "13d": case "13n":{imageURL = "http://www.brotherslawncareservices.com/Winter-snow-flakes-winter-22231258-1238-768.jpg"; break;}
+				case "50n": case "50n":{imageURL = "http://vignette1.wikia.nocookie.net/demigodshaven/images/f/f5/Mist.jpg/revision/latest?cb=20110102163040"; break;}
+			}
+			document.getElementsByTagName("html")[0].style.background = "url("+imageURL+")"; 
+			document.getElementsByTagName("html")[0].style.backgroundSize = "cover";
+		}
+
+	</script>
+
+
+
+</head>
+
+<body>
+	<h1 style="margin:0; font-family:Arvo; text-align:center; font-size:500%;">The Weather</h1>
+	<h2 id="LatLong" style="margin:0; font-family:Arvo; font-size:200%;"></h2>	
+	<section id="googleMap" style="width:100%x;height:200px;"></section>
+	<table style="width:100%"><tbody>
+		<tr>
+    			<td id="Weather" width="33%" padding="2px"></td>
+    			<td id="Temp" width="33%" onClick="SwitchTempType();"></td>
+    			<td id="Main" width="33%"></td>
+  		</tr>
+		<tr>
+    			<td id="Wind" width="33%" padding="2px"></td>
+    			<td id="Humidity" width="33%"></td>
+    			<td id="Sys" width="33%" padding="2px"></td>
+  		</tr>
+	</tbody></table> 
+	<p id="DataOutput"></p>
+
+</body>
+</html>
