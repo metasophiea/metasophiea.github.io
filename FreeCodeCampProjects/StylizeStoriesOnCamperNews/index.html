@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>The Feed</title>
+	<meta charset="utf-8"></meta>
+	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
+
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		//JSON Keys: id, headline, timePosted, link, metaDescription, description, rank, upVotes, author, image, storyLink
+		var ArticleRowSelector = 0;//ArticleRow_Upper and ArticleRow_Lower
+		$(document).ready(function() {$.getJSON("http://www.freecodecamp.com/news/hot", function(json){Go(json)});});
+		function Go(JsonData){
+			AdjustArticleSize();
+			for(var a = 0; a < JsonData.length/2; a++){
+				ArticleMaker(JsonData[a].id, JsonData[a].headline, JsonData[a].timePosted, JsonData[a].link, JsonData[a].metaDescription, JsonData[a].description, JsonData[a].rank, JsonData[a].upVotes, JsonData[a].author, JsonData[a].image, JsonData[a].storyLink);
+			}
+		}
+
+		function AdjustArticleSize(){
+			var NewWidth = document.documentElement.clientWidth; var NewHeight = document.documentElement.clientHeight ;
+			ChangeCSSCode("Main", "h1", "font-size", (NewHeight*0.03), "px");
+			ChangeCSSCode("Main", "p", "font-size", (NewHeight*0.02), "px");
+		
+			NewHeight = NewHeight/2 - 10;
+			NewWidth = NewHeight;
+
+			ChangeCSSCode("Main", ".ArticleMain", "width", NewWidth, "px");
+			ChangeCSSCode("Main", ".ArticleMain", "height", NewHeight, "px");
+		}
+
+		function ArticleMaker(ID, Headline, Time_Posted, Link, MetaDescription, Description, Rank, UpVote, Author, Image, StoryLink){
+//Gather Information
+	//detect missing data where it could be
+		if(Image.length == 0 || Image == 'undefined'){var Article_Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2000px-No_image_available.svg.png";}else{var Article_Image = Image;}
+		if(Description.length == 0 || Description == 'undefined'){var Article_Sample = MetaDescription;}else{var Article_Sample = Description;}
+	//adding timestamp
+		var Time = MilisecondsToDate(Time_Posted);
+		if(Time[6] == 0){var AmPm = 'am'}else{var AmPm = 'pm'}
+		if(Time[5] < 10){var seconds = "0" + Time[5];}else{var seconds = Time[5];}
+		if(Time[4] < 10){var minutes = "0" + Time[4];}else{var minutes = Time[4];}
+		var Article_Timestamp  = Time[2] + '/' + Time[1] + '/' + Time[0] + '<br>' + Time[3] + ':' + minutes + ':' + seconds + AmPm;
+	//checking if description is over 200 characters (and shortening if necessary)
+		if(Article_Sample.length > 200){Article_Sample = Article_Sample.slice(0,200) + "...";}
+
+			var Article_AuthorAvatar = Author.picture; 
+			var Article_Headline = Headline;
+			var Article_Author = Author.username;
+			var Article_Rank = Rank;	
+			var Article_Link = Link;		
+
+//Construct Article
+			var NewArticle = 
+'<!-- Article/////////////////////////////////////////////////////////////////////////////////////////////////////// -->' + 
+'<td>'+
+'	<article class="ArticleMain">' +
+'		<table><tbody>' +
+'<!-- Start: TopRight Pulldown -->' +
+'			<tr height="50%">' +
+'				<td width="33%">' +
+'					<div class="ArticleInfoButton" style="background: url(\'' + Article_AuthorAvatar + '\') no-repeat center center; background-size: cover;">' +
+'						<footer class="ArticleInfoButton_Footer">' +
+'							<table><tbody>' +
+'								<tr>' +
+'									<td width="45%" class="ArticleInfoButton_FooterTableCells"><p style="margin:0px;">' + Article_Timestamp + '</p></td>' +
+'									<td width="35%" class="ArticleInfoButton_FooterTableCells"><p style="margin:0px;">' + Article_Author + '</p></td>' +
+'									<td width="20%" class="ArticleInfoButton_FooterTableCells"><p style="margin:0px;">' + Article_Rank + '</p></td>' +
+'								</tr>' +
+'							</tbody></table>' +
+'						</footer>' +
+'					</div>' +
+'				</td>' +
+'<!-- End: TopRight Pulldown -->' +
+'<!-- Start: TopLeft Headline and Sample -->' +
+'				<td width="66%" colspan="2" style="vertical-align:text-top;">' +
+'					<h1 class="ArticleSampleHeading" onClick="ViewArticle(\'' + Article_Link + '\',\'' + Headline + '\');">' + Article_Headline + '</h1>' +
+'					<p class="ArticleSampleDescription">' + Article_Sample + '</p>' +
+'				</td>' +
+'<!-- End: TopLeft Headline and Sample -->' +
+'			</tr>' +
+'<!-- Start: Bottom Image -->' +
+'			<tr height="50%">' +
+'				<td colspan="3" class="ArticleBottomImage" style="background:url(\'' + Article_Image + '\') no-repeat center center; background-size: 100% auto;">' +
+'				</td>' +
+'			</tr>' +
+'<!-- End: Bottom Image -->' +
+'		</tbody></table>' +
+'	</article>' +
+'</td>';		
+
+//Shipping to rows
+	if(ArticleRowSelector == 0){document.getElementById("ArticleRow_Upper").innerHTML = document.getElementById("ArticleRow_Upper").innerHTML + NewArticle; ArticleRowSelector++;}
+	else{document.getElementById("ArticleRow_Lower").innerHTML = document.getElementById("ArticleRow_Lower").innerHTML + NewArticle; ArticleRowSelector--;}
+		}
+
+		function ChangeCSSCode(SheetName, SelectorText, Rule, NewValue, Type){
+			for(var a = 0; a < document.styleSheets.length; a++){
+				if(document.styleSheets[a].title == SheetName){
+					for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){
+						if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){
+							document.styleSheets[a].cssRules[b].style[Rule] = NewValue + Type;
+						}
+					}
+				}
+			}
+		}
+
+		function ViewArticle(Link, Headline){
+			document.getElementById("viewer").style["z-index"] = 2; 
+			document.getElementById("viewer").style.opacity = 1;
+			document.getElementById("viewer_iframe").src = Link;
+			
+			var MaxLength =  Math.floor(document.documentElement.clientWidth*0.05);
+			if(Headline.length > MaxLength ){Headline = Headline.slice(0,MaxLength) + "...";}
+			document.getElementById("viwer_Title").innerHTML = Headline;
+		}
+
+		function CloseViewer(){
+			document.getElementById("viewer").style["z-index"] = -1; 
+			document.getElementById("viewer").style.opacity = 0;
+			document.getElementById("viewer_iframe").src = "";
+			document.getElementById("viwer_Title").innerHTML = "";
+		}
+
+		function MilisecondsToDate(miliseconds){ //Returns Year, Month Day(in month) Hour Minute Second Am/Pm (0 for am, 1 for pm)
+			miliseconds = ((((miliseconds/1000)/60)/60)/24);
+			var Pm = 0;
+			var days = Math.floor(miliseconds); miliseconds = (miliseconds - days)*24;
+			var hours = Math.floor(miliseconds); miliseconds = (miliseconds - hours)*60; if(hours > 13){hours=hours-12;Pm = 1;} if(hours==0){hours=12;}
+			var minutes = Math.floor(miliseconds); miliseconds = (miliseconds - minutes)*60;
+			var seconds = Math.floor(miliseconds);
+
+			//Determine year
+				var CountingYear = 1970; var DaysResult = days; var years = 1970;
+				for(var a = 0; a < days; a=a+365){
+					if((DaysResult - 365) < 0){break;}
+					DaysResult = DaysResult - 365;
+					if(CountingYear%4 == 0){DaysResult--;}
+					CountingYear++; years++;
+				}days = DaysResult + 1;
+
+			//Determine Month
+				var month = 1;
+				if(days >= 31){days=days-31;month++;} //January
+				if(days >= 28){days=days-28;month++;}else if(days == 29 && years%4 == 0){days=days-29;month++;} //Febuary
+				if(days >= 31){days=days-31;month++;} //March
+				if(days >= 30){days=days-30;month++;} //April
+				if(days >= 31){days=days-31;month++;} //May
+				if(days >= 30){days=days-30;month++;} //June
+				if(days >= 31){days=days-31;month++;} //July
+				if(days >= 31){days=days-31;month++;} //August
+				if(days >= 30){days=days-30;month++;} //September
+				if(days >= 31){days=days-31;month++;} //October
+				if(days >= 30){days=days-30;month++;} //November
+
+			return [years,month,days,hours,minutes,seconds,Pm];
+		}
+	</script>
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+		}
+
+		table{border-spacing:0px; width:100%; height:100%;}
+		td{padding:0px;}
+		h1{font-size:10px;}
+		p{
+			margin:9px;
+			font-family:ABeeZee;
+			font-size:10px;
+		}
+
+		.ArticleSampleDescription{
+			text-align:justify;
+			padding:1px;
+		}
+
+		.ArticleMain{
+			width:100px; 
+			height:100px; 
+			background-color:rgb(250,250,250); 
+			margin:0px;
+		}
+
+		.ArticleInfoButton{	
+			height:100%; width:100%;
+			transition: width 0.5s, height 0.5s;
+			position:relative;
+			z-index:1;
+		}
+		
+		.ArticleInfoButton_FooterTableCells{
+			text-align:center; vertical-align:middle;
+		}
+		
+		.ArticleInfoButton:hover{	
+			width:250%; height:120%;
+		}
+
+		.ArticleInfoButton_Footer{
+			width:100%; height:20%;
+			position:absolute; bottom:0;
+			background-color:rgba(250,250,250,0.75);
+			opacity: 0;
+			transition: opacity 0.5s;
+		}
+		.ArticleInfoButton:hover .ArticleInfoButton_Footer{	
+			opacity: 1;
+		}
+
+		.ArticleSampleHeading{
+			text-align:center;
+			color:rgb(0,0,0);
+			font-family: Arvo;
+			transition: color 0.5s;
+		}
+
+		.ArticleSampleHeading:hover{
+			color:rgb(200,200,200);
+		}
+
+		.ViwerWindow_Heading{
+			text-decoration:none;
+			color:rgb(0,0,0);
+			transition: color 0.5s;
+		}
+
+		.ViwerWindow_Heading:hover{
+			color:rgb(100,100,100);
+		}
+
+	</style>
+
+</head>
+
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+<body>
+<section style="width:100%; height:100%;">
+	<table style="border-spacing:0px;"><tbody>
+		<tr id="ArticleRow_Upper"><!-- Upper Article Space --></tr>
+		<tr id="ArticleRow_Lower"><!-- Lower Article Space --></tr>
+	</table></tbody>
+</section>
+
+<section id="viewer" style="background-color:rgba(150,150,150,1); height:80%; width:80%; opacity:0;  z-index:-1; position:fixed; top:10%; left:10%; transition: opacity 0.5s;">
+<table><tbody>
+	<tr style="width:100%;"><td>
+		<table><tbody><tr>
+			<td>
+				<svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" height="50px" onClick="CloseViewer();">
+					<rect width="100" height="100" style="fill:rgb(100,100,100);"></rect>
+					<line x1="10" y1="10" x2="90" y2="90" style="stroke:rgb(255,255,255); stroke-width:8;"></line>
+					<line x1="90" y1="10" x2="10" y2="90" style="stroke:rgb(255,255,255); stroke-width:8;"></line>
+				</svg>
+			</td>
+			<td>
+				<a class="ViwerWindow_Heading" href="' + Article_Link + '" target="_blank"><h2 id="viwer_Title" style="font-family:Arvo; margin:0px;">Website</h2></a>
+			</td>
+		</tr></tbody></table>
+	</td></tr>
+	<tr style="width:100%; height:95%;"><td>
+		<iframe id="viewer_iframe" src="#" style="background:url('http://vignette1.wikia.nocookie.net/nintendo/images/4/49/Error.png/revision/latest?cb=20090923185137&path-prefix=en') no-repeat center; background-size:cover; width:100%; height:100%; padding:0px; border:0px;">error</iframe>
+	</td></tr>
+</section>
+
+</body>
+</html>
