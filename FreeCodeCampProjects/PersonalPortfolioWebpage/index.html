@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>Metasophiea</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
+	<style>
+		html, body{
+			height:100%;
+		 	margin: 0px;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			margin:0px;
+		}
+
+		h3{
+			font-family:Arvo;
+		}
+		
+		.navigation{
+			background-size: cover;
+			height:25px;
+			width:100%;
+			background-color:rgba(255,255,255,1);
+			position: fixed;
+    			left: 0px;
+    			top: 0px;
+			z-index: 1;
+		}
+
+		a.navigationButton {
+			background-color:#e9e9e9;
+			font-family:Arvo;
+			font-size:17px;
+			border:0px;
+			padding:0px 2.5%;
+			height:100%;
+			width:20%;
+    			text-decoration: none;
+    			color: initial;
+		}
+
+		a.navigationButton:hover {
+			background-color:#d9d9d9;
+		}
+
+		a.navigationButton:active{
+			background-color:#c9c9c9;
+		}
+
+		.SocialMediaButtonCover{
+			fill:rgba(255,255,255,0);
+		}
+
+		.SocialMediaButtonCover:hover{
+			fill:rgba(255,255,255,0.5);
+		}	
+
+		.section-a {
+	    		background: url('http://3.bp.blogspot.com/-Lnt8-QXLj1s/VnhfYoj25NI/AAAAAAAAKyY/3o-KNQ5YWnc/s1600/tree%2Bin%2Bthe%2Bwater%2B1.bmp') no-repeat center center fixed;
+	    		background-size: cover;
+			height: 100%; width 100%;
+			margin-top:25px;
+		}
+
+		.contentSection{
+	    		padding:25px;
+			background-color:#fafafa;
+			font-size:24px;
+			font-family:Kaushan Script;
+		}
+
+		.section-b {
+	    		padding:0px 0px;
+	    		background: url('http://1.bp.blogspot.com/-3g-WIFlbI4o/VnkoxQi7rSI/AAAAAAAAKy0/IrADkRXvdvg/s1600/Sea_2.bmp') no-repeat center center fixed;
+	    		background-size: cover;
+		}
+	
+		.section-c {
+	   		padding:0px 0px;
+	    		background: url('http://2.bp.blogspot.com/-icZ2mnobWhA/Vm7TKqbLG7I/AAAAAAAAKnY/bhiWQycmeQw/s1600/eclipse.jpg') no-repeat center center fixed;
+	    		background-size: cover;
+			height:100%;
+		}		
+
+		p {
+			margin: 0px;
+		}
+
+	</style>
+
+    	<!--[if lt IE 9]>
+        	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+</head>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<body>   
+<!-- //////////////// Navigation //////////////// -->
+	<header class="navigation">
+		<table style="width:100%; height:100%;">
+			<tr>
+				<td style="width:20%; vertical-align:top; ">
+					<h1 style="font-size:20px; font-family:Arvo; margin: 0px 0px 0px 3px;" class="primary">Metasophiea.com</h1>
+				</td>
+				<td style="text-align:right; height:100%;">
+					<section style="float: right; height:100%; width:100%;"  id="navSection">
+						<a class="navigationButton" href="#main">main</a>
+						<a class="navigationButton" href="#about">about</a>
+						<a class="navigationButton" href="#works">works</a>
+						<a class="navigationButton" href="#contact">contact</a>
+					</section>
+				</td>
+			</tr>
+		</table>
+	</header>
+
+<!-- //////////////// Main //////////////// -->
+    	<section class="section-a" style="padding:2.5%;" id="main">
+		<svg id="mainSVG" width="100%" height="100%" viewbox="0 0 100 100">
+
+		<!-- //////// Main Name //////// -->
+			<rect
+				x="0"
+				y="35"
+				width="100"
+				height="20"
+				fill="rgba(255,255,255,0.75)";
+			></rect>
+
+			<rect
+				x="1"
+				y="36"
+				width="98"
+				height="18"
+				fill="rgba(255,255,255,0.75)";
+			></rect>
+
+			<text
+				style="font-family:Pacifico; fill:#b0b0b0; font-size:80%;"
+				text-anchor="middle"
+				x=50
+				y=49
+			>Metasophiea</text>
+		<!-- /////////////////////////// -->
+
+		<!-- //////// Social Media Button 1 //////// -->
+			<rect
+				x="0"
+				y="57"
+				width="21"
+				height="5"
+				fill="rgba(255,255,255,0.75)"
+			></rect>
+			<text
+				style="font-family:Pacifico; fill:#909090; font-size:28%;"
+				x=10
+				y=61
+				text-anchor="middle"
+			>Website</text>
+
+			<a xlink:href="http://metasophiea.com/">
+			<rect
+				x="0"
+				y="57"
+				width="21"
+				height="5"
+				class="SocialMediaButtonCover"
+			></rect>
+    			</a>
+		<!-- /////////////////////////////////////// -->
+
+		<!-- //////// Social Media Button 2 //////// -->
+			<rect
+				x="27"
+				y="57"
+				width="20"
+				height="5"
+				fill="rgba(255,255,255,0.75)"
+			></rect>
+			<text
+				style="font-family:Pacifico; fill:#909090; font-size:28%;"
+				x=37
+				y=61
+				text-anchor="middle"
+			>Twitter</text>
+
+			<a xlink:href="https://twitter.com/metasophiea">
+			<rect
+				x="27"
+				y="57"
+				width="20"
+				height="5"
+				class="SocialMediaButtonCover"
+			></rect>
+    			</a>
+		<!-- /////////////////////////////////////// -->
+
+		<!-- //////// Social Media Button 3 //////// -->
+			<rect
+				x="53"
+				y="57"
+				width="20"
+				height="5"
+				fill="rgba(255,255,255,0.75)"
+			></rect>
+			<text
+				style="font-family:Pacifico; fill:#909090; font-size:28%;"
+				x=63
+				y=61
+				text-anchor="middle"
+			>GitHub</text>
+
+			<a xlink:href="https://github.com/metasophiea/">
+			<rect
+				x="53"
+				y="57"
+				width="20"
+				height="5"
+				class="SocialMediaButtonCover"
+			></rect>
+    			</a>
+		<!-- /////////////////////////////////////// -->
+
+		<!-- //////// Social Media Button 4 //////// -->
+			<rect
+				x="79"
+				y="57"
+				width="21"
+				height="5"
+				fill="rgba(255,255,255,0.75)"
+			></rect>
+			<text
+				style="font-family:Pacifico; fill:#909090; font-size:28%;"
+				x=89
+				y=61
+				text-anchor="middle"
+			>LinkedIn</text>
+
+			<a xlink:href="https://ie.linkedin.com/in/metasophiea">
+			<rect
+				x="79"
+				y="57"
+				width="21"
+				height="5"
+				class="SocialMediaButtonCover"
+			></rect>
+    			</a>
+		<!-- /////////////////////////////////////// -->
+		</svg>
+    	</section>
+
+<!-- //////////////// About //////////////// -->
+	<section class="contentSection" id="about">
+			<table width="100%">
+				<tr>
+					<td style="padding: 2px; vertical-align:top; font-size:80%;" width="50%">
+					<h2 style="font-family:Arvo; margin:2px; text-align:right;">about&emsp;</h2>
+					<p>Hello :)</p>
+					<p> &emsp; My name is Brandon, and I'm a (mostly) self-taught web-designer and programmer. I'm currently studying ECE (Electronic and Computer Engineering) in DCU.</p>
+					<p> &emsp; Apart from learning and enjoying computer technologies, I'm also an artist, creating images and music, and anything I'm interested in, during my spare time.</p>
+					</td>
+					<td><img src="https://avatars.githubusercontent.com/u/13985585" width="100%"></td>
+				</tr>
+			</table>
+	</section>
+  
+<!-- //////////////// Works //////////////// -->  
+    	<section class="section-b" id="works">
+			<table width="100%" height="100%">
+				<tr height="50%" width="100%">
+					<td style="padding: 2px;" width="33%">
+						<svg width="100%" height="100%" viewbox="0 0 100 100">
+							<image  
+								x="10" 
+								y="14" 
+								height="80" 
+								width="80" 
+								xlink:href="http://4.bp.blogspot.com/-D57hGYq5DY0/VnhfsqXYZbI/AAAAAAAAKyg/YXj6uQf8DnU/s1600/curve_1.bmp"
+							></image>
+
+							<a style="text-decoration: none;" xlink:href="https://soundcloud.com/metasophiea/curve"><svg width="100%" height="100%" viewbox="0 0 100 100" style="opacity:0; transition: opacity 0.5s ease;" onmouseover="this.style.opacity='1';" onmouseout="this.style.opacity='0';">
+								<rect
+									x="10"
+									y="14"
+									width="80"
+									height="80"
+									fill="rgba(255,255,255,0.85)"
+								></rect>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:120%;"
+									text-anchor="middle"
+									x=50
+									y=40
+								>Curve</text>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:40%;"
+									text-anchor="middle"
+									x=50
+									y=50
+								>
+									<tspan x="50" y="50">Curve is a 22 minute</tspan>
+									<tspan x="50" y="55">symphony I wrote,</tspan>
+									<tspan x="50" y="60">preformed and recorded</tspan>
+									<tspan x="50" y="65">over the course of a year</tspan>
+								</text>
+							</svg></a>
+						</svg>
+					</td>
+					<td style="padding: 2px;" width="33%">
+						<svg width="100%" height="100%" viewbox="0 0 100 100">
+							<image  
+								x="10" 
+								y="14" 
+								height="80" 
+								width="80" 
+								xlink:href="http://3.bp.blogspot.com/-azhP9cztl-k/VnkuO1Cy6vI/AAAAAAAAKzM/DWm64_kzQKs/s1600/Untitled.bmp"
+							></image>
+
+							<svg width="100%" height="100%" viewbox="0 0 100 100" style="opacity:0; transition: opacity 0.5s ease;" onmouseover="this.style.opacity='0';" onmouseout="this.style.opacity='0';">
+								<rect
+									x="10"
+									y="14"
+									width="80"
+									height="80"
+									fill="rgba(255,255,255,0.85)"
+								></rect>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:120%;"
+									text-anchor="middle"
+									x=50
+									y=40
+								></text>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:40%;"
+									text-anchor="middle"
+									x=50
+									y=50
+								>
+								</text>
+							</svg>
+						</svg>
+					</td>
+					<td style="padding: 2px;" width="33%">
+						<svg width="100%" height="100%" viewbox="0 0 100 100">
+							<image  
+								x="10" 
+								y="14" 
+								height="80" 
+								width="80" 
+								xlink:href="http://3.bp.blogspot.com/-azhP9cztl-k/VnkuO1Cy6vI/AAAAAAAAKzM/DWm64_kzQKs/s1600/Untitled.bmp"
+							></image>
+
+							<svg width="100%" height="100%" viewbox="0 0 100 100" style="opacity:0; transition: opacity 0.5s ease;" onmouseover="this.style.opacity='0';" onmouseout="this.style.opacity='0';">
+								<rect
+									x="10"
+									y="14"
+									width="80"
+									height="80"
+									fill="rgba(255,255,255,0.85)"
+								></rect>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:120%;"
+									text-anchor="middle"
+									x=50
+									y=40
+								></text>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:40%;"
+									text-anchor="middle"
+									x=50
+									y=50
+								>
+								</text>
+							</svg>
+						</svg>
+					</td>
+				</tr>
+				<tr height="50%">
+					<td style="padding: 2px;" width="33%">
+						<svg width="100%" height="100%" viewbox="0 0 100 100">
+							<image  
+								x="10" 
+								y="14" 
+								height="80" 
+								width="80" 
+								xlink:href="http://3.bp.blogspot.com/-azhP9cztl-k/VnkuO1Cy6vI/AAAAAAAAKzM/DWm64_kzQKs/s1600/Untitled.bmp"
+							></image>
+
+							<svg width="100%" height="100%" viewbox="0 0 100 100" style="opacity:0; transition: opacity 0.5s ease;" onmouseover="this.style.opacity='0';" onmouseout="this.style.opacity='0';">
+								<rect
+									x="10"
+									y="14"
+									width="80"
+									height="80"
+									fill="rgba(255,255,255,0.85)"
+								></rect>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:120%;"
+									text-anchor="middle"
+									x=50
+									y=40
+								></text>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:40%;"
+									text-anchor="middle"
+									x=50
+									y=50
+								>
+								</text>
+							</svg>
+						</svg>
+					</td>
+					<td style="padding: 2px;" width="33%">
+						<svg width="100%" height="100%" viewbox="0 0 100 100">
+							<image  
+								x="10" 
+								y="14" 
+								height="80" 
+								width="80" 
+								xlink:href="http://3.bp.blogspot.com/-azhP9cztl-k/VnkuO1Cy6vI/AAAAAAAAKzM/DWm64_kzQKs/s1600/Untitled.bmp"
+							></image>
+
+							<svg width="100%" height="100%" viewbox="0 0 100 100" style="opacity:0; transition: opacity 0.5s ease;" onmouseover="this.style.opacity='0';" onmouseout="this.style.opacity='0';">
+								<rect
+									x="10"
+									y="14"
+									width="80"
+									height="80"
+									fill="rgba(255,255,255,0.85)"
+								></rect>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:120%;"
+									text-anchor="middle"
+									x=50
+									y=40
+								></text>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:40%;"
+									text-anchor="middle"
+									x=50
+									y=50
+								>
+								</text>
+							</svg>
+						</svg>
+					</td>
+					<td style="padding: 2px;" width="33%">
+						<svg width="100%" height="100%" viewbox="0 0 100 100">
+							<image  
+								x="10" 
+								y="14" 
+								height="80" 
+								width="80" 
+								xlink:href="http://3.bp.blogspot.com/-azhP9cztl-k/VnkuO1Cy6vI/AAAAAAAAKzM/DWm64_kzQKs/s1600/Untitled.bmp"
+							></image>
+
+							<svg width="100%" height="100%" viewbox="0 0 100 100" style="opacity:0; transition: opacity 0.5s ease;" onmouseover="this.style.opacity='0';" onmouseout="this.style.opacity='0';">
+								<rect
+									x="10"
+									y="14"
+									width="80"
+									height="80"
+									fill="rgba(255,255,255,0.85)"
+								></rect>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:120%;"
+									text-anchor="middle"
+									x=50
+									y=40
+								></text>
+								<text
+									style="font-family:Arvo; fill:#000000; font-size:40%;"
+									text-anchor="middle"
+									x=50
+									y=50
+								>
+	
+								</text>
+							</svg>
+						</svg>
+					</td>
+				</tr>
+
+			</table>
+	</section>
+
+<!-- //////////////// Footer (Contact) //////////////// -->
+	<footer id="contact">
+		<table style="width:100%; height:100%; padding:0px; font-size:150%;">
+			<tr style="width:100%;">
+				<td style="font-family:Pacifico; width:50%; padding:16px;">Brandon Walsh 2015</td>
+				<td style="font-family:Pacifico; text-align:right; padding:16px;">contact@metasophiea.com</td>
+			</tr>
+		</table>
+		
+	</footer>
+
+</body>
+</html>
