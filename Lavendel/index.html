@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+<!-- Info -->
+	<!-- favcon: <link rel="icon" href="|url|" type="image/gif" sizes="16x16"> -->
+	<!-- add: xmlns="http://www.w3.org/2000/svg" to SVG element -->
+	<!-- add: <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family="> for google fonts-->
+
+<!-- Fonts -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:700">
+<!-- Git stuff -->
+	<!-- http://rawgit.com/metasophiea/[rest of Github raw address] - for testing (quicker update)(favicon.ico set to rawgit.com's taco-lookin' thing (white remote-control with chunk of smoked salmon on it?)(pedestal suporting Donald Trump's hair?)) -->
+	<!-- http://cdn.rawgit.com/metasophiea/[rest of Github raw address] - for full use (favicon.ico open)-->
+<!-- Scripts -->
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- for JSON -->
+	<script src="https://rawgit.com/metasophiea/website/master/JavaScript/CSS_Edit.js"></script> <!-- for CSS_Edit -->
+
+<!-- Shapes -->
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/poly.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/box.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/image.js"></script>
+
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/box.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/rectangle.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/square.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/circle.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/elipse.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/line.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/advancedshapeexample.js"></script>
+		<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/shapes/rounded_rectangle.js"></script>
+
+	<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/UserViewControl.js"></script>
+	<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/KeyBoardControl.js"></script>
+	<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/ToolMenu.js"></script>
+	<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/DrawControl.js"></script>
+	<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/DataManipulation.js"></script>
+	<script type='text/javascript' src="https://rawgit.com/metasophiea/WebProgramming/master/TestProjects/InfiniPaint/Render.js"></script>
+
+	<script>
+	// Globals Menu //
+		var XPosition = 0; var YPosition = 0;
+		var Canvas; var ZoomStep = 0.1; var ZoomAmount = 1; var ZoomLimits = [0.1,8]; var ZoomIndex = 0;
+		var RefreshCount = 30;
+		var RenderId = setInterval(function(){ Render(); }, 1000/RefreshCount ); 
+	// ---------- //
+
+		function Go(){
+			Canvas = document.getElementById('MainCanvas').getContext("2d");
+			console.log("hello");
+			AdjustCanvasToFill();
+
+			DrawBackground();
+			Render();
+		}
+	/////////////////////////////////////////////////////////////////////////
+	</script>
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+			overflow-x: hidden; overflow-y: hidden;
+		}
+
+		#MainCanvas{
+			margin:0px;
+			background-color: rgb(20,20,20);
+		}
+
+		#ToolMenu{
+			position: absolute;
+			left: 0px; top: 0px;
+			height: 0px; width: 0px;
+			z-index: 1;
+
+			transition: height 0.25s, width 0.25s;
+		}
+
+		.ToolMenu_Item{
+			fill:rgba(255,255,255,0.2);
+		}
+
+		.ToolMenu_Item:hover{
+			fill:rgba(255,255,255,0.4);
+		}
+
+		.ToolMenu_Text{
+			fill:rgb(0,0,0);
+			font-size:80%;
+			font-family:'Lato', sans-serif;
+			text-anchor: middle;
+			-moz-user-select: -moz-none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+		}
+
+		.ToolMenu_Symbol{
+			fill:rgb(40,40,40);
+		}
+
+	</style>
+</head>
+
+<body onLoad="Go()" onResize="AdjustCanvasToFill()" onKeyDown="KeyPress(event)" >
+<canvas id="MainCanvas" width="0" height="0" onDBlClick="DoubleClick(event, this)" onmousedown="MouseDown(event, this)" onwheel="Zoom(event, this)"></canvas>
+<div id="SubCanvases"></div>
+
+<!-- Tool Menu -->
+	<svg id="ToolMenu" xmlns="http://www.w3.org/2000/svg">
+		<rect x="0" y="0" height="200" width="100" style="fill:rgb(120,120,120);"/>
+
+
+	<!-- Tool -->
+		<text class="ToolMenu_Text" x="50" y="17">Tools</text>
+		<polygon class="ToolMenu_Symbol" points="90,12.5 80,17.5 80,7.75"/>
+		<rect id="Tools" class="ToolMenu_Item" x="2.5" y="2.5" height="20" width="95" onClick="ToolMenu_OptionPressed(this)"/>
+		<!-- submenu -->
+		<g id="Tools_Submenu" style="visibility: hidden;">
+			<rect x="105" y="0" height="200" width="100" style="fill:rgb(120,120,120);"/>
+			<text class="ToolMenu_Text" x="155" y="17">Tools</text>
+		</g>
+
+	<!-- New -->
+		<text class="ToolMenu_Text" x="50" y="38">New</text>
+		<polygon class="ToolMenu_Symbol" points="90,33.5 80,39.5 80,28.75"/>
+		<rect id="New" class="ToolMenu_Item" x="2.5" y="23.5" height="20" width="95" onClick="ToolMenu_OptionPressed(this)"/>
+		<!-- submenu -->
+		<g id="New_Submenu" style="visibility: hidden;">
+			<rect x="105" y="0" height="200" width="100" style="fill:rgb(120,120,120);"/>
+			<text class="ToolMenu_Text" x="155" y="17">New</text>
+		</g>
+	<svg>
+<!-- --------- -->
+
+</body>
+</html>
