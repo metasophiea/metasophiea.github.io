@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>X's And O's</title>
+	<meta charset="utf-8"></meta>
+	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css"> <!-- for Google fonts-->
+	<!-- add: xmlns="http://www.w3.org/2000/svg" to SVG element -->
+
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- for JSON -->
+	<script>
+		var SquareHash = {'0': "TopLeft", '1':"TopMiddle", '2':"TopRight", '3':"MiddleLeft", '4':"MiddleMiddle", '5':"MiddleRight", '6':"BottomLeft", '7':"BottomMiddle", '8':"BottomRight"};
+		var ChangingColoursId; var PlayerIs = ""; var ComputerIs = ""; var WinningLineOpacity = 0; var GameOn = false;
+		var TheBoard = ['','','','','','','','',''];
+		function Go(){
+			SpalshAbout();
+			ChangingColoursId = setInterval(function(){SpalshAbout()}, 1500);
+		}
+
+		function SpalshAbout(){
+			var r = 0; var g = 0; var b = 0;
+			for(var a = 0; a < 9; a++){
+				r = 200 + Math.random()*55;
+				g = 200 + Math.random()*55;
+				b = 200 + Math.random()*55;
+				document.getElementById(SquareHash[a] + '_Colour').style.fill = 'rgb(' + parseInt(r) + ',' + parseInt(g) + ',' + parseInt(b) + ')';
+			}
+			document.getElementById('WinningLine').style.stroke = 'rgba(' + parseInt(200 + Math.random()*55) + ',' + parseInt(200 + Math.random()*55) + ',' + parseInt(200 + Math.random()*55) + ',' + WinningLineOpacity + ')';
+
+			var XOorBlank = Math.floor(Math.random()*3); var Place = Math.floor(Math.random()*9);
+			if(XOorBlank == 0){XOorBlank = "";}
+			else if(XOorBlank == 1){XOorBlank = "X";}
+			else if(XOorBlank == 2){XOorBlank = "O";}
+			TheBoard[Place] = XOorBlank;
+			PrintBoard();
+		}
+
+		function StartGame(){
+		//hide action plane
+			ChangeCSSCode("Main", "#ActionPlane", "fill", "rgba(255,255,255,0)", "");
+			ChangeCSSCode("Main", "#IntroText", "fill", "rgba(100,100,100,0)", "");
+			ChangeCSSCode("Main", "#selectionSquareBackground", "fill", "rgba(240,240,240,0)", "");
+			ChangeCSSCode("Main", ".ActionSymbol", "stroke", "rgba(100,100,100,0)", "");
+			ChangeCSSCode("Main", "#selectionSquare:hover", "fill", "rgba(240,240,240,0)", "");
+			ChangeCSSCode("Main", ".ActionPlaneItems", "visibility", "hidden", "");
+
+		//reveal playing plane
+			ChangeCSSCode("Main", "#DividingLine", "stroke", "rgba(180,180,180, 1)", "");
+			ChangeCSSCode("Main", "#DividingLine", "stroke-width", "1", "");
+			clearInterval(ChangingColoursId);
+			var r = 240; var g = 240; var b = 240;
+			for(var a = 0; a < 9; a++){
+				document.getElementById(SquareHash[a] + '_Colour').style.fill = 'rgb(' + parseInt(r) + ',' + parseInt(g) + ',' + parseInt(b) + ')';
+			}
+
+			GameOn = true;
+			TheBoard = ['','','','','','','','',''];
+			PrintBoard();
+			if(PlayerIs == "O"){OpeningMove();}
+		}
+
+		function ClickedSquare(Square){if(!GameOn){return;}
+			if(TheBoard[Square].length == 0){TheBoard[Square] = PlayerIs;}
+			PrintBoard();
+			LookForWinningArrangment();
+			if(!CheckIfBoardIsFull() && GameOn){Counter();}
+			else{EndGame('Draw');}
+		}
+
+		function EndGame(Type){GameOn = false;
+//			console.log("Seems it was a " + Type);
+			ChangingColoursId = setInterval(function(){SpalshAbout()}, 1500);
+			ChangeCSSCode("Main", ".ActionPlaneItems", "visibility", "visible", "");
+			window.setTimeout(RestartMenu, 2000);
+		}
+
+		function RestartMenu(){
+		//reveal action plane
+			ChangeCSSCode("Main", "#ActionPlane", "fill", "rgba(255,255,255,0.5)", "");
+			ChangeCSSCode("Main", "#IntroText", "fill", "rgba(100,100,100,1)", "");
+			ChangeCSSCode("Main", "#selectionSquareBackground", "fill", "rgba(240,240,240,0.95)", "");
+			ChangeCSSCode("Main", ".ActionSymbol", "stroke", "rgba(100,100,100,1)", "");
+			ChangeCSSCode("Main", "#selectionSquare:hover", "fill", "rgba(240,240,240,0.75)", "");
+
+		//hide playing plane
+			ChangeCSSCode("Main", "#DividingLine", "stroke", "rgba(180,180,180, 0)", "");
+			ChangeCSSCode("Main", "#DividingLine", "stroke-width", "100", "");
+			WinningLineOpacity = 0;
+		}
+
+		function OpeningMove(){PlaceComputerSymbolIn(0);}
+		function Counter(){
+			var x = CheckForWinningOrLosingPlacement(ComputerIs);if(x != -1){PlaceComputerSymbolIn(x); return;}
+			var x = CheckForWinningOrLosingPlacement(PlayerIs);if(x != -1){PlaceComputerSymbolIn(x); return;}
+
+			if(ArraysEqual(TheBoard,['','','','','X','','','',''])){
+				var x = Math.floor(Math.random()*4);
+				if(x == 0){PlaceComputerSymbolIn(0);}
+				else if(x == 1){PlaceComputerSymbolIn(2);}
+				else if(x == 2){PlaceComputerSymbolIn(6);}
+				else if(x == 3){PlaceComputerSymbolIn(8);}
+				return;
+			}
+
+			if(ArraysEqual(TheBoard,['','X','','X','O','','','O','X'])){PlaceComputerSymbolIn(2);return;}
+			else if(ArraysEqual(TheBoard,['','X','','X','O','O','','','X'])){PlaceComputerSymbolIn(6);return;}
+			else if(ArraysEqual(TheBoard,['X','','','O','O','X','','X',''])){PlaceComputerSymbolIn(8);return;}
+			else if(ArraysEqual(TheBoard,['X','O','','','O','X','','X',''])){PlaceComputerSymbolIn(6);return;}
+			else if(ArraysEqual(TheBoard,['','O','X','X','O','','','X',''])){PlaceComputerSymbolIn(8);return;}
+			else if(ArraysEqual(TheBoard,['','','X','O','O','O','','X',''])){PlaceComputerSymbolIn(7);return;}
+			else if(ArraysEqual(TheBoard,['','X','','O','O','X','X','',''])){PlaceComputerSymbolIn(2);return;}
+			else if(ArraysEqual(TheBoard,['','X','','','O','X','X','O',''])){PlaceComputerSymbolIn(0);return;}
+
+			if(ArraysEqual(TheBoard,['X','O','','','','','','',''])){PlaceComputerSymbolIn(6);return;}
+			else if(ArraysEqual(TheBoard,['X','','','O','','','','',''])){PlaceComputerSymbolIn(2);return;}
+			else if(ArraysEqual(TheBoard,['X','','','','','O','','',''])){PlaceComputerSymbolIn(6);return;}
+			else if(ArraysEqual(TheBoard,['X','','','','','','','O',''])){PlaceComputerSymbolIn(6);return;}
+
+			if(ArraysEqual(TheBoard,['X','','O','','','','','',''])){PlaceComputerSymbolIn(6);return;}
+			else if(ArraysEqual(TheBoard,['X','','','','','','O','',''])){PlaceComputerSymbolIn(2);return;}
+			else if(ArraysEqual(TheBoard,['X','','','','','','','','O'])){PlaceComputerSymbolIn(6);return;}
+
+			if(ArraysEqual(TheBoard,['X','','','','O','','','',''])){PlaceComputerSymbolIn(8);return;}
+			else if(ArraysEqual(TheBoard,['','','X','','O','','','',''])){PlaceComputerSymbolIn(6);return;}
+			else if(ArraysEqual(TheBoard,['','','','','O','','X','',''])){PlaceComputerSymbolIn(2);return;}
+			else if(ArraysEqual(TheBoard,['','','','','O','','','','X'])){PlaceComputerSymbolIn(0);return;}
+
+			if(ArraysEqual(TheBoard,['X','','O','O','','','X','',''])){PlaceComputerSymbolIn(8);return;}
+			else if(ArraysEqual(TheBoard,['X','O','X','','','','O','',''])){PlaceComputerSymbolIn(8);return;}
+			else if(ArraysEqual(TheBoard,['X','','','O','','','X','','O'])){PlaceComputerSymbolIn(2);return;}
+
+			if(ArraysEqual(TheBoard,['X','','','','O','','','','X'])){PlaceComputerSymbolIn(1);return;}
+			else if(ArraysEqual(TheBoard,['','','X','','O','','X','',''])){PlaceComputerSymbolIn(1);return;}
+
+			if(TheBoard[4] == ""){PlaceComputerSymbolIn(4);return;}
+
+			if(ArraysEqual(TheBoard,['O','','','','X','','','','X']) || ArraysEqual(TheBoard,['','','O','','X','','X','','']) || ArraysEqual(TheBoard,['','','X','','X','','O','','']) || ArraysEqual(TheBoard,['X','','','','X','','','','O'])){
+				if(TheBoard[0] == ""){PlaceComputerSymbolIn(0);}
+				else if(TheBoard[2] == ""){PlaceComputerSymbolIn(2);}
+				else if(TheBoard[6] == ""){PlaceComputerSymbolIn(6);}
+				else if(TheBoard[8] == ""){PlaceComputerSymbolIn(8);}				
+				return;
+			}
+
+			if(ArraysEqual(TheBoard,['X','','','','O','X','','',''])){PlaceComputerSymbolIn(1);return;}
+			else if(ArraysEqual(TheBoard,['X','','','','O','','','X',''])){PlaceComputerSymbolIn(3);return;}
+			else if(ArraysEqual(TheBoard,['','','X','X','O','','','',''])){PlaceComputerSymbolIn(1);return;}
+			else if(ArraysEqual(TheBoard,['','','X','','O','','','X',''])){PlaceComputerSymbolIn(5);return;}
+			else if(ArraysEqual(TheBoard,['','X','','','O','','X','',''])){PlaceComputerSymbolIn(3);return;}
+			else if(ArraysEqual(TheBoard,['','','','','O','X','X','',''])){PlaceComputerSymbolIn(7);return;}
+			else if(ArraysEqual(TheBoard,['','X','','','O','','','','X'])){PlaceComputerSymbolIn(5);return;}	
+			else if(ArraysEqual(TheBoard,['','','','X','O','','','','X'])){PlaceComputerSymbolIn(7);return;}		
+
+			if(TheBoard[4] == ""){PlaceComputerSymbolIn(4);return;}
+			while(true){
+				var x = Math.floor(Math.random()*9);
+				if(TheBoard[x] == ""){PlaceComputerSymbolIn(x); break;}
+			}
+		}
+
+		function CheckForWinningOrLosingPlacement(Type){
+		//left -> right
+			if(TheBoard[0] == '' && TheBoard[1] == Type && TheBoard[2] == Type){return 0;}
+			if(TheBoard[0] == Type && TheBoard[1] == '' && TheBoard[2] == Type){return 1;}
+			if(TheBoard[0] == Type && TheBoard[1] == Type && TheBoard[2] == ''){return 2;}
+
+			if(TheBoard[3] == '' && TheBoard[4] == Type && TheBoard[5] == Type){return 3;}
+			if(TheBoard[3] == Type && TheBoard[4] == '' && TheBoard[5] == Type){return 4;}
+			if(TheBoard[3] == Type && TheBoard[4] == Type && TheBoard[5] == ''){return 5;}
+
+			if(TheBoard[6] == '' && TheBoard[7] == Type && TheBoard[8] == Type){return 6;}
+			if(TheBoard[6] == Type && TheBoard[7] == '' && TheBoard[8] == Type){return 7;}
+			if(TheBoard[6] == Type && TheBoard[7] == Type && TheBoard[8] == ''){return 8;}
+		//right-> left
+			if(TheBoard[2] == '' && TheBoard[1] == Type && TheBoard[0] == Type){return 2;}
+			if(TheBoard[2] == Type && TheBoard[1] == '' && TheBoard[0] == Type){return 1;}
+			if(TheBoard[2] == Type && TheBoard[1] == Type && TheBoard[0] == ''){return 0;}
+
+			if(TheBoard[5] == '' && TheBoard[4] == Type && TheBoard[3] == Type){return 5;}
+			if(TheBoard[5] == Type && TheBoard[4] == '' && TheBoard[3] == Type){return 4;}
+			if(TheBoard[5] == Type && TheBoard[4] == Type && TheBoard[3] == ''){return 3;}
+
+			if(TheBoard[8] == '' && TheBoard[7] == Type && TheBoard[6] == Type){return 8;}
+			if(TheBoard[8] == Type && TheBoard[7] == '' && TheBoard[6] == Type){return 7;}
+			if(TheBoard[8] == Type && TheBoard[7] == Type && TheBoard[6] == ''){return 6;}
+
+		//Top -> Bottom
+			if(TheBoard[0] == '' && TheBoard[3] == Type && TheBoard[6] == Type){return 0;}
+			if(TheBoard[0] == Type && TheBoard[3] == '' && TheBoard[6] == Type){return 3;}
+			if(TheBoard[0] == Type && TheBoard[3] == Type && TheBoard[6] == ''){return 6;}
+
+			if(TheBoard[1] == '' && TheBoard[4] == Type && TheBoard[7] == Type){return 1;}
+			if(TheBoard[1] == Type && TheBoard[4] == '' && TheBoard[7] == Type){return 4;}
+			if(TheBoard[1] == Type && TheBoard[4] == Type && TheBoard[7] == ''){return 7;}
+
+			if(TheBoard[2] == '' && TheBoard[5] == Type && TheBoard[8] == Type){return 2;}
+			if(TheBoard[2] == Type && TheBoard[5] == '' && TheBoard[8] == Type){return 5;}
+			if(TheBoard[2] == Type && TheBoard[5] == Type && TheBoard[8] == ''){return 8;}
+		//Bottom -> Top
+			if(TheBoard[6] == '' && TheBoard[3] == Type && TheBoard[0] == Type){return 6;}
+			if(TheBoard[6] == Type && TheBoard[3] == '' && TheBoard[0] == Type){return 3;}
+			if(TheBoard[6] == Type && TheBoard[3] == Type && TheBoard[0] == ''){return 0;}
+
+			if(TheBoard[7] == '' && TheBoard[4] == Type && TheBoard[1] == Type){return 7;}
+			if(TheBoard[7] == Type && TheBoard[4] == '' && TheBoard[1] == Type){return 4;}
+			if(TheBoard[7] == Type && TheBoard[4] == Type && TheBoard[1] == ''){return 1;}
+
+			if(TheBoard[8] == '' && TheBoard[5] == Type && TheBoard[2] == Type){return 8;}
+			if(TheBoard[8] == Type && TheBoard[5] == '' && TheBoard[2] == Type){return 5;}
+			if(TheBoard[8] == Type && TheBoard[5] == Type && TheBoard[2] == ''){return 2;}
+		//TopLeft -> BottomRight
+			if(TheBoard[0] == '' && TheBoard[4] == Type && TheBoard[8] == Type){return 0;}
+			if(TheBoard[0] == Type && TheBoard[4] == '' && TheBoard[8] == Type){return 4;}
+			if(TheBoard[0] == Type && TheBoard[4] == Type && TheBoard[8] == ''){return 8;}
+		//TopRight -> BottomTop
+			if(TheBoard[2] == '' && TheBoard[4] == Type && TheBoard[6] == Type){return 2;}
+			if(TheBoard[2] == Type && TheBoard[4] == '' && TheBoard[6] == Type){return 4;}
+			if(TheBoard[2] == Type && TheBoard[4] == Type && TheBoard[6] == ''){return 6;}
+
+			return -1;
+		}
+
+		function WinSituation(Type, WinArray){
+			GameOn = false;
+			var x = 0; var y = 0;
+			if(WinArray[0] == 0)		{x=16.5; y=16.5;}
+			else if(WinArray[0] == 1)	{x=49.5; y=16.5;}
+			else if(WinArray[0] == 2)	{x=82.5; y=16.5;}
+			else if(WinArray[0] == 3)	{x=16.5; y=49.5;}
+			else if(WinArray[0] == 5)	{x=82.5; y=49.5;}
+			else if(WinArray[0] == 6)	{x=16.5; y=82.5;}
+			else if(WinArray[0] == 7)	{x=49.5; y=82.5;}
+			else if(WinArray[0] == 8)	{x=82.5; y=82.5;}
+			document.getElementById('WinningLine').setAttribute('x1',x);
+			document.getElementById('WinningLine').setAttribute('y1',y);	
+
+			if(WinArray[1] == 0)		{x=16.5; y=16.5;}
+			else if(WinArray[1] == 1)	{x=49.5; y=16.5;}
+			else if(WinArray[1] == 2)	{x=82.5; y=16.5;}
+			else if(WinArray[1] == 3)	{x=16.5; y=49.5;}
+			else if(WinArray[1] == 5)	{x=82.5; y=49.5;}
+			else if(WinArray[1] == 6)	{x=16.5; y=82.5;}
+			else if(WinArray[1] == 7)	{x=49.5; y=82.5;}
+			else if(WinArray[1] == 8)	{x=82.5; y=82.5;}
+			document.getElementById('WinningLine').setAttribute('x2',x);
+			document.getElementById('WinningLine').setAttribute('y2',y);
+			WinningLineOpacity = 1;
+			document.getElementById('WinningLine').style.stroke = 'rgba(' + parseInt(200 + Math.random()*55) + ',' + parseInt(200 + Math.random()*55) + ',' + parseInt(200 + Math.random()*55) + ',' + WinningLineOpacity + ')';
+			EndGame(Type);
+		}
+
+		function LookForWinningArrangment(){
+		//horizontal
+			if(TheBoard[0] == PlayerIs && TheBoard[1] == PlayerIs && TheBoard[2] == PlayerIs){WinSituation(PlayerIs, [0,2]);}
+			if(TheBoard[0] == ComputerIs && TheBoard[1] == ComputerIs && TheBoard[2] == ComputerIs){WinSituation(ComputerIs, [0,2]);}
+			if(TheBoard[3] == PlayerIs && TheBoard[4] == PlayerIs && TheBoard[5] == PlayerIs){WinSituation(PlayerIs, [3,5]);}
+			if(TheBoard[3] == ComputerIs && TheBoard[4] == ComputerIs && TheBoard[5] == ComputerIs){WinSituation(ComputerIs, [3,5]);}
+			if(TheBoard[6] == PlayerIs && TheBoard[7] == PlayerIs && TheBoard[8] == PlayerIs){WinSituation(PlayerIs, [6,8]);}
+			if(TheBoard[6] == ComputerIs && TheBoard[7] == ComputerIs && TheBoard[8] == ComputerIs){WinSituation(ComputerIs, [6,8]);}
+		//vertical
+			if(TheBoard[0] == PlayerIs && TheBoard[3] == PlayerIs && TheBoard[6] == PlayerIs){WinSituation(PlayerIs, [0,6]);}
+			if(TheBoard[0] == ComputerIs && TheBoard[3] == ComputerIs && TheBoard[6] == ComputerIs){WinSituation(ComputerIs, [0,6]);}
+			if(TheBoard[1] == PlayerIs && TheBoard[4] == PlayerIs && TheBoard[7] == PlayerIs){WinSituation(PlayerIs, [1,7]);}
+			if(TheBoard[1] == ComputerIs && TheBoard[4] == ComputerIs && TheBoard[7] == ComputerIs){WinSituation(ComputerIs, [1,7]);}
+			if(TheBoard[2] == PlayerIs && TheBoard[5] == PlayerIs && TheBoard[8] == PlayerIs){WinSituation(PlayerIs, [2,8]);}
+			if(TheBoard[2] == ComputerIs && TheBoard[5] == ComputerIs && TheBoard[8] == ComputerIs){WinSituation(ComputerIs, [2,8]);}
+		//diagonal
+			if(TheBoard[0] == PlayerIs && TheBoard[4] == PlayerIs && TheBoard[8] == PlayerIs){WinSituation(PlayerIs, [0,8]);}
+			if(TheBoard[0] == ComputerIs && TheBoard[4] == ComputerIs && TheBoard[8] == ComputerIs){WinSituation(ComputerIs, [0,8]);}
+			if(TheBoard[2] == PlayerIs && TheBoard[4] == PlayerIs && TheBoard[6] == PlayerIs){WinSituation(PlayerIs, [2,6]);}
+			if(TheBoard[2] == ComputerIs && TheBoard[4] == ComputerIs && TheBoard[6] == ComputerIs){WinSituation(ComputerIs, [2,6]);}
+		}
+
+		function PrintBoard(){
+			for(var a = 0; a < 9; a++){
+				ChangeCSSCode("Main", '.' + SquareHash[a] + '_X', "stroke", "rgba(180,180,180, 0)", "");
+				ChangeCSSCode("Main", '.' + SquareHash[a] + '_O', "stroke", "rgba(180,180,180, 0)", "");
+				if(TheBoard[a].length != 0){
+					ChangeCSSCode("Main", '.' + SquareHash[a] + '_' + TheBoard[a], "stroke", "rgba(180,180,180, 1)", "");
+				}
+			}
+		}
+
+		function ArraysEqual(a, b) {if (a === b){return true;}if (a == null || b == null){return false;}if (a.length != b.length){return false;}for (var i = 0; i < a.length; ++i) {if (a[i] !== b[i]) return false;}return true;}
+		function CheckIfBoardIsFull(){for(var a = 0; a < 9; a++){if(TheBoard[a] == ""){return false;}}return true;}
+		function Select(Type){PlayerIs = Type;if(PlayerIs == "X"){ComputerIs = "O";}else{ComputerIs = "X";}StartGame();}
+		function PlaceComputerSymbolIn(Square){if(TheBoard[Square].length == 0){TheBoard[Square] = ComputerIs;}PrintBoard();LookForWinningArrangment();if(CheckIfBoardIsFull()){EndGame('Draw');}}
+		function ChangeCSSCode(SheetName, SelectorText, Rule, NewValue, Type){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){document.styleSheets[a].cssRules[b].style[Rule] = NewValue + Type;}}}}}
+		function GetCSSCode(SheetName, SelectorText, Rule){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){return document.styleSheets[a].cssRules[b].style[Rule];}}}}}
+	</script>
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+		}
+
+/* Colour Plane */
+		.ColourSquare{
+			transition: fill 0.5s;
+		}
+
+		#DividingLine{
+			stroke:rgba(180,180,180, 0);
+			stroke-width:100;
+			transition: stroke 1s, stroke-width 2s;
+		}
+
+/* Game Items */
+		.TopLeft_X{stroke:rgba(180,180,180, 0);}
+		.TopMiddle_X{stroke:rgba(180,180,180, 0);}
+		.TopRight_X{stroke:rgba(180,180,180, 0);}
+		.MiddleLeft_X{stroke:rgba(180,180,180, 0);}
+		.MiddleMiddle_X{stroke:rgba(180,180,180, 0);}
+		.MiddleRight_X{stroke:rgba(180,180,180, 0);}
+		.BottomLeft_X{stroke:rgba(180,180,180, 0);}
+		.BottomMiddle_X{stroke:rgba(180,180,180, 0);}
+		.BottomRight_X{stroke:rgba(180,180,180, 0);}
+
+		.TopLeft_O{stroke:rgba(180,180,180, 0);}
+		.TopMiddle_O{stroke:rgba(180,180,180, 0);}
+		.TopRight_O{stroke:rgba(180,180,180, 0);}
+		.MiddleLeft_O{stroke:rgba(180,180,180, 0);}
+		.MiddleMiddle_O{stroke:rgba(180,180,180, 0);}
+		.MiddleRight_O{stroke:rgba(180,180,180, 0);}
+		.BottomLeft_O{stroke:rgba(180,180,180, 0);}
+		.BottomMiddle_O{stroke:rgba(180,180,180, 0);}
+		.BottomRight_O{stroke:rgba(180,180,180, 0);}
+
+		.GameSymbol{
+			stroke-width:2;
+			transition: stroke 0.5s;
+		}
+
+		#WinningLine{
+			stroke:rgba(150,150,150,0);
+			stroke-width:3;
+			transition: stroke 1s;
+		}
+
+/* Action Plane */
+		.ActionPlaneItems{
+			visibility:visible;
+			transition: fill 1s, visibility 1s;
+		}
+
+		#ActionPlane{
+			fill:rgba(255,255,255,0.5);
+		}
+		.ActionSquare{
+			fill:rgba(240,240,240,0);
+			transition: fill 0.5s;
+		}
+		.ActionSquare:hover{fill:rgba(255,255,255,0.5);}
+
+		#IntroText{
+			font-family:Pacifico; 
+			font-size:50%; 
+			fill:rgba(100,100,100,1);
+		}
+
+		#selectionSquareBackground{
+			fill:rgba(240,240,240,0.95);
+		}
+
+		.ActionSymbol{
+			stroke:rgba(100,100,100, 1);
+			stroke-width:2;
+			transition: stroke 1s;
+		}
+
+		#selectionSquare{
+			fill:rgba(240,240,240,0);
+			transition: fill 0.5s;
+		}
+		#selectionSquare:hover{
+			fill:rgba(240,240,240,0.75);
+		}
+	</style>
+</head>
+
+<body onLoad="Go()">
+
+	<svg style="z-index:0; width:100%; height:100%;" viewbox="0 0 99 99" xmlns="http://www.w3.org/2000/svg">
+		<rect id="TopLeft_Colour" class="ColourSquare" x="0" y="0" width="33" height="33" style="fill:rgb(200,240,240);"></rect>
+			<line class="TopLeft_X GameSymbol" x1="5" y1="5" x2="28" y2="28"></line>
+			<line class="TopLeft_X GameSymbol" x1="28" y1="5" x2="5" y2="28"></line>
+			<circle class="TopLeft_O GameSymbol" cx="16.5" cy="16.5" r="12" style="stroke-width:2.25; fill:none;"/>
+		<rect id="TopMiddle_Colour" class="ColourSquare" x="33" y="0" width="33" height="33" style="fill:rgb(240,200,240);"></rect>
+			<line class="TopMiddle_X GameSymbol" x1="38" y1="5" x2="61" y2="28"></line>
+			<line class="TopMiddle_X GameSymbol" x1="61" y1="5" x2="38" y2="28"></line>
+			<circle class="TopMiddle_O GameSymbol" cx="49.5" cy="16.5" r="12" style="stroke-width:2.25; fill:none;"/>
+		<rect id="TopRight_Colour" class="ColourSquare" x="66" y="0" width="33" height="33" style="fill:rgb(240,240,200);"></rect>
+			<line class="TopRight_X GameSymbol" x1="71" y1="5" x2="94" y2="28"></line>
+			<line class="TopRight_X GameSymbol" x1="94" y1="5" x2="71" y2="28"></line>
+			<circle class="TopRight_O GameSymbol" cx="82.5" cy="16.5" r="12" style="stroke-width:2.25; fill:none;"/>
+
+		<rect id="MiddleLeft_Colour" class="ColourSquare" x="0" y="33" width="33" height="33" style="fill:rgb(200,200,240);"></rect>
+			<line class="MiddleLeft_X GameSymbol" x1="5" y1="38" x2="28" y2="61"></line>
+			<line class="MiddleLeft_X GameSymbol" x1="28" y1="38" x2="5" y2="61"></line>
+			<circle class="MiddleLeft_O GameSymbol" cx="16.5" cy="49.5" r="12" style="stroke-width:2.25; fill:none;"/>
+		<rect id="MiddleMiddle_Colour" class="ColourSquare" x="33" y="33" width="33" height="33" style="fill:rgb(240,200,200);"></rect>
+			<line class="MiddleMiddle_X  GameSymbol" x1="38" y1="38" x2="61" y2="61"></line>
+			<line class="MiddleMiddle_X GameSymbol" x1="61" y1="38" x2="38" y2="61"></line>
+			<circle class="MiddleMiddle_O" class="GameSymbol" cx="49.5" cy="49.5" r="12" style="stroke-width:2.25; fill:none;"/>
+		<rect id="MiddleRight_Colour" class="ColourSquare" x="66" y="33" width="33" height="33" style="fill:rgb(200,240,200);"></rect>
+			<line class="MiddleRight_X GameSymbol" x1="71" y1="38" x2="94" y2="61"></line>
+			<line class="MiddleRight_X GameSymbol" x1="94" y1="38" x2="71" y2="61" ></line>
+			<circle class="MiddleRight_O GameSymbol" cx="82.5" cy="49.5" r="12" style="stroke-width:2.25; fill:none;"/>
+
+		<rect id="BottomLeft_Colour" class="ColourSquare" x="0" y="66" width="33" height="33" style="fill:rgb(200,240,240);"></rect>
+			<line class="BottomLeft_X GameSymbol" x1="5" y1="71" x2="28" y2="94"></line>
+			<line class="BottomLeft_X GameSymbol" x1="28" y1="71" x2="5" y2="94"></line>
+			<circle class="BottomLeft_O GameSymbol" cx="16.5" cy="82.5" r="12" style="stroke-width:2.25; fill:none;"/>
+		<rect id="BottomMiddle_Colour" class="ColourSquare" x="33" y="66" width="33" height="33" style="fill:rgb(240,200,240);"></rect>
+			<line class="BottomMiddle_X GameSymbol" x1="38" y1="71" x2="61" y2="94"></line>
+			<line class="BottomMiddle_X GameSymbol" x1="61" y1="71" x2="38" y2="94"></line>
+			<circle class="BottomMiddle_O GameSymbol" cx="49.5" cy="82.5" r="12" style="stroke-width:2.25; fill:none;"/>
+		<rect id="BottomRight_Colour" class="ColourSquare" x="66" y="66" width="33" height="33" style="fill:rgb(240,240,200);"></rect>
+			<line class="BottomRight_X GameSymbol" x1="71" y1="71" x2="94" y2="94"></line>
+			<line class="BottomRight_X GameSymbol" x1="94" y1="71" x2="71" y2="94"></line>
+			<circle class="BottomRight_O GameSymbol" cx="82.5" cy="82.5" r="12" style="stroke-width:2.25; fill:none;"/>
+
+		<rect id="TopLeft_Hover" class="ActionSquare" x="0" y="0" width="33" height="33" onClick="ClickedSquare(0)"></rect>
+		<rect id="TopMiddle_Hover" class="ActionSquare" x="33" y="0" width="33" height="33" onClick="ClickedSquare(1)"></rect>
+		<rect id="TopRight_Hover" class="ActionSquare" x="66" y="0" width="33" height="33" onClick="ClickedSquare(2)"></rect>
+		<rect id="MiddleLeft_Hover" class="ActionSquare" x="0" y="33" width="33" height="33" onClick="ClickedSquare(3)"></rect>
+		<rect id="MiddleMiddle_Hover" class="ActionSquare" x="33" y="33" width="33" height="33" onClick="ClickedSquare(4)"></rect>
+		<rect id="MiddleRight_Hover" class="ActionSquare" x="66" y="33" width="33" height="33" onClick="ClickedSquare(5)"></rect>
+		<rect id="BottomLeft_Hover" class="ActionSquare" x="0" y="66" width="33" height="33" onClick="ClickedSquare(6)"></rect>
+		<rect id="BottomMiddle_Hover" class="ActionSquare" x="33" y="66" width="33" height="33" onClick="ClickedSquare(7)"></rect>
+		<rect id="BottomRight_Hover" class="ActionSquare" x="66" y="66" width="33" height="33" onClick="ClickedSquare(8)"></rect>
+
+		<line id="DividingLine" x1="33" y1="0" x2="33" y2="99"></line>
+		<line id="DividingLine" x1="66" y1="0" x2="66" y2="99"></line>
+		<line id="DividingLine" x1="0" y1="33" x2="99" y2="33"></line>
+		<line id="DividingLine" x1="0" y1="66" x2="99" y2="66"></line>
+		<line id="WinningLine" x1=0 y1=0 x2=99 y2=99></line>		
+	</svg>
+
+	<svg class="ActionPlaneItems" style="position:fixed; top:0px; left:0px; z-index:1; width:100%; height:100%;" viewbox="0 0 99 99" xmlns="http://www.w3.org/2000/svg">
+		<rect id="ActionPlane" class="ActionPlaneItems" x="10" y="10" width="79" height="79"></rect>
+		<text id="IntroText" x="50" y="30" text-anchor="middle" class="ActionPlaneItems">Choose Your Weapon</text>
+		<rect id="selectionSquareBackground" x="20" y="40" width="20" height="20" class="ActionPlaneItems"></rect>
+		<line class="ActionSymbol" x1="25" y1="45" x2="35" y2="55" class="ActionPlaneItems"></line>
+		<line class="ActionSymbol" x1="35" y1="45" x2="25" y2="55" class="ActionPlaneItems"></line>
+		<rect id="selectionSquare" class="ActionPlaneItems" x="20" y="40" width="20" height="20" onClick="Select('X')"></rect>
+
+		<rect id="selectionSquareBackground" x="59" y="40" width="20" height="20" class="ActionPlaneItems"></rect>
+  		<circle class="ActionSymbol ActionPlaneItems" cx="69" cy="50" r="6" style="fill:none;"/>
+		<rect id="selectionSquare" class="ActionPlaneItems" x="59" y="40" width="20" height="20" onClick="Select('O')"></rect>
+
+	</svg>
+
+</body>
+</html>
