@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Twitch</title>
+	<meta charset="utf-8"></meta>
+	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css"> <!-- for Google fonts-->
+	<!-- add: xmlns="http://www.w3.org/2000/svg" to SVG element -->
+
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- for JSON -->
+	<script>
+		//API: https://api.twitch.tv/kraken/streams/freecodecamp?callback=?
+		//API: https://api.twitch.tv/kraken/
+		//API: https://api.twitch.tv/kraken/streams
+		//API: https://api.twitch.tv/kraken/streams/featured
+		//API: https://api.twitch.tv/kraken/channels/freecodecamp
+		//API: search streams: https://api.twitch.tv/kraken/search/streams?q=myst
+		//API: search channels: https://api.twitch.tv/kraken/search/channels?q=myst
+
+		var SearchTermBox_HeightAdjust = 15; var SearchType = "Streams"; var DisplayedChannelNames = [];
+		function Go(){AdjustSizes(); Reset();}
+		function AdjustSizes(){
+			ChangeCSSCode("Main", "#SearchBox", "font-size", (document.documentElement.clientHeight/SearchTermBox_HeightAdjust), "px");
+			ChangeCSSCode("Main", "#ChannelPlane_Heading", "font-size", (document.documentElement.clientHeight/SearchTermBox_HeightAdjust), "px");
+			ChangeCSSCode("Main", "#SearchTypeSelector_StreamsButton_text", "font-size", (document.documentElement.clientHeight/(SearchTermBox_HeightAdjust*3.5)), "px");
+			ChangeCSSCode("Main", "#SearchTypeSelector_ChannelsButton_text", "font-size", (document.documentElement.clientHeight/(SearchTermBox_HeightAdjust*3.5)), "px");	
+			ChangeCSSCode("Main", ".ChannelPlane_Stats", "font-size", (document.documentElement.clientHeight/(SearchTermBox_HeightAdjust*3)), "px");	
+			document.getElementById('ResetButton').width = document.getElementById('Menu').offsetHeight;
+		}
+
+		function Search(){
+			var SearchTerm = document.getElementById('SearchBox').value;
+			if(SearchTerm.length == 0){return;}
+		//Search term accepted, let's go
+			console.log("Searched for: " + SearchTerm);
+			if(SearchType == "Streams"){
+				var URL = "https://api.twitch.tv/kraken/search/streams?q=" + SearchTerm;
+				$.getJSON(URL, function(json){ResultBuilder_Streams(json)});
+			}else if(SearchType == "Channels"){
+				var URL = "https://api.twitch.tv/kraken/search/channels?q=" + SearchTerm;
+				$.getJSON(URL, function(json){ResultBuilder_Channels(json)});
+			}
+		}
+
+		function ResultBuilder_ChannelPage(Data){
+			document.getElementById('Results').innerHTML = "";
+				var NewArticle = 
+				'<!-- Result ////////////////////////////////////////// -->' + 
+				'<article class="ChannelPlane">' + 
+					'<table style="width:100%; height:100%;"><tbody>' + 
+						'<tr style="width:100%;">' + 
+							'<td colspan="2">' +
+								'<h1 id="ChannelPlane_Heading" onClick="OpenLink(\'' + Data.url + '\')">' + Data.display_name + '</h1>' +
+							'</td>' + 
+						'</tr>' + 
+						'<tr style="">' + 
+							'<td style="width:25%;">' + 
+								'<img style="width:100%;" src="' + Data.logo + '" onClick="OpenLink(\'' + Data.url + '\')"></img>' + 
+							'</td>' + 
+							'<td style="padding:5%;">' + 
+								'<p class="ChannelPlane_Stats"> Followers: <i>' + Data.followers + '</i></p>' + 
+								'<p class="ChannelPlane_Stats"> Game: <i>' + Data.game + '</i></p>' +
+								'<p class="ChannelPlane_Stats"> Status: <i>' + Data.status + '</i></p>' +  
+								'<p class="ChannelPlane_Stats"> Views: <i>' + Data.views + '</i></p>' + 
+								'<p class="ChannelPlane_Stats"> Language: <i>' + Data.language + '</i></p>' + 
+							'</td>' +
+						'</tr>' + 
+						'<tr>' + 
+							'<td id="StreamingPlane" style="width:100%;" colspan="2">' + 
+							'</td>' + 
+						'</tr>' + 
+					'</tbody></table>' + 
+				'</article>';
+
+			document.getElementById('Results').innerHTML = document.getElementById('Results').innerHTML + NewArticle;
+			//Fill in Stream plane
+			$.getJSON("https://api.twitch.tv/kraken/streams/" + Data.display_name, function(json){ResultBuilder_ChannelPage_StreamingPlane(json)});
+		}
+
+		function ResultBuilder_ChannelPage_StreamingPlane(Data){	
+			if(Data.stream == null){
+				document.getElementById('StreamingPlane').innerHTML = '<h1 id="ChannelPlane_Heading"> Not streaming </h1>';
+				return;}
+			else{
+				var Link = (Data.stream).channel.url;
+				var Heading = (Data.stream).game;
+				var StreamViewers = (Data.stream).viewers;
+				var ChannelName = (Data.stream).channel.name;
+
+				var NewArticle = 
+					'<!-- Result ////////////////////////////////////////// -->' + 
+					'<article class="ResultItem" onClick="OpenLink(\'' + Link + '\')">' + 
+					'<table style="width:100%; height:100%;" cellspacing="0px"><tbody>' +
+					'<tr>' +
+						'<td style="width:90%;">' +
+							'<h1 style="font-family:Play;" onClick="">' + Heading + '</h1>' + 
+						'</td>' +
+						'<td>' +
+							'<p> Viewers: ' + StreamViewers + '</p>' + 
+						'</td>' +
+					'</tr>' +
+					'<tr>' +
+						'<td style="width:50%;">' +
+							'<p> - ' + ChannelName + '</p>' + 
+						'</td>' +
+						'<td>' +
+						'</td>' +
+					'</tr>' +
+ 					'</table></tbody>' +
+					'</article>';
+				document.getElementById('StreamingPlane').innerHTML = NewArticle;
+			}
+		}
+
+		function ResultBuilder_Featured(Data){
+			document.getElementById('Results').innerHTML = ""; DisplayedChannelNames = [];
+			if(Data.featured.length > 25){var ResultCount = 25;}
+			else{var ResultCount = Data.featured.length;}
+
+			var NewArticle = "";
+			for(var a = 0; a < ResultCount; a++){
+				var Link = (Data.featured[a]).stream.channel.url;
+				var Heading = (Data.featured[a]).stream.game;
+				var StreamViewers = (Data.featured[a]).stream.viewers;
+				var ChannelName = (Data.featured[a]).stream.channel.name;
+				DisplayedChannelNames[a] = ChannelName;
+
+				NewArticle = 
+					'<!-- Result ////////////////////////////////////////// -->' + 
+					'<article id="' + ChannelName + '" class="ResultItem" onClick="OpenLink(\'' + Link + '\')">' + 
+					'<table style="width:100%; height:100%;" cellspacing="0px"><tbody>' +
+					'<tr>' +
+						'<td style="width:90%;">' +
+							'<h1 style="font-family:Play;">' + Heading + '</h1>' + 
+						'</td>' +
+						'<td>' +
+							'<p> Viewers: ' + StreamViewers + '</p>' + 
+						'</td>' +
+					'</tr>' +
+					'<tr>' +
+						'<td style="width:50%;">' +
+							'<p> - ' + ChannelName + '</p>' + 
+						'</td>' +
+						'<td>' +
+						'</td>' +
+					'</tr>' +
+ 					'</table></tbody>' +
+					'</article>';
+
+				document.getElementById('Results').innerHTML = document.getElementById('Results').innerHTML + NewArticle;
+			}
+		}
+
+		function ResultBuilder_Streams(Data){
+			document.getElementById('Results').innerHTML = "";
+			if(Data.streams.length > 10){var ResultCount = 10;}
+			else{var ResultCount = Data.streams.length;}
+
+			var NewArticle = "";
+			for(var a = 0; a < ResultCount; a++){
+				var Link = (Data.streams[a]).channel.url;
+				var Heading = (Data.streams[a]).game;
+				var StreamViewers = (Data.streams[a]).viewers;
+				var ChannelName = (Data.streams[a]).channel.name;
+
+				NewArticle = 
+					'<!-- Result ////////////////////////////////////////// -->' + 
+					'<article class="ResultItem" onClick="OpenLink(\'' + Link + '\')">' + 
+					'<table style="width:100%; height:100%;" cellspacing="0px"><tbody>' +
+					'<tr>' +
+						'<td style="width:90%;">' +
+							'<h1 style="font-family:Play;">' + Heading + '</h1>' + 
+						'</td>' +
+						'<td>' +
+							'<p> Viewers: ' + StreamViewers + '</p>' + 
+						'</td>' +
+					'</tr>' +
+					'<tr>' +
+						'<td style="width:50%;">' +
+							'<p> - ' + ChannelName + '</p>' + 
+						'</td>' +
+						'<td>' +
+						'</td>' +
+					'</tr>' +
+ 					'</table></tbody>' +
+					'</article>';
+
+				document.getElementById('Results').innerHTML = document.getElementById('Results').innerHTML + NewArticle;
+			}
+		}
+
+		function ResultBuilder_Channels(Data){
+			document.getElementById('Results').innerHTML = ""; DisplayedChannelNames = [];
+			if(Data.channels.length > 10){var ResultCount = 10;}
+			else{var ResultCount = Data.channels.length;}
+
+			var NewArticle = "";
+			for(var a = 0; a < ResultCount; a++){
+				var Link = (Data.channels[a]).url;
+				var ChannelName = (Data.channels[a]).display_name;
+				var Views = (Data.channels[a]).views;
+				var ContentType = (Data.channels[a]).game; if(ContentType == null || ContentType == ""){ContentType = "";}else{ContentType = " - " + ContentType;}
+				DisplayedChannelNames[a] = ChannelName;
+
+				NewArticle = 
+					'<!-- Result ////////////////////////////////////////// -->' + 
+					'<article id="' + ChannelName + '" class="ResultItem_Channel" onClick="OpenChannel(\'' + ChannelName + '\')">' + 
+					'<table style="width:100%; height:100%;" cellspacing="0px"><tbody>' +
+					'<tr>' +
+						'<td style="width:90%;">' +
+							'<h1 style="font-family:Play;">' + ChannelName + '</h1>' + 
+						'</td>' +
+						'<td style="width:5%;">' +
+							'<p> Views: ' + Views + '</p>' + 
+						'</td>' +
+					'</tr>' +
+					'<tr>' +
+						'<td style="width:50%;">' +
+							'<p>' + ContentType + '</p>' + 
+						'</td>' +
+						'<td>' +
+						'</td>' +
+					'</tr>' +
+ 					'</table></tbody>' +
+					'</article>';
+
+				document.getElementById('Results').innerHTML = document.getElementById('Results').innerHTML + NewArticle;
+			}
+			//Discover whether each channel is streaming
+			ResultBuilder_StreamingCheck();
+		}
+		function ResultBuilder_StreamingCheck(){for(var a = 0; a < DisplayedChannelNames.length; a++){$.getJSON("https://api.twitch.tv/kraken/streams/" + DisplayedChannelNames[a], function(json){ResultBuilder_StreamingCheck_CheckForStream(json)});}}
+		function ResultBuilder_StreamingCheck_CheckForStream(Data){if(Data.stream != null){document.getElementById(Data.stream.channel.display_name).style['background-color'] = "rgba(150,255,150,1)";}}
+
+		function Reset(){
+			console.log('reset');
+			ChangeSearchType("Streams");
+			document.getElementById('SearchBox').value = "";
+			$.getJSON("https://api.twitch.tv/kraken/streams/featured", function(json){ResultBuilder_Featured(json)});
+		}
+		function ChangeSearchType(Type){
+			console.log("Switch search type to: " + Type); SearchType = Type;
+			if(SearchType == "Streams"){
+				ChangeCSSCode("Main", "#SearchTypeSelector_StreamsButton", "background-color", "rgba(200,255,200,1)", "");
+				ChangeCSSCode("Main", "#SearchTypeSelector_ChannelsButton", "background-color", "rgba(200,220,220,1)", "");
+			}else{
+				ChangeCSSCode("Main", "#SearchTypeSelector_StreamsButton", "background-color", "rgba(200,220,200,1)", "");
+				ChangeCSSCode("Main", "#SearchTypeSelector_ChannelsButton", "background-color", "rgba(200,255,255,1)", "");
+			}
+		}
+		function OpenChannel(ChannelName){$.getJSON("https://api.twitch.tv/kraken/channels/" + ChannelName + "?callback=?", function(json){ResultBuilder_ChannelPage(json)});}
+		function OpenLink(URL){console.log("Linking to: " + URL); window.open(URL, '_blank');}
+		function ChangeCSSCode(SheetName, SelectorText, Rule, NewValue, Type){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){document.styleSheets[a].cssRules[b].style[Rule] = NewValue + Type;}}}}}
+		function GetCSSCode(SheetName, SelectorText, Rule){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){return document.styleSheets[a].cssRules[b].style[Rule];}}}}}
+	</script>
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+		}
+
+		h1, p, h2{margin:0px;}
+		td{padding:0px;}
+
+		#Menu{
+			width:80%; height:8%; z-index: 1;
+			position:fixed; top:1%; left:10%;
+			border:0px; padding:0px; 
+			background-color:rgba(200,200,200,1);
+		}
+
+		#ResetButton{
+			background-color:rgba(220,220,220,1);
+			transition: background-color 0.5s;
+		}
+		#ResetButton:hover{background-color:rgba(240,240,240,1);}
+
+		#SearchBox{
+			width:100%; height:100%;
+			border:0px; padding:0px; 
+			font-family: Ubuntu;
+			font-size:45px;
+			background-color:rgba(200,200,200,1);
+		}	
+
+		#Results{
+			width:80%;
+			position:absolute; top:10%; left:10%; 
+			background-color:rgba(200,200,200,1);
+		}
+
+		.ResultItem{
+			background-color:rgba(200,255,200,1);	
+			padding:10px; margin:5px;
+			transition: background-color 0.5s;
+		}
+		.ResultItem:hover{background-color:rgba(150,255,150,1); }
+
+		.ResultItem_Channel{
+			background-color:rgba(200,220,220,1);	
+			padding:10px; margin:5px;
+			transition: background-color 0.5s;
+		}
+		.ResultItem_Channel:hover{background-color:rgba(200,255,255,1);}
+
+		.ChannelPlane{
+			background-color:rgba(220,220,220,1);	
+			padding:10px; margin:5px;
+			transition: background-color 0.5s;
+		}
+
+		#ChannelPlane_Heading{
+			text-align:center; 
+			font-family:Ubuntu; 
+			font-size:45px;
+		}
+		.ChannelPlane_Stats{
+			font-family:Ubuntu;
+			font-size:15px;
+		}
+
+
+		#SearchTypeSelector{
+			background-color:rgba(180,180,180,1);
+			padding:1%;
+		}
+
+		#SearchTypeSelector_StreamsButton{width:100%; height:100%; background-color:rgba(200,255,200,1); transition: background-color 0.5s, width 1s;}
+		#SearchTypeSelector_StreamsButton:hover{width:200%; background-color:rgba(150,255,150,1);}
+		#SearchTypeSelector_StreamsButton_text{color:rgba(0,0,0,0); font-size:15px; font-family:Ubuntu; transition: color 1s;}
+		#SearchTypeSelector_StreamsButton:hover #SearchTypeSelector_StreamsButton_text{color:rgba(0,0,0,1);}
+
+		#SearchTypeSelector_ChannelsButton{width:100%; height:100%; background-color:rgba(200,220,220,1); transition: background-color 0.5s, width 1s;}
+		#SearchTypeSelector_ChannelsButton:hover{width:200%; background-color:rgba(200,255,255,1);}
+		#SearchTypeSelector_ChannelsButton_text{color:rgba(0,0,0,0); font-size:15px; font-family:Ubuntu; transition: color 1s;}
+		#SearchTypeSelector_ChannelsButton:hover #SearchTypeSelector_ChannelsButton_text{color:rgba(0,0,0,1);}
+	</style>
+</head>
+
+<body onload="Go()" onresize="AdjustSizes()">
+	<section id="Menu">
+		<table style="width:100%; height:100%;" cellspacing="0px"><tbody><tr>
+			<td id="ResetButton" onClick="Reset()"></td>
+			<td>
+				<form action="javascript:Search()">
+					<input type="text" id="SearchBox" autocomplete="off">
+				</form>
+			</td>
+			<td id="SearchTypeSelector" style="width:10%;">
+				<table style="width:100%; height:100%;" cellspacing="0px"><tbody>
+					<tr><td style="height:50%; width:100%;">
+						<div id="SearchTypeSelector_StreamsButton" onClick="ChangeSearchType('Streams')">
+							<p id="SearchTypeSelector_StreamsButton_text" style="position:relative; top:8%; width:100%; text-align:center;">Streams</p>
+						</div>			
+					</td></tr>
+					<tr><td style="height:50%; width:100%;">
+						<div id="SearchTypeSelector_ChannelsButton" onClick="ChangeSearchType('Channels')">
+							<p id="SearchTypeSelector_ChannelsButton_text" style="position:relative; top:8%; width:100%; text-align:center;">Channels</p>
+						</div>	
+					</td></tr>
+				</tbody></table>
+			</td>		
+		</tr></tbody></table>
+	</section>
+
+	<section id="Results">
+	</section>
+
+</body>
+</html>
