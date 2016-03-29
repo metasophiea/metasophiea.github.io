@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Simon Game</title>
+	<meta charset="utf-8"></meta>
+	<!-- add: xmlns="http://www.w3.org/2000/svg" to SVG element -->
+
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- for JSON -->
+	<script>
+	//Console vars
+		var DimColourHash = {"Red":[255,0,0],"Green":[0,255,0],"Blue":[0,102,255],"Yellow":[255,255,0],"Orange":[255,135,0], "White":[255,255,255]};
+		var BrightColourHash = {"Red":[255,100,100],"Green":[120,255,120],"Blue":[100,204,255],"Yellow":[255,255,150],"Orange":[255,270,100]};
+		var IntroId; var i = 0; var Pattern = []; var InitialPatternLength = 1; var OrderCount = 0; var WinCount = 20;
+		var RimColour = [50,50,50];
+		var SwitchPosition = "off";
+
+	//Audio vars
+		var AudioContext = window.AudioContext || window.webkitAudioContext || false; var audioCtx = new AudioContext();
+		var GeneralBeep = 440; var BadBeep = 220; var SuccessBeep = 550;
+		var Oscillator; 
+		var GainBox; 
+		var Volume = 0.5;
+
+		function Go(){
+			Intro();
+			SetupSound();
+			GenerateNewPattern();
+			setTimeout(function(){ DisplayPattern(); }, 2000);
+		}
+
+		function SetupSound(){
+			if(!AudioContext){/*Audio non-functional*/return;} 
+				Oscillator = audioCtx.createOscillator();
+      					Oscillator.type = 'sine'; //sine, square, sawtooth, triangle, custom
+      					Oscillator.frequency.value = GeneralBeep;
+      					Oscillator.start(0); //delay optional parameter is mandatory on Safari 
+
+				GainBox = audioCtx.createGain(); Oscillator.connect(GainBox);
+      					GainBox.gain.value = 0;
+
+      					GainBox.connect(audioCtx.destination);		
+		}
+
+		function Beep(type){//General, Bad, Success
+			switch(type){
+				case 'General': Oscillator.frequency.value = GeneralBeep;
+						GainBox.gain.setTargetAtTime(Volume,audioCtx.currentTime,0.05);
+						setTimeout(function(){ GainBox.gain.setTargetAtTime(0,audioCtx.currentTime,0.05); }, 70);
+						break;
+				case 'Bad': 	Oscillator.frequency.value = BadBeep;
+						GainBox.gain.setTargetAtTime(Volume,audioCtx.currentTime,0.05); 
+						setTimeout(function(){ GainBox.gain.setTargetAtTime(0,audioCtx.currentTime,0.05); }, 70);
+						break;
+				case 'Success': Oscillator.frequency.value = SuccessBeep; 
+						GainBox.gain.setTargetAtTime(Volume,audioCtx.currentTime,0.05);
+						setTimeout(function(){ GainBox.gain.setTargetAtTime(0,audioCtx.currentTime,0.05); }, 70);
+						break;
+				case 'Switch': 	Oscillator.frequency.value = GeneralBeep; Oscillator.type = "square";
+						GainBox.gain.setTargetAtTime(Volume,audioCtx.currentTime,0.01);
+						setTimeout(function(){ GainBox.gain.setTargetAtTime(0,audioCtx.currentTime,0.05); Oscillator.frequency.value = 110; }, 70);
+						setTimeout(function(){ Oscillator.type = "sine"; Oscillator.frequency.value = GeneralBeep; }, 100);
+						break;
+				case 'Reset': 	Oscillator.frequency.value = 0;
+						GainBox.gain.setTargetAtTime(Volume,audioCtx.currentTime,0.05);
+						setTimeout(function(){ GainBox.gain.setTargetAtTime(0,audioCtx.currentTime,0.05); }, 70);
+						break;
+			}
+		}
+
+		function GenerateNewPattern(){
+			Pattern = [];
+			for(var a = 0; a < InitialPatternLength; a++){
+				switch(Math.floor(Math.random()*5)){
+					case 0: Pattern[a] = 'Red'; break;
+					case 1: Pattern[a] = 'Green'; break;
+					case 2: Pattern[a] = 'Blue'; break;
+					case 3: Pattern[a] = 'Yellow'; break;
+					case 4: Pattern[a] = 'Orange'; break;
+				}
+			}
+		}
+
+		function DisplayPattern(){
+			var Time = 750;
+			for(var a = 0; a < Pattern.length; a++){
+				switch(Pattern[a]){
+					case 'Red': setTimeout(function(){ PressColour('Red'); }, Time*a); break;
+					case 'Green': setTimeout(function(){ PressColour('Green'); }, Time*a); break;
+					case 'Blue': setTimeout(function(){ PressColour('Blue'); }, Time*a); break;
+					case 'Yellow': setTimeout(function(){ PressColour('Yellow'); }, Time*a); break;
+					case 'Orange': setTimeout(function(){ PressColour('Orange'); }, Time*a); break;
+				}
+			}
+			DisplayNumber(Pattern.length);
+			OrderCount = 0;
+		}
+
+		function ExtendPattern(){
+			switch(Math.floor(Math.random()*5)){
+				case 0: Pattern[Pattern.length] = 'Red'; break;
+				case 1: Pattern[Pattern.length] = 'Green'; break;
+				case 2: Pattern[Pattern.length] = 'Blue'; break;
+				case 3: Pattern[Pattern.length] = 'Yellow'; break;
+				case 4: Pattern[Pattern.length] = 'Orange'; break;
+			}	
+			DisplayPattern();
+		}
+
+		function CheckPattern(id){
+			if(Pattern[OrderCount] == id){ 
+				OrderCount++; 
+			}else{ 
+				if(SwitchPosition == "off"){
+					Beep("Bad");
+					FlashRim(Pattern[OrderCount]);  
+					setTimeout(function(){ DisplayPattern(); }, 2500); 
+				}
+				else if(SwitchPosition == "on"){
+					Beep("Bad");
+					FlashRim(Pattern[OrderCount]); 
+					GenerateNewPattern(); 
+					setTimeout(function(){ Intro(); }, 2500); 
+					setTimeout(function(){ DisplayPattern(); }, 4000);
+					return;
+					}
+			}
+			if(OrderCount == WinCount){FlashRim("White"); setTimeout(function(){ Reset(); }, 2500);}
+			else if(OrderCount == Pattern.length){FlashRimOnce("White"); Beep("Success"); setTimeout(function(){ ExtendPattern(); }, 1500);}
+		}
+
+		function PressColour(id){Beep("General");
+			ChangeCSSCode("Main", "#"+id, "fill", "rgb("+BrightColourHash[id][0]+","+BrightColourHash[id][1]+","+BrightColourHash[id][2]+")","");
+			setTimeout(function(){ ChangeCSSCode("Main", "#"+id, "fill", "rgb("+DimColourHash[id][0]+","+DimColourHash[id][1]+","+DimColourHash[id][2]+")",""); }, 500);
+		}
+
+		function FlashRim(id){
+			var FlashCount = 4; var Time = 250; var Colour = DimColourHash[id]; var Type = "Bad";
+			if(id == "White"){Type = "Success"}
+			for(var a = 0; a < FlashCount; a++){
+				setTimeout(function(){ Beep(Type); ChangeCSSCode("Main", "#ConsoleRimLight", "stroke", "rgb(" + Colour[0] + "," + Colour[1] + "," + Colour[2] + ")",""); }, Time + Time*2*a);
+				setTimeout(function(){ ChangeCSSCode("Main", "#ConsoleRimLight", "stroke", "rgb(" + RimColour[0] + "," + RimColour[1] + "," + RimColour[2] + ")",""); }, Time*2 + Time*2*a);
+			}
+		}
+
+		function FlashRimOnce(id){
+			var Time = 500; var Colour = DimColourHash[id];
+			ChangeCSSCode("Main", "#ConsoleRimLight", "stroke", "rgb(" + Colour[0] + "," + Colour[1] + "," + Colour[2] + ")","");
+			setTimeout(function(){ ChangeCSSCode("Main", "#ConsoleRimLight", "stroke", "rgb(" + RimColour[0] + "," + RimColour[1] + "," + RimColour[2] + ")",""); }, Time);
+		}
+
+		function Intro(){i = 0; IntroId = setInterval(function(){IntroSet()}, 100);}
+		function IntroSet(){
+			if(i > 9){clearInterval(IntroId);DisplayNumber(0);return;}
+			switch(i%5) {
+				case 0: PressColour('Red'); break;
+				case 1: PressColour('Orange'); break;
+				case 2: PressColour('Green'); break;
+				case 3: PressColour('Blue'); break;
+				case 4: PressColour('Yellow'); break;
+			}
+
+			DisplayNumber(i + i*10);
+			i++;
+		}
+
+		function ShiftSwitch(){Beep("Switch");
+			if(SwitchPosition == "off"){
+				SwitchPosition = "on";
+				document.getElementById('SwitchLeaver').style.y = 50.5;
+				
+			}else{
+				SwitchPosition = "off";
+				document.getElementById('SwitchLeaver').style.y = 46.8;
+			}
+			
+		}
+
+		function Reset(){
+			Beep("Reset");
+			DisplayNumber(0);
+			Intro();
+			Pattern = [];
+			SwitchPosition = "off"; document.getElementById('SwitchLeaver').style.y = 46.8;
+			GenerateNewPattern();
+			setTimeout(function(){ DisplayPattern(); }, 2000);
+			ChangeCSSCode("Main", "#Reset", "fill", "rgb(60,60,60)","");
+			setTimeout(function(){ ChangeCSSCode("Main", "#Reset", "fill", "rgb(120,120,120)",""); }, 500);	
+		}
+
+		function DisplayNumber(Number){
+			var String = Number.toString(); if(String.length == 1){String = '0' + String;}
+			var SegmentArray_1 = [0,0,0,0,0,0,0]; var SegmentArray_10 = [0,0,0,0,0,0,0];
+			switch(String[1]) {
+				case '0':SegmentArray_1 = [1,1,1,0,1,1,1]; break;
+				case '1':SegmentArray_1 = [0,0,1,0,0,1,0]; break;
+				case '2':SegmentArray_1 = [1,0,1,1,1,0,1]; break;
+				case '3':SegmentArray_1 = [1,0,1,1,0,1,1]; break;
+				case '4':SegmentArray_1 = [0,1,1,1,0,1,0]; break;
+				case '5':SegmentArray_1 = [1,1,0,1,0,1,1]; break;
+				case '6':SegmentArray_1 = [1,1,0,1,1,1,1]; break;
+				case '7':SegmentArray_1 = [1,0,1,0,0,1,0]; break;
+				case '8':SegmentArray_1 = [1,1,1,1,1,1,1]; break;
+				case '9':SegmentArray_1 = [1,1,1,1,0,1,0]; break;
+			}
+
+			switch(String[0]) {
+				case '0':SegmentArray_10 = [1,1,1,0,1,1,1]; break;
+				case '1':SegmentArray_10 = [0,0,1,0,0,1,0]; break;
+				case '2':SegmentArray_10 = [1,0,1,1,1,0,1]; break;
+				case '3':SegmentArray_10 = [1,0,1,1,0,1,1]; break;
+				case '4':SegmentArray_10 = [0,1,1,1,0,1,0]; break;
+				case '5':SegmentArray_10 = [1,1,0,1,0,1,1]; break;
+				case '6':SegmentArray_10 = [1,1,0,1,1,1,1]; break;
+				case '7':SegmentArray_10 = [1,0,1,0,0,1,0]; break;
+				case '8':SegmentArray_10 = [1,1,1,1,1,1,1]; break;
+				case '9':SegmentArray_10 = [1,1,1,1,0,1,0]; break;
+			}
+				
+			for(var a = 1; a <= 7; a++){
+				if(SegmentArray_1[a-1] == 1){ ChangeCSSCode("Main", "#LCD_1_" + a, "fill", "rgb(127,255,0)","");
+				}else{ ChangeCSSCode("Main", "#LCD_1_" + a, "fill", "rgb(70,70,70)",""); }
+				if(SegmentArray_10[a-1] == 1){ ChangeCSSCode("Main", "#LCD_10_" + a, "fill", "rgb(127,255,0)","");
+				}else{ ChangeCSSCode("Main", "#LCD_10_" + a, "fill", "rgb(70,70,70)",""); }
+			}
+		}
+
+
+		function ChangeCSSCode(SheetName, SelectorText, Rule, NewValue, Type){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){document.styleSheets[a].cssRules[b].style[Rule] = NewValue + Type;}}}}}
+		function GetCSSCode(SheetName, SelectorText, Rule){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){return document.styleSheets[a].cssRules[b].style[Rule];}}}}}
+	</script>
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+		}
+
+		#Console{
+			fill:rgb(25,25,25);
+		}
+		#ConsoleRimLight{stroke:rgb(50,50,50);}
+		#CenterSticker{fill:rgb(255,50,255);}
+
+		#Green{fill:rgb(0,255,0);}
+		#Blue{fill:rgb(0,102,255);}
+		#Yellow{fill:rgb(255,255,0);}
+		#Red{fill:rgb(255,0,0);}
+		#Orange{fill:rgb(255,135,0);}
+
+		#LCDDisplayBackground{fill:rgb(35,35,35);}
+
+		#LCD_10_1{fill:rgb(70,70,70);}
+		#LCD_10_2{fill:rgb(70,70,70);}
+		#LCD_10_3{fill:rgb(70,70,70);}
+		#LCD_10_4{fill:rgb(70,70,70);}
+		#LCD_10_5{fill:rgb(70,70,70);}
+		#LCD_10_6{fill:rgb(70,70,70);}
+		#LCD_10_7{fill:rgb(70,70,70);}
+
+		#LCD_1_1{fill:rgb(70,70,70);}
+		#LCD_1_2{fill:rgb(70,70,70);}
+		#LCD_1_3{fill:rgb(70,70,70);}
+		#LCD_1_4{fill:rgb(70,70,70);}
+		#LCD_1_5{fill:rgb(70,70,70);}
+		#LCD_1_6{fill:rgb(70,70,70);}
+		#LCD_1_7{fill:rgb(70,70,70);}
+
+		#Reset{fill:rgb(120,120,120);}
+		#SwitchHole{fill:rgb(20,20,20);}
+		#SwitchLeaver{fill:rgb(100,100,100); transition: y 0.5s;}
+	</style>
+</head>
+
+<body onLoad="Go()">
+	<svg style="height:100%; width:100%;" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+		<polygon id="Console" points="91.51582741719676,49.999996185302734 60.14432857665497,93.23176574707031 9.384169701673727,76.71868896484375 9.384169701673727,23.281299591064453 60.14432857665497,6.7682342529296875 91.51582741719676,49.999996185302734" />
+		<polygon id="ConsoleRimLight" stroke="#ff0000" stroke-width="3" fill-opacity="0.01" points="88.5147586431367,49.99999237060547 59.28308867518854,90.28301239013672 11.985247722749136,74.8962631225586 11.985247722749136,25.103727340698242 59.28308867518854,9.716987609863281 88.5147586431367,49.99999237060547"/>
+		
+		<circle id="CenterSticker" r="10.3" cy="49.6" cx="45.8"/>
+
+		<path id="Green" onClick="PressColour(this.id); CheckPattern(this.id);" d="m-1.356628,66.16744l0,-32.336443l32.336586,32.336443l-32.336586,0z" id="svg_4" transform="rotate(-135 14.811664581298828,49.99921798706055)"/>
+		<path id="Blue" onClick="PressColour(this.id); CheckPattern(this.id);" d="m20.415112,36.260356l0,-32.386275l32.288535,32.386275l-32.288535,0z" transform="rotate(-63.086517333984375 36.55937957763672,20.067218780517575)"/>
+		<path id="Yellow" onClick="PressColour(this.id); CheckPattern(this.id);" d="m55.521564,47.612365l0,-32.224364l32.451788,32.224364l-32.451788,0z" transform="rotate(9.201997756958008 71.74745941162105,31.500183105468775)"/>
+		<path id="Red" onClick="PressColour(this.id); CheckPattern(this.id);" d="m55.527012,84.617293l0,-32.235649l32.440445,32.235649l-32.440445,0z" transform="rotate(81.1812744140625 71.7472381591797,68.4994659423828)"/>
+		<path id="Orange" onClick="PressColour(this.id); CheckPattern(this.id);" d="m20.376363,96.087657l0,-32.309681l32.365711,32.309681l-32.365711,0z" transform="rotate(153.0496063232422 36.55921936035157,79.93281555175781)"/>
+		
+		<rect id="LCDDisplayBackground" height="6.3" width="10" y="46.4" x="40.8"/>
+
+		<rect id="LCD_10_1" height="0.4" width="2.2" y="46.7" x="42.9"/>
+		<rect id="LCD_10_2" height="2.2" width="0.4" y="47.1" x="42.5"/>
+		<rect id="LCD_10_3" height="2.2" width="0.4" y="47.1" x="45.1"/>
+		<rect id="LCD_10_4" height="0.4" width="2.2" y="49.3" x="42.9"/>
+		<rect id="LCD_10_5" height="2.2" width="0.4" y="49.7" x="42.5"/>
+		<rect id="LCD_10_6" height="2.2" width="0.4" y="49.7" x="45.1"/>
+		<rect id="LCD_10_7" height="0.4" width="2.2" y="51.9" x="42.9"/>
+
+		<rect id="LCD_1_1" height="0.4" width="2.2" y="46.7" x="46.3"/>
+		<rect id="LCD_1_2" height="2.2" width="0.4" y="47.1" x="45.9"/>
+		<rect id="LCD_1_3" height="2.2" width="0.4" y="47.1" x="48.5"/>
+		<rect id="LCD_1_4" height="0.4" width="2.2" y="49.3" x="46.3"/>
+		<rect id="LCD_1_5" height="2.2" width="0.4" y="49.7" x="45.9"/>
+		<rect id="LCD_1_6" height="2.2" width="0.4" y="49.7" x="48.5"/>
+		<rect id="LCD_1_7" height="0.4" width="2.2" y="51.9" x="46.3"/>
+
+		<rect id="Reset" height="6.3" width="1.9" y="46.4" x="51" onClick="Reset()"/>
+		<rect id="SwitchHole" height="6.3" width="2" y="46.4" x="38.6" onClick="ShiftSwitch()"/>
+		<rect id="SwitchLeaver" height="1.9" width="1.8" y="46.8" x="38.7" onClick="ShiftSwitch()"/>
+	</svg>
+</body>
+</html>
