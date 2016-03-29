@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countdown Clock</title>
+	<meta charset="UTF-8">
+	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
+	<style>
+		html, body {
+			height: 100%; width:100%;
+			margin: 0px;
+			background-color:#f0f0f0;
+			}
+	</style>
+	
+	<script>
+		var TimerRunning = false;
+		var timer = 0;
+		var FlipFlop = 0;
+		var CountDownClock = 0;
+
+		function StartTimer() {
+			if(TimerRunning){clearInterval(CountDownClock_Count++); TimerPause(); return;}else{TimerUnpause(); TimerRunning = true;}
+			if(timer == 0){Timer_WorkValues(); FlipFlop = 1;}
+	
+    			CountDownClock = setInterval(function () {
+				DrawSnake();
+        			minutes = parseInt(timer / 60, 10);
+        			seconds = parseInt(timer % 60, 10);
+
+				if(minutes < 10){minutes = "0" + minutes;}
+				else{minutes = minutes;}
+				if(seconds < 10){seconds = "0" + seconds;}
+				else{seconds = seconds;}
+
+        			document.getElementById('ButtonText').innerHTML = minutes + ":" + seconds;
+
+        			if (--timer < 0) {
+					if(FlipFlop == 0){Timer_WorkValues(); FlipFlop = 1;}
+					else{Timer_BreakValues(); FlipFlop = 0;}
+        			}
+    			}, 1000);
+
+			function TimerPause(){			
+				document.getElementById('BackgroundCircle').style.fill = "#d0d0d0";
+				TimerRunning = false;
+			}
+
+			function TimerUnpause(){
+				if(FlipFlop == 0){document.getElementById('BackgroundCircle').style.fill = "#FFFFFF";}else{document.getElementById('BackgroundCircle').style.fill = "#f0f0f0";}
+			}
+		}
+
+		function Timer_WorkValues(){
+			document.getElementById('BackgroundCircle').style.fill = "#f0f0f0";
+			timer = parseInt(document.getElementById('WorkValue').innerHTML)*60; }
+		function Timer_BreakValues(){
+			document.getElementById('BackgroundCircle').style.fill = "#FFFFFF";
+			timer = parseInt(document.getElementById('BreakValue').innerHTML)*60;}
+
+		function TimerReset(){
+			clearInterval(CountDownClock);
+			timer = 0;
+			TimerRunning = false;
+			document.getElementById('ButtonText').innerHTML = "00:00";
+			document.getElementById('BackgroundCircle').style.fill = "#f0f0f0";
+			document.getElementById("snake").setAttribute("width", 100);
+		}
+
+		function ChangeTime(amount, display){
+			if(parseInt(display.innerHTML) > 0 || amount == 1){display.innerHTML = parseInt(display.innerHTML) + amount;}
+		}
+
+		function DrawSnake(){
+			if(FlipFlop == 0){
+				document.getElementById("snake").setAttribute("width", (timer/(parseInt(document.getElementById('BreakValue').innerHTML)*60))*100);
+			}
+			else{
+				document.getElementById("snake").setAttribute("width", (timer/(parseInt(document.getElementById('WorkValue').innerHTML)*60))*100);
+			}
+		}
+			
+	</script>
+
+</head>
+
+<body>
+		<svg height="100%" width="100%" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+			<rect
+				x=0 y=0 height=100 width=100
+				style="fill:#f0f0f0;"
+			></rect>
+				
+
+	<!-- Work Setter -->
+			<rect
+				x=10 y=10 height=10 width=30
+				style="fill:#e8e8e8;"
+			></rect>
+			<text
+				id="WorkValue"
+				text-anchor="middle"
+				x=25 y=19
+				style="fill:#505050; font-family:Arvo; font-size:70%;"
+			>25</text>
+			<text
+				text-anchor="middle"
+				x=15 y=19
+				style="fill:#505050; font-family:Arvo; font-size:70%;"
+				onmousedown="ChangeTime(1, document.getElementById('WorkValue'));"
+			>+</text>
+			<text
+				text-anchor="middle"
+				x=35 y=18.5
+				style="fill:#505050; font-family:Arvo; font-size:70%;"
+				onmousedown="ChangeTime(-1, document.getElementById('WorkValue'));"
+			>-</text>
+
+
+	<!-- Break Setter -->
+			<rect
+				x=60 y=10 height=10 width=30
+				style="fill:#e8e8e8;"
+			></rect>
+			<text
+				id="BreakValue"
+				text-anchor="middle"
+				x=75 y=19
+				style="fill:#505050; font-family:Arvo; font-size:70%;"
+			>5</text>
+			<text
+				text-anchor="middle"
+				x=65 y=19
+				style="fill:#505050; font-family:Arvo; font-size:70%;"
+				onmousedown="ChangeTime(1, document.getElementById('BreakValue'));"
+			>+</text>
+			<text
+				text-anchor="middle"
+				x=85 y=18.5
+				style="fill:#505050; font-family:Arvo; font-size:70%;"
+				onmousedown="ChangeTime(-1, document.getElementById('BreakValue'));"
+			>-</text>
+
+
+	<!-- Main Clock -->
+			<circle id="BackgroundCircle"
+				cx="50" 
+				cy="46" 
+				r="20" 
+				stroke=#000000
+				stroke-width="0.2" 
+				style="fill:#f0f0f0; transition: fill 0.5s ease;"			
+			></circle>
+			<text
+				id="ButtonText"
+				text-anchor="middle"
+				x=50 y=50
+				style="fill:#505050; font-family:Arvo; font-size:80%;"
+			>Press</text>
+			<circle id="CoverCircle"
+				cx="50" 
+				cy="46" 
+				r="20" 
+				stroke=#000000
+				stroke-width="0.2" 
+				style="fill:#ffffff; opacity:0; transition: opacity 0.5s ease;"
+				onmouseover="this.style.opacity='0.5';"
+				onmouseout="this.style.opacity='0';"
+				onmousedown="StartTimer();"		
+			></circle>
+			
+	<!-- Snake -->
+			<rect id="snake"
+				x=0 y=72.5 height=5 width=100
+				fill="#d0d0d0"
+			></rect>
+
+	<!-- Reset -->
+			<rect	
+				x=40 y=80 height=10 width=20
+				style="fill:#e8e8e8;"
+			></rect>
+			<text
+				text-anchor="middle"
+				x=50 y=87.25
+				style="fill:#505050; font-family:Arvo; font-size:40%;"
+			>Reset</text>
+			<rect
+				x=40 y=80 height=10 width=20
+				style="fill:#ffffff; opacity:0; transition: opacity 0.5s ease;"
+				onmouseover="this.style.opacity='0.5';"
+				onmouseout="this.style.opacity='0';"
+				onmousedown="TimerReset();"
+			></rect>
+
+		</svg>
+
+</body>
+</html>
