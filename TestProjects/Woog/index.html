@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Woog</title>
+	<meta charset="utf-8"></meta>
+	<!-- add: xmlns="http://www.w3.org/2000/svg" to SVG element -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">
+	
+	<!-- AudioParam | AudioContext -->
+
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- for JSON -->
+	<script>
+//////////Page Setup/////////////////////////////////////////////////////////////////
+		var SVG_ViewBoxHeight = 1000;
+//////////Audio Setup////////////////////////////////////////////////////////////////
+		var AudioContext = window.AudioContext || window.webkitAudioContext || false;
+		var audioCtx = new AudioContext();
+		var MaxVolume = 1;
+		var KeyboardBus = audioCtx.createGain();
+		var EffectsChain = [KeyboardBus, audioCtx.destination];
+/////////////////////////////////////////////////////////////////////////////////////
+		var KeyCount = 20;
+		var CodesForKeys = {0:"A3",
+							1:"B3",
+							2:"C4",
+							3:"D4",
+							4:"E4",
+							5:"F4",
+							6:"G4",
+							7:"A4",
+							8:"B4",
+							9:"C5",
+							10:"D5",
+							11:"E5",
+							12:"F5",
+							13:"G5",
+							14:"A5",
+							15:"B5",
+							16:"C6",
+							17:"D6",
+							18:"E6",
+							19:"F6"
+							}
+		var Key_OscillatorBlocks = [];
+		var DepressedKeyArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+		function Go(){
+			if(!AudioContext){/*Audio non-functional*/return;}
+			//Create oscillator for each key
+			for(var a = 0; a < KeyCount; a++){
+				Key_OscillatorBlocks[a] = {
+					"Oscillator":audioCtx.createOscillator(),
+					"Gain":audioCtx.createGain(),
+					"Pan":audioCtx.createPanner()
+					};
+				Key_OscillatorBlocks[a].Oscillator.type = 'sine';
+				Key_OscillatorBlocks[a].Oscillator.frequency.value = 220*((a*0.125)+1);
+				Key_OscillatorBlocks[a].Oscillator.start(0);
+				Key_OscillatorBlocks[a].Oscillator.connect(Key_OscillatorBlocks[a].Gain);
+
+				Key_OscillatorBlocks[a].Gain.gain.value = 0;
+				Key_OscillatorBlocks[a].Gain.connect(Key_OscillatorBlocks[a].Pan);
+
+				Key_OscillatorBlocks[a].Pan.setPosition(0,0,10);
+				Key_OscillatorBlocks[a].Pan.connect(EffectsChain[0]);
+				
+			}
+			//Setup Main Keyboard Bus
+				KeyboardBus.gain.setTargetAtTime(MaxVolume,audioCtx.currentTime,0.05);
+				ConnectTogetherLine(EffectsChain);
+			ChangeWave("sine");
+		}
+/////////////////////////////////////////////////////////////////////////////////////
+	//Waveform Selection
+		function ChangeWave(NewWave){
+			for(var a = 0; a < KeyCount; a++){
+				Key_OscillatorBlocks[a].Oscillator.type = NewWave;
+			}
+			document.getElementById('sine').style.fill = "rgb(100,100,100)";
+			document.getElementById('square').style.fill = "rgb(100,100,100)";
+			document.getElementById('sawtooth').style.fill = "rgb(100,100,100)";
+			document.getElementById('triangle').style.fill = "rgb(100,100,100)";
+			document.getElementById(NewWave).style.fill = "rgb(250,100,100)";
+		}
+/////////////////////////////////////////////////////////////////////////////////////
+	//Activate Oscillator
+		function PlayTone(code){
+			if( DepressedKeyArray[code] === 0){
+				DepressedKeyArray[code] = 1;
+				document.getElementById(CodesForKeys[code]).style.fill = 'rgb(220,220,220)';
+				Key_OscillatorBlocks[code].Gain.gain.setTargetAtTime(MaxVolume,audioCtx.currentTime,0.05);
+			}
+			else if( DepressedKeyArray[code] == 1 ){
+				DepressedKeyArray[code] = 0;
+				document.getElementById(CodesForKeys[code]).style.fill = 'rgb(250,250,250)';
+				Key_OscillatorBlocks[code].Gain.gain.setTargetAtTime(0,audioCtx.currentTime,0.05);
+			}
+		}
+/////////////////////////////////////////////////////////////////////////////////////
+	//Volume Slider
+		function AdjustVolume(object, event){
+			object.setAttributeNS(null,"onmousemove","AdjustVolume_Calculate(this)");
+			object.setAttributeNS(null,"onmouseout","AdjustVolume_Stop(this)");
+			object.setAttributeNS(null,"onmouseup","AdjustVolume_Stop(this)");
+			//initial adjust
+			AdjustVolume_Calculate(object);
+		}
+
+		function AdjustVolume_Calculate(object){
+			var PositionInsideBox = (event.clientY - object.getBoundingClientRect().top);
+			var PercentFromTopOfBox = PositionInsideBox/object.getBoundingClientRect().height;
+			var Position = PercentFromTopOfBox*object.height.baseVal.value;
+
+			if(Position < (document.getElementById('VolumeSlider_Backing').y.baseVal.value + 20)){
+				Position = 25;
+			}
+			else if(Position > (document.getElementById('VolumeSlider_Backing').height.baseVal.value - 35)){
+				Position = document.getElementById('VolumeSlider_Backing').height.baseVal.value - 35;
+			}
+			MaxVolume = 1-PercentFromTopOfBox;
+			KeyboardBus.gain.setTargetAtTime(MaxVolume,audioCtx.currentTime,0.05);
+			document.getElementById('VolumeSlider').style.y = Position-10;
+		}
+
+		function AdjustVolume_Stop(object){
+			object.removeAttributeNS(null, "onmousemove");
+			object.removeAttributeNS(null, "onmouseout");
+			object.removeAttributeNS(null, "onmouseup");
+		}
+/////////////////////////////////////////////////////////////////////////////////////
+	//Reverb Module
+	var ReverbOn = false;
+	var ReverbEffectPosition = 0;
+		//Box Parts
+			var Reverb_Object = audioCtx.createConvolver();
+		///////////
+		
+		
+	function SwitchReverb(){
+		if(ReverbOn){
+			ReverbOn = false;
+			document.getElementById('Reverb_OnOff').style.x = 375;
+			ReverbToEffectsChain('disconnect');
+		}
+		else{
+			ReverbOn = true;
+			document.getElementById('Reverb_OnOff').style.x = 405;
+			ReverbToEffectsChain('connect');
+		}
+	}
+	function ReverbToEffectsChain(action){
+		if(action == 'connect'){
+			EffectsChain = PlopObjectIntoArray(Reverb_Object, EffectsChain, 1);
+			}
+		else if(action == 'disconnect'){
+			EffectsChain = PullObjectOutOfArray(Reverb_Object, EffectsChain, 1);
+			}
+		ConnectTogetherLine(EffectsChain);
+	}
+/////////////////////////////////////////////////////////////////////////////////////
+	//Data Manipulation
+	function PlopObjectIntoArray(Object, Array, Position){
+		var OutputArray = []; var OutputArray_Count = 0;
+		for(var a = 0; a < Array.length; a++){
+			if(a == Position){
+				OutputArray[OutputArray_Count] = Object;
+				OutputArray_Count++;
+			}
+			OutputArray[OutputArray_Count] = Array[a];
+			OutputArray_Count++;
+		}
+
+		return OutputArray;
+	}
+	
+	function PullObjectOutOfArray(Object, Array, Position){
+		var OutputArray = []; var OutputArray_Count = 0;
+		for(var a = 0; a < Array.length; a++){
+			if(a == Position && Array[a] == Object){a++;}
+			OutputArray[OutputArray_Count] = Array[a];
+			OutputArray_Count++;
+		}
+		return OutputArray;
+	}
+	
+	//Hook up new string
+	function ConnectTogetherLine(Array){
+		for(var a = 0; a < Array.length-1; a++){
+			Array[a].connect(Array[a+1]);
+		}
+	}
+/////////////////////////////////////////////////////////////////////////////////////
+	</script>
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+
+		}
+		
+		.ModuleSwitch{
+			transition: x 0.5s;
+		}
+		
+		.ModuleBacking{
+			fill:none;
+			stroke:rgb(150,150,150);
+			stroke-width:5;
+		}
+
+		.WaveButton{
+			fill:rgb(100,100,100);
+		}
+
+		.Button{cursor:pointer;}
+
+		.key{
+			fill:rgb(250,250,250);
+		}
+		.key:hover{
+			fill:rgb(240,240,240);
+		}
+
+		.key:active{
+			fill:rgb(220,220,220);
+		}
+
+	</style>
+</head>
+
+<body onLoad="Go()">
+
+	<svg style="height:100%; width:100%;" viewbox="0 0 2000 1000" xmlns="http://www.w3.org/2000/svg">
+	<!-- Backing -->
+		<rect id="MainBacking" height="1000" width="2000" y="0" x="0" style="fill:rgb(50,50,50);"/>
+
+	<!-- Keys -->
+		<rect class="key" id="A3" height="430" width="96" y="570" x="00" onmousedown="PlayTone(0)"/>
+		<rect class="key" id="B3" height="430" width="96" y="570" x="100" onmousedown="PlayTone(1)"/>
+		<rect class="key" id="C4" height="430" width="96" y="570" x="200" onmousedown="PlayTone(2)"/>
+		<rect class="key" id="D4" height="430" width="96" y="570" x="300" onmousedown="PlayTone(3)"/>
+		<rect class="key" id="E4" height="430" width="96" y="570" x="400" onmousedown="PlayTone(4)"/>
+		<rect class="key" id="F4" height="430" width="96" y="570" x="500" onmousedown="PlayTone(5)"/>
+		<rect class="key" id="G4" height="430" width="96" y="570" x="600" onmousedown="PlayTone(6)"/>
+		<rect class="key" id="A4" height="430" width="96" y="570" x="700" onmousedown="PlayTone(7)"/>
+		<rect class="key" id="B4" height="430" width="96" y="570" x="800" onmousedown="PlayTone(8)"/>
+		<rect class="key" id="C5" height="430" width="96" y="570" x="900" onmousedown="PlayTone(9)"/>
+		<rect class="key" id="D5" height="430" width="96" y="570" x="1000" onmousedown="PlayTone(10)"/>
+		<rect class="key" id="E5" height="430" width="96" y="570" x="1100" onmousedown="PlayTone(11)"/>
+		<rect class="key" id="F5" height="430" width="96" y="570" x="1200" onmousedown="PlayTone(12)"/>
+		<rect class="key" id="G5" height="430" width="96" y="570" x="1300" onmousedown="PlayTone(13)"/>
+		<rect class="key" id="A5" height="430" width="96" y="570" x="1400" onmousedown="PlayTone(14)"/>
+		<rect class="key" id="B5" height="430" width="96" y="570" x="1500" onmousedown="PlayTone(15)"/>
+		<rect class="key" id="C6" height="430" width="96" y="570" x="1600" onmousedown="PlayTone(16)"/>
+		<rect class="key" id="D6" height="430" width="96" y="570" x="1700" onmousedown="PlayTone(17)"/>
+		<rect class="key" id="E6" height="430" width="96" y="570" x="1800" onmousedown="PlayTone(18)"/>
+		<rect class="key" id="F6" height="430" width="96" y="570" x="1900" onmousedown="PlayTone(19)"/>
+
+	<!-- Volume Control -->
+		<rect id="VolumeSlider_Backing" x="10" y="10" height="550" width="80" style="fill:rgb(150,150,150);"/>
+		<rect id="VolumeSlider" x="15" y="15" height="50" width="70" style="fill:rgb(200,200,200);" />
+		<rect id="SelectionCover" class="Button" x="10" y="10" height="550" width="80" style="fill:rgba(255,150,150,0);" onmousedown="AdjustVolume(this,event)"/>
+
+	<!-- Wave Type Selectors -->
+		<rect class="WaveButton Button" id="sine", x="100" y="10" height="130" width="130" onmousedown="ChangeWave(this.id)"/>
+		<rect class="WaveButton Button" id="square", x="100" y="150" height="130" width="130" onmousedown="ChangeWave(this.id)"/>
+		<rect class="WaveButton Button" id="sawtooth", x="100" y="290" height="130" width="130" onmousedown="ChangeWave(this.id)"/>
+		<rect class="WaveButton Button" id="triangle", x="100" y="430" height="130" width="130" onmousedown="ChangeWave(this.id)"/>
+	<!-- Reverb -->
+		<rect id="Reverb_Backing" class="ModuleBacking" x="240" y="12.5" height="265" width="300"/>
+			<text x="250" y="45" style="fill:rgb(150,150,150); font-size:200%; font-family:Arvo;">Reverb</text>
+			<rect id="Reverb_OnOff_Backing" x="370" y="20" height="30" width="60" style="fill:rgb(100,100,100);" />
+			<rect id="Reverb_OnOff" class="ModuleSwitch" x="375" y="25" height="20" width="20" style="fill:rgb(200,200,200);" />
+			<rect id="Reverb_OnOff_Cover" x="370" y="20" height="30" width="60" style="fill:rgba(0,0,0,0);" onClick="SwitchReverb()"/>
+	</svg>
+
+</body>
+</html>
