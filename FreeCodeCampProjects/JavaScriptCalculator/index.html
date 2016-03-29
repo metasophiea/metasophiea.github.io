@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<meta charset="UTF-8">
+	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
+	<style>
+		body {padding:5px;}
+		html, body {
+			margin:0px;
+			height: 99%; width:99%;
+			background-color:#f0f0f0;
+			}
+		button{
+			transition: background 0.25s ease;
+			height:100%; width:100%;
+			text-decoration: none;
+			background:#FFFFFF;
+			border:0px;
+		}
+		button:hover{
+			background:#f0f0f0;
+		}
+		button:active{
+			background:#d0d0d0;
+		}
+
+
+
+
+	</style>
+	
+	<script>
+		function Calculate(){
+			if(document.getElementById('CalculationSpace').value != ''){document.getElementById('CalculationSpace').value = eval(document.getElementById('CalculationSpace').value);}
+		}
+	</script>
+
+</head>
+
+<body>
+	<table width="100%" height="100%" cellspacing="10"><tbody width="100%" height="100%">
+		<tr width="100%" height="100%">
+			<td width="50%" height="100%">
+					<textarea id=CalculationSpace style="height:100%; width:100%; resize: none;"></textarea>
+			</td>
+			<td width="50%" height="100%">
+			<table id=ButtonSpace width="100%" height="50%" cellspacing="1" style="background-color:#e0e0e0;"><tbody width="100%" height="100%">
+				<tr height="20%">
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = '';"
+						>Cla</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('Math.random()');"
+						>Rand</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat(',');"
+						>,</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('Math.pow(');"
+						>Pow</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('+');"
+						>+</button>
+					</td>
+				<tr height="20%">
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('1');"
+						>1</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('2');"
+						>2</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('3');"
+						>3</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('Math.sqrt(');"
+						>Sqrt</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('-');"
+						>-</button>
+					</td>
+				<tr height="20%">
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('4');"
+						>4</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('5');"
+						>5</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('6');"
+						>6</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('Math.sin(');"
+						>Sin</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('*');"
+						>x</button>
+					</td>
+				<tr height="20%">
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('7');"
+						>7</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('8');"
+						>8</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('9');"
+						>9</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('Math.cos(');"
+						>Cos</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('/');"
+						>/</button>
+					</td>
+				<tr height="20%">
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('(');"
+						>(</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('0');"
+						>0</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat(')');"
+						>)</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="document.getElementById('CalculationSpace').value = (document.getElementById('CalculationSpace').value).concat('Math.tan(');"
+						>Tan</button>
+					</td>
+					<td width="20%">
+						<button
+							onClick="Calculate();"
+						>=</button>
+					</td>
+				</tr>
+			</tbody></table>
+			</td>
+		</tr>
+	</tbody></table>
+</body>
+</html>
