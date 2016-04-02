@@ -1,3 +1,10 @@
+//Zoom_Index MUST be of odd count, with central number being 1
+var Zoom_Index = [0.1,0.11,0.13,0.15,0.17,0.2,0.22,0.26,0.3,0.33,0.38,0.43,0.5,0.65,0.75,0.875,
+			1,
+			1.125,1.25,1.4,1.5,1.68,1.8,2.1,2.5,2.8,3.1,3.5,4,4.5,5,5.7,6.5];
+
+var MovementFrames = {"Zoom":[],"X":[],"Y":[]};
+		
 // Draw List // - Format: "id", "type", data...
 	var DrawList = []; var TempDrawList = []; var BackGroundList = [];
 	var Spin = 0;
@@ -55,4 +62,24 @@
 			else{return counter;}
 		}
 		return counter;
+	}
+
+//// Viewport Automation ////////////////////////////////////////////////
+	function ActiveViewportAutomation(){
+		if(MovementFrames.X[0] != undefined){XPosition = MovementFrames.X.shift();}
+		if(MovementFrames.Y[0] != undefined){YPosition = MovementFrames.Y.shift();}
+		if(MovementFrames.Zoom[0] != undefined){
+			var i = MovementFrames.Zoom.shift();
+
+			var BeforeZoom_CursorX = (document.getElementById('MainCanvas').width/2 - XPosition)/ZoomAmount;
+			var BeforeZoom_CursorY = (document.getElementById('MainCanvas').height/2 - YPosition)/ZoomAmount;
+
+			ZoomAmount = i;
+			ZoomIndex = FindClosestIndex(i);
+
+			var AfterZoom_CursorX = (document.getElementById('MainCanvas').width/2 - XPosition)/ZoomAmount;
+			var AfterZoom_CursorY = (document.getElementById('MainCanvas').height/2 - YPosition)/ZoomAmount;
+			XPosition = XPosition + (AfterZoom_CursorX-BeforeZoom_CursorX)*ZoomAmount;
+			YPosition = YPosition + (AfterZoom_CursorY-BeforeZoom_CursorY)*ZoomAmount;	
+		}
 	}
