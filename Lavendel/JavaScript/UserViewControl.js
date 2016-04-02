@@ -5,7 +5,7 @@
 var PositionInsideBox = [0,0]
 var OldPosition = [0,0];
 var NewPosition = [0,0];
-  function Pan(event, object){
+  	function Pan(event, object){
 		object.setAttributeNS(null,"onmousemove","Pan_Calculate(event)");
 		object.setAttributeNS(null,"onmouseout","Pan_Stop(this)");
 		object.setAttributeNS(null,"onmouseup","Pan_Stop(this)");
@@ -24,57 +24,90 @@ var NewPosition = [0,0];
 		object.removeAttributeNS(null, "onmouseout");
 		object.removeAttributeNS(null, "onmouseup");
 	}
+
+	function AutoPan(EndX,EndY,TimeToTake){ var StartX = XPosition; var StartY = YPosition;
+		var PanningRoute = {"X":[],"Y":[]}; var Frames = TimeToTake*RefreshCount; var FrameCount = 0;
+		if(MovementFrames.X[MovementFrames.X.length-1] != null){ 
+			StartX = MovementFrames.X[MovementFrames.X.length-1];
+			StartY = MovementFrames.Y[MovementFrames.Y.length-1];
+		}
+
+		PanningRoute.X = RouteCurveMaker(StartX, EndX, Frames, 'cosin');
+		PanningRoute.Y = RouteCurveMaker(StartY, EndY, Frames, 'cosin');
+
+		//Attached frames to end of current reel
+			MovementFrames.X.push.apply(MovementFrames.X,PanningRoute.X);
+			MovementFrames.Y.push.apply(MovementFrames.Y,PanningRoute.Y);
+	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
 // Zoom //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// >> Globals Required <<
 	// XPosition (number) & YPosition (number)
-	// - The current user view position. All canvas objects are positioned relitive to these values
+	// - The current userview position. All canvas objects are positioned relitive to these values
 	// ZoomAmount (number)
 	// - Simply the zoom multiplier. This number is used with canvas object's positions to change their rendered size
 	// - The number starts at 1, with anything lower resulting in the objects reducing in size, and vice versa
-	function Zoom(data, object){	
-		var BeforeZoom_CursorX = (data.clientX - XPosition)/ZoomAmount;
-		var BeforeZoom_CursorY = (data.clientY - YPosition)/ZoomAmount;
+	// ZoomIndex (number) & Zoom_Index (array of numbers)
 
-		ZoomStep = ZoomAmount/8;
-		if( data.deltaY > 0){//Zoom out
-			ZoomAmount = ZoomAmount - ZoomStep;
-			ZoomIndex--;
-			if( ZoomAmount <= ZoomLimits[0]){ZoomAmount = ZoomLimits[0]; ZoomIndex++;}
-		}
-		else if( data.deltaY < 0 ){//Zoom in
-			ZoomAmount = ZoomAmount + ZoomStep;
-			ZoomIndex++;
-			if( ZoomAmount >= ZoomLimits[1]){ZoomAmount = ZoomLimits[1]; ZoomIndex--;}
-		}
-		
-	//Correction
-		switch(ZoomIndex){
-			case -16: ZoomAmount = 0.1; break;
-			case -8: ZoomAmount = 0.3; break;
-			case -4: ZoomAmount = 0.5; break;
-			case -2: ZoomAmount = 0.75; break;
-			case 0: ZoomAmount = 1; break;
-			case 2: ZoomAmount = 1.25; break;
-			case 4: ZoomAmount = 1.5; break;
-			case 8: ZoomAmount = 2.5; break;
-			case 16: ZoomAmount = 6.5; break;
-		}
+	function Zoom(Index){
+		var cap = (Zoom_Index.length - 1)/2;
+		if(ZoomIndex < -cap){ZoomIndex = -cap;}else if(ZoomIndex > cap){ZoomIndex = cap;}
+		ZoomIndex = Index; ZoomAmount = Zoom_Index[Index+cap];
+	}
+	function SimpleZoom(Index){Zoom_WithPercentage(Index,0.5,0.5);}
+	function Zoom_WithPercentage(Index,X,Y){
+		if(X > 1){X = 1;}else if(X < 0){X = 0;}
+		if(Y > 1){Y = 1;}else if(Y < 0){Y = 0;}
+		Zoom_WithViewportPosition(Index,document.getElementById('MainCanvas').width*X,document.getElementById('MainCanvas').height*Y);
+	}
+	function Zoom_WithViewportPosition(Index,X,Y){
+		if(X > document.getElementById('MainCanvas').width){X = document.getElementById('MainCanvas').width;}else if(X < 0){X = 0;}
+		if(Y > document.getElementById('MainCanvas').height){Y = document.getElementById('MainCanvas').height;}else if(Y < 0){Y = 0;}
 
-		var AfterZoom_CursorX = (data.clientX - XPosition)/ZoomAmount;
-		var AfterZoom_CursorY = (data.clientY - YPosition)/ZoomAmount;
+		var BeforeZoom_CursorX = (X - XPosition)/ZoomAmount;
+		var BeforeZoom_CursorY = (Y - YPosition)/ZoomAmount;
+
+		Zoom(Index);
+
+		var AfterZoom_CursorX = (X - XPosition)/ZoomAmount;
+		var AfterZoom_CursorY = (Y - YPosition)/ZoomAmount;
 
 		XPosition = XPosition + (AfterZoom_CursorX-BeforeZoom_CursorX)*ZoomAmount;
-  		YPosition = YPosition + (AfterZoom_CursorY-BeforeZoom_CursorY)*ZoomAmount;
+  		YPosition = YPosition + (AfterZoom_CursorY-BeforeZoom_CursorY)*ZoomAmount;	
 	}
+
+	// Machine Control ////////// ////////// ////////// ////////// ////////// ////////// ////////// ////////// ////////// //////////
+	function AutoZoom(FinishIndex, TimeToTake){var StartIndex = ZoomIndex;
+		if(FinishIndex < -cap){FinishIndex = -cap;}else if(FinishIndex > cap){FinishIndex = cap;}
+		var cap = (Zoom_Index.length - 1)/2;
+		var ZoomingRoute = []; var Frames = TimeToTake*RefreshCount; var FrameCount = 0;
+
+		if(MovementFrames.Zoom[MovementFrames.Zoom.length-1] != null){ 
+			StartIndex = FindClosestIndex(MovementFrames.Zoom[MovementFrames.Zoom.length-1]);
+		}
+
+		ZoomingRoute = RouteCurveMaker(Zoom_Index[StartIndex+cap], Zoom_Index[FinishIndex+cap], Frames, 'cosin');
+
+		//Attached frames to end of current reel
+			for(var a = 0; a < ZoomingRoute.length; a++){
+				MovementFrames.Zoom.push(ZoomingRoute[a]);
+			}
+	}
+
+	// Mouse Control / ////////// ////////// ////////// ////////// ////////// ////////// ////////// ////////// ////////// //////////
+	function MouseZoom(data, object){
+		var NewZoomIndex = ZoomIndex;
+		if( data.deltaY > 0){//Zoom out
+			NewZoomIndex--; if(NewZoomIndex < -16){NewZoomIndex = -16;}
+		}
+		else if( data.deltaY < 0 ){//Zoom in
+			NewZoomIndex++; if(NewZoomIndex > 16){NewZoomIndex = 16;}
+		}
+		Zoom_WithViewportPosition(NewZoomIndex,data.clientX,data.clientY);
+	}	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 

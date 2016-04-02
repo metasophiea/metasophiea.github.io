@@ -26,19 +26,20 @@
 		<script type='text/javascript' src="http://metasophiea.com/Lavendel/JavaScript/shapes/image.js"></script>
 		<script type='text/javascript' src="http://metasophiea.com/Lavendel/JavaScript/shapes/line.js"></script>		
 
-	<script type='text/javascript' src="http://metasophiea.com/Lavendel/JavaScript/UserViewControl.js"></script>
+	<script type='text/javascript' src="file:///H:/Documents/GitHub/metasophiea.github.io/Lavendel/JavaScript/UserViewControl.js"></script>
 	<script type='text/javascript' src="http://metasophiea.com/Lavendel/JavaScript/KeyBoardControl.js"></script>
 	<script type='text/javascript' src="http://metasophiea.com/Lavendel/JavaScript/ToolMenu.js"></script>
 	<script type='text/javascript' src="http://metasophiea.com/Lavendel/JavaScript/DrawControl.js"></script>
-	<script type='text/javascript' src="http://metasophiea.com/Lavendel/JavaScript/DataManipulation.js"></script>
-	<script type='text/javascript' src="http://metasophiea.com/Lavendel/JavaScript/Render.js"></script>
+	<script type='text/javascript' src="file:///H:/Documents/GitHub/metasophiea.github.io/Lavendel/JavaScript/DataManipulation.js"></script>
+	<script type='text/javascript' src="file:///H:/Documents/GitHub/metasophiea.github.io/Lavendel/JavaScript/Render.js"></script>
 
 	<script>
-	// Globals Menu //
+	// Globals //
 		var XPosition = 0; var YPosition = 0;
-		var Canvas; var ZoomStep = 0.1; var ZoomAmount = 1; var ZoomLimits = [0.1,8]; var ZoomIndex = 0;
+		var Canvas; var ZoomAmount = 1; var ZoomIndex = 0;
 		var RefreshCount = 30;
 		var RenderId = setInterval(function(){ Render(); }, 1000/RefreshCount ); 
+		var ActiveViewportAutomationId = setInterval(function(){ ActiveViewportAutomation(); }, 1000/RefreshCount ); 
 	// ---------- //
 
 		function Go(){
@@ -48,6 +49,10 @@
 
 			DrawBackground();
 			Render();
+			AutoZoom(-4,5);
+			AutoPan(149.13,31.5,5);
+			AutoZoom(9,2);
+			AutoPan(-2789,-803,2);
 		}
 	/////////////////////////////////////////////////////////////////////////
 	</script>
@@ -98,7 +103,7 @@
 </head>
 
 <body onLoad="Go()" onResize="AdjustCanvasToFill()" onKeyDown="KeyPress(event)" >
-<canvas id="MainCanvas" width="0" height="0" onDBlClick="DoubleClick(event, this)" onmousedown="MouseDown(event, this)" onwheel="Zoom(event, this)"></canvas>
+<canvas id="MainCanvas" width="0" height="0" onDBlClick="DoubleClick(event, this)" onmousedown="MouseDown(event, this)" onwheel="MouseZoom(event, this)"></canvas>
 <div id="SubCanvases"></div>
 
 <!-- Tool Menu -->
