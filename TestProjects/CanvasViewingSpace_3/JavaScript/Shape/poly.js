@@ -49,23 +49,22 @@ function poly(InputData = {}){
 		Canvas.strokeStyle = this.LineColour;
 		Canvas.lineWidth = CanvasLength(this.Thickness);
 
-		Canvas.beginPath();
+	//Develop Viewport points, and test whether these points are within the viewport's range, or if the shape stretches accross the viewport
+		var DrawingPoints = []; var UnvisibleCount = [0,0];
+		for(var a = 0; a < InitialData.Points.length; a++){
+			DrawingPoints[a] = CanvasToViewport(this.Points[a][0],this.Points[a][1]);
 
-		//var temp = CanvasAngle(CanvasX(this.Points[0][0]), CanvasY(this.Points[0][1]));
-		//var temp = CanvasAngle(this.Points[0][0],this.Points[0][1]);
-		//temp[0] = CanvasX(temp[0]); temp[1] = CanvasY(temp[1]); 
-		var temp = CanvasToViewport(this.Points[0][0],this.Points[0][1]);
-		Canvas.moveTo( temp[0],temp[1] );
-		for(var a = 1; a < InitialData.Points.length; a++){
-			//temp = CanvasAngle(CanvasX(this.Points[a][0]), CanvasY(this.Points[a][1]));
-			//temp = CanvasAngle(this.Points[a][0],this.Points[a][1]);
-			//temp[0] = CanvasX(temp[0]); temp[1] = CanvasY(temp[1]); 
-			temp = CanvasToViewport(this.Points[a][0],this.Points[a][1]);
-			Canvas.lineTo( temp[0],temp[1] );
+			if( DrawingPoints[a][0] < 100 ){UnvisibleCount[0]++;}
+			else if( (document.getElementById('MainCanvas').width-DrawingPoints[a][0]) < 100 ){UnvisibleCount[0]--;}
+			if( DrawingPoints[a][1] < 100 ){UnvisibleCount[1]++;}
+			else if( (document.getElementById('MainCanvas').height-DrawingPoints[a][1]) < 100 ){UnvisibleCount[1]--;}
 		}
 
-		Canvas.closePath();
- 		Canvas.fill(); 
-		Canvas.stroke();	
+	//Assuming at least one point is within range; draw the object
+		if(UnvisibleCount[0] < DrawingPoints.length && UnvisibleCount[1] < DrawingPoints.length && UnvisibleCount[0] > -DrawingPoints.length && UnvisibleCount[1] > -DrawingPoints.length){
+			Canvas.beginPath(); Canvas.moveTo( DrawingPoints[0][0],DrawingPoints[0][1] );
+			for(var a = 1; a < DrawingPoints.length; a++){ Canvas.lineTo( DrawingPoints[a][0],DrawingPoints[a][1] ); }
+			Canvas.closePath(); Canvas.fill(); Canvas.stroke();	
+		}
 	}
 }
