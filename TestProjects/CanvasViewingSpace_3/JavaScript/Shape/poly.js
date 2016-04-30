@@ -12,8 +12,8 @@ function poly(InputData = {}){
 	//Style
 		//Main colour
 		if(StyleData.hasOwnProperty('R')){this.R = StyleData.R;}else{this.R = 0;}
-		if(StyleData.hasOwnProperty('G')){this.G = StyleData.R;}else{this.G = 0;}
-		if(StyleData.hasOwnProperty('B')){this.B = StyleData.R;}else{this.B = 0;}
+		if(StyleData.hasOwnProperty('G')){this.G = StyleData.G;}else{this.G = 0;}
+		if(StyleData.hasOwnProperty('B')){this.B = StyleData.B;}else{this.B = 0;}
 		if(StyleData.hasOwnProperty('A')){this.A = StyleData.A;}else{this.A = 1;}
 		this.Colour = 'rgba('+this.R+', '+this.G+', '+this.B+', '+this.A+')';
 
@@ -51,10 +51,16 @@ function poly(InputData = {}){
 
 		Canvas.beginPath();
 
-		var temp = CanvasAngle(CanvasX(this.Points[0][0]), CanvasY(this.Points[0][1]));
+		//var temp = CanvasAngle(CanvasX(this.Points[0][0]), CanvasY(this.Points[0][1]));
+		//var temp = CanvasAngle(this.Points[0][0],this.Points[0][1]);
+		//temp[0] = CanvasX(temp[0]); temp[1] = CanvasY(temp[1]); 
+		var temp = CanvasToViewport(this.Points[0][0],this.Points[0][1]);
 		Canvas.moveTo( temp[0],temp[1] );
 		for(var a = 1; a < InitialData.Points.length; a++){
-			temp = CanvasAngle(CanvasX(this.Points[a][0]), CanvasY(this.Points[a][1]));
+			//temp = CanvasAngle(CanvasX(this.Points[a][0]), CanvasY(this.Points[a][1]));
+			//temp = CanvasAngle(this.Points[a][0],this.Points[a][1]);
+			//temp[0] = CanvasX(temp[0]); temp[1] = CanvasY(temp[1]); 
+			temp = CanvasToViewport(this.Points[a][0],this.Points[a][1]);
 			Canvas.lineTo( temp[0],temp[1] );
 		}
 
