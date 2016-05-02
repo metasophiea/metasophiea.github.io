@@ -1,7 +1,7 @@
 function poly(InputData = {}){
 // JSON Recieving ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	if(InputData.hasOwnProperty('ID')){this.ID = ID;}else{this.ID = 0;}
-	if(InputData.hasOwnProperty('Adjusting')){this.Adjusting = Adjusting;}else{this.Adjusting = false;}
+	if(InputData.hasOwnProperty('ID')){this.ID = InputData.ID;}else{this.ID = 0;}
+	if(InputData.hasOwnProperty('Adjusting')){this.Adjusting = InputData.Adjusting;}else{this.Adjusting = false;}
 	if(InputData.hasOwnProperty('StyleData')){var StyleData = InputData.StyleData;}else{var StyleData = {};}
 	if(InputData.hasOwnProperty('InitialData')){var InitialData = InputData.InitialData;}else{var InitialData = {};}
 // Values ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,10 +54,10 @@ function poly(InputData = {}){
 		for(var a = 0; a < InitialData.Points.length; a++){
 			DrawingPoints[a] = CanvasToViewport(this.Points[a][0],this.Points[a][1]);
 
-			if( DrawingPoints[a][0] < 100 ){UnvisibleCount[0]++;}
-			else if( (document.getElementById('MainCanvas').width-DrawingPoints[a][0]) < 100 ){UnvisibleCount[0]--;}
-			if( DrawingPoints[a][1] < 100 ){UnvisibleCount[1]++;}
-			else if( (document.getElementById('MainCanvas').height-DrawingPoints[a][1]) < 100 ){UnvisibleCount[1]--;}
+			if( DrawingPoints[a][0] < 0 ){UnvisibleCount[0]++;}
+			else if( (document.getElementById('MainCanvas').width-DrawingPoints[a][0]) < 0 ){UnvisibleCount[0]--;}
+			if( DrawingPoints[a][1] < 0 ){UnvisibleCount[1]++;}
+			else if( (document.getElementById('MainCanvas').height-DrawingPoints[a][1]) < 0 ){UnvisibleCount[1]--;}
 		}
 
 	//Assuming at least one point is within range; draw the object

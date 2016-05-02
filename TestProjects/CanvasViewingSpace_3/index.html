@@ -23,7 +23,7 @@
 
 	<script>
 	//Viewport control
-		var View = { "Position":[0,0], "Angle":0, "Zoom":0 }; var Canvas; 
+		var View = { "Position":[0,0], "Angle":0.5, "Zoom":0 }; var Canvas; 
 		var ZoomIndex = {	"-16":0.1, "-15":0.11, "-14":0.13, "-13":0.15, "-12":0.17, "-11":0.2, "-10":0.22, "-9":0.26, 
 					"-8":0.3, "-7":0.33, "-6":0.38, "-5":0.43, "-4":0.5, "-3":0.65, "-2":0.75, "-1":0.875, 
 					"0":1, 
@@ -35,7 +35,7 @@
 		var BackgroundDrawList = []; var DrawList = []; var TempDrawList = [];
 
 	//Tool
-		var type = "Spin";
+		var type = "Pan";
 		function ClickTool(type, data, object){
 			switch(type){
 				case "Pan": MousePan(data,object); break;
@@ -43,27 +43,31 @@
 			}
 		}
 	</script>
-	<script type='text/javascript' src="http://metasophiea.com/TestProjects/CanvasViewingSpace_3/JavaScript/Shape/poly.js"></script>
-	<script type='text/javascript' src="http://metasophiea.com/TestProjects/CanvasViewingSpace_3/JavaScript/Render.js"></script>
-	<script type='text/javascript' src="http://metasophiea.com/TestProjects/CanvasViewingSpace_3/JavaScript/ViewportControls.js"></script>
+
+	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Shape/poly.js"></script>
+	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Shape/image.js"></script>
+	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Shape/image2.js"></script>
+	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Shape/image3.js"></script>
+	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Render.js"></script>
+	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/ViewportControls.js"></script>
 
 	<script>
 		function Go(){ console.log("hello");
 			Canvas = document.getElementById('MainCanvas').getContext("2d");
 			AdjustCanvasToFill();
+
+			//Zoom_WithViewportPosition(-1,0.5,0.5);
 			DrawBackground();
 			Render();
-
-			BackgroundDrawList.push( new poly({ "InitialData":{"Points":[[60,60], [60,160], [160,160], [160,60]]}, "StyleData":{"R":255,"G":0,"B":0} }) );
-			Zoom_WithViewportPosition(-16,0.5,0.5);
 		}
 
 		function AdjustCanvasToFill(){console.log("adjusting viewport");
-			document.getElementById('MainCanvas').height = window.innerHeight;
-			document.getElementById('MainCanvas').width = window.innerWidth;
+			document.getElementById('MainCanvas').height = window.innerHeight/2;
+			document.getElementById('MainCanvas').width = window.innerWidth/2;
 		}
 
 		function CanvasLength(Length){return Length*ZoomIndex[View.Zoom];} // Converts a CanvasSpace Length, to true window Length
+		function ViewportLength(Length){return Length/ZoomIndex[View.Zoom];} // Converts a true window Length, to a CanvasSpace Length
 		function CanvasToViewport(X,Y){
 			//Viewport Angle
 				//Get distance from Zero
@@ -90,6 +94,12 @@
 
 			return [X,Y];
 		}
+
+		function GetObjectDrawArrayPositionByID(ID, Array){
+			for(var a = 0; a < Array.length; a++){ if(Array[a].WhoAreYou().ID == ID){return a} }
+			return -1;
+		}
+
 	</script>
 
 	<style title="Main">
@@ -102,7 +112,7 @@
 </head>
 
 <body onLoad="Go()" onResize="AdjustCanvasToFill()">
-  <canvas id="MainCanvas" width="0" height="0" onmousedown="ClickTool(type, event, this)" onwheel="MouseZoom(event, this)"></canvas>
-  <p id="readout"></p>
+	<canvas id="MainCanvas" width="0" height="0" onmousedown="ClickTool(type, event, this)" onwheel="MouseZoom(event, this)"></canvas>
+	<div id="SubCanvases"></div>
 </body>
 </html>
