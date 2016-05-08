@@ -1,7 +1,9 @@
 //F4 - Get current Position, Zoom and Angle
 function KeyPress(event){//console.log(event.keyCode + " | " + event.code);
 
-	if(event.code == "F2" && event.shiftKey == true){
+	if(event.code == "F2" && event.shiftKey == true){//Stats
+		console.log("-- -- -- \Stats -- -- --");
+		console.log("XY         : " + View.Position);
 		console.log("Center View: " + ViewportPointsAt(0.5, 0.5) + " Zoom: " + View.Zoom + " Angle: " + View.Angle );
 		console.log("Viewing Dimensions: " + ViewportLength(window.innerWidth) + "x" + ViewportLength(window.innerHeight));
 		console.log("Frame Rate: " + RefreshPerSecond );

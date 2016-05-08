@@ -21,43 +21,44 @@
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> --> <!-- for JSON -->
 	<!-- <script src="http://metasophiea.com/Useful_Items/JavaScript/CSS_Edit.js"></script> --> <!-- for CSS_Edit -->
 
-	<script>
+	<script> var dir = "http://metasophiea.com/TestProjects/";
 	//Viewport control
 		var View = { "Position":[100,0], "Angle":0, "Zoom":0 }; var Canvas; 
 		var ZoomIndex = {	"-16":0.1, "-15":0.11, "-14":0.13, "-13":0.15, "-12":0.17, "-11":0.2, "-10":0.22, "-9":0.26, 
 					"-8":0.3, "-7":0.33, "-6":0.38, "-5":0.43, "-4":0.5, "-3":0.65, "-2":0.75, "-1":0.875, 
 					"0":1, 
 					"1":1.25, "2":1.25, "3":1.4, "4":1.5, "5":1.68, "6":1.8, "7":2.1, "8":2.5, 
-					"9":2.8, "10":3.1, "11":3.5, "12":4.4, "13":4, "14":4.5, "15":5.7, "16":6.5 };
+					"9":2.8, "10":3.1, "11":3.5, "12":4, "13":4.2, "14":4.5, "15":5.7, "16":6.5 };
+		var ActiveZoom = 1;
 
 	//Render
-		var RefreshPerSecond = 10; var ConstantRenderInterval = setInterval(function(){ Render(); }, 1000/RefreshPerSecond ); 
+		var RefreshPerSecond = 30; var ConstantRenderInterval = setInterval(function(){ Render(); }, 1000/RefreshPerSecond ); 
 		var BackgroundDrawList = []; var DrawList = []; var TempDrawList = [];
 
 	//Tool
-		var type = "Spin";
-		function ClickTool(type, data, object){
-			switch(type){
-				case "Pan": MousePan(data,object); break;
-				case "Spin": MouseSpin(data,object); break;
-			}
-		}
+		var type = "Pan";
+	//Tool Menu
+		var MenuOpen = {"Main":false};
+
+	//Auto Control
+		var ActiveViewportMovementRefreshPerSecond = RefreshPerSecond; var ActiveAutoControlInterval = setInterval(function(){ AutoControl(); }, 1000/ActiveViewportMovementRefreshPerSecond );
+		var ActiveViewportMovementScript = {"Position":[], "Angle":[], "Zoom":[] };
 	</script>
 
-	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Shape/poly.js"></script>
-	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Shape/image.js"></script>
-	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Shape/text.js"></script>
-	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/Render.js"></script>
-	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/ViewportControls.js"></script>
-	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/KeyboardInput.js"></script>
-	<script type='text/javascript' src="file:///C:/Users/Brandon/Desktop/CanvasViewingSpace_3/JavaScript/AutoControl.js"></script>
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/Shape/poly.js"></script>
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/Shape/image.js"></script>
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/Shape/text.js"></script>
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/Render.js"></script>
+
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/ViewportControls.js"></script>
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/KeyboardInput.js"></script>
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/AutoControl.js"></script>
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/Script.js"></script>
+	<script type='text/javascript' src=dir+"CanvasViewingSpace_3/JavaScript/Menu.js"></script>
 	<script>
 		function Go(){ console.log("hello");
 			Canvas = document.getElementById('MainCanvas').getContext("2d");
 			AdjustCanvasToFill();
-
-			setTimeout(function(){MoveTo( {"X":106.47448321,"Y":81.02813,"Zoom":16,"Angle":-0.782987} );},1000);
-
 			DrawBackground();
 			Render();
 		}
@@ -67,8 +68,8 @@
 			document.getElementById('MainCanvas').width = window.innerWidth;
 		}
 
-		function CanvasLength(Length){return Length*ZoomIndex[View.Zoom];} // Converts a CanvasSpace Length, to true window Length
-		function ViewportLength(Length){return Length/ZoomIndex[View.Zoom];} // Converts a true window Length, to a CanvasSpace Length
+		function CanvasLength(Length){return Length*ActiveZoom;} // Converts a CanvasSpace Length, to true window Length
+		function ViewportLength(Length){return Length/ActiveZoom;} // Converts a true window Length, to a CanvasSpace Length
 		function CanvasToViewport(X,Y){
 			//Viewport Angle
 				//Get distance from Zero
@@ -91,7 +92,7 @@
 				X = (Dis*Math.cos(Ang)); Y = -(Dis*Math.sin(Ang));
 
 			//Viewport Zoom and Pan
-			X = (X+View.Position[0])*ZoomIndex[View.Zoom]; Y = (Y+View.Position[1])*ZoomIndex[View.Zoom];
+			X = (X+View.Position[0])*ActiveZoom; Y = (Y+View.Position[1])*ActiveZoom;
 
 			return [X,Y];
 		}
@@ -109,11 +110,25 @@
 			overflow-x: hidden; overflow-y: hidden;
 		}
 
+		#Menu{
+			position: absolute;
+			z-index: 1;
+
+			transition: height 0.25s, width 0.25s;
+		}
+
+		.MenuButtonCover{
+			fill: rgba(250,250,250,0);
+		}
+		.MenuButtonCover:hover{
+			fill: rgba(255,255,255,0.5);
+		}
+
 	</style>
 </head>
 
 <body onLoad="Go()" onResize="AdjustCanvasToFill()" onKeyDown="KeyPress(event)">
-	<canvas id="MainCanvas" width="0" height="0" onmousedown="ClickTool(type, event, this)" onwheel="MouseZoom(event, this)"></canvas>
-	<div id="SubCanvases"></div>
+	<canvas id="MainCanvas" width="0" height="0" onmousedown="ClickTool(type, event, this)" onwheel="MouseZoom(event, this)" onDBlClick="DoubleClick(event, this)"></canvas>
+	<svg id="Menu" style="height:0px, width:0px"></svg>
 </body>
 </html>

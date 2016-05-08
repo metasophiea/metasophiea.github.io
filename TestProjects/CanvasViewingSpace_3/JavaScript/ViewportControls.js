@@ -19,7 +19,7 @@
 	function ViewportPointsAt(X,Y){
 		//X and Y are a number between 0 and 1, representing how far down or right they are
 			var X = document.getElementById('MainCanvas').width*X; var Y = document.getElementById('MainCanvas').height*Y;			
-			X = (X/ZoomIndex[View.Zoom]) - View.Position[0]; Y = (Y/ZoomIndex[View.Zoom]) - View.Position[1];	
+			X = ViewportLength(X) - View.Position[0]; Y = ViewportLength(Y) - View.Position[1];	
 				var Dis = Math.pow(Math.pow((X),2)+Math.pow((Y),2),0.5);
 
 			//Calculate Angle (catching odd calculations)
@@ -91,8 +91,8 @@ var NewPosition = [0,0];
 		OldPosition[1] = View.Position[1];
 	}
 	function MousePan_Calculate(event){
-		View.Position[0] = (event.clientX-PositionInsideBox[0])/ZoomIndex[View.Zoom]+OldPosition[0];
-		View.Position[1] = (event.clientY-PositionInsideBox[1])/ZoomIndex[View.Zoom]+OldPosition[1];
+		View.Position[0] = ViewportLength(event.clientX-PositionInsideBox[0])+OldPosition[0];
+		View.Position[1] = ViewportLength(event.clientY-PositionInsideBox[1])+OldPosition[1];
 		NewPosition[0] = View.Position[0]; NewPosition[1] = View.Position[1];
 	}
 	function MousePan_Stop(object){
@@ -114,7 +114,7 @@ var NewPosition = [0,0];
 		
 		//Collect Centre points before and after the zooom, while doing the zoom
 			var OldPoints = ViewportPointsAt(X,Y);
-			View.Zoom = Index;
+			View.Zoom = Index; ActiveZoom = ZoomIndex[View.Zoom];
 			var NewPoints = ViewportPointsAt(X,Y);	
 		//Gather polar coords for these points and add the Viewport angle
 			OldPoints = [(GetPolar(OldPoints[0],OldPoints[1])[0]+View.Angle),(GetPolar(OldPoints[0],OldPoints[1])[1])];
@@ -125,4 +125,34 @@ var NewPosition = [0,0];
 		//Adjust Viewport accordingly
 			View.Position[0] = View.Position[0] + (NewPoints[0]-OldPoints[0]);
 			View.Position[1] = View.Position[1] + (NewPoints[1]-OldPoints[1]);
+	}
+
+	function DirectControlZoom_WithViewportPosition(Exact,X,Y){ //X and Y are a number between 0 and 1, representing how far down or right they are
+		if( X < 0 ){X = 0;}else if( X > 1 ){X = 1;} if( Y < 0 ){Y = 0;}else if( Y > 1 ){Y = 1;} 
+		
+		//Collect Centre points before and after the zooom, while doing the zoom
+			var OldPoints = ViewportPointsAt(X,Y);
+			ActiveZoom = Exact; View.Zoom = ClosestZoomIndex(Exact);
+			var NewPoints = ViewportPointsAt(X,Y);	
+		//Gather polar coords for these points and add the Viewport angle
+			OldPoints = [(GetPolar(OldPoints[0],OldPoints[1])[0]+View.Angle),(GetPolar(OldPoints[0],OldPoints[1])[1])];
+			NewPoints = [(GetPolar(NewPoints[0],NewPoints[1])[0]+View.Angle),(GetPolar(NewPoints[0],NewPoints[1])[1])];
+		//convert back to Cartesian
+			OldPoints = GetCartesian(OldPoints[0],OldPoints[1]);
+			NewPoints = GetCartesian(NewPoints[0],NewPoints[1]);
+		//Adjust Viewport accordingly
+			View.Position[0] = View.Position[0] + (NewPoints[0]-OldPoints[0]);
+			View.Position[1] = View.Position[1] + (NewPoints[1]-OldPoints[1]);
+	}
+
+	function ClosestZoomIndex(exact){
+		var array = Object.keys(ZoomIndex);
+		var closestDistance = 10; var ans = 0;
+		for(var a = 0; a < array.length; a++){
+			if(Math.abs(ZoomIndex[array[a]]-exact) === 0){return array[a];}
+			if(Math.abs(ZoomIndex[array[a]]-exact) < closestDistance){
+				ans = array[a]; closestDistance = Math.abs(ZoomIndex[array[a]]-exact);
+			}
+		}
+		return ans;
 	}
