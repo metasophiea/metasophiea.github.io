@@ -13,8 +13,8 @@ function DrawBackground(){
 	DrawList.Background.push( new poly({ "ID":GetNextID("Background"), "InitialData":{"Points":[[0,0], [0,100], [100,100], [100,0]]}, "StyleData":{"R":255,"G":0,"B":0} }) );	
 	DrawList.Background.push( new poly({ "ID":GetNextID("Background"), "InitialData":{"Points":[[0,-5000], [0,5000], [10,5000], [10,-5000]]} }) );
 	DrawList.Background.push( new poly({ "ID":GetNextID("Background"), "InitialData":{"Points":[[-5000,0], [-5000,10], [5000,10], [5000,0]]} }) );
-	DrawList.Background.push( new image({"ID":GetNextID("Background"), "InitialData":{"Center":[100,100],"Width":100,"Height":200,"Angle":Math.PI/4}, "StyleData":{"URL":"http://img.timeinc.net/time/photoessays/2008/trees/franklin_trees_01.jpg"} }) );	
-	DrawList.Background.push( new text({ "ID":GetNextID("Background"), "InitialData":{"Center":[200,200],"Width":300,"Height":200,"Angle":0}, "StyleData":{"Text":["Hello","hello again", "get outta here"], "Font":"Lucida Sans Unicode", "Size":100, "R":255,"G":100,"B":200, "Thickness":5, "Align":"left", "LineSpacing":0.5} }) );	
+	DrawList.Background.push( new image({"ID":GetNextID("Background"), "InitialData":{"Center":[100,100],"Width":100,"Height":200,"Angle":Math.PI/4}, "StyleData":{"URL":"file:///C:/Users/Public/Pictures/Sample%20Pictures/Autumn%20Leaves.jpg"} }) );	
+	DrawList.Background.push( new text({ "ID":GetNextID("Background"), "InitialData":{"Center":[200,200],"Width":300,"Height":200,"Angle":0}, "StyleData":{"Text":["Hello","hello again", "get outta here"], "Font":"Lucida Console", "Size":100, "R":255,"G":100,"B":200, "Thickness":5, "Align":"left", "LineSpacing":0.5} }) );	
 
 
 

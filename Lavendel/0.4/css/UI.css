@@ -1,0 +1,13 @@
+#UI{
+	position:absolute; z-index:1;
+}
+
+.BackingPlate{fill:rgb(200,200,200);}
+.FrontingPlate{fill:rgb(220,220,220);}
+
+.ExitButton{
+	fill:rgb(255,220,220);
+}
+.ExitButton:hover{
+	fill:rgb(255,200,200);
+}

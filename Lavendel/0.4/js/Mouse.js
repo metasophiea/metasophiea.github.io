@@ -24,7 +24,7 @@ function DoubleClick(event,that){
 	var temp = PointToID(event.clientX,event.clientY); 
 	if(temp != -1){ GetObjectFromID(temp).DoubleClick(); }else{
 		switch(Tool.DoubleClick){
-			case "MainUI": console.log("-menu-"); break;
+			case "MainUI": StartMenu(event.clientX,event.clientY); break;
 		}
 	}
 }
