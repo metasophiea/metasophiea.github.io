@@ -5,7 +5,7 @@ function Lavendel_Start(){
 //Load Globals
 	var Globals_Script = document.createElement("script");
 	Globals_Script.type = "text/javascript";
-	Globals_Script.src = 'file:///C:/Users/Brandon/Desktop/Lavendel_0.5/Globals.js'; 
+	Globals_Script.src = 'http://metasophiea.com/Lavendel/0.5/Globals.js'; 
 	document.getElementsByTagName("head")[0].appendChild(Globals_Script);
 
 //Set up Elements
