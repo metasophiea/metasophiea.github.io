@@ -30,7 +30,7 @@ function Lavendel_Start(){
 }
 
 function LoadAndBoot(){
-	var temp; var Address = "https://metasophiea.com/Lavendel/0.5/";
+	var temp; var Address = "http://metasophiea.com/Lavendel/0.5/";
 	var CSSList = [
 		'CSS/Menu/default.css'
 	];
