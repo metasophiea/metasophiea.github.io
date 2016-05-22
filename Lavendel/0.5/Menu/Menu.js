@@ -40,7 +40,7 @@ function MoveWindowWithID_MousePan_Stop(object){
 	clearTimeout(ClickTimeout_ID);
 }
 
-function BringForward(that){console.log("-- -- -- -- --");
+function BringForward(that){
 	var temp = that.parentElement.getElementsByTagName('svg');
 	var highest = 0; var lowest = temp[0].style['z-index'];
 	for(var a = 0; a < temp.length; a++){
