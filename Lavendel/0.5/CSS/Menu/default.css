@@ -1,0 +1,14 @@
+.BackingPlate{fill:rgb(200,200,200);}
+.Plate_1{fill:rgb(220,220,220);}
+.Plate{fill:rgba(255,255,255,0.4);}
+.generalText{fill:rgb(0,0,0);}
+
+.ButtonGlow{fill:rgba(255,255,255,0);}
+.ButtonGlow:hover{fill:rgba(255,255,255,0.5);}
+.ButtonDim{fill:rgba(0,0,0,0);}
+.ButtonDim:hover{fill:rgba(0,0,0,0.1);}
+
+.UpdateButtonBack{fill:rgb(200,200,255);}
+.ExitButtonBack{fill:rgb(255,220,220);}
+
+.textBackground{fill:rgb(255,255,255);}
