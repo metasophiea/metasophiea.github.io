@@ -1,5 +1,5 @@
 var BootCount = 0;
-var BootAddress = "file:///H:/Documents/GitHub/metasophiea.github.io/lavendel/0.6/";
+var BootAddress = "http:/metasophiea.com/lavendel/0.6/";
 	var CSSList = [
 	];
 	var ScriptList = [
