@@ -1,14 +1,5 @@
-- Proper draw list
-- - Draw list
-- - Index list
-- - Add(obj)
-- - PlopAdd(obj,Draw_Position)
-- - remove(Index_Position || Draw_Position)
-- - shift(Draw_Position1,Draw_Position2)
-- - getObj(Index_Position)
-- - nextIndex()
+- Reintegrate everything
 
-- Mouse Interface
 - Keyboard Interface
 
 - Subshape Selectioning
