@@ -19,9 +19,65 @@
 <body>
 	<section>
 		<pre>
---------------------------------------------------------
-2016-05-28-a - Created New Domain Structure For Lavendel
---------------------------------------------------------
+---------------------------------------------------------
+2016-06-05-a - The Sudden Beginning of Lavendel 0.7
+---------------------------------------------------------
+- Removed "./Lavendel" folder, as it turned out that it
+  was never actually needed. Created 
+  "./TestProjects/CanvasViewingSpace_4" as a catcher with
+  a similar cause
+- Created 'list' object for draw lists. This simplifies
+  list interaction and working with the ID system
+- Created mouse interface..its a little clunky but solid.
+  It incorporates viewport controls and acesses object 
+  methods for correct situations. Method list now;
+  - Selected       (indicating that an object has been 
+                   selected, but not necessarily clicked)
+  - Unselected
+  - Click
+  - DoubleClick
+  - Pass
+  - Drag
+  - Passout
+  - Out
+  - Wheel
+- Snazzy rendering efficiency for images didn't work while
+  zooming, have rewritten again. Still snazzy.
+- Began renaming some of the global vars and functions to
+  have assembly-esk prefixes
+---------------------------------------------------------
+		</pre>
+	</section>
+
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-05-29-a - Beginnings of Lavendel 0.6
+---------------------------------------------------------
+- Completed switch to new subdomain. Syncing with github
+  on windows is a bit dodge due to the two 'lavendel' 
+  folders. Case isn't important in windows it seems. 
+- Combined 'globals' file into './lavendel.js' file, to 
+  ease inclusion and reduce line count. Also arranged 
+  some new variables in there, such as the link list
+- Added new 'ClickAndDrag' function into objects 
+  (should probably be named just 'drag')
+- Rewrote 'mouse.js' a little to better facilitate the
+  dragging function
+- Rearranged and renamed files and functions to unify
+  casing
+- Rewrote 'image's Draw function to allow user defined
+  anchoring. Also includes snazzy rendering efficiency
+  which might come in handy for 'text'
+---------------------------------------------------------
+		</pre>
+	</section>
+
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-05-28-a - Created New Domain Structure For /Lavendel
+---------------------------------------------------------
 http://metasophiea.com/lavendel /0.5
 				/0.6
 				/blog
@@ -33,7 +89,7 @@ http://metasophiea.com/lavendel /0.5
   from './Lavendel'.
 - Also, welcome to the inaugural post of the Lavendel
   development blog. I'm liking this text style too.
---------------------------------------------------------
+---------------------------------------------------------
 		</pre>
 	</section>
 </body>
