@@ -20,6 +20,38 @@
 	<section>
 		<pre>
 ---------------------------------------------------------
+2016-06-05-a - The Sudden Beginning of Lavendel 0.7
+---------------------------------------------------------
+- Removed "./Lavendel" folder, as it turned out that it
+  was never actually needed. Created 
+  "./TestProjects/CanvasViewingSpace_4" as a catcher with
+  a similar cause
+- Created 'list' object for draw lists. This simplifies
+  list interaction and working with the ID system
+- Created mouse interface..its a little clunky but solid.
+  It incorporates viewport controls and acesses object 
+  methods for correct situations. Method list now;
+  - Selected       (indicating that an object has been 
+                   selected, but not necessarily clicked)
+  - Unselected
+  - Click
+  - DoubleClick
+  - Pass
+  - Drag
+  - Passout
+  - Out
+  - Wheel
+- Snazzy rendering efficiency for images didn't work while
+  zooming, have rewritten again. Still snazzy.
+- Began renaming some of the global vars and functions to
+  have assembly-esk prefixes
+---------------------------------------------------------
+		</pre>
+	</section>
+
+	<section>
+		<pre>
+---------------------------------------------------------
 2016-05-29-a - Beginnings of Lavendel 0.6
 ---------------------------------------------------------
 - Completed switch to new subdomain. Syncing with github
