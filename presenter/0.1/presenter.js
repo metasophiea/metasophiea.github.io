@@ -1,7 +1,7 @@
 var BootCount = 0;
 //Container Element
-	var lavendel_ContainerElement;
-	var lavendel_ContainerElement_Dimensions = [0,0];
+	var ContainerElement;
+	var ContainerElement_Dimensions = [0,0];
 
 //Canvas'es
 	var ViewportElement; var Viewport;
@@ -17,28 +17,22 @@ var BootCount = 0;
 //Render
 	var RefreshPerSecond = 30; var ConstantRenderInterval;
 	var DrawList = {"Background":[],"Main":[],"Temp":[]};
+
 //Tool
 	var ClickTimeoutTime = 500; var ClickTimeout_ID;
-	var tool = {"click":"pan", "LongClick":"MainUI", "wheel":"zoom"};
-
-//Auto Movement
-//	var ActiveViewportMovementRefreshPerSecond = RefreshPerSecond; var ActiveAutoControlInterval;
-//	var ActiveViewportMovementScript = {"Position":[], "Angle":[], "Zoom":[] };		
+	var tool = {"click":"pan", "DoubleClick":"MainUI", "wheel":"zoom"};
 
 //Mouse
 	var Mouse_Mousedown = false;
+	var Mouse_Selected;
 
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-function Lavendel_Start(){
+function Presenter_Start(){
 //Error Check
-	if(document.getElementById('LavendelWindow') == null){console.error("Error 0: There's no element for Lavendel to run in");return;}
+	if(document.getElementById('PresenterWindow') == null){console.error("Error 0: There's no element for Lavendel to run in");return;}
 
 //Set up Elements
-	lavendel_ContainerElement = document.getElementById('LavendelWindow');
-		lavendel_ContainerElement.setAttribute("onmouseover","document.getElementsByTagName('html')[0].style.overflowX = 'hidden'; document.getElementsByTagName('html')[0].style.overflowY = 'hidden';");
-		lavendel_ContainerElement.setAttribute("onmouseout","document.getElementsByTagName('html')[0].style.overflowX = 'auto'; document.getElementsByTagName('html')[0].style.overflowY = 'auto';");
-
+	ContainerElement = document.getElementById('PresenterWindow');
 	ViewportElement = document.createElement('canvas'); ViewportElement.id = "ViewportElement";
 		ViewportElement.style['z-index'] = 0; ViewportElement.style.position = "relative";
 		ViewportElement.style.top = 0; ViewportElement.style.left = 0;
@@ -47,27 +41,27 @@ function Lavendel_Start(){
 	SelectionMatrixElement = document.createElement('canvas'); SelectionMatrixElement.id = "SelectionMatrixElement";
 		SelectionMatrixElement.width = 0; SelectionMatrixElement.height = 0;
 		SelectionMatrix = SelectionMatrixElement.getContext('2d');
-		
-	lavendel_ContainerElement.appendChild(ViewportElement);
+	ContainerElement.appendChild(ViewportElement);
+
+	document.body.setAttribute("onresize","AdjustCanvasToFill();");
 
 //Load Files
-var BootAddress = "http://metasophiea.com/lavendel/0.7/";
+var BootAddress = "http://metasophiea.com/presenter/0.1/";
 	var CSSList = [
-		'menu/css/default.css'
 	];
 	var ScriptList = [
-		'mouse.js',
-
-		'canvas/objectcanvas.js',
+		'canvas/objects/drawlist.js',
+		'canvas/objects/numberlist.js',
+		'canvas/canvaselement.js',
 		'canvas/render.js',
-		'canvas/list.js',
-		'canvas/viewportcontrol.js',	
-		'canvas/shape/image.js',
-		'canvas/shape/poly.js',
-		'canvas/shape/text.js',
+		'canvas/mouseinterface.js',
+		'canvas/ViewportControl/pan.js',
+		'canvas/ViewportControl/spin.js',
+		'canvas/ViewportControl/zoom.js',
 
-		'menu/startmenu.js',
-		'menu/create.js'
+		'canvas/objects/shape/poly.js',
+		'canvas/objects/shape/image.js',
+		'canvas/objects/shape/text.js'
 	];
 
 	var temp;
@@ -83,7 +77,7 @@ var BootAddress = "http://metasophiea.com/lavendel/0.7/";
 		document.getElementsByTagName("head")[0].appendChild(temp)
 	}
 
-	//Only load this file, when all the other files have been loaded and accounted for
+//Only load this file, when all the other files have been loaded and accounted for
 	var BootStarter = setInterval(function(){
 		if(BootCount == ScriptList.length){
 			clearInterval(BootStarter);
@@ -93,6 +87,3 @@ var BootAddress = "http://metasophiea.com/lavendel/0.7/";
 		}
 	},100);
 }
-
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
-console.log("-> ./lavendel.js loaded");
