@@ -1,0 +1,2 @@
+- Proper text size scaling "ctx.scale(s, s);"
+- Proper text rendering efficiency
