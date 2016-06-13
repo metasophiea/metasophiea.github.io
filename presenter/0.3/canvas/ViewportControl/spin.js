@@ -16,7 +16,7 @@ function MouseSpin_Calculate(data){
 	SpinViewPort(StartPosition[0],StartPosition[1],(StartingAngle - SpinAmount*(EndPosition[1]-StartPosition[1]))); //only using EndPosition[1] as we're only looking at y movement
 }
 
-function SpinViewPort(X,Y,Angle){console.log(Angle);
+function SpinViewPort(X,Y,Angle){
 	//X and Y are a number between 0 and 1, representing how far down or right they are
 	//Collect Centre points before and after the spin, while doing the spin
 		var OldPoints = ViewportPointsAt(X,Y);
@@ -28,6 +28,7 @@ function SpinViewPort(X,Y,Angle){console.log(Angle);
 	//convert back to Cartesian
 		OldPoints = GetCartesian(OldPoints[0],OldPoints[1]);
 		NewPoints = GetCartesian(NewPoints[0],NewPoints[1]);
+		console.log(OldPoints +"|"+ NewPoints);
 	//Adjust Viewport accordingly
 		view.position[0] = view.position[0] + (NewPoints[0]-OldPoints[0]);
 		view.position[1] = view.position[1] + (NewPoints[1]-OldPoints[1]);			
