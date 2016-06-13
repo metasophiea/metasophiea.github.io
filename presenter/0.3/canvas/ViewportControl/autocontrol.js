@@ -87,6 +87,7 @@ function CreatePathTo(position,data={}){
 		break;
 	}
 
+	console.log(ProducedArray);
 	//paste to ActiveViewportMovementScript
 	for(var a = 0; a < ProducedArray.position.length; a++){
 		ActiveViewportMovementScript.position[ActiveViewportMovementScript.position.length] = ProducedArray.position[a];
