@@ -41,6 +41,7 @@ function getData(){
 	for(var a = 0; a < array.length; a++){outputarray[a] = articles[array[a]];}
 	return outputarray;
 }
+
 function PutTogetherImageBox(){
 var data = getData();
 //Image Boxes
@@ -54,7 +55,7 @@ var data = getData();
 		var image = document.createElementNS('http://www.w3.org/2000/svg','image');
 			image.setAttribute("x",0); image.setAttribute("y",0);
 			image.setAttribute("height",100); image.setAttribute("width",100);
-			image.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",data[a].url);
+			image.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",data[a].image_url);
 			pattern.appendChild(image);
 			def.appendChild(pattern);
 		var shape = document.createElementNS('http://www.w3.org/2000/svg','polygon');
@@ -64,6 +65,11 @@ var data = getData();
 			shape.setAttribute("points",""+(33+(temp/2))+","+(10+temp)+" "+(66-(temp/2))+","+(10+temp)+" "+(90-temp)+","+(33+(temp/2))+" "+(90-temp)+","+(66-(temp/2))+" "+(66-(temp/2))+","+(90-temp)+" "+(33+(temp/2))+","+(90-temp)+" "+(10+temp)+","+(66-(temp/2))+" "+(10+temp)+","+(33+(temp/2))+"");
 			shape.setAttribute("fill","url(#img_"+a+")");
 			document.getElementById("MainMenuSVG").appendChild(shape);
+		var shape = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+			shape.id = 'image_oct_textbacker'+a; shape.setAttribute("class","imageoct");
+			shape.style.opacity = 0; shape.style.fill = data[a].backerFill;
+			shape.setAttribute("points",""+(90-temp)+","+(43+(temp/2))+" "+(90-temp)+","+(56-(temp/2))+" "+(10+temp)+","+(56-(temp/2))+" "+(10+temp)+","+(43+(temp/2))+"");
+			document.getElementById("MainMenuSVG").appendChild(shape);		
 		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
 			text.id = 'image_oct_headtext'+a; text.setAttribute("class","imageoct");
 			text.style.opacity = 0; text.style.fill = data[a].textcolour;
@@ -76,25 +82,27 @@ var data = getData();
 			text.style.opacity = 0; text.style.fill = data[a].textcolour;
 			text.style["font-size"] = 2.5;
 			text.setAttribute("x",15); text.setAttribute("y",52);
+			text.setAttribute("extraData",data[a].link_url);
 			text.innerHTML = data[a].text;
 			document.getElementById("MainMenuSVG").appendChild(text);
-
-		var shape = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-			shape.id = 'image_oct_link'+a; shape.setAttribute("class","imageoct");
-			shape.style.opacity = 0;
-			var temp = 2;
-//			shape.setAttribute("onclick","window.location="+data[a].link+";");
-			shape.setAttribute("onclick","console.log('"+data[a].headline+"');");
-			shape.setAttribute("points",""+(33+(temp/2))+","+(10+temp)+" "+(66-(temp/2))+","+(10+temp)+" "+(90-temp)+","+(33+(temp/2))+" "+(90-temp)+","+(66-(temp/2))+" "+(66-(temp/2))+","+(90-temp)+" "+(33+(temp/2))+","+(90-temp)+" "+(10+temp)+","+(66-(temp/2))+" "+(10+temp)+","+(33+(temp/2))+"");
-			document.getElementById("MainMenuSVG").appendChild(shape);
 	}document.getElementById("MainMenuSVG").appendChild(def);
+
+	var shape = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+		shape.id = 'image_oct_link'; shape.setAttribute("class","imageoct");
+		shape.style.opacity = 0; 
+		var temp = 2;
+		shape.setAttribute("points",""+(33+(temp/2))+","+(10+temp)+" "+(66-(temp/2))+","+(10+temp)+" "+(90-temp)+","+(33+(temp/2))+" "+(90-temp)+","+(66-(temp/2))+" "+(66-(temp/2))+","+(90-temp)+" "+(33+(temp/2))+","+(90-temp)+" "+(10+temp)+","+(66-(temp/2))+" "+(10+temp)+","+(33+(temp/2))+"");
+		document.getElementById("MainMenuSVG").appendChild(shape);
+	
 
 	var imageboxTransitioner_currentImage = 0;
 	setTimeout(function(){
 		document.getElementById('image_oct_image'+imageboxTransitioner_currentImage).style.opacity = 1;
 		document.getElementById('image_oct_headtext'+imageboxTransitioner_currentImage).style.opacity = 1;
 		document.getElementById('image_oct_bodytext'+imageboxTransitioner_currentImage).style.opacity = 1;
-		document.getElementById('image_oct_link'+imageboxTransitioner_currentImage).style['z-index'] = 1;
+		document.getElementById('image_oct_textbacker'+imageboxTransitioner_currentImage).style.opacity = 1;
+		var temp = document.getElementById('image_oct_bodytext'+imageboxTransitioner_currentImage).getAttribute('extraData');
+		document.getElementById('image_oct_link').setAttribute("onclick","window.location='"+temp+"';");
 		imageboxTransitioner_currentImage++;
 	},1000);
 	imageboxTransitioner = setInterval(function(){
@@ -102,12 +110,15 @@ var data = getData();
 			document.getElementById('image_oct_image'+a).style.opacity = 0;
 			document.getElementById('image_oct_headtext'+a).style.opacity = 0;
 			document.getElementById('image_oct_bodytext'+a).style.opacity = 0;
-			document.getElementById('image_oct_link'+a).style['z-index'] = -1;
+			document.getElementById('image_oct_textbacker'+a).style.opacity = 0;
 		}
 		document.getElementById('image_oct_image'+imageboxTransitioner_currentImage).style.opacity = 1;
 		document.getElementById('image_oct_headtext'+imageboxTransitioner_currentImage).style.opacity = 1;
 		document.getElementById('image_oct_bodytext'+imageboxTransitioner_currentImage).style.opacity = 1;
-		document.getElementById('image_oct_link'+imageboxTransitioner_currentImage).style['z-index'] = 1;
+		document.getElementById('image_oct_textbacker'+imageboxTransitioner_currentImage).style.opacity = 1;
+		var temp = document.getElementById('image_oct_bodytext'+imageboxTransitioner_currentImage).getAttribute('extraData');
+		
+		document.getElementById('image_oct_link').setAttribute("onclick","window.location='"+temp+"';");
 		imageboxTransitioner_currentImage++; if(imageboxTransitioner_currentImage == data.length){imageboxTransitioner_currentImage = 0;}
 	},5000);
 }
