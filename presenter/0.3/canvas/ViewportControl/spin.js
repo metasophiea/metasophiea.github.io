@@ -16,7 +16,7 @@ function MouseSpin_Calculate(data){
 	SpinViewPort(StartPosition[0],StartPosition[1],(StartingAngle - SpinAmount*(EndPosition[1]-StartPosition[1]))); //only using EndPosition[1] as we're only looking at y movement
 }
 
-function SpinViewPort(X,Y,Angle){
+function SpinViewPort(X,Y,Angle){console.log(Angle);
 	//X and Y are a number between 0 and 1, representing how far down or right they are
 	//Collect Centre points before and after the spin, while doing the spin
 		var OldPoints = ViewportPointsAt(X,Y);
