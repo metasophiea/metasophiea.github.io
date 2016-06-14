@@ -15,6 +15,15 @@ var articles = {
 		"backerFill":"rgba(0,0,0,0.75)",
 		"image_url":"http://metasophiea.com/presenter/resources/images/PresenterSplash_1.bmp",
 		"link_url":"http://metasophiea.com/presenter/info"
+	},
+	"article_20160614-a":{
+		"headline":"Free Code Camp Project Archive",
+		"text_line1":"check out some of my original websites",
+		"text_line2":"from when I was first learning HTML, JS and CSS",
+		"textcolour":"rgb(0,0,0)",
+		"backerFill":"rgba(255,255,255,0.75)",
+		"image_url":"http://newbornstartups.com/wp-content/uploads/2015/06/fcc-logo.png",
+		"link_url":"http://metasophiea.com/FreeCodeCampProjects/"		
 	}
 };		
 
