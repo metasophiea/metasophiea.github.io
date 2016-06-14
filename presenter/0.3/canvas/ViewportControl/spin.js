@@ -28,6 +28,7 @@ function SpinViewPort(X,Y,Angle){
 	//convert back to Cartesian
 		OldPoints = GetCartesian(OldPoints[0],OldPoints[1]);
 		NewPoints = GetCartesian(NewPoints[0],NewPoints[1]);
+		console.log(OldPoints +"|"+ NewPoints);
 	//Adjust Viewport accordingly
 		view.position[0] = view.position[0] + (NewPoints[0]-OldPoints[0]);
 		view.position[1] = view.position[1] + (NewPoints[1]-OldPoints[1]);			
