@@ -1,4 +1,4 @@
-var imageboxTransitioner;
+var imageboxTransitioner; var slideCount; var pauseSlideShow = false;
 function ShowMainMenu(){
 //Main SVG
 	var SVG_Element = document.createElementNS('http://www.w3.org/2000/svg','svg');
@@ -18,10 +18,13 @@ function ShowMainMenu(){
 	shape.style.fill = "rgb(220,220,220)";
 	document.getElementById("MainMenuSVG").appendChild(shape);
 
+	addTabs();
 	PutTogetherImageBox();
-
+	
 	setTimeout(function(){
 		document.getElementById("backing_oct").style.opacity = 1;
+		var contents = document.getElementsByClassName('slideButton'); console.log(contents);
+		for(var a = 0; a < contents.length; a++){contents[a].style.opacity = 1;}
 	},1000);
 }
 
@@ -33,9 +36,7 @@ function HideMainMenu(){
 }
 
 
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function getData(){
 	var array = Object.keys(articles); var outputarray = [];
 	for(var a = 0; a < array.length; a++){outputarray[a] = articles[array[a]];}
@@ -43,7 +44,7 @@ function getData(){
 }
 
 function PutTogetherImageBox(){
-var data = getData();
+var data = getData(); slideCount = data.length;
 //Image Boxes
 	var def = document.createElementNS('http://www.w3.org/2000/svg','defs');	
 	for(var a = 0; a < data.length; a++){
@@ -69,21 +70,31 @@ var data = getData();
 			shape.id = 'image_oct_textbacker'+a; shape.setAttribute("class","imageoct");
 			shape.style.opacity = 0; shape.style.fill = data[a].backerFill;
 			shape.setAttribute("points",""+(90-temp)+","+(43+(temp/2))+" "+(90-temp)+","+(56-(temp/2))+" "+(10+temp)+","+(56-(temp/2))+" "+(10+temp)+","+(43+(temp/2))+"");
-			document.getElementById("MainMenuSVG").appendChild(shape);		
+			document.getElementById("MainMenuSVG").appendChild(shape);
+
+		var SlightAdjust = 1;
+		if(data[a].text_line2 == ""){SlightAdjust = 0;}		
 		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
 			text.id = 'image_oct_headtext'+a; text.setAttribute("class","imageoct");
 			text.style.opacity = 0; text.style.fill = data[a].textcolour;
 			text.style["font-size"] = 5;
-			text.setAttribute("x",15); text.setAttribute("y",50);
+			text.setAttribute("x",15); text.setAttribute("y",50-SlightAdjust);
 			text.innerHTML = data[a].headline;
+			text.setAttribute("extraData",data[a].link_url);
 			document.getElementById("MainMenuSVG").appendChild(text);
 		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
-			text.id = 'image_oct_bodytext'+a; text.setAttribute("class","imageoct");
+			text.id = 'image_oct_bodytext1'+a; text.setAttribute("class","imageoct");
 			text.style.opacity = 0; text.style.fill = data[a].textcolour;
 			text.style["font-size"] = 2.5;
-			text.setAttribute("x",15); text.setAttribute("y",52);
-			text.setAttribute("extraData",data[a].link_url);
-			text.innerHTML = data[a].text;
+			text.setAttribute("x",15); text.setAttribute("y",52-SlightAdjust);
+			text.innerHTML = data[a].text_line1;
+			document.getElementById("MainMenuSVG").appendChild(text);
+		var text = document.createElementNS('http://www.w3.org/2000/svg','text');
+			text.id = 'image_oct_bodytext2'+a; text.setAttribute("class","imageoct");
+			text.style.opacity = 0; text.style.fill = data[a].textcolour;
+			text.style["font-size"] = 2.5;
+			text.setAttribute("x",15); text.setAttribute("y",54-SlightAdjust);
+			text.innerHTML = data[a].text_line2;
 			document.getElementById("MainMenuSVG").appendChild(text);
 	}document.getElementById("MainMenuSVG").appendChild(def);
 
@@ -94,38 +105,37 @@ var data = getData();
 		shape.setAttribute("points",""+(33+(temp/2))+","+(10+temp)+" "+(66-(temp/2))+","+(10+temp)+" "+(90-temp)+","+(33+(temp/2))+" "+(90-temp)+","+(66-(temp/2))+" "+(66-(temp/2))+","+(90-temp)+" "+(33+(temp/2))+","+(90-temp)+" "+(10+temp)+","+(66-(temp/2))+" "+(10+temp)+","+(33+(temp/2))+"");
 		document.getElementById("MainMenuSVG").appendChild(shape);
 	
-
 	var imageboxTransitioner_currentImage = 0;
-	setTimeout(function(){
-		document.getElementById('image_oct_image'+imageboxTransitioner_currentImage).style.opacity = 1;
-		document.getElementById('image_oct_headtext'+imageboxTransitioner_currentImage).style.opacity = 1;
-		document.getElementById('image_oct_bodytext'+imageboxTransitioner_currentImage).style.opacity = 1;
-		document.getElementById('image_oct_textbacker'+imageboxTransitioner_currentImage).style.opacity = 1;
-		var temp = document.getElementById('image_oct_bodytext'+imageboxTransitioner_currentImage).getAttribute('extraData');
-		document.getElementById('image_oct_link').setAttribute("onclick","window.location='"+temp+"';");
-		imageboxTransitioner_currentImage++;
-	},1000);
-	imageboxTransitioner = setInterval(function(){
-		for(var a = 0; a < data.length; a++){
-			document.getElementById('image_oct_image'+a).style.opacity = 0;
-			document.getElementById('image_oct_headtext'+a).style.opacity = 0;
-			document.getElementById('image_oct_bodytext'+a).style.opacity = 0;
-			document.getElementById('image_oct_textbacker'+a).style.opacity = 0;
-		}
-		document.getElementById('image_oct_image'+imageboxTransitioner_currentImage).style.opacity = 1;
-		document.getElementById('image_oct_headtext'+imageboxTransitioner_currentImage).style.opacity = 1;
-		document.getElementById('image_oct_bodytext'+imageboxTransitioner_currentImage).style.opacity = 1;
-		document.getElementById('image_oct_textbacker'+imageboxTransitioner_currentImage).style.opacity = 1;
-		var temp = document.getElementById('image_oct_bodytext'+imageboxTransitioner_currentImage).getAttribute('extraData');
-		
-		document.getElementById('image_oct_link').setAttribute("onclick","window.location='"+temp+"';");
-		imageboxTransitioner_currentImage++; if(imageboxTransitioner_currentImage == data.length){imageboxTransitioner_currentImage = 0;}
-	},5000);
+	setTimeout(function(){goToSlide(imageboxTransitioner_currentImage++);},1000);
+	imageboxTransitioner = setInterval(function(){if(!pauseSlideShow){
+		goToSlide(imageboxTransitioner_currentImage++);
+		if(imageboxTransitioner_currentImage == data.length){imageboxTransitioner_currentImage = 0;}	
+	}},5000);
 }
 
+function addTabs(){
+	var shape = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+		shape.setAttribute("points","11,67 15,71 10,76 6,72");
+		shape.style.fill = 'rgb(255,0,0)'; shape.style.opacity = 0; 
+		shape.id = 'slideButton_1';
+		shape.setAttribute('class','slideButton menu');
+		document.getElementById("MainMenuSVG").appendChild(shape);
+}
 
-
-
-
-
-
+function goToSlide(number){
+	for(var a = 0; a < slideCount; a++){
+		document.getElementById('image_oct_image'+a).style.opacity = 0;
+		document.getElementById('image_oct_headtext'+a).style.opacity = 0;
+		document.getElementById('image_oct_bodytext1'+a).style.opacity = 0;
+		document.getElementById('image_oct_bodytext2'+a).style.opacity = 0;
+		document.getElementById('image_oct_textbacker'+a).style.opacity = 0;
+	}
+	document.getElementById('image_oct_image'+number).style.opacity = 1;
+	document.getElementById('image_oct_headtext'+number).style.opacity = 1;
+	document.getElementById('image_oct_bodytext1'+number).style.opacity = 1;
+	document.getElementById('image_oct_bodytext2'+number).style.opacity = 1;
+	document.getElementById('image_oct_textbacker'+number).style.opacity = 1;
+	var temp = document.getElementById('image_oct_headtext'+number).getAttribute('extraData');
+		
+	document.getElementById('image_oct_link').setAttribute("onclick","window.location='"+temp+"';");	
+}
