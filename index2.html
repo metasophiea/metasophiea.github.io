@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	<style title="Main">
+		html, body{width:100%; height:100%; margin:0px;}
+	</style>
+
+	<script>
+		function Go(){
+			var page = document.getElementById('main');
+			page.innerHTML = page.innerHTML + 'OS: ' + navigator.platform +'\n\n';
+			page.innerHTML = page.innerHTML + 'appVersion: ' + navigator.appVersion +'\n\n';
+			page.innerHTML = page.innerHTML + 'userAgent: ' + navigator.userAgent +'\n\n';
+
+		}
+	</script>
+</head>
+
+<body onLoad="Go();">
+	<pre id="main"></pre>	
+</body>
+</html>
