@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<meta name="theme-color" content="#202020"></meta>
+	<link rel="icon" href="https://3.bp.blogspot.com/-L1kqNHRCp3k/Vsg4mftph4I/AAAAAAAALaw/8749dzjaeCk/s1600/favcon.gif" type="image/gif" sizes="100x100"></link>
+
+<!-- Info -->
+	<!-- favcon: <link rel="icon" href="|url|" type="image/gif" sizes="16x16"> -->
+	<!-- add: xmlns="http://www.w3.org/2000/svg" to SVG element -->
+	<!-- add: <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family="> for google fonts-->
+	
+<!-- Fonts -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">
+
+<!-- Git stuff -->
+	<!-- http://rawgit.com/metasophiea/[rest of Github raw address] - for testing (quicker update)(favicon.ico set to rawgit.com's taco) -->
+	<!-- http://cdn.rawgit.com/metasophiea/[rest of Github raw address] - for full use (favicon.ico open)-->
+	<!-- Git Sites (10)-->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/PersonalPortfolioWebpage.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/RandomQuoteMachine.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/PomodoroClock.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/JavaScriptCalculator.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/LocalWeather.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/StylizeStoriesOnCamperNews.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/WikipediaViewer.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/TwitchtvSearcher.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/TicTacToe.html -->
+		<!-- FreeCodeCamp/SimonGame: http://rawgit.com/metasophiea/metasophiea.github.io/master/FreeCodeCamp_Projects/SimonGame.html -->
+	<!-- ///////// -->
+<!-- Scripts -->
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- for JSON -->
+	<script>
+		var SquareSize_Original = 10; var SquareSize = SquareSize_Original;
+		var Square_Colours;
+		var FCCBoxOut = false;
+		var MuiscBoxOut = false;
+		var TestsBoxOut = false;
+	
+		function Go(){
+			AdjustColours();
+			Square_Colours = setInterval(function(){AdjustColours()}, 1000);
+			
+			document.getElementById('SpinningSquare').width.baseVal.value = SquareSize;
+			document.getElementById('SpinningSquare').height.baseVal.value	= SquareSize;
+			document.getElementById('SpinningSquare').x.baseVal.value = SquareSize/-2;
+			document.getElementById('SpinningSquare').y.baseVal.value = SquareSize/-2;
+
+			//hello
+		}
+			
+		function SquareClick(){
+			if(SquareSize == SquareSize_Original){//Show menu
+				SquareSize = 300;
+				clearInterval(Square_Colours);
+				ChangeCSSCode("Main", "#SpinningSquare", "fill", "rgb(255,255,255)", "");
+				setTimeout(function() { document.getElementById('TextArea').style.opacity = 1; }, 500);	
+				document.getElementById('TextArea').style.visibility = 'visible';			
+			}
+			else if(SquareSize > SquareSize_Original){//return
+				//if sub-menus are open, close them, but do no more
+				if(FCCBoxOut){GetFCCBox(); return;}
+				if(MuiscBoxOut){GetMuiscBox(); return;}
+				if(TestsBoxOut){GetTestBox(); return;}
+			
+				SquareSize = SquareSize_Original;
+				Square_Colours = setInterval(function(){AdjustColours()}, 1000);
+				document.getElementById('TextArea').style.opacity = 0;
+				setTimeout(function() { document.getElementById('TextArea').style.visibility = 'hidden'; }, 2000);				
+			}	
+			document.getElementById('SpinningSquare').width.baseVal.value = SquareSize;
+			document.getElementById('SpinningSquare').height.baseVal.value	= SquareSize;
+			document.getElementById('SpinningSquare').x.baseVal.value = SquareSize/-2;
+			document.getElementById('SpinningSquare').y.baseVal.value = SquareSize/-2;
+		}
+		
+		function GetFCCBox(){
+			if(!FCCBoxOut){ FCCBoxOut = true;
+				ChangeCSSCode("Main", "#FCCButton", "fill", "rgb(255,100,100)", "");
+				ChangeCSSCode("Main", "#FCCButton", "x", 5, "");
+				ChangeCSSCode("Main", "#FCCButton", "y", -25, "");	
+				document.getElementById('FCCBox').style.visibility = 'visible';
+				document.getElementById('FCCBox').style.opacity = 1;
+			}else{ FCCBoxOut = false;
+				ChangeCSSCode("Main", "#FCCButton", "fill", "rgb(255,200,200)", "");
+				ChangeCSSCode("Main", "#FCCButton", "x", 2, "");
+				ChangeCSSCode("Main", "#FCCButton", "y", -22, "");	
+				document.getElementById('FCCBox').style.opacity = 0;
+				setTimeout(function() { document.getElementById('FCCBox').style.visibility = 'hidden'; }, 1000);	
+			}
+		}
+		
+		function GetMuiscBox(){
+			if(!MuiscBoxOut){ MuiscBoxOut = true;
+				ChangeCSSCode("Main", "#MusicButton", "fill", "rgb(100,255,100)", "");
+				ChangeCSSCode("Main", "#MusicButton", "x", -25, "");
+				ChangeCSSCode("Main", "#MusicButton", "y", 5, "");	
+				document.getElementById('MuiscBox').style.visibility = 'visible';
+				document.getElementById('MuiscBox').style.opacity = 1;
+			}else{ MuiscBoxOut = false;
+				ChangeCSSCode("Main", "#MusicButton", "fill", "rgb(200,255,200)", "");
+				ChangeCSSCode("Main", "#MusicButton", "x", -22, "");
+				ChangeCSSCode("Main", "#MusicButton", "y", 2, "");	
+				document.getElementById('MuiscBox').style.opacity = 0;
+				setTimeout(function() { document.getElementById('MuiscBox').style.visibility = 'hidden'; }, 1000);	
+			}
+		}
+		
+		function GetTestBox(){
+			if(!TestsBoxOut){ TestsBoxOut = true;
+				ChangeCSSCode("Main", "#TestsButton", "fill", "rgb(150,150,255)", "");
+				ChangeCSSCode("Main", "#TestsButton", "x", -22, "");
+				ChangeCSSCode("Main", "#TestsButton", "y", -22, "");	
+				document.getElementById('TestsBox').style.visibility = 'visible';
+				document.getElementById('TestsBox').style.opacity = 1;
+			}else{ TestsBoxOut = false;
+				ChangeCSSCode("Main", "#TestsButton", "fill", "rgb(200,200,255)", "");
+				ChangeCSSCode("Main", "#TestsButton", "x", -22, "");
+				ChangeCSSCode("Main", "#TestsButton", "y", -22, "");	
+				document.getElementById('TestsBox').style.opacity = 0;
+				OpenTestPannel(0);
+				setTimeout(function() { document.getElementById('TestsBox').style.visibility = 'hidden'; }, 1000);	
+			}
+		}
+		
+		var TestPannels = [0,0,0,0,0,0];
+		function OpenTestPannel(Pannel){
+			for(var a = 1; a <= 6; a++){
+				document.getElementById('Tests_Pannel_' + a).style.visibility = "hidden";
+				document.getElementById('Tests_Pannel_' + a).style.opacity = 0;
+			}
+			if(Pannel == 0){return;}
+			if( TestPannels[Pannel-1] == 0){
+				document.getElementById('Tests_Pannel_' + Pannel).style.visibility = "visible";
+				document.getElementById('Tests_Pannel_' + Pannel).style.opacity = 1;
+			}
+		}
+		
+		function AdjustColours(){ChangeCSSCode("Main", "#SpinningSquare", "fill", "rgb(" + Math.floor(Math.random()*255) + "," + Math.floor(Math.random()*255) + "," + Math.floor(Math.random()*255) + ")", "");}
+		function ChangeCSSCode(SheetName, SelectorText, Rule, NewValue, Type){for(var a = 0; a < document.styleSheets.length; a++){if(document.styleSheets[a].title == SheetName){for(var b = 0; b < document.styleSheets[a].cssRules.length; b++){if(document.styleSheets[a].cssRules[b].selectorText == SelectorText){document.styleSheets[a].cssRules[b].style[Rule] = NewValue + Type;}}}}}
+	</script>
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+			background-color:rgb(20,20,20);
+			overflow-x: hidden; overflow-y: hidden;
+		}
+		
+		a{
+			fill:rgba(0,0,0,0);
+		}
+		@keyframes example {
+    		from {transform: rotate(0deg);}
+   			to {transform: rotate(360deg);}
+		}
+		#SpinningSquare{
+			 fill:rgba(255,0,0,1);
+			 animation-name: example;
+			 animation-duration: 4s;
+			 animation-iteration-count: infinite;
+			 animation-timing-function: linear;
+			 transform: rotate(45deg);
+			 transition: x 3s, y 3s, height 3s, width 3s, fill 1s;
+		}
+		
+		#TextArea{
+			transition: opacity 2s;
+		}
+		
+		#FCCButton{
+			fill:rgb(255,200,200);
+			transition: x 0.5s, y 0.5s, fill 0.5s;
+			x:2; y:-22;
+		}
+		
+		#FCCButton:hover{
+			fill:rgb(255,150,150);
+			x:5; y:-25;
+		}		
+		
+		#MusicButton{
+			fill:rgb(200,255,200);
+			transition: x 0.5s, y 0.5s, fill 0.5s;
+			x:-22; y:2;
+		}
+		
+		#MusicButton:hover{
+			fill:rgb(150,255,150);
+			x:-25; y:5;
+		}	
+		
+		#TestsButton{
+			fill:rgb(200,200,255);
+			transform: rotate(-45deg);
+			transition: x 0.5s, y 0.5s, fill 0.5s;
+			x:-22; y:-22;
+		}
+		
+		#TestsButton:hover{
+			fill:rgb(150,150,255);
+			x:-25; y:-25;
+		}	
+		
+		.StandardButtonBackground{
+			fill:rgb(240,240,240);
+		}
+		
+		.StandardButton:hover{
+			fill:rgba(255,255,255,0.5);
+		}
+		
+		.TabButton{
+			fill:rgba(240,240,255,0);
+			width:7.2px; height:7px;
+			transition: fill 0.5s;
+		}
+		
+		.TabButton:hover{
+			fill:rgba(250,250,255,0.5);
+		}
+		
+		.TabSymbol{
+			fill:rgb(150,150,150);
+		}
+		
+	</style>
+</head>
+
+<body onLoad="Go()">
+<svg id="MainSVG" width="100%" height="100%" viewbox="-50 -50 100 100"  xmlns="http://www.w3.org/2000/svg" style="z-index: -1;">
+	<rect id="SpinningSquare" x="-0" y="-0" height="0" width="0" onclick="SquareClick()"></rect>
+
+	<g id="TextArea" visibility="hidden" opacity="0">
+		<rect id="FCCButton" height="20" width="20" onClick="GetFCCBox()"/>
+		<rect id="MusicButton" height="20" width="20" onClick="GetMuiscBox()"/>
+		<rect id="TestsButton" height="20" width="20" onClick="GetTestBox()"/>
+		<polygon style="fill:rgb(230,230,230); transform: translate(-30px,-30px) scale(0.3);" points="136.737609507049,188.692435121084 63.2623904929514,188.692435121084 11.3075648789165,136.737609507049 11.3075648789165,63.2623904929514 63.2623904929513,11.3075648789165 136.737609507049,11.3075648789165 188.692435121084,63.2623904929513 188.692435121084,136.737609507049" />
+
+<!-- Tests -->
+	<g id="TestsBox" visibility="hidden" opacity="0" style="transition: opacity 0.5s;">
+		<rect x="-22.5" y="-22.5" height="45" width="45" style="fill:rgb(200,200,255)"/>
+		<text x="0" y="-18" style="font-size: 3.5; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Tests</text>
+			<rect x="-21.5" y="-16" height="37" width="43" style="fill:rgba(255,255,255,0.5);"/>
+			
+			<!-- Box 1 -->	
+			<rect x="-21.5" y="-16" width="7.2" height="7" style="fill:rgb(220,220,255);"/>
+			<!-- Symbol -->
+				<rect x="-18.5" y="-14" width="1" height="3" class="TabSymbol"/>
+				<rect x="-19.5" y="-13" width="3" height="1" class="TabSymbol"/>		
+				<polygon points="-18,-15 -19,-13.8 -17,-13.8" class="TabSymbol"/>
+				<polygon points="-18,-10.2 -19,-11.2 -17,-11.2" class="TabSymbol"/>
+				<polygon points="-15.5,-12.5 -16.8,-13.5 -16.8,-11.5" class="TabSymbol"/>
+				<polygon points="-20.5,-12.5 -19.2,-13.5 -19.2,-11.5" class="TabSymbol"/>
+			<!-- ------ -->
+			<rect class="TabButton" x="-21.5" y="-16" onclick="OpenTestPannel(1)"/>	
+			
+				<g class="Tab" id="Tests_Pannel_1" visibility="hidden" opacity="0" >
+					<rect x="-21.5" y="-9" height="30" width="43" style="fill:rgba(100,100,100,0.5);"/>
+				<!-- Link 1 -->	
+					<rect class="StandardButtonBackground" x="-20.5" y="-8" height="3" width="41"/>
+					<text x="0" y="-5.75" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">SVG Zoom And Pan</text>
+					<a class="StandardButton" xlink:href="http://metasophiea.com/TestProjects/SVGViewingSpace">
+						<rect x="-20.5" y="-8" height="3" width="41"/>
+					</a>
+					
+				<!-- Link 2 -->	
+					<rect class="StandardButtonBackground" x="-20.5" y="-4" height="3" width="41"/>
+					<text x="0" y="-1.75" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Canvas Viewing Space</text>
+					<a class="StandardButton" xlink:href="http://metasophiea.com/TestProjects/CanvasViewingSpace">
+						<rect x="-20.5" y="-4" height="3" width="41"/>
+					</a>
+
+				<!-- Link 3 -->	
+					<rect class="StandardButtonBackground" x="-20.5" y="0" height="3" width="41"/>
+					<text x="0" y="2.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Canvas Viewing Space 2 (scripted)</text>
+					<a class="StandardButton" xlink:href="http://metasophiea.com/TestProjects/CanvasViewingSpace_2">
+						<rect x="-20.5" y="0" height="3" width="41"/>
+					</a>
+
+				<!-- Link 4 -->	
+					<rect class="StandardButtonBackground" x="-20.5" y="4" height="3" width="41"/>
+					<text x="0" y="6.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Canvas Viewing Space 3 (with rotation)</text>
+					<a class="StandardButton" xlink:href="http://metasophiea.com/TestProjects/CanvasViewingSpace_3">
+						<rect x="-20.5" y="4" height="3" width="41"/>
+					</a>
+
+				<!-- Link 5 -->	
+					<rect class="StandardButtonBackground" x="-20.5" y="8" height="3" width="41"/>
+					<text x="0" y="10.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Lavendel 0.4</text>
+					<a class="StandardButton" xlink:href="http://metasophiea.com/Lavendel/0.4">
+						<rect x="-20.5" y="8" height="3" width="41"/>
+					</a>
+
+
+				</g>
+			<!-- Box 2 -->	
+			<rect x="-14.3334" y="-16" width="7.2" height="7" style="fill:rgb(220,220,255);"/>
+			<rect class="TabButton" x="-14.3334" y="-16" onclick="OpenTestPannel(2)"/>	
+			
+				<g class="Tab" id="Tests_Pannel_2" visibility="hidden" opacity="0" >	
+					<rect x="-21.5" y="-9" height="30" width="43" style="fill:rgba(100,200,100,0.5);"/>
+				</g>
+			<!-- Box 3 -->	
+			<rect x="-7.1668" y="-16" width="7.2" height="7" style="fill:rgb(220,220,255);"/>
+			<rect class="TabButton" x="-7.1668" y="-16" onclick="OpenTestPannel(3)"/>	
+			
+				<g class="Tab" id="Tests_Pannel_3" visibility="hidden" opacity="0" >
+					<rect x="-21.5" y="-9" height="30" width="43" style="fill:rgba(100,100,200,0.5);"/>
+				</g>
+			<!-- Box 4 -->	
+			<rect x="-0.0002" y="-16" width="7.2" height="7" style="fill:rgb(220,220,255);"/>
+			<rect class="TabButton" x="-0.0002" y="-16" onclick="OpenTestPannel(4)"/>
+			
+				<g class="Tab" id="Tests_Pannel_4" visibility="hidden" opacity="0" >	
+					<rect x="-21.5" y="-9" height="30" width="43" style="fill:rgba(100,200,200,0.5);"/>
+				</g>
+			<!-- Box 5 -->	
+			<rect x="7.1664" y="-16" width="7.2" height="7" style="fill:rgb(220,220,255);"/>
+			<rect class="TabButton" x="7.1664" y="-16" onclick="OpenTestPannel(5)"/>
+				<g class="Tab" id="Tests_Pannel_5" visibility="hidden" opacity="0" >	
+					<rect x="-21.5" y="-9" height="30" width="43" style="fill:rgba(200,100,100,0.5);"/>
+				</g>
+			<!-- Box 6 -->	
+			<rect x="14.233" y="-16" width="7.2" height="7" style="fill:rgb(220,220,255);"/>
+			<rect class="TabButton" x="14.233" y="-16" onclick="OpenTestPannel(6)"/>
+				<g class="Tab" id="Tests_Pannel_6" visibility="hidden" opacity="0" >	
+					<rect x="-21.5" y="-9" height="30" width="43" style="fill:rgba(200,100,200,0.5);"/>
+				</g>
+	</g>
+<!-- ///// -->	
+		
+	
+<!-- Music -->
+	<g id="MuiscBox" visibility="hidden" opacity="0" style="transition: opacity 0.5s;">
+		<rect x="-22.5" y="-22.5" height="45" width="45" style="fill:rgb(200,255,200)"/>
+		<text x="0" y="-18" style="font-size: 3.5; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Music</text>
+		
+		<!-- Link 1 -->	
+			<rect class="StandardButtonBackground" x="-21.5" y="-16" height="3" width="43"/>
+			<text x="0" y="-13.75" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Curve 2 (beta)</text>
+			<a class="StandardButton" xlink:href="https://soundcloud.com/metasophiea/beta-curve-2-1492015">
+				<rect x="-21.5" y="-16" height="3" width="43"/>
+			</a>
+				
+		<!-- Link 2 -->		
+			<rect class="StandardButtonBackground" x="-21.5" y="-12.5" height="3" width="43"/>
+			<text x="0" y="-10.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Curve</text>
+			<a class="StandardButton" xlink:href="https://soundcloud.com/metasophiea/curve">
+				<rect x="-21.5" y="-12.5" height="3" width="43"/>
+			</a>
+	</g>
+<!-- ///// -->
+	
+<!-- FCC Items -->
+		<g id="FCCBox" visibility="hidden" opacity="0" style="transition: opacity 0.5s;">
+			<rect x="-22.5" y="-22.5" height="45" width="45" style="fill:rgb(255,200,200)"/>
+			<text x="0" y="-18" style="font-size: 3.5; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">FreeCodeCamp Projects</text>
+			
+		<!-- Link 1 -->	
+			<rect class="StandardButtonBackground" x="-21.5" y="-16" height="3" width="43"/>
+			<text x="0" y="-13.75" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Personal Portfolio Webpage</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/PersonalPortfolioWebpage">
+				<rect x="-21.5" y="-16" height="3" width="43"/>
+			</a>
+				
+		<!-- Link 2 -->		
+			<rect class="StandardButtonBackground" x="-21.5" y="-12.5" height="3" width="43"/>
+			<text x="0" y="-10.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Random Quote Machine</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/RandomQuoteMachine">
+				<rect x="-21.5" y="-12.5" height="3" width="43"/>
+			</a>
+
+		<!-- Link 3 -->	
+			<rect class="StandardButtonBackground" x="-21.5" y="-9" height="3" width="43"/>
+			<text x="0" y="-6.75" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Pomodoro Clock</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/PomodoroClock">
+				<rect x="-21.5" y="-9" height="3" width="43"/>
+			</a>
+			
+		<!-- Link 4 -->	
+			<rect class="StandardButtonBackground" x="-21.5" y="-5.5" height="3" width="43"/>
+			<text x="0" y="-3.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">JavaScript Calculator</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/JavaScriptCalculator">
+				<rect x="-21.5" y="-5.5" height="3" width="43"/>
+			</a>
+				
+		<!-- Link 5 -->	
+			<rect class="StandardButtonBackground" x="-21.5" y="-2" height="3" width="43"/>
+			<text x="0" y="0.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Local Weather</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/LocalWeather">
+				<rect x="-21.5" y="-2" height="3" width="43"/>
+			</a>
+
+		<!-- Link 6 -->		
+			<rect class="StandardButtonBackground" x="-21.5" y="1.5" height="3" width="43"/>	
+			<text x="0" y="3.75" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Stylize Stories On Camper News</text>			
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/StylizeStoriesOnCamperNews">
+				<rect x="-21.5" y="1.5" height="3" width="43"/>
+			</a>
+
+		<!-- Link 7 -->
+			<rect class="StandardButtonBackground" x="-21.5" y="5" height="3" width="43"/>
+			<text x="0" y="7.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Wikipedia Viewer</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/WikipediaViewer">
+				<rect x="-21.5" y="5" height="3" width="43"/>
+			</a>
+				
+		<!-- Link 8 -->
+			<rect class="StandardButtonBackground" x="-21.5" y="8.5" height="3" width="43"/>
+			<text x="0" y="10.75" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Twitchtv Searcher</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/TwitchtvSearcher">
+				<rect x="-21.5" y="8.5" height="3" width="43"/>
+			</a>
+			
+		<!-- Link 9 -->
+			<rect class="StandardButtonBackground" x="-21.5" y="12" height="3" width="43"/>
+			<text x="0" y="14.25" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Tic Tac Toe</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/TicTacToe">
+				<rect  x="-21.5" y="12" height="3" width="43"/>
+			</a>
+
+		<!-- Link 10 -->	
+			<rect class="StandardButtonBackground" x="-21.5" y="15.5" height="3" width="43"/>
+			<text x="0" y="17.75" style="font-size: 2; fill:rgb(0,0,0); font-family:Arvo;" text-anchor="middle">Simon Game</text>
+			<a class="StandardButton" xlink:href="http://metasophiea.com/FreeCodeCampProjects/SimonGame">
+				<rect x="-21.5" y="15.5" height="3" width="43"/>
+			</a>
+		</g>
+<!-- ///////// -->
+	</g>
+</svg>
+
+</body>
+</html>
