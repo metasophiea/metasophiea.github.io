@@ -14,16 +14,16 @@
 
 	<script>
 		function Go(){
-			var page = document.getElementById('main');
-			page.innerHTML = page.innerHTML + 'OS: ' + navigator.platform +'\n\n';
-			page.innerHTML = page.innerHTML + 'appVersion: ' + navigator.appVersion +'\n\n';
-			page.innerHTML = page.innerHTML + 'userAgent: ' + navigator.userAgent +'\n\n';
-
+			document.getElementById('OS').innerHTML = '<i><b>OS:</b></i> ' + navigator.platform;
+			document.getElementById('appVersion').innerHTML = '<i><b>appVersion:</b></i> ' + navigator.appVersion;
+			document.getElementById('userAgent').innerHTML = '<i><b>userAgent:</b></i> ' + navigator.userAgent;
 		}
 	</script>
 </head>
 
 <body onLoad="Go();">
-	<pre id="main"></pre>	
+	<p id="OS"></p>
+	<p id="appVersion"></p>
+	<p id="userAgent"></p>	
 </body>
 </html>
