@@ -13,8 +13,8 @@ function Zoom_WithViewportPosition(Index,X,Y){ //X and Y are a number between 0 
 		view.zoom.index = Index; view.zoom.value = ZoomHash[view.zoom.index];
 		var NewPoints = ViewportPointsAt(X,Y);	
 	//Gather polar coords for these points and add the Viewport angle
-		OldPoints = [(GetPolar(OldPoints[0],OldPoints[1])[0]+view.angle),(GetPolar(OldPoints[0],OldPoints[1])[1])];
-		NewPoints = [(GetPolar(NewPoints[0],NewPoints[1])[0]+view.angle),(GetPolar(NewPoints[0],NewPoints[1])[1])];
+		OldPoints = [(GetPolar(OldPoints[0],OldPoints[1])[0]),(GetPolar(OldPoints[0],OldPoints[1])[1]+view.angle)];
+		NewPoints = [(GetPolar(NewPoints[0],NewPoints[1])[0]),(GetPolar(NewPoints[0],NewPoints[1])[1]+view.angle)];
 	//convert back to Cartesian
 		OldPoints = GetCartesian(OldPoints[0],OldPoints[1]);
 		NewPoints = GetCartesian(NewPoints[0],NewPoints[1]);
