@@ -11,3 +11,4 @@ drawBackground();
 render();
 
 createPathTo( {'position':[-0,0], 'zoom':0, 'angle':0},{'type':'cosin','duration':1} );
+createPathTo( {'position':[-400,0], 'zoom':5, 'angle':1},{'type':'cosin','duration':3} );

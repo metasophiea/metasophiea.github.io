@@ -11,7 +11,7 @@ function getStartPosition(){
 		var temp = getViewportPoint([0.5,0.5]);
 		return {"position":[-temp[0],-temp[1]], "zoom":view.zoom.value, "angle":view.angle}; 
 	}
-	else{ return {"position":activeViewportMovementScript.position[activeViewportMovementScript.position-1], "zoom":activeViewportMovementScript.zoom[activeViewportMovementScript.zoom-1], "angle":activeViewportMovementScript.angle[activeViewportMovementScript.angle-1]}; }
+	else{ return {"position":activeViewportMovementScript.position[activeViewportMovementScript.position.length-1], "zoom":activeViewportMovementScript.zoom[activeViewportMovementScript.zoom.length-1], "angle":activeViewportMovementScript.angle[activeViewportMovementScript.angle.length-1]}; }
 }
 
 function createPathTo(position,data={}){
