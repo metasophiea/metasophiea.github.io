@@ -19,33 +19,26 @@ function getViewportPoint(fractionPoint){
 	return getCartesian(polar);	
 }
 
+function getViewportDifference(event,x,y){
+	var output = [x*Math.cos(view.angle)+y*Math.sin(-view.angle),x*Math.sin(view.angle)+y*Math.cos(-view.angle)];
+	return [getViewportLength(output[0]),getViewportLength(output[1])];
+}
+
+
+
 
 function getColourFromID(ID){
-	ID = ID.toString(2).split('').reverse().join('').match(/.{1,8}/g);
-	for(var a = 0; a < ID.length; a++){ ID[a] = parseInt(ID[a].split('').reverse().join(''), 2); }
+	ID = (ID+1).toString(2).split('').reverse().join('').match(/.{1,8}/g);
+	for(var a = 0; a < ID.length; a++){ ID[a] = parseInt(ID[a].split('').reverse().join(''), 2); } 
+	if(ID[1] == undefined){ID[1]=0; ID[2]=0;}else if(ID[2] == undefined){ID[2]=0;}
 	return "rgba("+ID[0]+","+ID[1]+","+ID[2]+",1)";
 }
-
-function getZoomValueFromIndex(index){
-	var ZoomHash = {	"-16":0.1, "-15":0.11, "-14":0.13, "-13":0.15, "-12":0.17, "-11":0.2, "-10":0.22, "-9":0.26, 
-				"-8":0.3, "-7":0.33, "-6":0.38, "-5":0.43, "-4":0.5, "-3":0.65, "-2":0.75, "-1":0.875, 
-				"0":1, 
-				"1":1.25, "2":1.3, "3":1.4, "4":1.5, "5":1.68, "6":1.8, "7":2.1, "8":2.5, 
-				"9":2.8, "10":3.1, "11":3.5, "12":3.8, "13":4.2, "14":4.8, "15":5.7, "16":6.5 };
-	return ZoomHash[index];
-}
-function getClosestZoomIndexFromValue(exact){
-	if(getZoomValueFromIndex(0) == exact){ return 0;}
-	else if(getZoomValueFromIndex(0) < exact){
-		for(var a = 0; a < 16+1; a++){
-			if(getZoomValueFromIndex(a) >= exact){return a-1;}
-		}return 16;
+function getIDFromPoint(X,Y){ 
+	var data = selectionMatrix.getImageData(X-1,Y-1,3,3).data; //console.log(selectionMatrix.getImageData(X,Y,1,1).data);
+	for(var a = 0; a < data.length-4; a+=4){
+		if((data[a] != data[a+4]) || (data[a+1] != data[a+5]) || (data[a+2] != data[a+6]) ||  (data[a+3] != data[a+7])){return -1;}
 	}
-	else{
-		for(var a = 0; a > -16-1; a--){
-			if(getZoomValueFromIndex(a) < exact){return a+1;}
-		}return -16;
-	}
+	return (256*256*data[2] + 256*data[1] + data[0])-1;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 BootCount++; console.log('./canvas/canvasElement.js');

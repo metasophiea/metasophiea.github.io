@@ -65,10 +65,10 @@ function poly(inputData = []){
 		}
 	}
 
-	this.pushToFront = function(){DrawList.Background.pushToFront(ID);}
-	this.pushToBack = function(){DrawList.Background.pushToBack(ID);}
-	this.pushForward = function(){DrawList.Background.pushForward(ID);}
-	this.pushBackward = function(){DrawList.Background.pushBackward(ID);}
+	this.pushToFront = function(){drawList.background.pushToFront(ID);}
+	this.pushToBack = function(){drawList.background.pushToBack(ID);}
+	this.pushForward = function(){drawList.background.pushForward(ID);}
+	this.pushBackward = function(){drawList.background.pushBackward(ID);}
 
 //Private
 	function MyZ(){return DrawList.Background.getObjDrawPosition(ID);}

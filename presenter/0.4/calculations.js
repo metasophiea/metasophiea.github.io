@@ -107,4 +107,4 @@ function createPath(type,start,end,stepcount){
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
-console.log("-> ./calculations.js loaded"); BootCount++;
+BootCount++; console.log("./calculations.js"); 

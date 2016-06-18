@@ -1,4 +1,4 @@
-function spinAroundPosition(amount,point){
+function spinAroundPoint(amount,point){
 	var OldPoints = getViewportPoint(point);
 	view.angle = amount;
 	var NewPoints = getViewportPoint(point);

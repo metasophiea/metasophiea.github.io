@@ -2,7 +2,7 @@ function autoControl(){
 	if(activeViewportMovementScript.position.length != 0){ view.angle = 0;
 		setViewportCenterPosition(activeViewportMovementScript.position.shift());
 		exact_zoomToPosition(activeViewportMovementScript.zoom.shift(),[0.5,0.5]);
-		spinAroundPosition(activeViewportMovementScript.angle.shift(),[0.5,0.5]);
+		spinAroundPoint(activeViewportMovementScript.angle.shift(),[0.5,0.5]);
 	}
 }
 

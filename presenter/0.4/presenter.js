@@ -8,14 +8,17 @@ var BootCount = 0;
 
 			'canvas/render.js',
 			'canvas/canvasElement.js',
+			'canvas/mouseInterface.js',
 
 			'canvas/objects/drawlist.js',
+			'canvas/objects/numberlist.js',
 			'canvas/objects/shapes/poly.js',
 
 			'canvas/viewportControl/pan.js',
 			'canvas/viewportControl/zoom.js',
 			'canvas/viewportControl/spin.js',
-			'canvas/viewportControl/autoViewportControl.js'
+			'canvas/viewportControl/autoViewportControl.js',
+			'canvas/viewportControl/mouseInterfaceControls.js'
 		]
 	};
 
@@ -36,8 +39,11 @@ var BootCount = 0;
 	var activeViewportMovementRefreshesPerSecond = refreshesPerSecond; var activeAutoViewportControlInterval;
 	var activeViewportMovementScript = {"position":[], "angle":[], "zoom":[] };	
 
-	
-
+//Tool
+	var tool = {'drag':'pan'};
+//Mouse Interface
+	var mouseInterface_Mousedown = false;
+	var mouseInterface_Selected;
 
 
 
@@ -55,7 +61,7 @@ function Presenter_Start(){
 	selectionMatrixElement = document.createElement('canvas'); selectionMatrixElement.id = "selectionMatrixElement";
 		selectionMatrixElement.width = 0; selectionMatrixElement.height = 0;
 		selectionMatrix = selectionMatrixElement.getContext('2d');
-	containerElement.appendChild(viewportElement);
+	containerElement.appendChild(viewportElement); containerElement.appendChild(selectionMatrixElement);
 	document.body.setAttribute("onresize","adjustViewportElementToFill();");
 
 //Load Files
