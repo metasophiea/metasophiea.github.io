@@ -1,6 +1,6 @@
 var BootCount = 0;
 //Included Files
-	var includeAddress = 'http://metasophiea.com/presenter/0.4/';
+	var includeAddress = getLocation();
 	var includeFiles = {
 		'CSS':[],
 		'JS':[
@@ -13,6 +13,7 @@ var BootCount = 0;
 			'canvas/objects/drawlist.js',
 			'canvas/objects/numberlist.js',
 			'canvas/objects/shapes/poly.js',
+			'canvas/objects/shapes/image.js',
 
 			'canvas/viewportControl/pan.js',
 			'canvas/viewportControl/zoom.js',
@@ -82,4 +83,12 @@ function Presenter_Start(){
 			document.getElementsByTagName("head")[0].appendChild(temp);
 		}
 	},100);
+}
+
+function getLocation(){
+	var temp = window.location.href.split('/'); var output = '';
+	for(var a = 0; a < temp.length; a++){
+		output = output + temp[a] + '/';
+		if(temp[a] == 'presenter'){return output + temp[a+2] + '/';}
+	}
 }

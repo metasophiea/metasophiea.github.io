@@ -71,7 +71,7 @@ function poly(inputData = []){
 	this.pushBackward = function(){drawList.background.pushBackward(ID);}
 
 //Private
-	function MyZ(){return DrawList.Background.getObjDrawPosition(ID);}
+	function MyZ(){return drawList.background.getObjDrawPosition(ID);}
 
 // Drawing ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 this.draw = function(){
