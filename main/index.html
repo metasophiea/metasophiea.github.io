@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">
+
+<script>
+	function WhatIsThis(){
+		var data = getData();
+		var OS_temp = '';  var Browser_temp = '';  
+		var results = {'os':{'name':'','version':''},'browser':{'name':'','version':''}};
+
+		//OS
+		OS_temp = {'0':'unknown','input':'unknown'};
+		for(var a = 0; a < data[0][1].length; a++){
+			if((OS_temp = data[0][1][a].match('Linux ')) != null){break;}
+			else if((OS_temp = data[0][1][a].match('Windows ')) != null){break;}
+			else if((OS_temp = data[0][1][a].match('Andriod ')) != null){break;}
+		}
+
+		//Browser
+		Browser_temp = {'0':'unknown','input':'unknown'};	
+		for(var a = 0; a < data.length; a++){
+			if(data[a].length == 1){
+				if((Browser_temp = data[a][0].match('Chrome/')) != null){break;}
+				else if((Browser_temp = data[a][0].match('Firefox/')) != null){break;}	
+				else if((Browser_temp = data[a][0].match('Safari/')) != null){break;}				
+			}
+		}
+
+		results.os.name = OS_temp['input'].slice(0,OS_temp[0].length-1); results.os.version = OS_temp['input'].slice(OS_temp[0].length);
+		results.browser.name = Browser_temp['input'].slice(0,Browser_temp[0].length-1); results.browser.version = Browser_temp['input'].slice(Browser_temp[0].length);
+		return results;
+
+		function getData(){var data = navigator.userAgent;
+			var outputArray = []; var tempArray = []; var temp = '';
+			for(var a = 0; a < data.length; a++){
+				if(data[a] == ' '){
+					if(data[a+1] == '('){
+						while(data[a] != ')'){a++; temp = temp + data[a];}
+					}
+					else{outputArray.push(temp.split('('));temp = '';}
+				}
+				else{temp = temp + data[a];}
+			}
+ 			outputArray.push(temp.split('('));temp = '';
+
+ 			for(var a = 0; a < outputArray.length; a++){
+				if(outputArray[a].length == 2){
+					for(var b = 0; b < outputArray[a][1].length; b++){
+						if(outputArray[a][1][b] == ';' || outputArray[a][1][b] == ')'){tempArray.push(temp);temp = '';b++;}
+						else{temp = temp + outputArray[a][1][b];}
+					}
+					outputArray[a][1] = tempArray; tempArray = [];
+				}
+			}
+
+			return outputArray;
+		}
+	}
+
+	function Go(){
+		var results = WhatIsThis();
+		console.log('OS: ' + results.os.name + ' - v: ' + results.os.version);
+		console.log('Browser: ' + results.browser.name + ' - v: ' + results.browser.version);
+		console.log(results.browser.version.split('.'));
+
+		results = 'OS: ' + results.os.name + ' - ' + results.os.version + '<br>' + 'Browser: ' + results.browser.name + ' - ' + results.browser.version;
+
+		document.getElementById('output').innerHTML = results;
+	}
+
+</script>
+
+	<style title="Main">
+		html, body{width:100%; height:100%; margin:0px;}
+	</style>
+</head>
+
+<body onLoad="Go()">
+	<p id='output' style='font-family:Arvo;'></p>
+</body>
+</html>

@@ -19,8 +19,7 @@ function drawBackground(){
 	drawList.background.add( new poly({ "initialData":{"points":[[-50,-50], [-50,50], [50,50], [50,-50]]}, "styleData":{"R":255,"G":100,"B":100} }) );	
 	drawList.background.add( new poly({ "initialData":{"points":[[100,100], [100,200], [200,200], [200,100]]}, "styleData":{"R":0,"G":255,"B":0} }) );	
 
-	drawList.background.add( new image({ "initialData":{"position":[200,200],"anchor":[0.8,0.8],"width":100,"height":200,"angle":Math.PI/4}, "styleData":{"URL":"http://cdn.earthporm.com/wp-content/uploads/2014/08/amazing-trees-17.jpg"} }) );	
-
+	drawList.background.add( new image({ "initialData":{"position":[200,200],"anchor":[0.8,0.8],"width":200,"height":200,"angle":Math.PI/4}, "styleData":{"URL":"http://cdn.earthporm.com/wp-content/uploads/2014/08/amazing-trees-17.jpg"} }) );	
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
