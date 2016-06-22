@@ -16,7 +16,7 @@
 		for(var a = 0; a < data[0][1].length; a++){
 			if((temp = data[0][1][a].match('Linux ')) != null){results.os = takeThis(temp[0],data[0][1][a]);break;}
 			else if((temp = data[0][1][a].match('Windows ')) != null){results.os = takeThis(temp[0],data[0][1][a]);break;}
-			else if((temp = data[0][1][a].match('Andriod ')) != null){results.os = takeThis(temp[0],data[0][1][a]);break;}
+			else if((temp = data[0][1][a].match('Android ')) != null){results.os = takeThis(temp[0],data[0][1][a]);break;}
 		}
 
 		//Browser
