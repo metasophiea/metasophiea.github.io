@@ -22,8 +22,7 @@
 		//Browser
 		for(var a = 0; a < data.length; a++){
 			if(data[a].length == 1){
-				if((temp = data[a][0].match('OPR/')) != null){results.browser = takeThis(temp[0],data[a][0]);break;}
-				else if((temp = data[a][0].match('Chrome/')) != null){results.browser = takeThis(temp[0],data[a][0]);break;}
+				if((temp = data[a][0].match('Chrome/')) != null){results.browser = takeThis(temp[0],data[a][0]);break;}
 				else if((temp = data[a][0].match('Firefox/')) != null){results.browser = takeThis(temp[0],data[a][0]);break;}
 				else if((temp = data[a][0].match('Safari/')) != null){results.browser = takeThis(temp[0],data[a][0]);break;}
 			}
