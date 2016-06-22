@@ -29,32 +29,32 @@
 			}
 		}
 		return results;
-		
-		function takeThis(name,data){ return {'name':name.slice(0,name.length-1),'version':data.slice(name.length,data.length)}; }
-		function getData(){var data = navigator.userAgent;
-			var outputArray = []; var tempArray = []; var temp = '';
-			for(var a = 0; a < data.length; a++){
-				if(data[a] == ' '){
-					if(data[a+1] == '('){
-						while(data[a] != ')'){a++; temp = temp + data[a];}
-					}
-					else{outputArray.push(temp.split('('));temp = '';}
+	}
+	
+	function takeThis(name,data){ return {'name':name.slice(0,name.length-1),'version':data.slice(name.length,data.length)}; }
+	function getData(){var data = navigator.userAgent;
+		var outputArray = []; var tempArray = []; var temp = '';
+		for(var a = 0; a < data.length; a++){
+			if(data[a] == ' '){
+				if(data[a+1] == '('){
+					while(data[a] != ')'){a++; temp = temp + data[a];}
 				}
-				else{temp = temp + data[a];}
+				else{outputArray.push(temp.split('('));temp = '';}
 			}
- 			outputArray.push(temp.split('('));temp = '';
-
- 			for(var a = 0; a < outputArray.length; a++){
-				if(outputArray[a].length == 2){
-					for(var b = 0; b < outputArray[a][1].length; b++){
-						if(outputArray[a][1][b] == ';' || outputArray[a][1][b] == ')'){tempArray.push(temp);temp = '';b++;}
-						else{temp = temp + outputArray[a][1][b];}
-					}
-					outputArray[a][1] = tempArray; tempArray = [];
-				}
-			}
-			return outputArray;
+			else{temp = temp + data[a];}
 		}
+			outputArray.push(temp.split('('));temp = '';
+
+		for(var a = 0; a < outputArray.length; a++){
+			if(outputArray[a].length == 2){
+				for(var b = 0; b < outputArray[a][1].length; b++){
+					if(outputArray[a][1][b] == ';' || outputArray[a][1][b] == ')'){tempArray.push(temp);temp = '';b++;}
+					else{temp = temp + outputArray[a][1][b];}
+				}
+				outputArray[a][1] = tempArray; tempArray = [];
+			}
+		}
+		return outputArray;
 	}
 
 
@@ -67,6 +67,7 @@
 		results = 'OS: ' + results.os.name + ' - ' + results.os.version + '<br>' + 'Browser: ' + results.browser.name + ' - ' + results.browser.version;
 
 		document.getElementById('output').innerHTML = results;
+		document.getElementById('output2').innerHTML = getData();		
 	}
 
 </script>
@@ -78,5 +79,6 @@
 
 <body onLoad="Go()">
 	<p id='output' style='font-family:Arvo;'>Hello</p>
+	<p id='output2'></p>
 </body>
 </html>
