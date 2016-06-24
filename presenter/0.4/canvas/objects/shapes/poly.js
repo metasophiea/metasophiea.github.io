@@ -98,13 +98,10 @@ this.Draw_Viewport = function(DrawingPoints){
 }
 this.Draw_SelectionMatrix = function(DrawingPoints){
 	selectionMatrix.fillStyle = IDcolour;
-	if(this.Thickness === 0){ 
-		selectionMatrix.strokeStyle = IDcolour;
-		selectionMatrix.lineWidth = 0.5;
-	}else{
-		selectionMatrix.strokeStyle = IDcolour;
-		selectionMatrix.lineWidth = getRealLength(lineThickness);
-	}
+	selectionMatrix.strokeStyle = IDcolour;
+	if(lineThickness === 0){ selectionMatrix.lineWidth = 0.5; }
+	else{ selectionMatrix.lineWidth = getRealLength(lineThickness); }
+
 	selectionMatrix.beginPath(); selectionMatrix.moveTo( DrawingPoints[0][0],DrawingPoints[0][1] );
 	for(var a = 1; a < DrawingPoints.length; a++){ selectionMatrix.lineTo( DrawingPoints[a][0],DrawingPoints[a][1] ); }
 	selectionMatrix.closePath(); selectionMatrix.fill(); selectionMatrix.stroke();
