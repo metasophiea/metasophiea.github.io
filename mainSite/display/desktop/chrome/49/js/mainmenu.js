@@ -138,10 +138,8 @@ function addTabs(){
 			shape.style.x = 23-a*4; shape.style.y = 18+a*4;
 			shape.style.opacity = 0; shape.style.fill = RandomColour(); 
 			shape.setAttribute('class','menu slideButton');
-			shape.setAttribute('onmouseover','this.style.x = parseInt(this.style.x) - 5;');
-			shape.setAttribute('onmouseout','this.style.x = parseInt(this.style.x) + 5;');
-			shape.setAttribute('onmouseover','this.style.y = parseInt(this.style.y) - 5;');
-			shape.setAttribute('onmouseout','this.style.y = parseInt(this.style.y) + 5;');
+			shape.setAttribute('onmouseover','this.style.x = parseInt(this.style.x) - 5;this.style.y = parseInt(this.style.y) - 5;');
+			shape.setAttribute('onmouseout','this.style.x = parseInt(this.style.x) + 5;this.style.y = parseInt(this.style.y) + 5;');
 			shape.setAttribute('onclick','PauseShowAndGoTo('+a+');');
 			document.getElementById("MainMenuSVG").appendChild(shape);		
 	}
@@ -154,10 +152,8 @@ function goToSlide(number){
 		document.getElementById('image_oct_bodytext1'+a).style.opacity = 0;
 		document.getElementById('image_oct_bodytext2'+a).style.opacity = 0;
 		document.getElementById('image_oct_textbacker'+a).style.opacity = 0;
-		document.getElementById('tab'+a).setAttribute('onmouseover','this.style.x = parseInt(this.style.x) - 5;');
-		document.getElementById('tab'+a).setAttribute('onmouseout','this.style.x = parseInt(this.style.x) + 5;');
-		document.getElementById('tab'+a).setAttribute('onmouseover','this.style.y = parseInt(this.style.y) - 5;');
-		document.getElementById('tab'+a).setAttribute('onmouseout','this.style.y = parseInt(this.style.y) + 5;');
+		document.getElementById('tab'+a).setAttribute('onmouseover','this.style.x = parseInt(this.style.x) - 5;this.style.y = parseInt(this.style.y) - 5;');
+		document.getElementById('tab'+a).setAttribute('onmouseout','this.style.x = parseInt(this.style.x) + 5;this.style.y = parseInt(this.style.y) + 5;');
 
 		document.getElementById('tab'+a).style.x = 23-a*4;
 		document.getElementById('tab'+a).style.y = 18+a*4;
