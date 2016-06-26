@@ -23,7 +23,7 @@ var articles = {
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,255,255,0.75)",
 		"image_url":"http://newbornstartups.com/wp-content/uploads/2015/06/fcc-logo.png",
-		"link_url":"http://metasophiea.com/FreeCodeCampProjects/"		
+		"link_url":"http://metasophiea.com/sideProjects/FreeCodeCamp/"		
 	},
 	"article_20160616-a":{
 		"headline":"Curve and Curve 2 Beta",
