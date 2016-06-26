@@ -7,9 +7,7 @@ function poly(inputData = []){
 	var ID = -1; var IDcolour; var Selected = false; var Z = 0;
 
 	var points = [];
-	if(initialData.hasOwnProperty('points')){
-		for(var a = 0; a < initialData.points.length; a++){ points.push(initialData.points[a]); }
-	}
+	if(initialData.hasOwnProperty('points')){ points = initialData.points.slice(); }
 
 	//Style
 		//Main colour

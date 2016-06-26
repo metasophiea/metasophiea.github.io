@@ -1,15 +1,7 @@
 - Proper text size scaling "ctx.scale(s, s);"
 - Proper text rendering efficiency
 
-- update "getViewportDifference" doesn't need 'event'
-- 'redCross' & 'greenCross' have no var
 - "getColourFromId" grouping could have native method
-- "moiseInterfaceEvent" doesn't need 'this'
 - 'render' for loop could be replaced with a native js dot command
-- 'Presenter.js' 'view' has no var
-- 'document.getElementsByTagName("head")[0].appendChild(temp);' maybe just 'document.head.appendChild(temp);'?
 - 'numberList.js' needs name work, and .find should be more efficient
-- .addID not selecting for id's not placed at the end
-- perhaps rename 'background' and 'main' ..background and foreground?
-- 'poly's construct section for adding points should be simple assignment
-- image.draw for loops on ifs
+

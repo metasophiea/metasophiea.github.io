@@ -1,12 +1,12 @@
 function render(){
-	drawList.main.clear(); var temp = getViewportPoint([0.5,0.5]);
-	drawList.main.add( new poly({ "initialData":{"points":[[temp[0]+0,temp[1]+0], [temp[0]+0,temp[1]+100], [temp[0]+100,temp[1]+100], [temp[0]+100,temp[1]+0]]}, "styleData":{"R":255,"G":200,"B":200} }) );
+	drawList.foreground.clear(); var temp = getViewportPoint([0.5,0.5]);
+	drawList.foreground.add( new poly({ "initialData":{"points":[[temp[0]+0,temp[1]+0], [temp[0]+0,temp[1]+100], [temp[0]+100,temp[1]+100], [temp[0]+100,temp[1]+0]]}, "styleData":{"R":255,"G":200,"B":200} }) );
 
 	var temp = getViewportElementDimensions();
 	viewport.clearRect(0, 0, temp[0], temp[1]);
 	selectionMatrix.clearRect(0, 0, temp[0], temp[1]);
 
-	temp = Object.keys(drawList)
+	temp = Object.keys(drawList);
 	for(var a = 0; a < temp.length; a++){
 		drawList[temp[a]].render();
 	}

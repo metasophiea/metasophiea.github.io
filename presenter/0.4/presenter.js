@@ -32,10 +32,10 @@ var BootCount = 0;
 
 //Render 
 	var refreshesPerSecond = 30; var constantRenderInterval;
-	var drawList = {"background":[],"main":[]};
+	var drawList = {};
 
 //View Controls
-	view = {'position':[0,0], 'angle':0, 'zoom':{'index':0, 'value':1}};
+	var view = {'position':[0,0], 'angle':0, 'zoom':{'index':0, 'value':1}};
 //Auto Movement
 	var activeViewportMovementRefreshesPerSecond = refreshesPerSecond; var activeAutoViewportControlInterval;
 	var activeViewportMovementScript = {"position":[], "angle":[], "zoom":[] };	
@@ -71,7 +71,7 @@ function Presenter_Start(){
 		for(var b = 0; b < includeFiles[Object.keys(includeFiles)[a]].length; b++){
 			temp = document.createElement("script");
 			temp.type = "text/javascript"; temp.src = includeAddress + includeFiles[Object.keys(includeFiles)[a]][b];
-			document.getElementsByTagName("head")[0].appendChild(temp);			
+			document.head.appendChild(temp);			
 		}
 	}
 //Only load this file, when all the other files have been loaded and accounted for
@@ -80,7 +80,7 @@ function Presenter_Start(){
 			clearInterval(BootStarter);
 			temp = document.createElement("script");
 			temp.type = "text/javascript"; temp.src = includeAddress +'boot.js'; 
-			document.getElementsByTagName("head")[0].appendChild(temp);
+			document.head.appendChild(temp);
 		}
 	},100);
 }

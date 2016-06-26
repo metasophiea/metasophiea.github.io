@@ -67,14 +67,10 @@ function image(inputData = {}){
 		points[3] = [realPosition[0]-temp*Math.sin(greenangle),realPosition[1]+temp*Math.cos(greenangle)];
 
 		var count = [0,0];
-		if(points[0][0] < 0){count[0]--;}else if(points[0][0] > windowLimits[0]){count[0]++;}
-		if(points[1][0] < 0){count[0]--;}else if(points[1][0] > windowLimits[0]){count[0]++;}
-		if(points[2][0] < 0){count[0]--;}else if(points[2][0] > windowLimits[0]){count[0]++;}
-		if(points[3][0] < 0){count[0]--;}else if(points[3][0] > windowLimits[0]){count[0]++;}
-		if(points[0][1] < 0){count[1]--;}else if(points[0][1] > windowLimits[1]){count[1]++;}
-		if(points[1][1] < 0){count[1]--;}else if(points[1][1] > windowLimits[1]){count[1]++;}
-		if(points[2][1] < 0){count[1]--;}else if(points[2][1] > windowLimits[1]){count[1]++;}
-		if(points[3][1] < 0){count[1]--;}else if(points[3][1] > windowLimits[1]){count[1]++;}
+		for(var a = 0; a < points.length; a++){for(var b = 0; b < points[a].length; b++){
+			if(points[a][b] < 0){count[b]--;}
+			else if(points[a][b] > windowLimits[b]){count[b]++;}
+		}}
 
 		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){}
 		else{this.draw_viewport(realPosition,dimention); this.draw_selectionMatrix(realPosition,dimention);}

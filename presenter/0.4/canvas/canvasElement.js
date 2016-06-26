@@ -13,13 +13,13 @@ function getRealPoint(point){
 }
 function getViewportPoint(fractionPoint){
 	var dimensions = getViewportElementDimensions();
-	greenCross = [dimensions[0]*fractionPoint[0],dimensions[1]*fractionPoint[1]];
-	redCross = [ getViewportLength(greenCross[0])-view.position[0], getViewportLength(greenCross[1])-view.position[1] ];
+	var greenCross = [dimensions[0]*fractionPoint[0],dimensions[1]*fractionPoint[1]];
+	var redCross = [ getViewportLength(greenCross[0])-view.position[0], getViewportLength(greenCross[1])-view.position[1] ];
 	var polar = getPolarFrom(redCross); polar[1] = polar[1] - view.angle;
 	return getCartesian(polar);	
 }
 
-function getViewportDifference(event,x,y){
+function getViewportDifference(x,y){
 	var output = [x*Math.cos(view.angle)+y*Math.sin(-view.angle),x*Math.sin(view.angle)+y*Math.cos(-view.angle)];
 	return [getViewportLength(output[0]),getViewportLength(output[1])];
 }

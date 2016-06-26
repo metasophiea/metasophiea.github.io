@@ -11,18 +11,18 @@ function removeMouseInterface(){
 
 function setupMouseInterface(){
 	removeMouseInterface();
-	viewportElement.setAttributeNS(null,"onmousedown","mouseInterfaceEvent(this,event);");
-	viewportElement.setAttributeNS(null,"onmousemove","mouseInterfaceEvent(this,event);");	
-	viewportElement.setAttributeNS(null,"onmouseout","mouseInterfaceEvent(this,event);");	
-	viewportElement.setAttributeNS(null,"onmouseup","mouseInterfaceEvent(this,event);");	
-	viewportElement.setAttributeNS(null,"onwheel","mouseInterfaceEvent(this,event);");
-	viewportElement.setAttributeNS(null,"onclick","mouseInterfaceEvent(this,event);");	
-	viewportElement.setAttributeNS(null,"ondblclick","mouseInterfaceEvent(this,event);");	
+	viewportElement.setAttributeNS(null,"onmousedown","mouseInterfaceEvent(event);");
+	viewportElement.setAttributeNS(null,"onmousemove","mouseInterfaceEvent(event);");	
+	viewportElement.setAttributeNS(null,"onmouseout","mouseInterfaceEvent(event);");	
+	viewportElement.setAttributeNS(null,"onmouseup","mouseInterfaceEvent(event);");	
+	viewportElement.setAttributeNS(null,"onwheel","mouseInterfaceEvent(event);");
+	viewportElement.setAttributeNS(null,"onclick","mouseInterfaceEvent(event);");	
+	viewportElement.setAttributeNS(null,"ondblclick","mouseInterfaceEvent(event);");	
 }
 
 
-function mouseInterfaceEvent(that, event){
-	var pointingID = getIDFromPoint(event.layerX,event.layerY);// console.log(event.type +"|"+ Mouse_Mousedown +"|"+ pointingID);
+function mouseInterfaceEvent(event){
+	var pointingID = getIDFromPoint(event.layerX,event.layerY);
 	if(event.type == "mousedown"){mouseInterface_Mousedown = true;}
 	else if(event.type == "mouseup"){mouseInterface_Mousedown = false;}
 
@@ -52,7 +52,7 @@ function mouseInterfaceEvent_Object(ID,event){
 		case "mousemove":
 			if(mouseInterface_Mousedown){
 				removeMouseInterface(); 
-				viewportElement.setAttributeNS(null,"onmousemove","drawList.background.getObj("+ID+").drag(getViewportDifference(event,event.movementX,event.movementY));");
+				viewportElement.setAttributeNS(null,"onmousemove","drawList.background.getObj("+ID+").drag(getViewportDifference(event.movementX,event.movementY));");
 				viewportElement.setAttributeNS(null,"onmouseout","setupMouseInterface();");
 				viewportElement.setAttributeNS(null,"onmouseup","setupMouseInterface();");
 			}			
