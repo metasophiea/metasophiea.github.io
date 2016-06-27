@@ -14,6 +14,7 @@ var BootCount = 0;
 			'canvas/objects/numberlist.js',
 			'canvas/objects/shapes/poly.js',
 			'canvas/objects/shapes/image.js',
+			'canvas/objects/shapes/text.js',
 
 			'canvas/viewportControl/pan.js',
 			'canvas/viewportControl/zoom.js',

@@ -4,7 +4,7 @@ function poly(inputData = []){
 	if(inputData.hasOwnProperty('styleData')){var styleData = inputData.styleData;}else{var styleData = {};}
 	if(inputData.hasOwnProperty('codeData')){var codeData = inputData.codeData;}else{var codeData = {};}	
 // Values ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	var ID = -1; var IDcolour; var Selected = false; var Z = 0;
+	var ID = -1; var IDcolour; var selected = false; var Z = 0;
 
 	var points = [];
 	if(initialData.hasOwnProperty('points')){ points = initialData.points.slice(); }
@@ -106,17 +106,17 @@ this.Draw_SelectionMatrix = function(DrawingPoints){
 }
 // Click Code ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	this.select = function(){
-		if(!Selected){ this.set('A',this.getColour()[3]*(2/3)); }
-		Selected = true;
+		if(!selected){ this.set('A',A*(2/3)); }
+		selected = true;
 	}
 	this.unselect = function(){
-		if(Selected){ this.set('A',this.getColour()[3]*(3/2)); }
-		Selected = false;
+		if(selected){ this.set('A',A*(3/2)); }
+		selected  = false;
 	}	
 
 	this.click = function(){this.pushToFront();}
 	this.drag = function(point){ 
-		if(Selected){ for(var a = 0; a < points.length; a++){this.shiftPoint(a,point[0],point[1]);} } 
+		if(selected){ for(var a = 0; a < points.length; a++){this.shiftPoint(a,point[0],point[1]);} } 
 	}
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
