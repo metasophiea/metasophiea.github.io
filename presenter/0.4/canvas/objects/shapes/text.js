@@ -6,7 +6,8 @@ function text(inputData = {}){
 // Values ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var ID = -1; var IDcolour; var selected = false; var Z = 0; var detail = 100;
 	var position = [0,0]; var anchor = [0,0]; var angle = 0;
-	var text = []; var lineSpacing = 1.5; var fontFamily = 'Arial'; var fontSize = 20; var align = 'left';
+	var text = []; var lineSpacing = 1; var fontFamily = 'serif'; var fontSize = 20; var fontVariant = ''; var fontItalics = false;
+	var align = 'left';
 
 	if(initialData.hasOwnProperty('position')){position = initialData.position;}
 	if(initialData.hasOwnProperty('anchor')){anchor = initialData.anchor;}
@@ -17,7 +18,9 @@ function text(inputData = {}){
 		if(styleData.hasOwnProperty('lineSpacing')){lineSpacing = styleData.lineSpacing;}
 		if(styleData.hasOwnProperty('fontFamily')){fontFamily = styleData.fontFamily;}
 		if(styleData.hasOwnProperty('fontSize')){fontSize = styleData.fontSize;}
-		if(styleData.hasOwnProperty('align')){align = styleData.align;}
+		if(styleData.hasOwnProperty('fontVariant')){fontVariant = styleData.fontVariant;}
+		if(styleData.hasOwnProperty('fontItalics')){fontItalics = styleData.fontItalics;}
+		if(styleData.hasOwnProperty('align')){align = styleData.align;}	
 
 		//Main colour
 		if(styleData.hasOwnProperty('R')){var R = styleData.R;}else{var R = 0;}
@@ -76,55 +79,52 @@ function text(inputData = {}){
 
 // Draw //
 	this.draw = function(){
-		viewport.textAlign = align;
-		viewport.font = detail + "px " + fontFamily; var height = 0; var longest = 0; var width = 0;
-		for(var a = 0; a < lineSpacing*(text.length-1); a++){ height += fontSize}
-		for(var a = 0; a < text.length; a++){ if(viewport.measureText(text[a]).width > longest){longest = viewport.measureText(text[a]).width;} }
-		width = longest*(fontSize/100);
+		//discover width and height of text
+			viewport.textAlign = align;
+			viewport.font = detail + "px " + fontFamily; var height = 0; var longest = 0; var width = 0;
+			for(var a = 0; a < lineSpacing*(text.length-1); a++){ height += fontSize; }height += fontSize;
+			for(var a = 0; a < text.length; a++){ if(viewport.measureText(text[a]).width > longest){longest = viewport.measureText(text[a]).width;} }
+			width = longest*(fontSize/100);
 
-		var temp = 0;
-		if(Math.abs(anchor[1]) > 1){temp = 1;}else{temp = Math.abs(anchor[1]);}
-//		var realPosition = getRealPoint( [position[0]-width*anchor[0],position[1]-height*anchor[1]+fontSize*(1-temp)] );
-		var realPosition = getRealPoint(position);
+		//get real position of anchor
+			var realPosition = getRealPoint(position);
 
-		height = height + fontSize;
-		var dimention = [getRealLength(width),getRealLength(height)]; var windowLimits = getViewportElementDimensions();
-		var left = (anchor[0]*dimention[0]); var down = (anchor[1]*dimention[1]); var right = ((1-anchor[0])*dimention[0]); var up = ((1-anchor[1])*dimention[1]);
+		//calculate bounding box points
+			var dimention = [getRealLength(width),getRealLength(height)]; var windowLimits = getViewportElementDimensions();
+			var left = (anchor[0]*dimention[0]); var down = (anchor[1]*dimention[1]); var right = ((1-anchor[0])*dimention[0]); var up = ((1-anchor[1])*dimention[1]);
 
-		var temp = 0; var greenangle = 0; var points = [[0,0],[0,0],[0,0],[0,0]]; 
-		temp = Math.pow((Math.pow(left,2) + Math.pow(down,2)),0.5); if(left===0){greenangle = 0-angle-view.angle;}else{greenangle = Math.atan(down/left)-angle-view.angle;}
-		points[0] = [realPosition[0]-temp*Math.cos(greenangle),realPosition[1]-temp*Math.sin(greenangle)]; 
-		temp = Math.pow((Math.pow(right,2) + Math.pow(down,2)),0.5); if(down===0){greenangle = angle+view.angle;}else{greenangle = angle+view.angle-Math.atan(right/down);}
-		points[1] = [realPosition[0]+temp*Math.cos(greenangle),realPosition[1]-temp*Math.sin(greenangle)];
-		temp = Math.pow((Math.pow(right,2) + Math.pow(up,2)),0.5); if(right===0){greenangle = angle+view.angle;}else{greenangle = angle+view.angle-Math.atan(up/right);}
-		points[2] = [realPosition[0]+temp*Math.cos(greenangle),realPosition[1]-temp*Math.sin(greenangle)];
-		temp = Math.pow((Math.pow(left,2) + Math.pow(up,2)),0.5); if(up===0){greenangle = 0-angle-view.angle;}else{greenangle = Math.atan(left/up)-angle-view.angle;}
-		points[3] = [realPosition[0]-temp*Math.sin(greenangle),realPosition[1]+temp*Math.cos(greenangle)];
+			var temp = 0; var greenangle = 0; var points = [[0,0],[0,0],[0,0],[0,0]]; 
+			temp = Math.pow((Math.pow(left,2) + Math.pow(down,2)),0.5); if(down===0){greenangle = 0-angle-view.angle;}else{greenangle = Math.atan(down/left)-angle-view.angle;}
+			points[0] = [realPosition[0]-temp*Math.cos(greenangle),realPosition[1]-temp*Math.sin(greenangle)]; 
+			temp = Math.pow((Math.pow(right,2) + Math.pow(down,2)),0.5); if(right===0){greenangle = angle+view.angle;}else{greenangle = angle+view.angle-Math.atan(right/down);}
+			points[1] = [realPosition[0]-temp*Math.sin(greenangle),realPosition[1]-temp*Math.cos(greenangle)]; 
+			temp = Math.pow((Math.pow(right,2) + Math.pow(up,2)),0.5); if(up===0){greenangle = angle+view.angle;}else{greenangle = angle+view.angle-Math.atan(up/right);}
+			points[2] = [realPosition[0]+temp*Math.cos(greenangle),realPosition[1]-temp*Math.sin(greenangle)];
+			temp = Math.pow((Math.pow(left,2) + Math.pow(up,2)),0.5); if(left===0){greenangle = 0-angle-view.angle;}else{greenangle = Math.atan(left/up)-angle-view.angle;}
+			points[3] = [realPosition[0]-temp*Math.sin(greenangle),realPosition[1]+temp*Math.cos(greenangle)];
 
-
-		if(Math.abs(anchor[1]) > 1){temp = 1;}else{temp = Math.abs(anchor[1]);}
-		points[0][1] = points[0][1] - getRealLength(fontSize*(1-temp)*0.75);
-		points[1][1] = points[1][1] - getRealLength(fontSize*(1-temp)*0.75);
-		points[2][1] = points[2][1] - getRealLength(fontSize*(1-temp)*0.75);
-		points[3][1] = points[3][1] - getRealLength(fontSize*(1-temp)*0.75);
-
-		var count = [0,0];
-		for(var a = 0; a < points.length; a++){for(var b = 0; b < points[a].length; b++){
-			if(points[a][b] < 0){count[b]--;}
-			else if(points[a][b] > windowLimits[b]){count[b]++;}
-		}}
-
-		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){console.log('don\'t draw');}
-		else{this.draw_viewport(realPosition,dimention); this.draw_selectionMatrix(realPosition,dimention);}
+		//count points outside viewport
+			var count = [0,0];
+			for(var a = 0; a < points.length; a++){for(var b = 0; b < points[a].length; b++){
+				if(points[a][b] < 0){count[b]--;}
+				else if(points[a][b] > windowLimits[b]){count[b]++;}
+			}}
+		
+		//decide on draw
+			if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){console.log('don\'t draw');}
+			else{this.draw_viewport(realPosition,dimention); this.draw_selectionMatrix(realPosition,dimention);}
 	}
+
 	this.draw_viewport = function(realPosition,dimention){
 		var scaleAdjust = getRealLength(fontSize)/detail; 
 		var positionAdjust = [(-anchor[0]*dimention[0])/scaleAdjust,(anchor[1]*dimention[1])/scaleAdjust];
 
+		if(fontItalics){viewport.font = 'italic ' + fontVariant + ' ' + detail + "px " + fontFamily;}
+		else{viewport.font = fontVariant + ' ' + detail + "px " + fontFamily;}
+
 		viewport.fillStyle = colour;
 		viewport.strokeStyle = lineColour;
 		viewport.lineWidth = lineThickness;
-		viewport.font = detail + "px " + fontFamily;
 		viewport.textAlign = align;
 
 		viewport.save();
@@ -132,8 +132,8 @@ function text(inputData = {}){
 		viewport.rotate(-view.angle-angle);
 		viewport.scale(scaleAdjust,scaleAdjust);
 		for(var a = 0; a < text.length; a++){
-			viewport.fillText(text[a],positionAdjust[0],a*detail*lineSpacing-positionAdjust[1]);
-			viewport.strokeText(text[a],positionAdjust[0],a*detail*lineSpacing-positionAdjust[1]);
+			viewport.fillText(text[a],positionAdjust[0],a*detail*lineSpacing-positionAdjust[1]+3*fontSize);
+			viewport.strokeText(text[a],positionAdjust[0],a*detail*lineSpacing-positionAdjust[1]+3*fontSize);
 		}
 		viewport.restore();
 	}
@@ -141,10 +141,12 @@ function text(inputData = {}){
 		var scaleAdjust = getRealLength(fontSize)/detail; 
 		var positionAdjust = [(-anchor[0]*dimention[0])/scaleAdjust,(anchor[1]*dimention[1])/scaleAdjust];
 
+		if(fontItalics){selectionMatrix.font = 'italic ' + fontVariant + ' ' + detail + "px " + fontFamily;}
+		else{selectionMatrix.font = fontVariant + ' ' + detail + "px " + fontFamily;}
+
 		selectionMatrix.fillStyle = IDColour;
 		selectionMatrix.strokeStyle = IDColour;
-		selectionMatrix.lineWidth = lineThickness;
-		selectionMatrix.font = detail + "px " + fontFamily;
+		selectionMatrix.lineWidth = lineThickness+15;
 		selectionMatrix.textAlign = align;
 
 		selectionMatrix.save();
@@ -152,8 +154,8 @@ function text(inputData = {}){
 		selectionMatrix.rotate(-view.angle-angle);
 		selectionMatrix.scale(scaleAdjust,scaleAdjust);
 		for(var a = 0; a < text.length; a++){
-			selectionMatrix.fillText(text[a],positionAdjust[0],a*detail*lineSpacing-positionAdjust[1]);
-			selectionMatrix.strokeText(text[a],positionAdjust[0],a*detail*lineSpacing-positionAdjust[1]);
+			selectionMatrix.fillText(text[a],positionAdjust[0],a*detail*lineSpacing-positionAdjust[1]+3*fontSize);
+			selectionMatrix.strokeText(text[a],positionAdjust[0],a*detail*lineSpacing-positionAdjust[1]+3*fontSize);
 		}
 		selectionMatrix.restore();
 	}

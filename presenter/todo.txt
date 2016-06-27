@@ -1,7 +1,5 @@
-- Proper text size scaling "ctx.scale(s, s);"
-- Proper text rendering efficiency
-
 - "getColourFromId" grouping could have native method
 - 'render' for loop could be replaced with a native js dot command
 - 'numberList.js' needs name work, and .find should be more efficient
+- text kinda jiggling during smooth zoom
 

@@ -57,21 +57,17 @@ function image(inputData = {}){
 		var left = (anchor[0]*dimention[0]); var down = (anchor[1]*dimention[1]); var right = ((1-anchor[0])*dimention[0]); var up = ((1-anchor[1])*dimention[1]);
 
 		var temp = 0; var greenangle = 0; var points = [[0,0],[0,0],[0,0],[0,0]]; 
-		temp = Math.pow((Math.pow(left,2) + Math.pow(down,2)),0.5); if(left===0){greenangle = 0-angle-view.angle;}else{greenangle = Math.atan(down/left)-angle-view.angle;}
+		temp = Math.pow((Math.pow(left,2) + Math.pow(down,2)),0.5); if(down===0){greenangle = 0-angle-view.angle;}else{greenangle = Math.atan(down/left)-angle-view.angle;}
 		points[0] = [realPosition[0]-temp*Math.cos(greenangle),realPosition[1]-temp*Math.sin(greenangle)]; 
-		temp = Math.pow((Math.pow(right,2) + Math.pow(down,2)),0.5); if(down===0){greenangle = angle+view.angle;}else{greenangle = angle+view.angle-Math.atan(right/down);}
+		temp = Math.pow((Math.pow(right,2) + Math.pow(down,2)),0.5); if(right===0){greenangle = angle+view.angle;}else{greenangle = angle+view.angle-Math.atan(right/down);}
 		points[1] = [realPosition[0]-temp*Math.sin(greenangle),realPosition[1]-temp*Math.cos(greenangle)]; 
-		temp = Math.pow((Math.pow(right,2) + Math.pow(up,2)),0.5); if(right===0){greenangle = angle+view.angle;}else{greenangle = angle+view.angle-Math.atan(up/right);}
+		temp = Math.pow((Math.pow(right,2) + Math.pow(up,2)),0.5); if(up===0){greenangle = angle+view.angle;}else{greenangle = angle+view.angle-Math.atan(up/right);}
 		points[2] = [realPosition[0]+temp*Math.cos(greenangle),realPosition[1]-temp*Math.sin(greenangle)];
-		temp = Math.pow((Math.pow(left,2) + Math.pow(up,2)),0.5); if(up===0){greenangle = 0-angle-view.angle;}else{greenangle = Math.atan(left/up)-angle-view.angle;}
+		temp = Math.pow((Math.pow(left,2) + Math.pow(up,2)),0.5); if(left===0){greenangle = 0-angle-view.angle;}else{greenangle = Math.atan(left/up)-angle-view.angle;}
 		points[3] = [realPosition[0]-temp*Math.sin(greenangle),realPosition[1]+temp*Math.cos(greenangle)];
 
 		var count = [0,0]; 
-//		console.log('-- -- -- -- --');
-//		console.log(windowLimits);
-		for(var a = 0; a < points.length; a++){for(var b = 0; b < points[a].length; b++){
-//			console.log(a+','+b+' - ' + points[a][b]);			
-
+		for(var a = 0; a < points.length; a++){for(var b = 0; b < points[a].length; b++){			
 			if(points[a][b] < 0){count[b]--;}
 			else if(points[a][b] > windowLimits[b]){count[b]++;}
 		}}
@@ -110,4 +106,4 @@ function image(inputData = {}){
 	this.drag = function(point){if(selected){this.shift(point);}}
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
-BootCount++; console.log("./canvas/shape/image2.js");
+BootCount++; console.log("./canvas/shape/image.js");
