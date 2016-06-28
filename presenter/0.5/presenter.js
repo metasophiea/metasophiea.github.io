@@ -1,5 +1,5 @@
 //Included Files
-	var presenterRepositoryURL = 'file:///H:/Documents/GitHub/metasophiea.github.io/presenter/0.5/';
+	var presenterRepositoryURL = 'http://metasophiea.com/presenter/0.5/';
 	var includeFiles = {
 		'CSS':[],
 		'JS':[
