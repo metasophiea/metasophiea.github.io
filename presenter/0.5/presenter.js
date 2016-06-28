@@ -3,8 +3,8 @@
 	var includeFiles = {
 		'CSS':[],
 		'JS':[
-			[	'file:///H:/Documents/GitHub/metasophiea.github.io/code/js/math/geometry.js',
-				'file:///H:/Documents/GitHub/metasophiea.github.io/code/js/math/numberProgression.js',
+			[	'http://metasophiea.com/code/js/math/geometry.js',
+				'http://metasophiea.com/code/js/math/numberProgression.js',
 				presenterRepositoryURL+'canvas/canvasElement.js',
 				presenterRepositoryURL+'canvas/render.js',
 				presenterRepositoryURL+'canvas/mouseInterface.js'
