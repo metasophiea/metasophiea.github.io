@@ -19,12 +19,13 @@ function getViewportPoint(fractionPoint){
 	return getCartesian(polar);	
 }
 
-function getViewportDifference(x,y){
-	var output = [x*Math.cos(view.angle)+y*Math.sin(-view.angle),x*Math.sin(view.angle)+y*Math.cos(-view.angle)];
+function getViewportDifference(diff){
+	var output = [diff[0]*Math.cos(view.angle)+diff[1]*Math.sin(-view.angle),diff[0]*Math.sin(view.angle)+diff[1]*Math.cos(-view.angle)];
 	return [getViewportLength(output[0]),getViewportLength(output[1])];
 }
-
-
+function getObjectDifference(diff,angle){
+	return [diff[0]*Math.cos(angle)+diff[1]*Math.sin(-angle),diff[0]*Math.sin(angle)+diff[1]*Math.cos(-angle)];
+}
 
 
 function getColourFromID(ID){

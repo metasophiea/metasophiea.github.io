@@ -17,6 +17,10 @@ function getPolarFrom(point){
 }
 function getCartesian(polar){return [(polar[0]*Math.cos(polar[1])), -(polar[0]*Math.sin(polar[1]))];}
 
+function distanceBetweenTwoPoints(point_1,point_A){
+	return Math.pow((Math.pow((point_A[0]-point_1[0]),2) + Math.pow((point_A[1]-point_1[1]),2)),0.5);
+}
+
 
 function createPath(type,start,end,stepcount){
 	var toClass = {}.toString; 

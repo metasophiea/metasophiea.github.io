@@ -22,9 +22,16 @@ function setupMouseInterface(){
 
 
 function mouseInterfaceEvent(event){
-	var pointingID = getIDFromPoint(event.layerX,event.layerY);
+	var pointingID = getIDFromPoint(event.layerX,event.layerY); 
 	if(event.type == "mousedown"){mouseInterface_Mousedown = true;}
 	else if(event.type == "mouseup"){mouseInterface_Mousedown = false;}
+
+	//Watch for hovering
+	if(mouseInterface_Hover != pointingID){
+		if(pointingID == -1){drawList.background.getObj(mouseInterface_Hover).mouseout();}
+		else{drawList.background.getObj(pointingID).mouseover([event.layerX,event.layerY]);}
+		mouseInterface_Hover = pointingID;
+	}
 
 	if(pointingID == -1){mouseInterfaceEvent_Viewport(event);}
 	else{mouseInterfaceEvent_Object(pointingID, event);}
@@ -49,13 +56,19 @@ function mouseInterfaceEvent_Viewport(event){
 function mouseInterfaceEvent_Object(ID,event){
 	switch(event.type){
 		case "click": mouseInterface_Selected.setID(ID); drawList.background.getObj(ID).click(event.layerX,event.layerY); break;
+		case "mousedown": 
+			var temp = getViewportElementDimensions();
+			drawList.background.getObj(ID).mousedown(getViewportPoint([event.layerX/temp[0],event.layerY/temp[1]])); 
+		break;
 		case "mousemove":
 			if(mouseInterface_Mousedown){
 				removeMouseInterface(); 
-				viewportElement.setAttributeNS(null,"onmousemove","drawList.background.getObj("+ID+").drag(getViewportDifference(event.movementX,event.movementY));");
+				viewportElement.setAttributeNS(null,"onmousemove","drawList.background.getObj("+ID+").drag(getViewportDifference([event.movementX,event.movementY]));");
 				viewportElement.setAttributeNS(null,"onmouseout","setupMouseInterface();");
 				viewportElement.setAttributeNS(null,"onmouseup","setupMouseInterface();");
-			}			
+			}else{
+				drawList.background.getObj(ID).mouseover([event.layerX,event.layerY]);
+			}
 		break;
 	}
 }

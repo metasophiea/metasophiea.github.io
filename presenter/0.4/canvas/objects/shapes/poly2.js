@@ -1,4 +1,4 @@
-function poly(inputData = []){
+function poly2(inputData = []){
 // JSON Recieving ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if(inputData.hasOwnProperty('initialData')){var initialData = inputData.initialData;}else{var initialData = {};}
 	if(inputData.hasOwnProperty('styleData')){var styleData = inputData.styleData;}else{var styleData = {};}
@@ -58,10 +58,6 @@ function poly(inputData = []){
 			case 'B': B = newValue; colour = 'rgba('+R+', '+G+', '+B+', '+A+')'; break;
 			case 'A': A = newValue; colour = 'rgba('+R+', '+G+', '+B+', '+A+')'; break;
 			case 'colour': colour = newValue; break;
-			case 'line_R': line_R = newValue; colour = 'rgba('+line_R+', '+line_G+', '+line_B+', '+line_A+')'; break;
-			case 'line_G': line_G = newValue; colour = 'rgba('+line_R+', '+line_G+', '+line_B+', '+line_A+')'; break;
-			case 'line_B': line_B = newValue; colour = 'rgba('+line_R+', '+line_G+', '+line_B+', '+line_A+')'; break;
-			case 'line_A': line_A = newValue; colour = 'rgba('+line_R+', '+line_G+', '+line_B+', '+line_A+')'; break;
 			case 'lineColour': lineColour = newValue; break;
 			case 'lineThickness': lineThickness = newValue; if(lineThickness === 0){lineColour = 'rgba(0,0,0,0)';}else{lineColour = 'rgba('+line_R+', '+line_G+', '+line_B+', '+line_A+')';} break;
 		}
@@ -80,6 +76,7 @@ function poly(inputData = []){
 	}
 	function closestPointToPoint(point){ var temp = distaceFromPoints(point); var ans = 0;
 		for(var a = 1; a < temp.length; a++){ if(temp[a] < temp[ans]){ans = a;} }
+		
 		return ans;
 	}
 
@@ -120,14 +117,13 @@ this.Draw_SelectionMatrix = function(DrawingPoints){
 	this.select = function(){if(!selected){ this.set('A',A*(2/3)); } selected = true;}
 	this.unselect = function(){if(selected){ this.set('A',A*(3/2)); } selected  = false;}	
 	this.click = function(){this.pushToFront();}	
-	this.mouseover = function(point){console.log(closestPointToPoint(point));}
-	this.mouseout = function(){}
+	this.mousemove = function(point){console.log(closestPointToPoint(point));}
 	this.mousedown = function(point){}
 	this.drag = function(point){
-		if(selected){
+		if(selected){ 
 			for(var a = 0; a < points.length; a++){this.shiftPoint(a,point[0],point[1]);}
 		}
 	}
 }
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
-console.log("./canvas/objects/shape/poly.js"); BootCount++;
+console.log("./canvas/objects/shape/poly2.js"); BootCount++;

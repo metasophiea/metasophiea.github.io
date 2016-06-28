@@ -12,7 +12,8 @@ var BootCount = 0;
 
 			'canvas/objects/drawlist.js',
 			'canvas/objects/numberlist.js',
-			'canvas/objects/shapes/poly.js',
+			'canvas/objects/shapes/poly.js', 'canvas/objects/shapes/poly2.js',
+			'canvas/objects/shapes/square.js',
 			'canvas/objects/shapes/image.js',
 			'canvas/objects/shapes/text.js',
 
@@ -45,7 +46,7 @@ var BootCount = 0;
 	var tool = {'drag':'pan'};
 //Mouse Interface
 	var mouseInterface_Mousedown = false;
-	var mouseInterface_Selected;
+	var mouseInterface_Selected; var mouseInterface_Hover;
 
 
 

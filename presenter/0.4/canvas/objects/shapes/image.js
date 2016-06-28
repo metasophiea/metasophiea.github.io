@@ -4,7 +4,7 @@ function image(inputData = {}){
 	if(inputData.hasOwnProperty('styleData')){var styleData = inputData.styleData;}else{var styleData = {};}
 	if(inputData.hasOwnProperty('codeData')){var codeData = inputData.codeData;}else{var codeData = {};}	
 // Values ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	var ID = -1; var IDcolour; var selected = false; var Z = 0;
+	var ID = -1; var IDColour; var selected = false; var Z = 0;
 	var position = [0,0]; var anchor = [0,0];
 	var width = 0; var height = 0; var angle = 0; 
 
@@ -93,15 +93,11 @@ function image(inputData = {}){
 		selectionMatrix.restore();
 	}
 // Mouse Methods //
-	this.select = function(){
-		if(!selected){ console.log('select'); }
-		selected = true;
-	}
-	this.unselect = function(){
-		if(selected){ console.log('unselect'); }
-		selected = false;
-	}	
-
+	this.select = function(){if(!selected){ console.log('select'); } selected = true;}
+	this.unselect = function(){if(selected){ console.log('unselect'); } selected = false;}	
+	this.mouseover = function(point){}
+	this.mouseout = function(){}
+	this.mousedown = function(point){}
 	this.click = function(x,y){this.pushToFront();}
 	this.drag = function(point){if(selected){this.shift(point);}}
 }

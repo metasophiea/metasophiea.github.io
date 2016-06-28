@@ -163,6 +163,9 @@ function text(inputData = {}){
 // Mouse Methods //
 	this.select = function(){ if(!selected){ this.set('A',A*(2/3)); } selected = true; }
 	this.unselect = function(){ if(selected){ this.set('A',A*(3/2)); } selected = false; }	
+	this.mouseover = function(point){}
+	this.mouseout = function(){}
+	this.mousedown = function(point){}
 	this.click = function(x,y){this.pushToFront();}
 	this.drag = function(point){if(selected){this.shift(point);}}
 }
