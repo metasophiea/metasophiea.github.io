@@ -47,7 +47,7 @@ function Presenter_Start(){
 //get, getJS.js script, and then load the files with it
 	var temp = document.createElement('script');
 	temp.type = 'text/javascript'; 
-	temp.src = 'file:///H:/Documents/GitHub/metasophiea.github.io/code/js/liveEdit/getJS.js';
+	temp.src = 'http://metasophiea.com/code/js/liveEdit/getJS.js';
 	temp.setAttribute('onLoad','getJS(includeFiles.JS);');
 	document.head.appendChild(temp);	
 }
