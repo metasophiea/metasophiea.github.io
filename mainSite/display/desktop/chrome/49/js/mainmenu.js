@@ -169,7 +169,7 @@ function goToSlide(number){
 	document.getElementById('tab'+number).style.y = parseInt(document.getElementById('tab'+number).style.y) - 5;
 
 	var temp = document.getElementById('image_oct_headtext'+number).getAttribute('extraData');
-	document.getElementById('image_oct_link').setAttribute("onclick","window.location='"+temp+"';");	
+	document.getElementById('image_oct_link').setAttribute("onclick","window.parent.location='"+temp+"';");	
 }
 
 function PauseShowAndGoTo(slideNumber){
