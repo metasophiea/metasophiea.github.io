@@ -85,5 +85,3 @@ function createPath(type,start,end,stepcount){
 		break;
 	}
 }
-
-console.log('metasophiea.com/code/js/math/numberProgression.js - loaded');

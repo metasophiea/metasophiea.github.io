@@ -22,5 +22,3 @@ function getPolarFrom(point){
 function getCartesian(polar){
 	return [(polar[0]*Math.cos(polar[1])), -(polar[0]*Math.sin(polar[1]))];
 }
-
-console.log('metasophiea.com/code/js/math/geometry.js - loaded');

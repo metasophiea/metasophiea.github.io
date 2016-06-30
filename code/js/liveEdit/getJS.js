@@ -21,7 +21,7 @@ function _getJS_singleArray(JS_List){
 
 function _getJS_string(string){
 	var temp = document.createElement("script");
-	temp.setAttribute('onLoad','_metasophiea_code_js_liveEdit_getJS_globals_bootCounter++;');
+	temp.setAttribute('onLoad','_metasophiea_code_js_liveEdit_getJS_globals_bootCounter++; console.log("%cgetJS successfully loaded: '+string+'", "color:rgb(202,136,202); font-style:italic;");');
 	temp.type = "text/javascript"; 
 	temp.src = string;
 	document.head.appendChild(temp);
