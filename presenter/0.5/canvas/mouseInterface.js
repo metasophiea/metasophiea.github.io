@@ -22,21 +22,21 @@ function setupMouseInterface(){
 
 
 function mouseInterfaceEvent(event){
-	var pointingID = getIDFromPoint(event.layerX,event.layerY); 
+	var pointingID = getIDFromPoint(event.layerX,event.layerY);  //console.log('mouse pointing at ' + pointingID);
 	if(event.type == "mousedown"){mouseInterface_Mousedown = true;}
 	else if(event.type == "mouseup"){mouseInterface_Mousedown = false;}
 
 	//Watch for hovering
 		if(pointingID == -1){
-			drawList.background.getObj(mouseInterface_Hover).mouseout();
+			if(mouseInterface_Hover != -1){drawList.foreground.getObj(mouseInterface_Hover).mouseout();}
 			mouseInterface_Hover = pointingID;
 		}
 		else if(mouseInterface_Hover != pointingID){
-			if(mouseInterface_Hover != -1){drawList.background.getObj(mouseInterface_Hover).mouseout();}
-			drawList.background.getObj(pointingID).mouseover([event.layerX,event.layerY]);
+			if(mouseInterface_Hover != -1){drawList.foreground.getObj(mouseInterface_Hover).mouseout();}
+			drawList.foreground.getObj(pointingID).mouseover([event.layerX,event.layerY]);
 			mouseInterface_Hover = pointingID;
 		}
-		else{drawList.background.getObj(pointingID).mouseover([event.layerX,event.layerY]);}
+		else{drawList.foreground.getObj(pointingID).mouseover([event.layerX,event.layerY]);}
 
 	if(pointingID == -1){mouseInterfaceEvent_Viewport(event);}
 	else{mouseInterfaceEvent_Object(pointingID, event);}
@@ -60,15 +60,15 @@ function mouseInterfaceEvent_Viewport(event){
 }
 function mouseInterfaceEvent_Object(ID,event){
 	switch(event.type){
-		case "click": mouseInterface_Selected.setID(ID); drawList.background.getObj(ID).click(event.layerX,event.layerY); break;
+		case "click": mouseInterface_Selected.setID(ID,[event.layerX,event.layerY]); drawList.foreground.getObj(ID).click(event.layerX,event.layerY); break;
 		case "mousedown": 
 			var temp = getViewportElementDimensions();
-			drawList.background.getObj(ID).mousedown(getViewportPoint([event.layerX/temp[0],event.layerY/temp[1]])); 
+			drawList.foreground.getObj(ID).mousedown(getViewportPoint([event.layerX/temp[0],event.layerY/temp[1]])); 
 		break;
 		case "mousemove":
 			if(mouseInterface_Mousedown){
 				removeMouseInterface(); 
-				viewportElement.setAttributeNS(null,"onmousemove","drawList.background.getObj("+ID+").drag(getViewportDifference([event.movementX,event.movementY]));");
+				viewportElement.setAttributeNS(null,"onmousemove","drawList.foreground.getObj("+ID+").drag(getViewportDifference([event.movementX,event.movementY]));");
 				viewportElement.setAttributeNS(null,"onmouseout","setupMouseInterface();");
 				viewportElement.setAttributeNS(null,"onmouseup","setupMouseInterface();");
 			}

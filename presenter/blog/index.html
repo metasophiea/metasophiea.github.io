@@ -20,6 +20,38 @@
 	<section>
 		<pre>
 ---------------------------------------------------------
+2016-07-03-a - SubShaping
+---------------------------------------------------------
+- This weekend brought about work on 0.5, which incliudes
+  a new way of drawing objects
+- Instead of having each object contain its drawing code,
+  they instead send all their drawing data to a seperate 
+  shape-drawing subfunction, thus keeping the line-count
+  down
+- I've seperated out some common shape functions, for the
+  same reason 
+- I also dabbled a little in subshaping (where one shape
+  can contain many others) I've gotten a rough version
+  together, that allows subselection (so I'm no longer
+  limited by that 255^3 object limit) and the shapes within
+  a shape, are positioned relitive to an origin point in
+  the parent shape, allowing for a more natural method of
+  positioning...this needs heavy work
+- I also rearranged the files a little...that needs lots
+  of work too
+- I have an example 'adjustable_rectangleObject' where 
+  pulling the topleft tab changes the height and width 
+  (though not properly) and I'll need to rewrite most of 
+  this for 0.6 to make it all tighter and allow better 
+  shape control
+---------------------------------------------------------
+		</pre>
+	</section>
+
+
+	<section>
+		<pre>
+---------------------------------------------------------
 2016-06-28-a - square.js
 ---------------------------------------------------------
 - Had a go at writing a square object that has little tabs

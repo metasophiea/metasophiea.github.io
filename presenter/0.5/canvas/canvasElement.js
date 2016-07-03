@@ -42,7 +42,7 @@ function getColourFromID(ID){
 	return "rgba("+ID[0]+","+ID[1]+","+ID[2]+",1)";
 }
 function getIDFromPoint(X,Y){ 
-	var data = selectionMatrix.getImageData(X-1,Y-1,3,3).data; //console.log(selectionMatrix.getImageData(X,Y,1,1).data);
+	var data = selectionMatrix.getImageData(X-1,Y-1,3,3).data;
 	for(var a = 0; a < data.length-4; a+=4){
 		if((data[a] != data[a+4]) || (data[a+1] != data[a+5]) || (data[a+2] != data[a+6]) ||  (data[a+3] != data[a+7])){return -1;}
 	}

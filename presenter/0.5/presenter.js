@@ -1,5 +1,5 @@
 //Included Files
-	var presenterRepositoryURL = 'http://metasophiea.com/presenter/0.5/';
+	var presenterRepositoryURL = 'file:///H:/Documents/GitHub/metasophiea.github.io/presenter/0.5/';
 	var includeFiles = {
 		'CSS':[],
 		'JS':[
@@ -7,7 +7,27 @@
 				'http://metasophiea.com/code/js/math/numberProgression.js',
 				presenterRepositoryURL+'canvas/canvasElement.js',
 				presenterRepositoryURL+'canvas/render.js',
-				presenterRepositoryURL+'canvas/mouseInterface.js'
+				presenterRepositoryURL+'canvas/mouseInterface.js',
+
+				presenterRepositoryURL+'object/drawlist.js',
+				presenterRepositoryURL+'object/numberlist.js',
+
+				presenterRepositoryURL+'canvas/viewportControl/autoViewportControl.js',
+				presenterRepositoryURL+'canvas/viewportControl/mouseInterfaceControls.js',
+				presenterRepositoryURL+'canvas/viewportControl/pan.js',
+				presenterRepositoryURL+'canvas/viewportControl/spin.js',
+				presenterRepositoryURL+'canvas/viewportControl/zoom.js',
+
+				presenterRepositoryURL+'canvas/shape/rectangle.js',
+				presenterRepositoryURL+'canvas/shape/square.js',
+				presenterRepositoryURL+'canvas/shape/poly.js',
+				presenterRepositoryURL+'canvas/shape/image.js',
+				presenterRepositoryURL+'canvas/shape/character.js',
+				presenterRepositoryURL+'canvas/shape/commonFunctions.js',
+
+				presenterRepositoryURL+'canvas/shape/object/rectangleObject.js',
+				presenterRepositoryURL+'canvas/shape/object/super_rectangleObject.js',
+				presenterRepositoryURL+'canvas/shape/object/adjustable_rectangleObject.js'
 			],[presenterRepositoryURL+'boot.js']		
 		]
 	};
@@ -24,7 +44,11 @@
 //View Controls
 	var view = {'position':[0,0], 'angle':0, 'zoom':{'index':0, 'value':1}};
 
-
+//Tool
+	var tool = {'drag':'pan'};
+//Mouse Interface
+	var mouseInterface_Mousedown = false;
+	var mouseInterface_Selected; var mouseInterface_Hover;
 
 
 function Presenter_Start(){
