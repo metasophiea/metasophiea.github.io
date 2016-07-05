@@ -24,7 +24,10 @@
 				presenterRepositoryURL+'canvas/shape/basic/character.js',
 				presenterRepositoryURL+'canvas/shape/basic/image.js',
 
-				presenterRepositoryURL+'canvas/shape/regular/rectangle.js'
+				presenterRepositoryURL+'canvas/shape/regular/rectangle.js',
+
+				presenterRepositoryURL+'canvas/shape/super/extraStuff.js',
+				presenterRepositoryURL+'canvas/shape/super/rectangle.js'
 			],[presenterRepositoryURL+'boot.js']		
 		]
 	};

@@ -5,15 +5,16 @@ function regularShape_rectangle(inputData = {}){
 // Values ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var ID = -1; var IDcolour; var selected = false; var hovering = false; var Z = 0; 
 	var width = 0; var height = 0; var anchor = [0,0];
-	var origin = {'point':[0,0],'angle':0}; var calculated = {'point':[0,0],'angle':0};
-	var position = [0,0]; var angle = 0;
+	var origin = {'point':[0,0],'angle':0}; 
+	var defined = {'point':[0,0],'angle':0};
+	var calculated = {'point':[0,0],'angle':0};
 
 	if(initialData.hasOwnProperty('origin')){origin = initialData.origin;}
-	if(initialData.hasOwnProperty('position')){position = initialData.position;}
+	if(initialData.hasOwnProperty('position')){defined.point = initialData.position;}
 	if(initialData.hasOwnProperty('width')){width = initialData.width;}
 	if(initialData.hasOwnProperty('height')){height = initialData.height;}
 	if(initialData.hasOwnProperty('anchor')){anchor = initialData.anchor;}
-	if(initialData.hasOwnProperty('angle')){angle = initialData.angle;}
+	if(initialData.hasOwnProperty('angle')){defined.angle = initialData.angle;}
 
 	//Style
 		//Main colour
@@ -37,26 +38,26 @@ function regularShape_rectangle(inputData = {}){
 	this.WhatAreYou = function(){return 'regularShape_rectangle - '+ID;}
 	this.getID = function(){return ID;}
 	this.shift = function(point){
-		position = [position[0]+point[0],position[1]+point[1]];
+		defined.point = [defined.point[0]+point[0],defined.point[1]+point[1]];
 	}
 	this.set = function(VariableName,newValue){
 		switch(VariableName){
 			case "ID": ID = newValue; IDcolour = getColourFromID(ID); break;
 			case 'Z': Z = newValue; break;
-			case 'R': R = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
-			case 'G': G = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
-			case 'B': B = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
+			case 'R': R = parseInt(newValue); colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
+			case 'G': G = parseInt(newValue); colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
+			case 'B': B = parseInt(newValue); colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
 			case 'A': A = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
 			case 'line_R': line_R = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
 			case 'line_G': line_G = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
 			case 'line_B': line_B = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
 			case 'line_A': line_A = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
 			case 'origin': origin = newValue; break;
-			case "position": position = newValue; break;
+			case "position": defined.point = newValue; break;
 			case "height": height = newValue; break;
 			case "width": width = newValue; break;
 			case "anchor": anchor = newValue; break;
-			case "angle": angle = newValue; break;
+			case "angle": defined.angle = newValue; break;
 			case 'lineThickness': lineThickness = newValue; if(lineThickness === 0){lineColour = 'rgba(0,0,0,0)';}else{lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')';} break;	
 		}
 	}
@@ -83,7 +84,7 @@ function regularShape_rectangle(inputData = {}){
 
 // Draw //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	this.draw = function(){
-		calculated.point = [origin.point[0]+position[0],origin.point[1]+position[1]]; calculated.angle = origin.angle + angle;
+		calculated.point = [origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]]; calculated.angle = origin.angle + defined.angle;
 
 		var realPosition = getRealPoint(calculated.point); var dimention = [getRealLength(width),getRealLength(height)]; 
 		var windowLimits = getViewportElementDimensions();
@@ -103,17 +104,29 @@ function regularShape_rectangle(inputData = {}){
 			basicShape_rectangle(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,colour,lineColour,getRealLength(lineThickness));
 			basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,IDcolour,IDcolour,getRealLength(lineThickness));
 		}
-		
 	}
-	this.draw_selectionMatrix_withID = function(ID){ID = getColourFromID(ID);
-		calculated.point = [origin.point[0]+position[0],origin.point[1]+position[1]]; calculated.angle = origin.angle + angle;
+
+	this.draw_withID = function(ID){ID = getColourFromID(ID);
+		calculated.point = [origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]]; calculated.angle = origin.angle + defined.angle;
 
 		var realPosition = getRealPoint(calculated.point); var dimention = [getRealLength(width),getRealLength(height)]; 
 		var windowLimits = getViewportElementDimensions();
-		var points = getCornerPoints(dimention[0],dimention[1],realPosition,anchor,calculated.angle);	
+		var points = getCornerPoints(dimention[0],dimention[1],realPosition,anchor,calculated.angle);
 
-		basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,ID,ID,getRealLength(lineThickness));
-		
+		var count = [0,0]; 
+		for(var a = 0; a < points.length; a++){
+			for(var b = 0; b < points[a].length; b++){			
+				if(points[a][b] < 0){count[b]--;}
+				else if(points[a][b] > windowLimits[b]){count[b]++;}
+			}
+		}
+
+
+		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){}
+		else{
+			basicShape_rectangle(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,colour,lineColour,getRealLength(lineThickness));
+			basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,ID,ID,getRealLength(lineThickness));
+		}
 	}
 
 // Mouse Methods /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
