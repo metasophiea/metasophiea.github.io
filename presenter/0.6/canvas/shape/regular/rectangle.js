@@ -84,7 +84,8 @@ function regularShape_rectangle(inputData = {}){
 
 // Draw //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	this.draw = function(){
-		calculated.point = [origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]]; calculated.angle = origin.angle + defined.angle;
+		var temp  = getPolarFrom(defined.point); temp[1] = temp[1] + origin.angle; temp = getCartesian(temp);
+		calculated = {'point':[origin.point[0]+temp[0],origin.point[1]+temp[1]],'angle':(origin.angle + defined.angle)}
 
 		var realPosition = getRealPoint(calculated.point); var dimention = [getRealLength(width),getRealLength(height)]; 
 		var windowLimits = getViewportElementDimensions();
@@ -107,7 +108,8 @@ function regularShape_rectangle(inputData = {}){
 	}
 
 	this.draw_withID = function(ID){ID = getColourFromID(ID);
-		calculated.point = [origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]]; calculated.angle = origin.angle + defined.angle;
+		var temp  = getPolarFrom(defined.point); temp[1] = temp[1] + origin.angle; temp = getCartesian(temp);
+		calculated = {'point':[origin.point[0]+temp[0],origin.point[1]+temp[1]],'angle':(origin.angle + defined.angle)}
 
 		var realPosition = getRealPoint(calculated.point); var dimention = [getRealLength(width),getRealLength(height)]; 
 		var windowLimits = getViewportElementDimensions();

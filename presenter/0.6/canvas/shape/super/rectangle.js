@@ -39,15 +39,15 @@ function superShape_rectangle(inputData = {}){
 	subShapeList.add( new regularShape_rectangle({ "initialData":{'origin':axiom,"position":[0,0],"anchor":[0,0],"width":width,"height":height,"angle":0}, "styleData":styleData }) );	
 	subShapeList.add( new regularShape_rectangle({ "initialData":{'origin':axiom,"position":[10,10],"anchor":[0,0],"width":width/2,"height":height/2,"angle":0}, "styleData":{"R":200,"G":200,"B":200} }) );	
 
-
 // Methods ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Public
 	this.WhatAreYou = function(){return 'superShape_rectangle - '+ID;}
 	this.getID = function(){return ID;}
 	this.shift = function(point){
 		defined.point = [defined.point[0]+point[0],defined.point[1]+point[1]];
-		axiom.point = getTopLeftPoint(width,height,calculated.point,anchor,calculated.angle);
-		axiom.angle = calculated.angle;
+		calculated = {'point':[origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]],'angle':(origin.angle + defined.angle)};
+		axiom = {'point':getTopLeftPoint(width,height,calculated.point,anchor,calculated.angle),'angle':calculated.angle};
+		subShapeList.updateOrigin(axiom);
 	}
 	this.set = function(VariableName,newValue){
 		switch(VariableName){
@@ -71,6 +71,7 @@ function superShape_rectangle(inputData = {}){
 		}
 		calculated = {'point':[origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]],'angle':(origin.angle + defined.angle)};
 		axiom = {'point':getTopLeftPoint(width,height,calculated.point,anchor,calculated.angle),'angle':calculated.angle};
+		subShapeList.updateOrigin(axiom);
 	}
 	this.pushToFront = function(){drawList.foreground.pushToFront(ID);}
 	this.pushToBack = function(){drawList.foreground.pushToBack(ID);}
@@ -84,17 +85,20 @@ function superShape_rectangle(inputData = {}){
 	}
 
 // Draw //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	this.draw = function(){
-		subShapeList.render_withID(ID);
-	}
-	this.draw_withID = function(ID){
-		subShapeList.render_withID(ID);		
-	}
-	function drawSubShapes(){subShapeList.render();}
-
+	this.draw = function(){ subShapeList.render_withID(ID); }
+	this.draw_withID = function(ID){ subShapeList.render_withID(ID); }
 // Mouse Methods /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	this.select = function(){}
-	this.unselect = function(){}	
+	this.select = function(point){
+		if(!selected){this.set('A',A*(2/3));  selected = true;}
+		var temp = getSubShape(point);
+		subShapeList.getObj(temp).select();
+	}
+	this.unselect = function(){
+		if(selected){
+			this.set('A',A*(3/2)); selected = false;
+			subShapeList.unselectAll();
+		}
+	}	
 	this.mouseover = function(point){
 		var temp = getSubShape(point);
 		//Watch for hovering
@@ -109,11 +113,13 @@ function superShape_rectangle(inputData = {}){
 			}
 			else{subShapeList.getObj(temp).mouseover(point);}
 	}
-	this.mouseout = function(){
-		var temp = subShapeList.getAllObjectIDs()
-		for(var a = 0; a < temp.length; a++){ subShapeList.getObj(temp[a]).mouseout(); }
-	}
+	this.mouseout = function(){subShapeList.mouseoutAll();}
 	this.mousedown = function(point){}
 	this.click = function(x,y){}
-	this.drag = function(point){}
+	this.drag = function(point){
+		if(selected){
+			if(lastHover == 0){this.shift(point);}
+			else{subShapeList.getObj(lastHover).drag(getObjectDifference(point,calculated.angle));}
+		}
+	}
 }

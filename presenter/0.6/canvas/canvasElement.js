@@ -29,9 +29,10 @@ function getViewportDifference(diff){
 	var output = [diff[0]*Math.cos(view.angle)+diff[1]*Math.sin(-view.angle),diff[0]*Math.sin(view.angle)+diff[1]*Math.cos(-view.angle)];
 	return [getViewportLength(output[0]),getViewportLength(output[1])];
 }
-// function getObjectDifference(diff,angle){
-// 	return [diff[0]*Math.cos(angle)+diff[1]*Math.sin(-angle),diff[0]*Math.sin(angle)+diff[1]*Math.cos(-angle)];
-// }
+
+function getObjectDifference(diff,angle){
+ 	return [diff[0]*Math.cos(angle)+diff[1]*Math.sin(-angle),diff[0]*Math.sin(angle)+diff[1]*Math.cos(-angle)];
+}
 
 //----------------------------------------------------------------------------------------------------------------------------------------//
 

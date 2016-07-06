@@ -23,6 +23,23 @@ function drawlist(){
 		return output;
 	}
 
+	this.updateOrigin = function(newOrigin){ 
+		for(var a = 0; a < list.length; a++){ 
+			list[a].set('origin',newOrigin); 
+		} 
+	}
+	this.mouseoutAll = function(){ 
+		for(var a = 0; a < list.length; a++){ 
+			list[a].mouseout(); 
+		} 
+	}
+	this.unselectAll = function(){ 
+		for(var a = 0; a < list.length; a++){ 
+			list[a].unselect(); 
+		} 
+	}
+
+
 	this.add = function(obj,superID=-1){
 		var newID = this.getNextId();
 		obj.set('ID',newID);
@@ -79,6 +96,5 @@ function drawlist(){
 
 	this.render = function(){ for(var a = 0; a < list.length; a++){ list[a].draw(); } }
 	this.render_withID = function(ID){ for(var a = 0; a < list.length; a++){ list[a].draw_withID(ID); } }
-
 	this.render_selectionMatrix_withID = function(ID){ for(var a = 0; a < list.length; a++){ list[a].draw_selectionMatrix_withID(ID); } }
 }

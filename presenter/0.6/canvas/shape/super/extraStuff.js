@@ -21,3 +21,11 @@ function getCornerPoints(width,height,position,anchor,angle){
 	return points;
 }
 
+function markPoints(points){
+	viewport.strokeStyle = 'rgb(255,0,0)';
+	viewport.lineWidth = 2;
+	for(var a = 0; a < points.length; a++){
+		viewport.beginPath(); viewport.moveTo( points[a][0]-10,points[a][1] );viewport.lineTo( points[a][0]+10,points[a][1] ); viewport.closePath(); viewport.stroke();
+		viewport.beginPath(); viewport.moveTo( points[a][0],points[a][1]-10 );viewport.lineTo( points[a][0],points[a][1]+10 ); viewport.closePath(); viewport.stroke();
+	}
+}
