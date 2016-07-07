@@ -115,7 +115,7 @@ function superShape_rectangle(inputData = {}){
 	}
 	this.mouseout = function(){subShapeList.mouseoutAll();}
 	this.mousedown = function(point){}
-	this.click = function(x,y){}
+	this.click = function(x,y){this.pushToFront();}
 	this.drag = function(point){
 		if(selected){
 			if(lastHover == 0){this.shift(point);}
