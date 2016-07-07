@@ -18,7 +18,7 @@ function drawlist(){
 	this.getObjDrawPosition = function(ID){return index[ID];}
 	this.getAllObjectIDs = function(){var output = [];
 		for(var a = 0; a < list.length; a++){
-			output += list[a].getID();
+			output[a] = list[a].getID();
 		}
 		return output;
 	}
