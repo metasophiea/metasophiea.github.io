@@ -39,6 +39,7 @@ function regularShape_rectangle(inputData = {}){
 	this.getID = function(){return ID;}
 	this.shift = function(point){
 		defined.point = [defined.point[0]+point[0],defined.point[1]+point[1]];
+		updateCalculated();
 	}
 	this.set = function(VariableName,newValue){
 		switch(VariableName){
@@ -60,6 +61,7 @@ function regularShape_rectangle(inputData = {}){
 			case "angle": defined.angle = newValue; break;
 			case 'lineThickness': lineThickness = newValue; if(lineThickness === 0){lineColour = 'rgba(0,0,0,0)';}else{lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')';} break;	
 		}
+		updateCalculated();
 	}
 	this.pushToFront = function(){drawList.foreground.pushToFront(ID);}
 	this.pushToBack = function(){drawList.foreground.pushToBack(ID);}
@@ -82,11 +84,13 @@ function regularShape_rectangle(inputData = {}){
 		return points;
 	}
 
+	function updateCalculated(){
+		var temp  = getPolarFrom(defined.point); temp[1] = temp[1] + origin.angle; temp = getCartesian(temp);
+		calculated = {'point':[origin.point[0]+temp[0],origin.point[1]+temp[1]],'angle':(origin.angle + defined.angle)}	
+	}
+
 // Draw //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	this.draw = function(){
-		var temp  = getPolarFrom(defined.point); temp[1] = temp[1] + origin.angle; temp = getCartesian(temp);
-		calculated = {'point':[origin.point[0]+temp[0],origin.point[1]+temp[1]],'angle':(origin.angle + defined.angle)}
-
 		var realPosition = getRealPoint(calculated.point); var dimention = [getRealLength(width),getRealLength(height)]; 
 		var windowLimits = getViewportElementDimensions();
 		var points = getCornerPoints(dimention[0],dimention[1],realPosition,anchor,calculated.angle);
@@ -98,7 +102,6 @@ function regularShape_rectangle(inputData = {}){
 				else if(points[a][b] > windowLimits[b]){count[b]++;}
 			}
 		}
-
 
 		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){}
 		else{
@@ -106,11 +109,7 @@ function regularShape_rectangle(inputData = {}){
 			basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,IDcolour,IDcolour,getRealLength(lineThickness));
 		}
 	}
-
 	this.draw_withID = function(ID){ID = getColourFromID(ID);
-		var temp  = getPolarFrom(defined.point); temp[1] = temp[1] + origin.angle; temp = getCartesian(temp);
-		calculated = {'point':[origin.point[0]+temp[0],origin.point[1]+temp[1]],'angle':(origin.angle + defined.angle)}
-
 		var realPosition = getRealPoint(calculated.point); var dimention = [getRealLength(width),getRealLength(height)]; 
 		var windowLimits = getViewportElementDimensions();
 		var points = getCornerPoints(dimention[0],dimention[1],realPosition,anchor,calculated.angle);
@@ -123,12 +122,43 @@ function regularShape_rectangle(inputData = {}){
 			}
 		}
 
-
 		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){}
 		else{
 			basicShape_rectangle(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,colour,lineColour,getRealLength(lineThickness));
 			basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,ID,ID,getRealLength(lineThickness));
 		}
+	}
+	this.draw_selectionMatrixOnly = function(){
+		var realPosition = getRealPoint(calculated.point); var dimention = [getRealLength(width),getRealLength(height)]; 
+		var windowLimits = getViewportElementDimensions();
+		var points = getCornerPoints(dimention[0],dimention[1],realPosition,anchor,calculated.angle);
+
+		var count = [0,0]; 
+		for(var a = 0; a < points.length; a++){
+			for(var b = 0; b < points[a].length; b++){			
+				if(points[a][b] < 0){count[b]--;}
+				else if(points[a][b] > windowLimits[b]){count[b]++;}
+			}
+		}
+
+		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){}
+		else{basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,IDcolour,IDcolour,getRealLength(lineThickness));}
+	}
+	this.draw_selectionMatrixOnly_withID = function(ID){ID = getColourFromID(ID);
+		var realPosition = getRealPoint(calculated.point); var dimention = [getRealLength(width),getRealLength(height)]; 
+		var windowLimits = getViewportElementDimensions();
+		var points = getCornerPoints(dimention[0],dimention[1],realPosition,anchor,calculated.angle);
+
+		var count = [0,0]; 
+		for(var a = 0; a < points.length; a++){
+			for(var b = 0; b < points[a].length; b++){			
+				if(points[a][b] < 0){count[b]--;}
+				else if(points[a][b] > windowLimits[b]){count[b]++;}
+			}
+		}
+
+		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){}
+		else{basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,ID,ID,getRealLength(lineThickness));}
 	}
 
 // Mouse Methods /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

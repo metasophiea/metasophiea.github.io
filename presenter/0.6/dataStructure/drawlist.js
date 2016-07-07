@@ -96,5 +96,6 @@ function drawlist(){
 
 	this.render = function(){ for(var a = 0; a < list.length; a++){ list[a].draw(); } }
 	this.render_withID = function(ID){ for(var a = 0; a < list.length; a++){ list[a].draw_withID(ID); } }
-	this.render_selectionMatrix_withID = function(ID){ for(var a = 0; a < list.length; a++){ list[a].draw_selectionMatrix_withID(ID); } }
+	this.render_selectionMatrixOnly = function(){ for(var a = 0; a < list.length; a++){ list[a].draw_selectionMatrixOnly(); } }
+	this.render_selectionMatrixOnly_withID = function(ID){ for(var a = 0; a < list.length; a++){ list[a].draw_selectionMatrixOnly_withID(ID); } }
 }

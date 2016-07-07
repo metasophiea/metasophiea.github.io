@@ -11,7 +11,9 @@ setupMouseInterface();
 
 
 drawList.foreground.add( new regularShape_rectangle({ "initialData":{"position":[0,-500],"anchor":[0,0],"width":10,"height":1000,"angle":0}, "styleData":{"R":0,"G":0,"B":0} }) );	
-drawList.foreground.add( new regularShape_rectangle({ "initialData":{"position":[200,200],"anchor":[0,0],"width":200,"height":200,"angle":0.1}, "styleData":{"R":100,"G":200,"B":100} }) );	
+drawList.foreground.add( new regularShape_rectangle({ "initialData":{"position":[200,200],"anchor":[0,0],"width":200,"height":200,"angle":0.1}, "styleData":{"R":100,"G":100,"B":200} }) );	
 
-drawList.foreground.add( new superShape_rectangle({ "initialData":{"position":[500,200],"anchor":[0,0],"width":200,"height":200,"angle":1}, "styleData":{"R":100,"G":200,"B":100} }) );	
+drawList.foreground.add( new superShape_testRectangle({ "initialData":{"position":[500,200],"anchor":[0,0],"width":200,"height":200,"angle":1}, "styleData":{"R":100,"G":200,"B":100} }) );	
+
+drawList.foreground.add( new superShape_adjustableRectangle({ "initialData":{"position":[0,0],"anchor":[0,0],"width":200,"height":200,"angle":0.5}, "styleData":{"R":200,"G":100,"B":100} }) );	
 

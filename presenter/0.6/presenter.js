@@ -27,7 +27,8 @@
 				presenterRepositoryURL+'canvas/shape/regular/rectangle.js',
 
 				presenterRepositoryURL+'canvas/shape/super/extraStuff.js',
-				presenterRepositoryURL+'canvas/shape/super/rectangle.js'
+				presenterRepositoryURL+'canvas/shape/super/testRectangle.js',
+				presenterRepositoryURL+'canvas/shape/super/adjustableRectangle.js'
 			],[presenterRepositoryURL+'boot.js']		
 		]
 	};
