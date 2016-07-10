@@ -1,4 +1,4 @@
-function regularShape_rectangle(inputData = {}){
+function regularShape_rectangle_hover(inputData = {}){
 // JSON Recieving ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if(inputData.hasOwnProperty('initialData')){var initialData = inputData.initialData;}else{var initialData = {};}
 	if(inputData.hasOwnProperty('styleData')){var styleData = inputData.styleData;}else{var styleData = {};}
@@ -166,13 +166,13 @@ function regularShape_rectangle(inputData = {}){
 	this.unselect = function(){selected = false;}	
 	this.mouseover = function(point){
 		if(!hovering){
-			this.set('R',R*(2.5/2)); this.set('G',G*(2.5/2)); this.set('B',B*(2.5/2));
+			this.set('A',0.5);
 			hovering = true;
 		}
 	}
 	this.mouseout = function(){
 		if(hovering){
-			this.set('R',R*(2/2.5));this.set('G',G*(2/2.5));this.set('B',B*(2/2.5));
+			this.set('A',0);
 			hovering = false;
 		}
 	}

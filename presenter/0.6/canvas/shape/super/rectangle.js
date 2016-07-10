@@ -116,10 +116,12 @@ function superShape_rectangle(inputData = {}){
 	this.mouseout = function(){subShapeList.mouseoutAll();}
 	this.mousedown = function(point){}
 	this.click = function(x,y){this.pushToFront();}
+	this.dragStart = function(){}
 	this.drag = function(point){
 		if(selected){
 			if(lastHover == 0){this.shift(point);}
 			else{subShapeList.getObj(lastHover).drag(getObjectDifference(point,calculated.angle));}
 		}
 	}
+	this.dragEnd = function(){}
 }

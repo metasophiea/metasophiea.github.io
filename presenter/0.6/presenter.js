@@ -25,6 +25,7 @@
 				presenterRepositoryURL+'canvas/shape/basic/image.js',
 
 				presenterRepositoryURL+'canvas/shape/regular/rectangle.js',
+				presenterRepositoryURL+'canvas/shape/regular/rectangle_hover.js',
 
 				presenterRepositoryURL+'canvas/shape/super/extraStuff.js',
 				presenterRepositoryURL+'canvas/shape/super/testRectangle.js',

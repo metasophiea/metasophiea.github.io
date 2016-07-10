@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+
+	<script>
+		function Go(that){
+			var f = new FileReader();
+			f.readAsBinaryString(that.files[0]);
+			f.onloadend = function(){console.log(f.result);end(f.result)}			
+		}
+
+		function end(data){
+			var a = document.createElement('a');
+			var file = new Blob([data]);
+			a.href = URL.createObjectURL(file);
+			a.download = 'test.txt';
+			document.body.appendChild(a);
+			a.click();
+		}
+	</script>
+
+</head>
+
+<body>
+	<input type='file' id='input' onchange="Go(this)">
+</body>
+
+
+</html>

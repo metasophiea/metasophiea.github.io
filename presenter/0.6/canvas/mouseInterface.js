@@ -68,9 +68,10 @@ function mouseInterfaceEvent_Object(ID,event){
 		case "mousemove":
 			if(mouseInterface_Mousedown){
 				removeMouseInterface(); 
+				drawList.foreground.getObj(ID).dragStart();
 				viewportElement.setAttributeNS(null,"onmousemove","drawList.foreground.getObj("+ID+").drag(getViewportDifference([event.movementX,event.movementY]));");
-				viewportElement.setAttributeNS(null,"onmouseout","setupMouseInterface();");
-				viewportElement.setAttributeNS(null,"onmouseup","setupMouseInterface();");
+				viewportElement.setAttributeNS(null,"onmouseout","drawList.foreground.getObj("+ID+").dragEnd();setupMouseInterface();");
+				viewportElement.setAttributeNS(null,"onmouseup","drawList.foreground.getObj("+ID+").dragEnd();setupMouseInterface();");
 			}
 		break;
 	}

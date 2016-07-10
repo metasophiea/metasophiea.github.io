@@ -104,25 +104,22 @@ function superShape_testRectangle(inputData = {}){
 	}	
 	this.mouseover = function(point){
 		var temp = getSubShape(point);
-		//Watch for hovering
-			if(temp == -1){
-				if(lastHover != -1){subShapeList.getObj(lastHover).mouseout();}
-				lastHover = temp;
-			}
-			else if(lastHover != temp){
-				if(lastHover != -1){subShapeList.getObj(lastHover).mouseout();}
-				subShapeList.getObj(temp).mouseover(point);
-				lastHover = temp;
-			}
-			else{subShapeList.getObj(temp).mouseover(point);}
+
+		if(temp == -1 && lastHover == -1){}
+		else if(temp != -1 && lastHover == -1){subShapeList.getObj(temp).mouseover(point);lastHover = temp;}
+		else if(temp == -1 && lastHover != -1){subShapeList.getObj(temp).mouseout();lastHover = temp;}
+		else if(temp != lastHover){subShapeList.getObj(lastHover).mouseout();subShapeList.getObj(temp).mouseover(point);lastHover = temp;}
+		else{subShapeList.getObj(temp).mouseover(point);}		
 	}
 	this.mouseout = function(){subShapeList.mouseoutAll();}
 	this.mousedown = function(point){}
 	this.click = function(x,y){this.pushToFront();}
+	this.dragStart = function(){}
 	this.drag = function(point){
 		if(selected){
 			if(lastHover == 0){this.shift(point);}
 			else{subShapeList.getObj(lastHover).drag(getObjectDifference(point,calculated.angle));}
 		}
 	}
+	this.dragEnd = function(){}
 }

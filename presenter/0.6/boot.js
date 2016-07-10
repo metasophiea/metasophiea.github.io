@@ -15,5 +15,5 @@ drawList.foreground.add( new regularShape_rectangle({ "initialData":{"position":
 
 drawList.foreground.add( new superShape_testRectangle({ "initialData":{"position":[500,200],"anchor":[0,0],"width":200,"height":200,"angle":1}, "styleData":{"R":100,"G":200,"B":100} }) );	
 
-drawList.foreground.add( new superShape_adjustableRectangle({ "initialData":{"position":[0,0],"anchor":[0,0],"width":200,"height":200,"angle":0.5}, "styleData":{"R":200,"G":100,"B":100} }) );	
+drawList.foreground.add( new superShape_adjustableRectangle({ "initialData":{"position":[0,0],"anchor":[1,1],"width":200,"height":200,"angle":0.5}, "styleData":{"R":200,"G":100,"B":100} }) );	
 
