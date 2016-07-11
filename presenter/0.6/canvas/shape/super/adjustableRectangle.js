@@ -39,48 +39,87 @@ function superShape_adjustableRectangle(inputData = {}){
 	var subShapeList = new drawlist();
 	subShapeList.add( new regularShape_rectangle({ "initialData":{'origin':axiom,"position":[0,0],"anchor":[0,0],"width":width,"height":height,"angle":0}, "styleData":styleData }) );	
 
+	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[0,0],"anchor":[0,0],"width":width,"height":height/10,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
+	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[width,0],"anchor":[1,0],"width":width/10,"height":height,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
+	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[width,height],"anchor":[1,1],"width":width,"height":height/10,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
+	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[0,height],"anchor":[0,1],"width":width/10,"height":height,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
+
 	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[0,0],"anchor":[0,0],"width":width/10,"height":height/10,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
 	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[width,0],"anchor":[1,0],"width":width/10,"height":height/10,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
 	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[width,height],"anchor":[1,1],"width":width/10,"height":height/10,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
 	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[0,height],"anchor":[0,1],"width":width/10,"height":height/10,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
 
+	var temp = Math.abs(width); if(Math.abs(height) < temp){temp = Math.abs(height);} temp = temp/3;
+	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[width/2,height/2],"anchor":[0.5,0.5],"width":temp,"height":temp,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
+
 	function updateSubShapes(){
 		subShapeList.getObj(0).set('width',width);subShapeList.getObj(0).set('height',height);
 
+
+		var temp = Math.abs(width); if(Math.abs(height) < temp){temp = Math.abs(height);}
+		subShapeList.getObj(1).set('width',width);subShapeList.getObj(1).set('height',temp/10);
+		subShapeList.getObj(2).set('width',temp/10);subShapeList.getObj(2).set('height',height);
+		subShapeList.getObj(3).set('width',width);subShapeList.getObj(3).set('height',temp/10);
+		subShapeList.getObj(4).set('width',temp/10);subShapeList.getObj(4).set('height',height);
+
 		var temp = width; if(height < temp){temp = height;} temp = temp/10;
-		subShapeList.getObj(1).set('width',temp);subShapeList.getObj(1).set('height',temp);
-		subShapeList.getObj(2).set('width',temp);subShapeList.getObj(2).set('height',temp);
-		subShapeList.getObj(3).set('width',temp);subShapeList.getObj(3).set('height',temp);
-		subShapeList.getObj(4).set('width',temp);subShapeList.getObj(4).set('height',temp);
+		subShapeList.getObj(5).set('width',temp);subShapeList.getObj(5).set('height',temp);
+		subShapeList.getObj(6).set('width',temp);subShapeList.getObj(6).set('height',temp);
+		subShapeList.getObj(7).set('width',temp);subShapeList.getObj(7).set('height',temp);
+		subShapeList.getObj(8).set('width',temp);subShapeList.getObj(8).set('height',temp);
+
+		var temp = Math.abs(width); if(Math.abs(height) < temp){temp = Math.abs(height);} temp = temp/3;
+		subShapeList.getObj(9).set('width',temp);subShapeList.getObj(9).set('height',temp);
 
 		subShapeList.getObj(1).set('position',[0,0]);
 		subShapeList.getObj(2).set('position',[width,0]);
 		subShapeList.getObj(3).set('position',[width,height]);
 		subShapeList.getObj(4).set('position',[0,height]);
+		subShapeList.getObj(5).set('position',[0,0]);
+		subShapeList.getObj(6).set('position',[width,0]);
+		subShapeList.getObj(7).set('position',[width,height]);
+		subShapeList.getObj(8).set('position',[0,height]);
+		subShapeList.getObj(9).set('position',[width/2,height/2]);
 
 		if(width < 0 && height < 0){
-			subShapeList.getObj(1).set('anchor',[0,0]);
-			subShapeList.getObj(2).set('anchor',[1,0]);
-			subShapeList.getObj(3).set('anchor',[1,1]);
-			subShapeList.getObj(4).set('anchor',[0,1]);	
+			subShapeList.getObj(1).set('anchor',[0,1]);
+			subShapeList.getObj(2).set('anchor',[0,0]);
+			subShapeList.getObj(3).set('anchor',[1,0]);
+			subShapeList.getObj(4).set('anchor',[1,1]);	
+			subShapeList.getObj(5).set('anchor',[0,0]);
+			subShapeList.getObj(6).set('anchor',[1,0]);
+			subShapeList.getObj(7).set('anchor',[1,1]);
+			subShapeList.getObj(8).set('anchor',[0,1]);	
 		}
 		else if(width < 0){
-			subShapeList.getObj(1).set('anchor',[0,1]);
-			subShapeList.getObj(2).set('anchor',[1,1]);
-			subShapeList.getObj(3).set('anchor',[1,0]);
-			subShapeList.getObj(4).set('anchor',[0,0]);		
+			subShapeList.getObj(1).set('anchor',[0,0]);
+			subShapeList.getObj(2).set('anchor',[0,0]);
+			subShapeList.getObj(3).set('anchor',[1,1]);
+			subShapeList.getObj(4).set('anchor',[1,1]);
+			subShapeList.getObj(5).set('anchor',[0,1]);
+			subShapeList.getObj(6).set('anchor',[1,1]);
+			subShapeList.getObj(7).set('anchor',[1,0]);
+			subShapeList.getObj(8).set('anchor',[0,0]);		
 		}
 		else if(height < 0){
-			subShapeList.getObj(1).set('anchor',[1,0]);
-			subShapeList.getObj(2).set('anchor',[0,0]);
-			subShapeList.getObj(3).set('anchor',[0,1]);
-			subShapeList.getObj(4).set('anchor',[1,1]);
+			subShapeList.getObj(1).set('anchor',[0,1]);
+			subShapeList.getObj(2).set('anchor',[1,0]);
+			subShapeList.getObj(3).set('anchor',[1,0]);
+			subShapeList.getObj(4).set('anchor',[0,1]);
+			subShapeList.getObj(5).set('anchor',[1,0]);
+			subShapeList.getObj(6).set('anchor',[0,0]);
+			subShapeList.getObj(7).set('anchor',[0,1]);
+			subShapeList.getObj(8).set('anchor',[1,1]);
 		}
 		else{
 			subShapeList.getObj(1).set('anchor',[0,0]);
 			subShapeList.getObj(2).set('anchor',[1,0]);
 			subShapeList.getObj(3).set('anchor',[1,1]);
-			subShapeList.getObj(4).set('anchor',[0,1]);
+			subShapeList.getObj(4).set('anchor',[0,1]);	
+			subShapeList.getObj(5).set('anchor',[0,0]);
+			subShapeList.getObj(6).set('anchor',[1,0]);
+			subShapeList.getObj(7).set('anchor',[1,1]);
+			subShapeList.getObj(8).set('anchor',[0,1]);
 		}
 	}
 
@@ -126,8 +165,6 @@ function superShape_adjustableRectangle(inputData = {}){
 	}
 
 	function updateMath(){
-		if(width < 0){console.log('-width');}
-
 		calculated = {'point':[origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]],'angle':(origin.angle + defined.angle)};
 		axiom = {'point':getTopLeftPoint(width,height,calculated.point,anchor,calculated.angle),'angle':calculated.angle};
 		subShapeList.updateOrigin(axiom);
@@ -177,14 +214,27 @@ function superShape_adjustableRectangle(inputData = {}){
 		if(selected){
 			if(lastHover == 0){this.shift(point);}
 			else{
+				var tempWidth = width; var tempHeight = height;
 				switch(lastHover){
 					case 1:
+						var y_diff = point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle);
+						this.shift([y_diff*Math.sin(calculated.angle),y_diff*Math.cos(calculated.angle)]);
+						height = height - y_diff;
+					break;
+					case 2: width = width + point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); break;
+					case 3: height = height + point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle); break;
+					case 4:
+						var x_diff = point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
+						this.shift([x_diff*Math.cos(calculated.angle),-x_diff*Math.sin(calculated.angle)]);
+						width = width - x_diff; 
+					break;
+					case 5:
 						this.shift([point[0],point[1]]);
 
 						height = height - (point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle)); 
 						width = width - (point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle));
 					break;
-					case 2: 
+					case 6: 
 						var y_diff = point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle);
 
 						this.shift([y_diff*Math.sin(calculated.angle),y_diff*Math.cos(calculated.angle)]);
@@ -192,11 +242,11 @@ function superShape_adjustableRectangle(inputData = {}){
 						height = height - y_diff; 
 						width = width + point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
 					break;
-					case 3: 
+					case 7: 
 						height = height + point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle);
 						width = width + point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
 					break;
-					case 4:
+					case 8:
 						var x_diff = point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
 
 						this.shift([x_diff*Math.cos(calculated.angle),-x_diff*Math.sin(calculated.angle)]);
@@ -204,15 +254,16 @@ function superShape_adjustableRectangle(inputData = {}){
 						height = height + point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle); 
 						width = width - x_diff; 
 					break;
+					case 9:
+						defined.angle += point[1]/150; updateMath();
+					break;
 				}
 				updateSubShapes();
 			}
 		}
 	}
 	this.dragEnd = function(){	
-	//	console.log(defined.point +'|'+ temp_position);
 		defined.point = getCornerPoint(3,width,height,defined.point,anchor,defined.angle);
-		//defined.point = temp_position;
 		anchor = temp_anchor;
 	}
 }
