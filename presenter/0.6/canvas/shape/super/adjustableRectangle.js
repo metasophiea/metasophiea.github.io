@@ -86,7 +86,7 @@ function superShape_adjustableRectangle(inputData = {}){
 
 // Methods ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Public
-	this.WhatAreYou = function(){return 'superShape_testRectangle - '+ID;}
+	this.WhatAreYou = function(){return 'superShape_adjustableRectangle - '+ID;}
 	this.getID = function(){return ID;}
 	this.shift = function(point){
 		defined.point = [defined.point[0]+point[0],defined.point[1]+point[1]];
