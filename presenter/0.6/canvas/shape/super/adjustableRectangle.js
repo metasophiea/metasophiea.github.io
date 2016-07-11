@@ -211,7 +211,8 @@ function superShape_adjustableRectangle(inputData = {}){
 	}
 	this.dragEnd = function(){	
 	//	console.log(defined.point +'|'+ temp_position);
-		defined.point = temp_position;
+		defined.point = getCornerPoint(4,width,height,defined.point,anchor,defined.angle);
+		//defined.point = temp_position;
 		anchor = temp_anchor;
 	}
 }
