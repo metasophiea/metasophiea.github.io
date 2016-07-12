@@ -255,6 +255,8 @@ function superShape_adjustableRectangle(inputData = {}){
 						width = width - x_diff; 
 					break;
 					case 9:
+						defined.point = temp_position;
+						anchor = temp_anchor;
 						defined.angle += point[1]/150; updateMath();
 					break;
 				}
