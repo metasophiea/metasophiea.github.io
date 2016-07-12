@@ -1,5 +1,5 @@
 function basicShape_image(canvas,width,height,position,anchor,angle,URL){
-	var img = new Image(); img.src = URL; console.log(img);
+	var img = new Image(); img.src = URL;
 
 	canvas.save();
 	canvas.translate(position[0],position[1]);

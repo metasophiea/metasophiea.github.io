@@ -1,4 +1,4 @@
-function superShape_adjustableRectangle(inputData = {}){
+function superShape_adjustableImage(inputData = {}){
 // JSON Recieving ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	if(inputData.hasOwnProperty('initialData')){var initialData = inputData.initialData;}else{var initialData = {};}
 	if(inputData.hasOwnProperty('styleData')){var styleData = inputData.styleData;}else{var styleData = {};}
@@ -10,12 +10,15 @@ function superShape_adjustableRectangle(inputData = {}){
 	var calculated = {'point':[0,0],'angle':0};
 	var temp_anchor = anchor; temp_position = defined.point;
 
+	var URL = 'https://upload.wikimedia.org/wikipedia/en/d/d0/Myst-library_and_ship.jpg';
+
 	if(initialData.hasOwnProperty('origin')){origin = initialData.origin;}
 	if(initialData.hasOwnProperty('position')){defined.point = initialData.position;}
 	if(initialData.hasOwnProperty('width')){width = initialData.width;}
 	if(initialData.hasOwnProperty('height')){height = initialData.height;}
 	if(initialData.hasOwnProperty('anchor')){anchor = initialData.anchor;}
 	if(initialData.hasOwnProperty('angle')){defined.angle = initialData.angle;}
+	if(initialData.hasOwnProperty('URL')){URL = initialData.URL;}
 	calculated = {'point':[origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]],'angle':(origin.angle + defined.angle)};
 	axiom = {'point':getTopLeftPoint(width,height,calculated.point,anchor,calculated.angle),'angle':calculated.angle};
 
@@ -37,7 +40,7 @@ function superShape_adjustableRectangle(inputData = {}){
 		else{var lineThickness = styleData.lineThickness;}
 // SubShapes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var subShapeList = new drawlist();
-	subShapeList.add( new regularShape_rectangle({ "initialData":{'origin':axiom,"position":[0,0],"anchor":[0,0],"width":width,"height":height,"angle":0}, "styleData":styleData }) );	
+	subShapeList.add( new regularShape_image({ "initialData":{'origin':axiom,"position":[0,0],"anchor":[0,0],"width":width,"height":height,"angle":0}, "styleData":{'URL':URL} }) );	
 
 	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[0,0],"anchor":[0,0],"width":width,"height":height/10,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
 	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[width,0],"anchor":[1,0],"width":width/10,"height":height,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
@@ -125,7 +128,7 @@ function superShape_adjustableRectangle(inputData = {}){
 
 // Methods ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Public
-	this.WhatAreYou = function(){return 'superShape_adjustableRectangle - '+ID;}
+	this.WhatAreYou = function(){return 'superShape_adjustableImage - '+ID;}
 	this.getID = function(){return ID;}
 	this.shift = function(point){
 		defined.point = [defined.point[0]+point[0],defined.point[1]+point[1]];
