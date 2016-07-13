@@ -3,3 +3,10 @@
 - 'numberList.js' needs name work, and .find should be more efficient
 - text kinda jiggling during smooth zoom
 
+
+
+- create regularText object
+- create keyboard interface
+- create creation and editing menus
+- work on automovement scripting system, and integration with keyboard and menus
+- wirk on upload
