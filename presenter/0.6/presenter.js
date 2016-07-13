@@ -5,6 +5,9 @@
 		'JS':[
 			[	'http://metasophiea.com/code/js/math/geometry.js',
 				'http://metasophiea.com/code/js/math/numberProgression.js',
+
+				presenterRepositoryURL+'loadsave.js',
+
 				presenterRepositoryURL+'canvas/canvasElement.js',
 				presenterRepositoryURL+'canvas/render.js',
 				presenterRepositoryURL+'canvas/mouseInterface.js',

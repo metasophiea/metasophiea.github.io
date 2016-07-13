@@ -55,7 +55,6 @@ function superShape_adjustableRectangle(inputData = {}){
 	function updateSubShapes(){
 		subShapeList.getObj(0).set('width',width);subShapeList.getObj(0).set('height',height);
 
-
 		var temp = Math.abs(width); if(Math.abs(height) < temp){temp = Math.abs(height);}
 		subShapeList.getObj(1).set('width',width);subShapeList.getObj(1).set('height',temp/10);
 		subShapeList.getObj(2).set('width',temp/10);subShapeList.getObj(2).set('height',height);
@@ -157,6 +156,14 @@ function superShape_adjustableRectangle(inputData = {}){
 	this.pushToBack = function(){drawList.foreground.pushToBack(ID);}
 	this.pushForward = function(){drawList.foreground.pushForward(ID);}
 	this.pushBackward = function(){drawList.foreground.pushBackward(ID);}
+
+	this.getData = function(){
+		return {
+			'type':'superShape_adjustableRectangle',
+			'initialData':{'position':defined.point,'anchor':anchor,'width':width,'height':height,'angle':defined.angle},
+			'styleData':{'R':R,'G':G,'B':B,'A':A,'line_R':line_R,'line_G':line_G,'line_B':line_B,'line_A':line_A,'lineThickness':lineThickness}
+		};
+	}
 
 	function getSubShape(point){
 		subShapeList.render_selectionMatrixOnly(); var temp = getIDFromPoint(point[0],point[1]); render();

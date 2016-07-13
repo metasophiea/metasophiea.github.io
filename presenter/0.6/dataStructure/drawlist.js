@@ -22,6 +22,13 @@ function drawlist(){
 		}
 		return output;
 	}
+	this.getAllData = function(){
+		var output = [];
+		for(var a = 0; a < list.length; a++){ 
+			output.push(list[a].getData()); 
+		} 
+		return output;
+	}
 
 	this.updateOrigin = function(newOrigin){ 
 		for(var a = 0; a < list.length; a++){ 

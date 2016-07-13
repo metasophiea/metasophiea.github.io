@@ -18,26 +18,11 @@ function superShape_adjustableImage(inputData = {}){
 	if(initialData.hasOwnProperty('height')){height = initialData.height;}
 	if(initialData.hasOwnProperty('anchor')){anchor = initialData.anchor;}
 	if(initialData.hasOwnProperty('angle')){defined.angle = initialData.angle;}
-	if(initialData.hasOwnProperty('URL')){URL = initialData.URL;}
 	calculated = {'point':[origin.point[0]+defined.point[0],origin.point[1]+defined.point[1]],'angle':(origin.angle + defined.angle)};
 	axiom = {'point':getTopLeftPoint(width,height,calculated.point,anchor,calculated.angle),'angle':calculated.angle};
 
-	//Style
-		//Main colour
-		if(styleData.hasOwnProperty('R')){var R = styleData.R;}else{var R = 0;}
-		if(styleData.hasOwnProperty('G')){var G = styleData.G;}else{var G = 0;}
-		if(styleData.hasOwnProperty('B')){var B = styleData.B;}else{var B = 0;}
-		if(styleData.hasOwnProperty('A')){var A = styleData.A;}else{var A = 1;}
-		var colour = 'rgba('+R+','+G+','+B+','+A+')';
-		//Outline colour
-		if(styleData.hasOwnProperty('line_R')){var line_R = styleData.line_R;}else{var line_R = 0;}
-		if(styleData.hasOwnProperty('line_G')){var line_G = styleData.line_R;}else{var line_G = 0;}
-		if(styleData.hasOwnProperty('line_B')){var line_B = styleData.line_R;}else{var line_B = 0;}
-		if(styleData.hasOwnProperty('line_A')){var line_A = styleData.line_A;}else{var line_A = 0;}
-		var lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')';
-		//Outline thickness
-		if(styleData.lineThickness === 0 || !styleData.hasOwnProperty('lineThickness')){ var lineColour = 'rgba(0,0,0,0)'; var lineThickness = 0;}
-		else{var lineThickness = styleData.lineThickness;}
+	if(styleData.hasOwnProperty('URL')){URL = styleData.URL;}
+
 // SubShapes /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var subShapeList = new drawlist();
 	subShapeList.add( new regularShape_image({ "initialData":{'origin':axiom,"position":[0,0],"anchor":[0,0],"width":width,"height":height,"angle":0}, "styleData":{'URL':URL} }) );	
@@ -138,21 +123,12 @@ function superShape_adjustableImage(inputData = {}){
 		switch(VariableName){
 			case "ID": ID = newValue; IDcolour = getColourFromID(ID); break;
 			case 'Z': Z = newValue; break;
-			case 'R': R = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
-			case 'G': G = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
-			case 'B': B = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
-			case 'A': A = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
-			case 'line_R': line_R = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_G': line_G = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_B': line_B = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_A': line_A = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
 			case 'origin': origin = newValue; break;
 			case "position": defined.point = newValue; break;
 			case "height": height = newValue; break;
 			case "width": width = newValue; break;
 			case "anchor": anchor = newValue; break;
 			case "angle": defined.angle = newValue; break;
-			case 'lineThickness': lineThickness = newValue; if(lineThickness === 0){lineColour = 'rgba(0,0,0,0)';}else{lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')';} break;	
 		}
 		updateMath();
 	}
@@ -160,6 +136,14 @@ function superShape_adjustableImage(inputData = {}){
 	this.pushToBack = function(){drawList.foreground.pushToBack(ID);}
 	this.pushForward = function(){drawList.foreground.pushForward(ID);}
 	this.pushBackward = function(){drawList.foreground.pushBackward(ID);}
+
+	this.getData = function(){
+		return {
+			'type':'superShape_adjustableImage',
+			'initialData':{'position':defined.point,'anchor':anchor,'width':width,'height':height,'angle':defined.angle},
+			'styleData':{'URL':URL}
+		};
+	}
 
 	function getSubShape(point){
 		subShapeList.render_selectionMatrixOnly(); var temp = getIDFromPoint(point[0],point[1]); render();
@@ -180,13 +164,15 @@ function superShape_adjustableImage(inputData = {}){
 	this.draw_selectionMatrixOnly_withID = function(ID){ subShapeList.render_selectionMatrixOnly_withID(ID); }
 // Mouse Methods /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	this.select = function(point){
-		if(!selected){this.set('A',A*(2/3));  selected = true;}
+		if(!selected){ 
+			selected = true;
+		}
 		var temp = getSubShape(point);
 		subShapeList.getObj(temp).select();
 	}
 	this.unselect = function(){
 		if(selected){
-			this.set('A',A*(3/2)); selected = false;
+			selected = false;
 			subShapeList.unselectAll();
 		}
 	}	
@@ -209,7 +195,7 @@ function superShape_adjustableImage(inputData = {}){
 	this.mouseout = function(){subShapeList.mouseoutAll();}
 	this.mousedown = function(point){}
 	this.click = function(x,y){this.pushToFront();}
-	this.dragStart = function(){
+	this.dragStart = function(){updateMath();
 		temp_position = defined.point; temp_anchor = anchor; 
 		defined.point = getTopLeftPoint(width,height,calculated.point,anchor,calculated.angle); anchor = [0,0];
 	}
@@ -276,3 +262,4 @@ function superShape_adjustableImage(inputData = {}){
 		anchor = temp_anchor;
 	}
 }
+
