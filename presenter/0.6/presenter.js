@@ -1,5 +1,5 @@
 //Included Files
-	var presenterRepositoryURL ='fhttp://metasophiea.com/presenter/0.6/';
+	var presenterRepositoryURL ='http://metasophiea.com/presenter/0.6/';
 	var includeFiles = {
 		'CSS':[],
 		'JS':[
