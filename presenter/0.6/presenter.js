@@ -1,16 +1,18 @@
 //Included Files
-	var presenterRepositoryURL ='http://metasophiea.com/presenter/0.6/';
+	var presenterRepositoryURL ='fhttp://metasophiea.com/presenter/0.6/';
 	var includeFiles = {
 		'CSS':[],
 		'JS':[
 			[	'http://metasophiea.com/code/js/math/geometry.js',
 				'http://metasophiea.com/code/js/math/numberProgression.js',
-
-				presenterRepositoryURL+'loadsave.js',
+				'http://metasophiea.com/code/js/io/loadsave.js',
 
 				presenterRepositoryURL+'canvas/canvasElement.js',
 				presenterRepositoryURL+'canvas/render.js',
-				presenterRepositoryURL+'canvas/mouseInterface.js',
+
+				presenterRepositoryURL+'canvas/interface/loadsave.js',
+				presenterRepositoryURL+'canvas/interface/mouseInterface.js',
+				presenterRepositoryURL+'canvas/interface/keyboardInterface.js',
 
 				presenterRepositoryURL+'dataStructure/drawlist.js',
 				presenterRepositoryURL+'dataStructure/numberlist.js',

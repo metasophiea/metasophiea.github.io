@@ -72,6 +72,14 @@ function regularShape_image(inputData = {}){
 	this.pushForward = function(){drawList.foreground.pushForward(ID);}
 	this.pushBackward = function(){drawList.foreground.pushBackward(ID);}
 
+	this.getData = function(){
+		return {
+			'type':'regularShape_Image',
+			'initialData':{'position':defined.point,'anchor':anchor,'width':width,'height':height,'angle':defined.angle},
+			'styleData':{'URL':URL}
+		};
+	}
+
 //Private
 	function getCornerPoints(width,height,position,anchor,angle){
 		var left = (anchor[0]*width); var down = (anchor[1]*height); var right = ((1-anchor[0])*width); var up = ((1-anchor[1])*height);

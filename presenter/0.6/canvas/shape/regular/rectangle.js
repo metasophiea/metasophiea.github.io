@@ -68,6 +68,14 @@ function regularShape_rectangle(inputData = {}){
 	this.pushForward = function(){drawList.foreground.pushForward(ID);}
 	this.pushBackward = function(){drawList.foreground.pushBackward(ID);}
 
+	this.getData = function(){
+		return {
+			'type':'regularShape_Rectangle',
+			'initialData':{'position':defined.point,'anchor':anchor,'width':width,'height':height,'angle':defined.angle},
+			'styleData':{'R':R,'G':G,'B':B,'A':A,'line_R':line_R,'line_G':line_G,'line_B':line_B,'line_A':line_A,'lineThickness':lineThickness}
+		};
+	}
+
 //Private
 	function getCornerPoints(width,height,position,anchor,angle){
 		var left = (anchor[0]*width); var down = (anchor[1]*height); var right = ((1-anchor[0])*width); var up = ((1-anchor[1])*height);

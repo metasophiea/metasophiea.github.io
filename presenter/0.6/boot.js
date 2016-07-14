@@ -7,7 +7,7 @@ mouseInterface_Hover = -1;
 
 adjustViewportElementToFill();
 constantRenderInterval = setInterval(function(){ render(); },1000/refreshesPerSecond);
-setupMouseInterface();
+setupMouseInterface(); setupKeyboardInterface();
 
 
 drawList.background.add( new regularShape_rectangle({ "initialData":{"position":[0,-500],"anchor":[0,0],"width":10,"height":1000,"angle":0}, "styleData":{"R":0,"G":0,"B":0} }) );	

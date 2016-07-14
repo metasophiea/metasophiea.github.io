@@ -68,7 +68,7 @@ function drawlist(){
 		this.refreshIndex();
 	}
 	this.removeByID = function(ID){ this.remove(index[ID]); }
-
+	this.removeAll = function(){list = []; index = [];}
 
 	this.swap = function(position1,position2){
 		var temp = list[position1];

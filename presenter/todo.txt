@@ -9,4 +9,3 @@
 - create keyboard interface
 - create creation and editing menus
 - work on automovement scripting system, and integration with keyboard and menus
-- wirk on upload
