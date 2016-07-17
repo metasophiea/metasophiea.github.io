@@ -139,7 +139,7 @@ function superShape_adjustableImage(inputData = {}){
 
 	this.getData = function(){
 		return {
-			'type':'superShape_adjustableImage',
+			'type':'superShape_adjustableImage','name':'Image',
 			'initialData':{'position':defined.point,'anchor':anchor,'width':width,'height':height,'angle':defined.angle},
 			'styleData':{'URL':URL}
 		};
@@ -209,19 +209,31 @@ function superShape_adjustableImage(inputData = {}){
 						var y_diff = point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle);
 						this.shift([y_diff*Math.sin(calculated.angle),y_diff*Math.cos(calculated.angle)]);
 						height = height - y_diff;
+						if(height < 0){height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 3; subShapeList.getObj(lastHover).mouseover(point);}
 					break;
-					case 2: width = width + point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); break;
-					case 3: height = height + point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle); break;
+					case 2: 
+						width = width + point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
+						if(width < 0){width = -width; subShapeList.getObj(lastHover).mouseout(); lastHover = 4; subShapeList.getObj(lastHover).mouseover(point);}
+					break;
+					case 3: 
+						height = height + point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle); 
+						if(height < 0){height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 1; subShapeList.getObj(lastHover).mouseover(point);}
+					break;
 					case 4:
 						var x_diff = point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
 						this.shift([x_diff*Math.cos(calculated.angle),-x_diff*Math.sin(calculated.angle)]);
-						width = width - x_diff; 
+						width = width - x_diff; 						
+						if(width < 0){width = -width; subShapeList.getObj(lastHover).mouseout(); lastHover = 2; subShapeList.getObj(lastHover).mouseover(point);}
 					break;
 					case 5:
 						this.shift([point[0],point[1]]);
 
 						height = height - (point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle)); 
 						width = width - (point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle));
+
+						if(height < 0){height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 8; subShapeList.getObj(lastHover).mouseover(point);}
+						else if(width < 0){width = -width; subShapeList.getObj(lastHover).mouseout(); lastHover = 6; subShapeList.getObj(lastHover).mouseover(point);}
+						else if(width < 0 && height < 0){width = -width; height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 7; subShapeList.getObj(lastHover).mouseover(point);}
 					break;
 					case 6: 
 						var y_diff = point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle);
@@ -230,10 +242,18 @@ function superShape_adjustableImage(inputData = {}){
 
 						height = height - y_diff; 
 						width = width + point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
+
+						if(height < 0){height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 7; subShapeList.getObj(lastHover).mouseover(point);}
+						else if(width < 0){width = -width; subShapeList.getObj(lastHover).mouseout(); lastHover = 5; subShapeList.getObj(lastHover).mouseover(point);}
+						else if(width < 0 && height < 0){width = -width; height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 8; subShapeList.getObj(lastHover).mouseover(point);}
 					break;
 					case 7: 
 						height = height + point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle);
 						width = width + point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
+
+						if(height < 0){height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 6; subShapeList.getObj(lastHover).mouseover(point);}
+						else if(width < 0){width = -width; subShapeList.getObj(lastHover).mouseout(); lastHover = 8; subShapeList.getObj(lastHover).mouseover(point);}
+						else if(width < 0 && height < 0){width = -width; height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 5; subShapeList.getObj(lastHover).mouseover(point);}
 					break;
 					case 8:
 						var x_diff = point[0]*Math.cos(calculated.angle) - point[1]*Math.sin(calculated.angle); 
@@ -242,6 +262,10 @@ function superShape_adjustableImage(inputData = {}){
 
 						height = height + point[1]*Math.cos(calculated.angle) + point[0]*Math.sin(calculated.angle); 
 						width = width - x_diff; 
+
+						if(height < 0){height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 5; subShapeList.getObj(lastHover).mouseover(point);}
+						else if(width < 0){width = -width; subShapeList.getObj(lastHover).mouseout(); lastHover = 7; subShapeList.getObj(lastHover).mouseover(point);}
+						else if(width < 0 && height < 0){width = -width; height = -height; subShapeList.getObj(lastHover).mouseout(); lastHover = 6; subShapeList.getObj(lastHover).mouseover(point);}
 					break;
 					case 9:
 						defined.point = temp_position;
@@ -254,6 +278,8 @@ function superShape_adjustableImage(inputData = {}){
 		}
 	}
 	this.dragEnd = function(){	
+		if(width < 0){width = -width;}
+
 		if(defined.point != temp_position){
 			var point = getPolarFrom([width*temp_anchor[0],height*temp_anchor[1]]);
 			point[1] += defined.angle; point = getCartesian(point);

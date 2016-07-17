@@ -42,3 +42,5 @@ function createPathTo(position,data={}){
 		activeViewportMovementScript.angle.push(producedArray.angle[a]);
 	}
 }
+
+function getPositionHere(){return {'position':getViewportPoint([0.5,0.5]), 'zoom':view.zoom.index, 'angle':view.angle};}

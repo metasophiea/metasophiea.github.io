@@ -43,5 +43,9 @@ function createPathTo(position,data={}){
 	}
 }
 
+function getPointHere(){
+	return {'position':[0,0], 'zoom':view.zoom, 'angle':1};
+}
+
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
-BootCount++; console.log("./canvas/viewportControl/autoViewportControl.js");
+console.log("-> ./canvas/viewportControl/autoViewportControl.js loaded"); BootCount++;

@@ -16,6 +16,10 @@ function getViewportPoint(fractionPoint){
 	var polar = getPolarFrom(redCross); polar[1] = polar[1] - view.angle;
 	return getCartesian(polar);
 }
+function getViewportPoint_fromPoint(point){
+	return getViewportPoint([point[0]/viewportElement.width,point[1]/viewportElement.height]);
+}
+
 function getRealLength(length){return length*view.zoom.value;}
 function getRealPoint(point){
 	var polar = getPolarFrom(point); polar[1] = polar[1] + view.angle;

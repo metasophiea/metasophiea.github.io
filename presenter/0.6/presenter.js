@@ -1,18 +1,26 @@
 //Included Files
 	var presenterRepositoryURL ='http://metasophiea.com/presenter/0.6/';
 	var includeFiles = {
-		'CSS':[],
+		'CSS':[
+			presenterRepositoryURL+'css/menu/default.css'
+		],
 		'JS':[
-			[	'http://metasophiea.com/code/js/math/geometry.js',
+			[	
+				'http://metasophiea.com/code/js/math/geometry.js',
 				'http://metasophiea.com/code/js/math/numberProgression.js',
 				'http://metasophiea.com/code/js/io/loadsave.js',
+
+				presenterRepositoryURL+'menu/start.js',
+				presenterRepositoryURL+'menu/windowMotion.js',
+				presenterRepositoryURL+'menu/parts/basic.js',
 
 				presenterRepositoryURL+'canvas/canvasElement.js',
 				presenterRepositoryURL+'canvas/render.js',
 
-				presenterRepositoryURL+'canvas/interface/loadsave.js',
+				presenterRepositoryURL+'canvas/interface/file.js',
 				presenterRepositoryURL+'canvas/interface/mouseInterface.js',
 				presenterRepositoryURL+'canvas/interface/keyboardInterface.js',
+				presenterRepositoryURL+'canvas/interface/automoveScript.js',
 
 				presenterRepositoryURL+'dataStructure/drawlist.js',
 				presenterRepositoryURL+'dataStructure/numberlist.js',
@@ -28,15 +36,14 @@
 				presenterRepositoryURL+'canvas/shape/basic/square.js',
 				presenterRepositoryURL+'canvas/shape/basic/character.js',
 				presenterRepositoryURL+'canvas/shape/basic/image.js',
-
 				presenterRepositoryURL+'canvas/shape/regular/rectangle.js',
 				presenterRepositoryURL+'canvas/shape/regular/rectangle_hover.js',
 				presenterRepositoryURL+'canvas/shape/regular/image.js',
-
 				presenterRepositoryURL+'canvas/shape/super/extraStuff.js',
 				presenterRepositoryURL+'canvas/shape/super/testRectangle.js',
 				presenterRepositoryURL+'canvas/shape/super/adjustableImage.js',
-				presenterRepositoryURL+'canvas/shape/super/adjustableRectangle.js'
+				presenterRepositoryURL+'canvas/shape/super/adjustableRectangle.js',
+				presenterRepositoryURL+'canvas/shape/mouseInterface_draw/rectangle.js'
 			],[presenterRepositoryURL+'boot.js']		
 		]
 	};
@@ -52,6 +59,10 @@
 	var drawList = {};
 //View Controls
 	var view = {'position':[0,0], 'angle':0, 'zoom':{'index':0, 'value':1}};
+//Auto Movement
+	var activeViewportMovementRefreshesPerSecond = refreshesPerSecond; var activeAutoViewportControlInterval;
+	var activeViewportMovementScript = {"position":[], "angle":[], "zoom":[] };	
+	var automoveScript = []; var automoveScript_step = -1;
 
 //Tool
 	var tool = {'drag':'pan'};
@@ -77,10 +88,17 @@ function Presenter_Start(){
 	containerElement.appendChild(viewportElement); containerElement.appendChild(selectionMatrixElement);
 	document.body.setAttribute("onresize","adjustViewportElementToFill();");
 
-//get, getJS.js script, and then load the files with it
+//get getJS.js script, and then load the files with it
 	var temp = document.createElement('script');
 	temp.type = 'text/javascript'; 
 	temp.src = 'http://metasophiea.com/code/js/liveEdit/getJS.js';
 	temp.setAttribute('onLoad','getJS(includeFiles.JS);');
 	document.head.appendChild(temp);	
+
+//get getCSS.js script, and then load the files with it
+	var temp = document.createElement('script');
+	temp.type = 'text/javascript'; 
+	temp.src = 'http://metasophiea.com/code/js/liveEdit/getCSS.js';
+	temp.setAttribute('onLoad','getCSS(includeFiles.CSS);');
+	document.head.appendChild(temp);
 }

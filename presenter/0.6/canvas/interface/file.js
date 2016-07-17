@@ -1,3 +1,10 @@
+function newScene(){
+	var i = Object.keys(drawList);
+	for(var a = 0; a < i.length; a++){
+		drawList[i[a]].removeAll();
+	}
+}
+
 function downloadScene(title){
 	var output = {
 		'foreground':drawList.foreground.getAllData(),

@@ -9,24 +9,26 @@ function setupKeyboardInterface(){
 	removeKeyboardInterface();
 	document.body.setAttribute("onkeypress","keyboardInterfaceEvent(event);");
 
-	keyBindings = {'32':function(){console.log('spaceman');}};
+	keyBindings = {'32':"console.log('spaceman');console.log('walk');"};
 }
+
+
+
 
 
 
 
 function keyboardInterfaceEvent(event){
 	console.log(event.charCode +'|'+ String.fromCharCode(event.charCode));
-	keyBindings[event.charCode]();
+	eval(keyBindings[event.charCode]);
 }
 
+function showKey(keyCode){
+	console.log(keyBindings[keyCode].split(';'));
+}
 
 function addToKey(keyCode,CB){
-	console.log(keyBindings[keyCode]);
-
 	keyBindings[keyCode] += CB;
+}
 
-	console.log(keyBindings[keyCode]);
-}
-function clearKey(keyCode,CB){
-}
+function clearKey(keyCode){delete keyBindings[keyCode];}
