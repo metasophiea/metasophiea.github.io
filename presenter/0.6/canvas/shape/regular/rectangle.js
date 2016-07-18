@@ -49,10 +49,10 @@ function regularShape_rectangle(inputData = {}){
 			case 'G': G = parseInt(newValue); colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
 			case 'B': B = parseInt(newValue); colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
 			case 'A': A = newValue; colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
-			case 'line_R': line_R = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_G': line_G = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_B': line_B = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_A': line_A = newValue; colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
+			case 'line_R': line_R = newValue; lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
+			case 'line_G': line_G = newValue; lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
+			case 'line_B': line_B = newValue; lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
+			case 'line_A': line_A = newValue; lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
 			case 'origin': origin = newValue; break;
 			case "position": defined.point = newValue; break;
 			case "height": height = newValue; break;

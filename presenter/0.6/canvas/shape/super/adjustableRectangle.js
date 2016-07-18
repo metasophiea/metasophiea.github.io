@@ -138,19 +138,21 @@ function superShape_adjustableRectangle(inputData = {}){
 			case 'G': G = newValue; subShapeList.getObj(0).set(VariableName,newValue); colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
 			case 'B': B = newValue; subShapeList.getObj(0).set(VariableName,newValue); colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
 			case 'A': A = newValue; subShapeList.getObj(0).set(VariableName,newValue); colour = 'rgba('+R+','+G+','+B+','+A+')'; break;
-			case 'line_R': line_R = newValue; subShapeList.getObj(0).set(VariableName,newValue); colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_G': line_G = newValue; subShapeList.getObj(0).set(VariableName,newValue); colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_B': line_B = newValue; subShapeList.getObj(0).set(VariableName,newValue); colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
-			case 'line_A': line_A = newValue; subShapeList.getObj(0).set(VariableName,newValue); colour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
+			case 'line_R': line_R = newValue; subShapeList.getObj(0).set(VariableName,newValue); lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
+			case 'line_G': line_G = newValue; subShapeList.getObj(0).set(VariableName,newValue); lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
+			case 'line_B': line_B = newValue; subShapeList.getObj(0).set(VariableName,newValue); lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
+			case 'line_A': line_A = newValue; subShapeList.getObj(0).set(VariableName,newValue); lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')'; break;
 			case 'origin': origin = newValue; break;
 			case "position": defined.point = newValue; break;
-			case "height": height = parseInt(newValue); updateSubShapes(); break;
-			case "width": width = parseInt(newValue); updateSubShapes(); break;
+			case "position_x": defined.point[0] = parseInt(newValue); break;
+			case "position_y": defined.point[1] = parseInt(newValue); break;
+			case "height": height = parseInt(newValue); break;
+			case "width": width = parseInt(newValue); break;
 			case "anchor": anchor = newValue; break;
-			case "angle": defined.angle = newValue; break;
+			case "angle": defined.angle = parseInt(newValue); break;
 			case 'lineThickness': lineThickness = newValue;  subShapeList.getObj(0).set(VariableName,newValue); if(lineThickness === 0){lineColour = 'rgba(0,0,0,0)';}else{lineColour = 'rgba('+line_R+','+line_G+','+line_B+','+line_A+')';} break;	
 		}
-		updateMath();
+		updateSubShapes(); updateMath();
 	}
 	this.pushToFront = function(){drawList.foreground.pushToFront(ID);}
 	this.pushToBack = function(){drawList.foreground.pushToBack(ID);}

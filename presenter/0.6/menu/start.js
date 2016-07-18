@@ -49,7 +49,10 @@ function menu_buildObjectMenu(point,ID){
 			SVG_Element.appendChild(buildMenu_text("generalText",['30','20'],data.name,"start",'16',"Lucida Console"));
 		//Body
 			var temp = 45;
-			SVG_Element.appendChild(buildMenu_text("generalText",['10',temp],'Position',"start","12","Lucida Console"));temp+=15;
+			SVG_Element.appendChild(buildMenu_text("generalText",['10',temp],'Position',"start","12","Lucida Console"));
+			SVG_Element.appendChild(buildMenu_text("generalText",['60',temp],'X',"start","12","Lucida Console"));
+			SVG_Element.appendChild(buildMenu_text("generalText",['120',temp],'Y',"start","12","Lucida Console"));temp+=15;
+
 			SVG_Element.appendChild(buildMenu_text("generalText",['10',temp],'Width',"start","12","Lucida Console"));temp+=15;
 			SVG_Element.appendChild(buildMenu_text("generalText",['10',temp],'Height',"start","12","Lucida Console"));temp+=15;
 			SVG_Element.appendChild(buildMenu_text("generalText",['10',temp],'Angle',"start","12","Lucida Console"));temp+=15;
@@ -75,15 +78,17 @@ function menu_buildObjectMenu(point,ID){
 	// Text Box //// //// //// ////
 		var updateCode = ''+
 			'if(event.keyCode == 13){'+
-				'var temp = this.childNodes[0].value.toString().split("");'+ 'temp.pop();'+
-				'console.log("drawList.foreground.getObj("+this.childNodes[0].id.split("-")[0]+").set("+this.childNodes[0].id.split("-")[1]+","+temp.join("")+")");'+
-				'drawList.foreground.getObj(this.childNodes[0].id.split("-")[0]).set(this.childNodes[0].id.split("-")[1],temp.join(""));'+
+				'var temp = this.childNodes[0].value.toString().split("");'+ 'temp.pop();'+ 'temp = temp.join("");'+
+				'console.log("drawList.foreground.getObj("+this.childNodes[0].id.split("-")[0]+").set("+this.childNodes[0].id.split("-")[1].toString()+","+temp+")");'+
+				'drawList.foreground.getObj(this.childNodes[0].id.split("-")[0]).set(this.childNodes[0].id.split("-")[1],temp);'+
+				'this.childNodes[0].value = temp;'+
 			'}'+
 			'this.childNodes[0].scrollTop = 0;'+
 		'';
 
 		var temp = 31;
-		SVG_Element.appendChild( buildMenu_textBox("generalText",['70',temp],"70","10",data.initialData.position,12,"Lucida Console",ID+"-position",updateCode) );temp+=15;
+		SVG_Element.appendChild( buildMenu_textBox("generalText",['72',temp],"30","10",data.initialData.position[0],12,"Lucida Console",ID+"-position_x",updateCode) );
+		SVG_Element.appendChild( buildMenu_textBox("generalText",['132',temp],"30","10",data.initialData.position[1],12,"Lucida Console",ID+"-position_y",updateCode) );temp+=15;
 		SVG_Element.appendChild( buildMenu_textBox("generalText",['50',temp],"70","10",data.initialData.width,12,"Lucida Console",ID+"-width",updateCode) );temp+=15;
 		SVG_Element.appendChild( buildMenu_textBox("generalText",['55',temp],"70","10",data.initialData.height,12,"Lucida Console",ID+"-height",updateCode) );temp+=15;
 		SVG_Element.appendChild( buildMenu_textBox("generalText",['55',temp],"70","10",data.initialData.angle,12,"Lucida Console",ID+"-angle",updateCode) );temp+=15;
