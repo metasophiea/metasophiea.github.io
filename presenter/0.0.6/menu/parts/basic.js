@@ -39,7 +39,7 @@ function buildMenu_textBox(Class,point,width,height,text,size,font,ID="",code=''
 		foreignObject.style.width = foreignObject; foreignObject.style.height = height;	
 
 	var shape = document.createElement('textarea');
-		shape.id = ID;
+		shape.id = ID; 
 		shape.style.width = width+"px"; shape.style.height = height+"px";
 		shape.style.border = "0px"; shape.style.padding = "0px";
 		shape.value = text;

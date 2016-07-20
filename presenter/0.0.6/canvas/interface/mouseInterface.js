@@ -28,7 +28,11 @@ function mouseInterfaceEvent(event){
 
 	//Watch for hovering
 		if(pointingID == -1){
-			if(mouseInterface_Hover != -1){drawList.foreground.getObj(mouseInterface_Hover).mouseout();}
+			if(mouseInterface_Hover != -1){
+				if(drawList.foreground.getObj(mouseInterface_Hover) != undefined){
+					drawList.foreground.getObj(mouseInterface_Hover).mouseout();
+				}
+			}
 			mouseInterface_Hover = pointingID;
 		}
 		else if(mouseInterface_Hover != pointingID){

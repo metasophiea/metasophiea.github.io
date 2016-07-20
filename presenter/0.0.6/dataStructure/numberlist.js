@@ -1,11 +1,19 @@
 var numberlist = function(){
 	var array = [];
 	this.clear = function(){
-		for(var a = 0; a < array.length; a++){ drawList.foreground.getObj(array[a]).unselect(); }
+		for(var a = 0; a < array.length; a++){ 
+			if(drawList.foreground.getObj(array[a]) != undefined){
+				drawList.foreground.getObj(array[a]).unselect(); 
+			}
+		}
 		array = [];
 	}
 	this.unhover = function(){
-		for(var a = 0; a < array.length; a++){ drawList.foreground.getObj(array[a]).mouseout(); }
+		for(var a = 0; a < array.length; a++){ 
+			if(drawList.foreground.getObj(array[a]) != undefined){
+				drawList.foreground.getObj(array[a]).mouseout(); 
+			}
+		}
 		array = [];
 	}
 

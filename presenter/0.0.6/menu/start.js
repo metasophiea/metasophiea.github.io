@@ -40,6 +40,21 @@ function menu_buildObjectMenu(point,ID){
 			code = 'moveWindowWithID(event,this);';
 			shape.setAttribute("onmousedown",code);
 			SVG_Element.appendChild(shape);
+
+	// Buttons //// //// //// ////
+		//Delete Button
+		SVG_Element.appendChild(buildMenu_rect("deleteButtonBack",['80%','80%'],"18%","18%"));
+		shape = buildMenu_rect("buttonDim",['80%','80%'],"18%","18%");
+		code = 'drawList.foreground.removeByID('+ID+');removeWindowWithID(this);';
+		shape.setAttribute("onmousedown",code);
+		SVG_Element.appendChild(shape);		
+		//Exit Button
+		SVG_Element.appendChild(buildMenu_rect("exitButtonBack",['5','5'],"20","20"));
+		shape = buildMenu_rect("buttonDim",['5','5'],"20","20");
+		code = 'removeWindowWithID(this);';
+		shape.setAttribute("onmousedown",code);
+		SVG_Element.appendChild(shape);
+		
 		
 	// Text //// //// //// ////
 		var data = drawList.foreground.getObj(ID).getData()
@@ -95,13 +110,12 @@ function menu_buildObjectMenu(point,ID){
 		var updateCode_Text = ''+
 			'if(event.keyCode == 13){'+
 				'var temp = this.childNodes[0].value.toString().split("");'+ 'temp.pop();'+ 'temp = temp.join("");'+
-				'if(temp == ""){temp = 0;}'+
+
 				'drawList.foreground.getObj(this.childNodes[0].id.split("-")[0]).set(this.childNodes[0].id.split("-")[1],temp);'+
 				'this.childNodes[0].value = temp;'+
 			'}'+
 			'else{'+
 				'var temp = this.childNodes[0].value;'+
-				'if(temp == ""){temp = 0;}'+
 				'drawList.foreground.getObj(this.childNodes[0].id.split("-")[0]).set(this.childNodes[0].id.split("-")[1],temp);'+
 				'this.childNodes[0].value = temp;'+
 			'}'+
@@ -109,37 +123,29 @@ function menu_buildObjectMenu(point,ID){
 		'';
 
 		var temp = 31;
-		SVG_Element.appendChild( buildMenu_textBox("generalText",['72',temp],"30","10",data.initialData.position[0],12,"Lucida Console",ID+"-position_x",updateCode_Numerical) );
-		SVG_Element.appendChild( buildMenu_textBox("generalText",['132',temp],"30","10",data.initialData.position[1],12,"Lucida Console",ID+"-position_y",updateCode_Numerical) );temp+=15;
-		SVG_Element.appendChild( buildMenu_textBox("generalText",['50',temp],"70","10",data.initialData.width,12,"Lucida Console",ID+"-width",updateCode_Numerical) );temp+=15;
-		SVG_Element.appendChild( buildMenu_textBox("generalText",['55',temp],"70","10",data.initialData.height,12,"Lucida Console",ID+"-height",updateCode_Numerical) );temp+=15;
-		SVG_Element.appendChild( buildMenu_textBox("generalText",['55',temp],"70","10",data.initialData.angle,12,"Lucida Console",ID+"-angle",updateCode_Numerical) );temp+=15;
+		SVG_Element.appendChild( buildMenu_textBox("noCSSText",['72',temp],"30","10",data.initialData.position[0],12,"Lucida Console",ID+"-position_x",updateCode_Numerical) );
+		SVG_Element.appendChild( buildMenu_textBox("noCSSText",['132',temp],"30","10",data.initialData.position[1],12,"Lucida Console",ID+"-position_y",updateCode_Numerical) );temp+=15;
+		SVG_Element.appendChild( buildMenu_textBox("noCSSText",['50',temp],"70","10",data.initialData.width,12,"Lucida Console",ID+"-width",updateCode_Numerical) );temp+=15;
+		SVG_Element.appendChild( buildMenu_textBox("noCSSText",['55',temp],"70","10",data.initialData.height,12,"Lucida Console",ID+"-height",updateCode_Numerical) );temp+=15;
+		SVG_Element.appendChild( buildMenu_textBox("noCSSText",['55',temp],"70","10",data.initialData.angle,12,"Lucida Console",ID+"-angle",updateCode_Numerical) );temp+=15;
 		switch(data.name){
 			case 'Rectangle':
 				temp+=15;
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['30',temp],"30","10",data.styleData.R,12,"Lucida Console",ID+"-R",updateCode_Numerical) );temp+=15;
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['30',temp],"30","10",data.styleData.G,12,"Lucida Console",ID+"-G",updateCode_Numerical) );temp+=15;
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['30',temp],"30","10",data.styleData.B,12,"Lucida Console",ID+"-B",updateCode_Numerical) );temp+=15;
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['30',temp],"30","10",data.styleData.A,12,"Lucida Console",ID+"-A",updateCode_Numerical) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['30',temp],"30","10",data.styleData.R,12,"Lucida Console",ID+"-R",updateCode_Numerical) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['30',temp],"30","10",data.styleData.G,12,"Lucida Console",ID+"-G",updateCode_Numerical) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['30',temp],"30","10",data.styleData.B,12,"Lucida Console",ID+"-B",updateCode_Numerical) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['30',temp],"30","10",data.styleData.A,12,"Lucida Console",ID+"-A",updateCode_Numerical) );temp+=15;
 				temp+=15;
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['150',temp],"30","10",data.styleData.lineThickness,12,"Lucida Console",ID+"-lineThickness",updateCode_Numerical) );
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['30',temp],"30","10",data.styleData.line_R,12,"Lucida Console",ID+"-line_R",updateCode_Numerical) );temp+=15;
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['30',temp],"30","10",data.styleData.line_G,12,"Lucida Console",ID+"-line_G",updateCode_Numerical) );temp+=15;
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['30',temp],"30","10",data.styleData.line_B,12,"Lucida Console",ID+"-line_B",updateCode_Numerical) );temp+=15;
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['30',temp],"30","10",data.styleData.line_A,12,"Lucida Console",ID+"-line_A",updateCode_Numerical) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['150',temp],"30","10",data.styleData.lineThickness,12,"Lucida Console",ID+"-lineThickness",updateCode_Numerical) );
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['30',temp],"30","10",data.styleData.line_R,12,"Lucida Console",ID+"-line_R",updateCode_Numerical) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['30',temp],"30","10",data.styleData.line_G,12,"Lucida Console",ID+"-line_G",updateCode_Numerical) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['30',temp],"30","10",data.styleData.line_B,12,"Lucida Console",ID+"-line_B",updateCode_Numerical) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['30',temp],"30","10",data.styleData.line_A,12,"Lucida Console",ID+"-line_A",updateCode_Numerical) );temp+=15;
 			break;
 			case 'Image': 
-				SVG_Element.appendChild( buildMenu_textBox("generalText",['55',temp],"90","13",data.styleData.URL,12,"Lucida Console",ID+"-URL",updateCode_Text) );temp+=15;
+				SVG_Element.appendChild( buildMenu_textBox("noCSSText",['55',temp],"90","13",data.styleData.URL,12,"Lucida Console",ID+"-URL",updateCode_Text) );temp+=15;
 			break;
 		}					
-
-	// Buttons //// //// //// ////
-		//Exit Button
-		SVG_Element.appendChild(buildMenu_rect("exitButtonBack",['5','5'],"20","20"));
-		shape = buildMenu_rect("buttonDim",['5','5'],"20","20");
-		code = 'removeWindowWithID(this);';
-		shape.setAttribute("onmousedown",code);
-		SVG_Element.appendChild(shape);
 
 	return SVG_Element;
 }
@@ -164,7 +170,10 @@ function menu_buildMainMenu(point){
 		//Backing Plate
 			SVG_Element.appendChild(buildMenu_rect("backingPlate",[0,0],"100%","100%"));
 		//Main Space Plate
-			SVG_Element.appendChild(buildMenu_rect("plate",['1%','12%'],"98%","86%"));
+			shape = buildMenu_rect("plate",['1%','12%'],"98%","86%");
+			code = 'moveWindowWithID(event,this);';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
 
 		//Header Bar
 			shape = buildMenu_rect("plate",['1%','2%'],"98%","8%");
@@ -173,13 +182,37 @@ function menu_buildMainMenu(point){
 			SVG_Element.appendChild(shape);
 
 	// Buttons //// //// //// ////
+		//New File
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,33],60,20));
+			SVG_Element.appendChild(buildMenu_text("generalText",[10,49],'New',"start","16","Lucida Console"));
+			shape = buildMenu_rect("buttonDim",[7,33],60,20);
+			code = 'drawList.foreground.removeAll()';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
+		//Save File
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,57],60,20));
+			SVG_Element.appendChild(buildMenu_text("generalText",[10,73],'Save',"start","16","Lucida Console"));
+			shape = buildMenu_rect("buttonDim",[7,57],60,20);
+			code = 'downloadScene(this.parentElement.getElementById("title").value);';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
+		//Load File
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,81],60,20));
+			SVG_Element.appendChild(buildMenu_text("generalText",[10,97],'Load',"start","16","Lucida Console"));
+			shape = buildMenu_rect("buttonDim",[7,81],60,20);
+			code = 'uploadScene();';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
 		//Exit Button
-		SVG_Element.appendChild(buildMenu_rect("exitButtonBack",['5','5'],"20","20"));
-		shape = buildMenu_rect("buttonDim",['5','5'],"20","20");
-		code = 'removeWindowWithID(this);';
-		shape.setAttribute("onmousedown",code);
-		SVG_Element.appendChild(shape);
+			SVG_Element.appendChild(buildMenu_rect("exitButtonBack",['5','5'],"20","20"));
+			shape = buildMenu_rect("buttonDim",['5','5'],"20","20");
+			code = 'removeWindowWithID(this);';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
 
+	// Text Box //// //// //// ////
+		SVG_Element.appendChild( buildMenu_textBox("headerText",[25,5],"370","20","Scene 1",20,"Lucida Console",'title') );
+		
 	return SVG_Element;
 }
 
