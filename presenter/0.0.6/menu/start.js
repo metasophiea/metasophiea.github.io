@@ -163,7 +163,7 @@ function menu_buildMainMenu(point){
 
 // Graphics //// //// //// //// //// //// //// //// //// ////
 	//SVG Container
-		SVG_Element = buildMenu_SVG('main',1,point,400,250);
+		SVG_Element = buildMenu_SVG('main',1,point,400,225);
 		SVG_Element.setAttribute("onload","console.log('loaded');");
 
 	// Plates //// //// //// ////
@@ -181,37 +181,82 @@ function menu_buildMainMenu(point){
 			shape.setAttribute("onmousedown",code);
 			SVG_Element.appendChild(shape);
 
+			SVG_Element.appendChild(buildMenu_rect("plate",[8,105],81,111));
+
 	// Buttons //// //// //// ////
 		//New File
-			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,33],60,20));
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,33],81,20));
 			SVG_Element.appendChild(buildMenu_text("generalText",[10,49],'New',"start","16","Lucida Console"));
-			shape = buildMenu_rect("buttonDim",[7,33],60,20);
+			shape = buildMenu_rect("buttonDim",[7,33],81,20);
 			code = 'drawList.foreground.removeAll()';
 			shape.setAttribute("onmousedown",code);
 			SVG_Element.appendChild(shape);
 		//Save File
-			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,57],60,20));
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,57],81,20));
 			SVG_Element.appendChild(buildMenu_text("generalText",[10,73],'Save',"start","16","Lucida Console"));
-			shape = buildMenu_rect("buttonDim",[7,57],60,20);
+			shape = buildMenu_rect("buttonDim",[7,57],81,20);
 			code = 'downloadScene(this.parentElement.getElementById("title").value);';
 			shape.setAttribute("onmousedown",code);
 			SVG_Element.appendChild(shape);
 		//Load File
-			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,81],60,20));
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[7,81],81,20));
 			SVG_Element.appendChild(buildMenu_text("generalText",[10,97],'Load',"start","16","Lucida Console"));
-			shape = buildMenu_rect("buttonDim",[7,81],60,20);
+			shape = buildMenu_rect("buttonDim",[7,81],81,20);
 			code = 'uploadScene();';
 			shape.setAttribute("onmousedown",code);
 			SVG_Element.appendChild(shape);
 		//Exit Button
-			SVG_Element.appendChild(buildMenu_rect("exitButtonBack",['5','5'],"20","20"));
-			shape = buildMenu_rect("buttonDim",['5','5'],"20","20");
+			SVG_Element.appendChild(buildMenu_rect("exitButtonBack",['1%','2%'],18,18));
+			shape = buildMenu_rect("buttonDim",['1%','2%'],18,18);
 			code = 'removeWindowWithID(this);';
 			shape.setAttribute("onmousedown",code);
 			SVG_Element.appendChild(shape);
 
+		//Tool.Drag = Pan Button
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[12,120],70,20));
+			SVG_Element.appendChild(buildMenu_text("generalText",[15,136],'Pan',"start","16","Lucida Console"));
+			shape = buildMenu_rect("buttonDim",[12,120],70,20);
+			code = 'tool.drag = "pan";removeWindowWithID(this);';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
+		//Tool.Drag = Spin Button
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[12,144],70,20));
+			SVG_Element.appendChild(buildMenu_text("generalText",[15,160],'Spin',"start","16","Lucida Console"));
+			shape = buildMenu_rect("buttonDim",[12,144],70,20);
+			code = 'tool.drag = "spin";removeWindowWithID(this);';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
+		//Create Rectangle Button
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[12,168],70,20));
+			SVG_Element.appendChild(buildMenu_text("generalText",[15,184],'Rectangle',"start","16","Lucida Console"));
+			shape = buildMenu_rect("buttonDim",[12,168],70,20);
+			code = 'tool.drag = "rectangle";removeWindowWithID(this);';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
+		//Create Image Button
+			SVG_Element.appendChild(buildMenu_rect("standardButtonBack",[12,192],70,20));
+			SVG_Element.appendChild(buildMenu_text("generalText",[15,208],'Image',"start","16","Lucida Console"));
+			shape = buildMenu_rect("buttonDim",[12,192],70,20);
+			code = 'tool.drag = "image";removeWindowWithID(this);';
+			shape.setAttribute("onmousedown",code);
+			SVG_Element.appendChild(shape);
+
+	// Text //// //// //// ////
+		SVG_Element.appendChild(buildMenu_text("generalText",[10,117],'Tool',"start",'12',"Lucida Console"));		
+
 	// Text Box //// //// //// ////
-		SVG_Element.appendChild( buildMenu_textBox("headerText",[25,5],"370","20","Scene 1",20,"Lucida Console",'title') );
+		var updateCode_Text = ''+
+			'if(event.keyCode == 13){'+
+				'var temp = this.childNodes[0].value.toString().split("");'+ 'temp.pop();'+ 'temp = temp.join("");'+
+				'this.childNodes[0].value = temp;'+
+			'}'+
+			'else{'+
+				'var temp = this.childNodes[0].value;'+
+				'this.childNodes[0].value = temp;'+
+			'}'+
+			'this.childNodes[0].scrollTop = 0;'+
+		'';
+		SVG_Element.appendChild( buildMenu_textBox("headerText",[20,5],375,18,"Scene 1",18,"Lucida Console",'title',updateCode_Text) );
 		
 	return SVG_Element;
 }

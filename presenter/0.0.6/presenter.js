@@ -43,7 +43,8 @@
 				presenterRepositoryURL+'canvas/shape/super/testRectangle.js',
 				presenterRepositoryURL+'canvas/shape/super/adjustableImage.js',
 				presenterRepositoryURL+'canvas/shape/super/adjustableRectangle.js',
-				presenterRepositoryURL+'canvas/shape/mouseInterface_draw/rectangle.js'
+				presenterRepositoryURL+'canvas/shape/mouseInterface_draw/rectangle.js',
+				presenterRepositoryURL+'canvas/shape/mouseInterface_draw/image.js'
 			],[presenterRepositoryURL+'boot.js']		
 		]
 	};

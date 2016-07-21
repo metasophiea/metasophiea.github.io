@@ -58,6 +58,7 @@ function mouseInterfaceEvent_Viewport(event){
 					case 'pan': mouseInterface_Pan(event); break;
 					case 'spin': mouseInterface_Spin(event); break;
 					case 'rectangle': mouseInterface_drawRectangle(event); break;
+					case 'image': mouseInterface_drawImage(event); break;
 				}
 			}
 		break;
@@ -67,6 +68,7 @@ function mouseInterfaceEvent_Object(ID,event){
 	switch(event.type){
 		case "click": mouseInterface_Selected.setID(ID,[event.layerX,event.layerY]); drawList.foreground.getObj(ID).click(event.layerX,event.layerY); break;
 		case 'dblclick': startMenu('object',[event.layerX,event.layerY],ID); break;
+		case "wheel": mouseInterface_Zoom(event); break;
 		case "mousedown": 
 			var temp = getViewportElementDimensions();
 			drawList.foreground.getObj(ID).mousedown(getViewportPoint([event.layerX/temp[0],event.layerY/temp[1]])); 

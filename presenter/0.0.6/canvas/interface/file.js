@@ -16,6 +16,7 @@ function downloadScene(title){
 }
 
 function uploadScene(){
+	newScene();
 	uploadData(loadScene);
 }
 

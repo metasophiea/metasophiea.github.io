@@ -128,7 +128,7 @@ function regularShape_image(inputData = {}){
 		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){}
 		else{
 			if(URL != ''){basicShape_image(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,URL);}
-			else{basicShape_rectangle(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')','rgb(0,0,0)',getRealLength(5));}
+			else{basicShape_image(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,'http://metasophiea.com/presenter/resources/images/PresenterSplash_1.bmp');}
 			basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,IDcolour,IDcolour,getRealLength(lineThickness));
 		}
 	}
@@ -148,7 +148,7 @@ function regularShape_image(inputData = {}){
 		if(Math.abs(count[0]) == 4 || Math.abs(count[1]) == 4){}
 		else{
 			if(URL != ''){basicShape_image(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,URL);}
-			else{basicShape_rectangle(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')','rgb(0,0,0)',getRealLength(5));}
+			else{basicShape_image(viewport,dimention[0],dimention[1],realPosition,anchor,calculated.angle,'http://metasophiea.com/presenter/resources/images/PresenterSplash_1.bmp');}
 			basicShape_rectangle(selectionMatrix,dimention[0],dimention[1],realPosition,anchor,calculated.angle,ID,ID,getRealLength(lineThickness));
 		}
 	}
