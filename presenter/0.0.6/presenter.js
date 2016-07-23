@@ -40,7 +40,6 @@
 				presenterRepositoryURL+'canvas/shape/regular/rectangle_hover.js',
 				presenterRepositoryURL+'canvas/shape/regular/image.js',
 				presenterRepositoryURL+'canvas/shape/super/extraStuff.js',
-				presenterRepositoryURL+'canvas/shape/super/testRectangle.js',
 				presenterRepositoryURL+'canvas/shape/super/adjustableImage.js',
 				presenterRepositoryURL+'canvas/shape/super/adjustableRectangle.js',
 				presenterRepositoryURL+'canvas/shape/mouseInterface_draw/rectangle.js',
