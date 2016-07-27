@@ -9,7 +9,7 @@ function regularShape_image(inputData = {}){
 	var defined = {'point':[0,0],'angle':0};
 	var calculated = {'point':[0,0],'angle':0};
 
-	var URL = 'http://miriadna.com/desctopwalls/images/max/Looking-at-the-tops-of-trees.jpg';
+	var URL = 'https://metasophiea.com/lib/image/noimageimage.png';
 
 	if(initialData.hasOwnProperty('origin')){origin = initialData.origin;}
 	if(initialData.hasOwnProperty('position')){defined.point = initialData.position;}

@@ -10,7 +10,7 @@ function superShape_adjustableImage(inputData = {}){
 	var calculated = {'point':[0,0],'angle':0};
 	var temp_anchor = anchor; temp_position = defined.point;
 
-	var URL = 'https://upload.wikimedia.org/wikipedia/en/d/d0/Myst-library_and_ship.jpg';
+	var URL = 'https://metasophiea.com/lib/image/noimageimage.png';
 
 	if(initialData.hasOwnProperty('origin')){origin = initialData.origin;}
 	if(initialData.hasOwnProperty('position')){defined.point = initialData.position;}
