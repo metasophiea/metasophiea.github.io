@@ -6,9 +6,9 @@
 		],
 		'JS':[
 			[	
-				'http://metasophiea.com/code/js/math/geometry.js',
-				'http://metasophiea.com/code/js/math/numberProgression.js',
-				'http://metasophiea.com/code/js/io/loadsave.js',
+				'http://metasophiea.com/lib/js/math/geometry.js',
+				'http://metasophiea.com/lib/js/math/numberProgression.js',
+				'http://metasophiea.com/lib/js/io/loadsave.js',
 
 				presenterRepositoryURL+'menu/start.js',
 				presenterRepositoryURL+'menu/windowMotion.js',
@@ -91,14 +91,14 @@ function Presenter_Start(){
 //get getJS.js script, and then load the files with it
 	var temp = document.createElement('script');
 	temp.type = 'text/javascript'; 
-	temp.src = 'http://metasophiea.com/code/js/liveEdit/getJS.js';
+	temp.src = 'http://metasophiea.com/lib/js/liveEdit/getJS.js';
 	temp.setAttribute('onLoad','getJS(includeFiles.JS);');
 	document.head.appendChild(temp);	
 
 //get getCSS.js script, and then load the files with it
 	var temp = document.createElement('script');
 	temp.type = 'text/javascript'; 
-	temp.src = 'http://metasophiea.com/code/js/liveEdit/getCSS.js';
+	temp.src = 'http://metasophiea.com/lib/js/liveEdit/getCSS.js';
 	temp.setAttribute('onLoad','getCSS(includeFiles.CSS);');
 	document.head.appendChild(temp);
 }
