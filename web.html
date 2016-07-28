@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<style title="Main">html, body{width:100%; height:100%; margin:0px;overflow-x: hidden; overflow-y: hidden;}iframe{width:100%; height:100%; margin:0px; border:0px;}</style>
+	<script src="file:///home/metasophiea/Software/metasophiea.github.io/lib/js/browserWork/ded_bowser.js"></script>
+	<script>
+		function go(){
+			var fileAddress = {'system':'','browser':bowser.name.toLowerCase(),'version':bowser.version};
+			fileAddress.version = fileAddress.version.split('.')[0];
+			
+			if(bowser.hasOwnProperty('likeAndroid')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('android')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('nexusMobile')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('nexusTablet')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('chromeos')){fileAddress.system = 'desktop';}
+			else if(bowser.hasOwnProperty('silk')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('sailfish')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('tizen')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('webos')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('windowsphone')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('windows')){fileAddress.system = 'desktop';}
+			else if(bowser.hasOwnProperty('mac')){fileAddress.system = 'desktop';}
+			else if(bowser.hasOwnProperty('linux')){fileAddress.system = 'desktop';}
+			else if(bowser.hasOwnProperty('edgeVersion')){fileAddress.system = 'desktop';}
+			else if(bowser.hasOwnProperty('versionIdentifier')){fileAddress.system = 'unknown';}
+			else if(bowser.hasOwnProperty('tablet')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('mobile')){fileAddress.system = 'mobile';}
+			else if(bowser.hasOwnProperty('xbox')){fileAddress.system = 'mobile';}	
+			else{fileAddress.system = 'unknown';}
+		
+			var URL = 'http://metasophiea.com/mainSite/display/'+fileAddress.system+'/'+fileAddress.browser+'/'+fileAddress.version+'/index.html';	
+			document.getElementById('mainFrame').src = URL;
+		}
+	</script>
+</head>
+
+<body onLoad='go();'>
+
+<iframe id='mainFrame' src=""></iframe>
+
+</body>
+</html>
