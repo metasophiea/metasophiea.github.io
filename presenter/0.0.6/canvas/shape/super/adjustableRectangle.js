@@ -52,6 +52,14 @@ function superShape_adjustableRectangle(inputData = {}){
 	var temp = Math.abs(width); if(Math.abs(height) < temp){temp = Math.abs(height);} temp = temp/3;
 	subShapeList.add( new regularShape_rectangle_hover({ "initialData":{'origin':axiom,"position":[width/2,height/2],"anchor":[0.5,0.5],"width":temp,"height":temp,"angle":0}, "styleData":{"R":255,"G":255,"B":255,'A':0} }) );	
 
+	function colouring(){
+		for(var a = 1; a <= 9; a++){
+			subShapeList.getObj(a).set('R',Math.floor(Math.random()*255));
+			subShapeList.getObj(a).set('G',Math.floor(Math.random()*255));
+			subShapeList.getObj(a).set('B',Math.floor(Math.random()*255));
+		}
+	}colouring();
+
 	function updateSubShapes(){
 		subShapeList.getObj(0).set('width',width);subShapeList.getObj(0).set('height',height);
 
@@ -304,6 +312,6 @@ function superShape_adjustableRectangle(inputData = {}){
 			defined.point = [defined.point[0]+point[0],defined.point[1]+point[1]];
 		}
 		anchor = temp_anchor; updateMath();
-
+		colouring();
 	}
 }
