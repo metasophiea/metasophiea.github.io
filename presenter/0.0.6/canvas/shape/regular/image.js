@@ -9,7 +9,7 @@ function regularShape_image(inputData = {}){
 	var defined = {'point':[0,0],'angle':0};
 	var calculated = {'point':[0,0],'angle':0};
 
-	var URL = 'http://metasophiea.com/lib/image/noimageimage.png';
+	var URL = '';
 
 	if(initialData.hasOwnProperty('origin')){origin = initialData.origin;}
 	if(initialData.hasOwnProperty('position')){defined.point = initialData.position;}
