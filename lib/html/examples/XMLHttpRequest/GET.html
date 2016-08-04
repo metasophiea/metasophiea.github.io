@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>function Go(){
+		console.log('hello');
+
+			var xhttp= new XMLHttpRequest();
+			xhttp.open("GET", "https://api.github.com/repos/metasophiea/metasophiea.github.io", true);
+			xhttp.send();
+
+			xhttp.onreadystatechange = function(){
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					console.log(JSON.parse(xhttp.responseText));
+				}
+			}
+	}</script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+
+</body>
+</html>

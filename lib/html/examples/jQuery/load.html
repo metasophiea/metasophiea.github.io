@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>function Go(){console.log('hello');
+
+		//For AJAX, needs to be in domain
+		$('#data').load('http://www.w3schools.com/jquery/demo_test.txt');
+
+	}</script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+	<p id='data' class='norm'>Hello</p>
+	<p id='data2' class='norm'>Hello (again)</p>
+</body>
+</html>
