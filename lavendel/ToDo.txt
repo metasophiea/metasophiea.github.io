@@ -1,6 +1,0 @@
-- Reintegrate everything
-
-- Keyboard Interface
-
-- Subshape Selectioning
-- Automove

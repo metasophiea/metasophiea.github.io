@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Word Stats</title>
+	<meta charset="utf-8"></meta>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+
+	function cleanWords(array){
+		for(var a = 0; a < array.length; a++){ array[a] = array[a].replace(/[^a-z]/gi,''); }
+		return array;
+	}
+
+	function sortJSON(JSONinput){
+		var limit = 8; if(Object.keys(JSONinput).length < limit){limit = Object.keys(JSONinput).length;} var array = [];
+		for(var a = 0; a < limit; a++){
+			var champ = JSON.parse('{"'+Object.keys(JSONinput)[0]+'":'+JSONinput[Object.keys(JSONinput)[0]]+'}'); var temp = {}; 
+			for(var b = 1; b < Object.keys(JSONinput).length; b++){
+				temp = JSON.parse('{"'+Object.keys(JSONinput)[b]+'":'+JSONinput[Object.keys(JSONinput)[b]]+'}');
+				if(temp[Object.keys(temp)[0]] > champ[Object.keys(champ)[0]]){champ = temp;}
+			}
+			array.push(champ);
+			delete JSONinput[Object.keys(champ)[0]];
+		}
+		return array;
+	}
+
+
+	function createWordFrequency(array){
+		var result = {};
+		for(var a = 0; a < array.length; a++){
+			if(result.hasOwnProperty(array[a].toLowerCase())){result[array[a].toLowerCase()]++;}
+			else{result[array[a].toLowerCase()] = 1;}
+		}
+
+		return sortJSON(result);
+	}
+
+	function Go(){
+		$('#mainTextBox').keyup(function() {
+			var text = String(this.value);
+			//Character Count
+				$('#characterCount').text(text.length);
+			//Word Count
+				var array = text.split('\n'); var array_2 = [];
+				for(var a = 0; a < array.length; a++){
+					array_2.push(array[a].split(' '));
+				}
+				array = $.map( array_2, function(n){return n;});
+
+				array = cleanWords(array);
+
+
+				var result = 0;
+				for(var a = 0; a < array.length; a++){
+					if(array[a].length != 0){result++;}
+				}
+				$('#wordCount').text(result);
+			//Line Count
+				$('#lineCount').text(text.split('\n').length);	
+
+			$('#wordFrequency').empty();
+			if(array.length == 1 && array[0] == ''){}
+			else{
+				var array = createWordFrequency(array); var temp = '';
+				for(var a = 0; a < array.length; a++){
+					temp = Object.keys(array[a]);
+					if(temp != ''){
+						$('#wordFrequency').append( '<td>"'+temp+'"<br>'+array[a][temp]+'</td>' );
+					}
+				}
+			}
+		});
+
+
+
+
+	}</script>
+	<style>
+		html, body{
+			width:100%; height:100%; margin:0px;
+		}
+		td{text-align:center;}
+		.std_td{width:33%; text-align:center;}
+
+		</style>
+</head>
+
+<body onLoad="Go()">
+	<textarea id='mainTextBox' autofocus='true' placeholder='type something...' style='margin: 5% 15%; resize: none; width:70%; height:30%;'></textarea>
+	<table style="width:100%">
+  		<tr id='tiles'>
+    			<td class='std_td'>Character Count</td>
+    			<td class='std_td'>Word Count</td> 
+    			<td class='std_td'>Line Count</td>
+  		</tr>
+  		<tr id='data'>
+    			<td class='std_td' id='characterCount'></td>
+    			<td class='std_td' id='wordCount'></td> 
+    			<td class='std_td' id='lineCount'></td>
+  		</tr>
+	</table>
+
+	<table style="width:100%">
+  		<tr id='wordFrequency'>
+  		</tr>		
+	</table>
+
+</body>
+</html>
+

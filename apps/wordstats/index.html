@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Word Stats</title>
+	<meta charset="utf-8"></meta> <meta name="theme-color" content="#FFFFFF"></meta>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="file:///H:/Documents/GitHub/metasophiea.github.io/lib/js/string/wordstats.js"></script>
+	<script>
+		function Go(){
+			$('#mainTextBox').keyup(function() {
+				var text = String(this.value);
+				//Character Count
+					$('#characterCount').text(text.length);
+				//Word Count
+					$('#wordCount').text(countWords(text));
+				//Line Count
+					$('#lineCount').text(text.split('\n').length);
+
+				//Word Frequency
+					$('#wordFrequency').empty();
+					var array = createWordFrequency(text,8); var temp = ''; console.log(array);
+					for(var a = 0; a < array.length; a++){
+						temp = Object.keys(array[a]);
+						if(temp != ''){ $('#wordFrequency').append( '<td style="width:'+100/array.length+'%">"'+temp+'"<br>'+array[a][temp]+'</td>' ); }
+					}
+			});
+		}
+	</script>
+
+	<style>
+		html, body{ width:100%; height:100%; margin:0px; overflow-x: hidden; overflow-y: hidden;}
+		td{text-align:center;}
+		.std_td{width:33%; text-align:center;}
+	</style>
+</head>
+
+<body onLoad="Go()">
+	<textarea id='mainTextBox' autofocus='true' placeholder='type something...' style='margin: 5% 15%; resize: none; width:70%; height:30%;'></textarea>
+	<table style="width:100%">
+  		<tr id='tiles'>
+    			<td class='std_td'>Character Count</td>
+    			<td class='std_td'>Word Count</td> 
+    			<td class='std_td'>Line Count</td>
+  		</tr>
+  		<tr id='data'>
+    			<td class='std_td' id='characterCount'></td>
+    			<td class='std_td' id='wordCount'></td> 
+    			<td class='std_td' id='lineCount'></td>
+  		</tr>
+	</table>
+	<table style="width:100%">
+  		<tr id='wordFrequency'></tr>		
+	</table>
+</body>
+</html>

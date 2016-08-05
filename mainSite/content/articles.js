@@ -14,7 +14,7 @@ var articles = {
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
 		"image_url":"http://metasophiea.com/presenter/resources/images/PresenterSplash_1.bmp",
-		"link_url":"http://metasophiea.com/presenter/info"
+		"link_url":"http://metasophiea.com/apps/presenter/info"
 	},
 	"article_20160614-a":{
 		"headline":"Free Code Camp Project Archive",
@@ -35,5 +35,4 @@ var articles = {
 		"link_url":"https://soundcloud.com/metasophiea/"		
 	},
 };		
-
-console.log("loaded");
+console.log("%carticles loaded", "color:rgb(202,136,202); font-style:italic;");
