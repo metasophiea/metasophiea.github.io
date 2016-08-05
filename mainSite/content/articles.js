@@ -12,7 +12,7 @@ var articles = {
 		"headline":"Word Stats",
 		"text_line1":"A mini webapp showing you some info on things you write in",
 		"text_line2":"not particularly useful..but somewhat handy n_n",
-		"textcolour":"rgb(200,200,200)",
+		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,100,0.75)",
 		"image_url":"http://metasophiea.com/lib/image/wordstats_splash1.bmp",
 		"link_url":"http://metasophiea.com/apps/wordstats"
