@@ -1,5 +1,5 @@
 var articles = {
-	"article_20160606-a":{
+	"article_20160807-a":{
 		"headline":"Canvas Viewing Space Project",
 		"text_line1":"A pure JS 2d graphics engine",
 		"text_line2":"currently developing into dynamic presentation app",
@@ -8,7 +8,7 @@ var articles = {
 		"image_url":"http://metasophiea.com/lib/image/canvasViewingSpace_splash1.bmp",
 		"link_url":"http://metasophiea.com/lib/js/canvasViewingSpace"
 	},
-	"article_20160606-a":{
+	"article_20160807-b":{
 		"headline":"Word Stats",
 		"text_line1":"A mini webapp showing you some info on things you write in",
 		"text_line2":"not particularly useful..but somewhat handy n_n",
