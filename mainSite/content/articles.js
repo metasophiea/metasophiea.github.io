@@ -36,4 +36,4 @@ var articles = {
 		"link_url":"https://soundcloud.com/metasophiea/"		
 	},
 };		
-console.log("%carticles loaded", "color:rgb(202,136,202); font-style:italic;");
+console.log('%c'+Object.keys(articles).length+'articles loaded', 'color:rgb(202,136,202); font-style:italic;');
