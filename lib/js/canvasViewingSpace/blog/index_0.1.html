@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	<style title="Main">
+		html, body{
+			width:100%; height:100%; margin:0px;
+		}
+
+	</style>
+</head>
+
+<body>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-07-28-a - Pieces And Bits
+---------------------------------------------------------
+- created a 'no image' image for the image object, also 
+  the image object starts with no URL on creation
+- changed grabbers to be colourful
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-07-19-a - Bits and Pieces
+---------------------------------------------------------
+- Updated menu to upate object on typing (instead of just
+  when enter key is pressed) also added protection against
+  a blank textbox
+- worked on getting the super image object to act nicely
+  with the menu, and having a bad image URL
+- Also reworked directories and version numbers a little
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-07-18-a - bug Spray
+---------------------------------------------------------
+- Rectangle menu bug fixing  
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-07-17-a - 
+---------------------------------------------------------
+- Added in some menuing (stripped a little from old 
+  Lavendel versions) main menu is blank, but rectangle
+  object menu almost complete
+- Did more work on the keyboard interface..program now 
+  seeming a little slap-dash (though I suppose its very
+  near completion, I'm in a little bit of a hurry, and 
+  I'm mostly bored of this)
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-07-13-a - Adjustable And Downloadable
+---------------------------------------------------------
+- adjustableRectangle working beautifully, one can now grab
+  and adjust corners and sides, aswel as grab centre to
+  adjust angle
+- small adjustments made, and now adjustableImage exists
+- working on load/save features, currently the console
+  command 'downloadScene()' gathers all the foreground data
+  and produces a text file (called 'out.presenter') with
+  JSON. Another function can take this text data to produce
+  a scene (file upload functionality still in works)
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-07-11-a - 0.6 Looking Good
+---------------------------------------------------------
+- Rearranged files to better suit new drawing method
+- Creating and developing "adjustableRectangle" object, 
+  which has grabbers in the corners, sides and centre for
+  changing the height, width and angle. (Should be simple
+  to rewrite as an image
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-07-03-a - SubShaping
+---------------------------------------------------------
+- This weekend brought about work on 0.5, which incliudes
+  a new way of drawing objects
+- Instead of having each object contain its drawing code,
+  they instead send all their drawing data to a seperate 
+  shape-drawing subfunction, thus keeping the line-count
+  down
+- I've seperated out some common shape functions, for the
+  same reason 
+- I also dabbled a little in subshaping (where one shape
+  can contain many others) I've gotten a rough version
+  together, that allows subselection (so I'm no longer
+  limited by that 255^3 object limit) and the shapes within
+  a shape, are positioned relitive to an origin point in
+  the parent shape, allowing for a more natural method of
+  positioning...this needs heavy work
+- I also rearranged the files a little...that needs lots
+  of work too
+- I have an example 'adjustable_rectangleObject' where 
+  pulling the topleft tab changes the height and width 
+  (though not properly) and I'll need to rewrite most of 
+  this for 0.6 to make it all tighter and allow better 
+  shape control
+  The other shape to the left, allows you to move the 
+  inner sqare, without moving the outter one. While moving
+  the outter one moves the inner. Moving the inner shape
+  outside its parent brakes things a little however (the
+  shape becomes unselectable)
+---------------------------------------------------------
+		</pre>
+	</section>
+
+
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-06-28-a - square.js
+---------------------------------------------------------
+- Had a go at writing a square object that has little tabs
+  you can pull to adjust size.
+- Wrote in a (rather slap-dash) 'mouseover'/'mouseout' 
+  system..it needs work
+---------------------------------------------------------
+		</pre>
+	</section>
+
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-06-27-a - text.js
+---------------------------------------------------------
+- Had to do repairs on the image object's efficiency code
+  it still can't cope with the idea of having an anchor
+  outside the image...work needed
+- Added in text.js, an improvement over the last veresion,
+  this version uses a scaling method to change the size of
+  the font during zoom, thus it is now smoother. There's 
+  still some jitter...I'm not sure where that come's from.
+  I'll be looking into that
+- I also did a little clean up work, baised on some notes
+  I put in the todo.txt
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-06-19-a - Little Touches
+---------------------------------------------------------
+- Rewrote image a little, reintegrated that
+- Created little subfunction that detects what address is
+  accessing it and adjusts it's include addresses 
+  accordingly (just for development)
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-06-18-b - Getting Back To Speed 0.4
+---------------------------------------------------------
+- Reintegrated Mouse_Interface for viewport movements with
+  the mouse.
+- Object selection reintegrated. Still just polys, but you
+  can select them and drag them about
+- Fixed automove script to allow multiple actions to be 
+  inserted in one go
+---------------------------------------------------------
+		</pre>
+	</section>
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-06-18-a - Rocking on Over to 0.4
+---------------------------------------------------------
+There was a bug with the last version's autocontrol, when
+it came to viewport rotation, so this version so far has
+been very focused on getting that to work
+- Starting from scratch, functions have new names, and
+  things are more modular now
+- Separated tasks out further, reducing number of times
+  parts access globals
+- Added new 'calculations.js' file for useful tasks that
+  aren't specific to the project (like getting polar 
+  coordinates from cartesian (and reverse) or creating
+  numerical processions of certain curves)
+- Redid panning, zooming and spinning controls, as well as
+  the automove system to be more stable...seems good so far
+---------------------------------------------------------
+		</pre>
+	</section>
+
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-06-12-a - Moving and Shakin' to 0.3
+---------------------------------------------------------
+- Fixed up the dragging functionality to deal with spun
+  viewports
+- Created autoviewport control functions, currently with
+  none, linear, sin and cosin movement patterns
+- Autoviewport control can be scripted from the command
+  line (menus to take over)
+- Created 'todo.txt' with some future works
+- Renamed some vars for more lower casing
+---------------------------------------------------------
+		</pre>
+	</section>	
+
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-06-11-a - Swiftly to 0.2
+---------------------------------------------------------
+- Rewrote 'poly' to be a better fit towards how it's used
+- Created shape creator - currently only makes rectangles
+  of random colour
+- Rewrote 'list' object to have private values, and 
+  preform Z position movements
+- You can drag objects, but not before you have selected
+  them first with a click. Selecting a poly changes its
+  colour temporarily. It also brings said poly forward
+---------------------------------------------------------
+		</pre>
+	</section>	
+	
+	<section>
+		<pre>
+---------------------------------------------------------
+2016-06-10-a - The Quick Begining of 0.1
+---------------------------------------------------------
+Considering that I'm getting a little overwhelmed with
+the Lavendel project, with it being developed with a very
+general concept in mind; I've decided to switch my efforts
+to what began this project and focus on making this single-
+use tool. As such, generalisations can be removed, and 
+development can move much quicker (which is necessary as
+I need to have made a presentation by september)
+After this is done, work can continue on Lavendel proper
+
+- Shipped in most of Lavendel 0.7
+- Spread out files in new layout, with a special folder
+  just for js objects. System maintains the nice, single
+  link nature of 0.7
+---------------------------------------------------------
+		</pre>
+	</section>		
+</body>
+</html>
