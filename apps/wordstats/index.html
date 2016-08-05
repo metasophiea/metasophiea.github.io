@@ -18,7 +18,7 @@
 
 				//Word Frequency
 					$('#wordFrequency').empty();
-					var array = createWordFrequency(text,8); var temp = ''; console.log(array);
+					var array = createWordFrequency(text,8); var temp = '';
 					for(var a = 0; a < array.length; a++){
 						temp = Object.keys(array[a]);
 						if(temp != ''){ $('#wordFrequency').append( '<td style="width:'+100/array.length+'%">"'+temp+'"<br>'+array[a][temp]+'</td>' ); }
