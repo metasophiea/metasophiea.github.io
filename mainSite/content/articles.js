@@ -8,6 +8,15 @@ var articles = {
 		"image_url":"http://metasophiea.com/lib/image/canvasViewingSpace_splash1.bmp",
 		"link_url":"http://metasophiea.com/lib/js/canvasViewingSpace"
 	},
+	"article_20160606-a":{
+		"headline":"Word Stats",
+		"text_line1":"A mini webapp showing you some info on things you write in",
+		"text_line2":"not particularly useful..but somewhat handy n_n",
+		"textcolour":"rgb(200,200,200)",
+		"backerFill":"rgba(0,0,100,0.75)",
+		"image_url":"http://metasophiea.com/lib/image/wordstats_splash1.bmp",
+		"link_url":"http://metasophiea.com/apps/wordstats"
+	},
 	"article_20160614-a":{
 		"headline":"Free Code Camp Project Archive",
 		"text_line1":"check out some of my original websites",
