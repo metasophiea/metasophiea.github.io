@@ -16,7 +16,7 @@ OUT 11, R16//PinD
 OUT 12, R16
 */
 
-;	jmp PortDirection ;Com|Port|N ;
+;jmp PortDirection ;Com|Port|N ;
 PortDirection:
 	;use program counter to select the first input
 		call UPCTSTFI
@@ -57,7 +57,7 @@ PortDirection:
 		jmp discover
 ;end
 
-;	jmp SetPort ;Com|Port|N ;
+;jmp SetPort ;Com|Port|N ;
 SetPort:
 	;use program counter to select the first input
 		call UPCTSTFI
@@ -98,7 +98,7 @@ SetPort:
 		jmp discover
 ;end
 
-;	jmp ReadPort ;Com|Port|F_High8|F_Low8
+;jmp ReadPort ;Com|Port|F_High8|F_Low8
 ReadPort:
 	;adds 2 to the program counter and returnsto discover
 		//add 2 to program counter

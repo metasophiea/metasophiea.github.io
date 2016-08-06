@@ -40,9 +40,9 @@ LYPWWZIPA:
 	ld R28, Z
 ret
 
-// --- testing for providede address and then placement of values --- //
+// --- testing for provided address and then placement of values --- //
 THTALFIAPR16ITL:
-// Test that there's a loaction for it, and places R18 in that location
+// Test that there's a location for it, and places R18 in that location
 ;select the next input
 	call STNI
 ;load Y pointer with what Z is pointing at
@@ -63,7 +63,7 @@ THTALFIAPR16ITL_dontDoHigh8Result:
 ret
 
 THTALFIAPR17ITL:
-// Test that there's a loaction for it, and places R18 in that location
+// Test that there's a location for it, and places R18 in that location
 ;select the next input
 	call STNI
 ;load Y pointer with what Z is pointing at
@@ -84,7 +84,7 @@ THTALFIAPR17ITL_dontDoHigh8Result:
 ret
 
 THTALFIAPR18ITL:
-// Test that there's a loaction for it, and places R18 in that location
+// Test that there's a location for it, and places R18 in that location
 ;select the next input
 	call STNI
 ;load Y pointer with what Z is pointing at
@@ -105,7 +105,7 @@ THTALFIAPR18ITL_dontDoHigh8Result:
 ret
 
 THTALFIAPR19ITL:
-// Test that there's a loaction for it, and places R18 in that location
+// Test that there's a location for it, and places R18 in that location
 ;select the next input
 	call STNI
 ;load Y pointer with what Z is pointing at
@@ -126,7 +126,7 @@ THTALFIAPR19ITL_dontDoHigh8Result:
 ret
 
 THTALFIAPR20ITL:
-// Test that there's a loaction for it, and places R18 in that location
+// Test that there's a location for it, and places R18 in that location
 ;select the next input
 	call STNI
 ;load Y pointer with what Z is pointing at
@@ -157,5 +157,3 @@ AvoidPageInfo:
 	inc R0
 	inc R0
 ret
-
-

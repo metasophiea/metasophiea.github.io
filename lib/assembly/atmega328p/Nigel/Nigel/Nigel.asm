@@ -92,15 +92,15 @@
 ; could potentially be mistaken as a BasicNumber confusing the Retriever.
 ; Bug count: 1
 	jmp BasicNumber	;|Com_High8|Com_Low8|IDNumber|Type|X| ;|00|70|
-					; 00 - Int ; 01 - Float ; 02 - Fractional ; 03 - Power ; 04 - Root 
+				; 00 - Int ; 01 - Float ; 02 - Fractional ; 03 - Power ; 04 - Root 
 	jmp BasicNumber2	;|Com_High8|Com_Low8|IDNumber_High8|IDNumber_Low8|Type|X| ;|00|72|
-						; 00 - Int ; 01 - Float ; 02 - Fractional ; 03 - Power ; 04 - Root 
+				; 00 - Int ; 01 - Float ; 02 - Fractional ; 03 - Power ; 04 - Root 
 	jmp BasicNumberRetriever ;|Com_High8|Com_Low8|IDNumber|F_High8|F_Low8| ;|00|74|
 	jmp BasicNumber2Retriever ;|Com_High8|Com_Low8|IDNumber_High8|IDNumber_Low8|F_High8|F_Low8| ;|00|76|
 
 
 	jmp DynamicNumber	;|Com_High8|Com_Low8|Type|IDNumber|Length|X| ;|00|78|
-						; 00 - Int ; 01 - Float ; 02 - Fractional ; 03 - Power ; 04 - Root
+				; 00 - Int ; 01 - Float ; 02 - Fractional ; 03 - Power ; 04 - Root
 ;	jmp DynamicNumberRetriever
 
 ;	jmp RegularToFloating ;|00||
@@ -138,7 +138,7 @@
 	jmp DevideFbyNWithRemainder		;|Com_High8|Com_Low8|F_High8|F_Low8|N|F_High8|F_Low8|F_High8|F_Low8| ;|00||
 	jmp DevideFbyFWithRemainder		;|Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|F_High8|F_Low8|F_High8|F_Low8| ;|00||
 
-	jmp SquareF			;|Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8| ;|||
+	jmp SquareF		;|Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8| ;|||
 	;jmp SquareRootF	;|Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8| ;|||
 
 	;jmp FtothepowerofN	;|Com_High8|Com_Low8|N|F_High8|F_Low8| ;|||
@@ -146,20 +146,20 @@
 
 	;jmp Ffactorial (postponed)		;|Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|F_High8|F_Low8| ;|00|96|
 
-	;jmp SinF			;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
+	;jmp SinF		;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
 	;jmp InverseSinF	;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
-	;jmp CosF			;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
+	;jmp CosF		;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
 	;jmp InverseCosF	;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
-	;jmp Tanf			;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
+	;jmp Tanf		;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
 	;jmp InverseTanf	;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
 
-	;jmp LogF			;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
+	;jmp LogF		;|Com_High8|Com_Low8|F_High8|F_Low8| ;|||
 
 // - if statements -	
-	jmp IsN_F ;ComHigh8|ComLow8|Com|N|F_High8|F_Low8|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8	;|00||
-			  ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
-	jmp IsF_F ;ComHigh8|ComLow8|Com|F_High8|F_Low8|F_High8|F_Low8|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8	;|00||
-			  ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+	jmp IsN_F	;ComHigh8|ComLow8|Com|N|F_High8|F_Low8|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8	;|00||
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+	jmp IsF_F	;ComHigh8|ComLow8|Com|F_High8|F_Low8|F_High8|F_Low8|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8	;|00||
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
 
 // - if with else -
 /*
@@ -182,10 +182,10 @@
 */
 
 // - while loop -
-	jmp WhileN_F ;ComHigh8|ComLow8|Com|N|F_High8|F_Low8|FirstCommandOfWhile'dCodeAddress_High8|FirstCommandOfWhile'dCodeAddress_Low8	;|00||
-			     ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
-	jmp WhileF_F ;ComHigh8|ComLow8|Com|F_High8|F_Low8|F_High8|F_Low8|FirstCommandOfWhile'dCodeAddress_High8|FirstCommandOfWhile'dCodeAddress_Low8	;|00||
-			     ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+	jmp WhileN_F	;ComHigh8|ComLow8|Com|N|F_High8|F_Low8|FirstCommandOfWhile'dCodeAddress_High8|FirstCommandOfWhile'dCodeAddress_Low8	;|00||
+				;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+	jmp WhileF_F	;ComHigh8|ComLow8|Com|F_High8|F_Low8|F_High8|F_Low8|FirstCommandOfWhile'dCodeAddress_High8|FirstCommandOfWhile'dCodeAddress_Low8	;|00||
+				;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
 
 /*
 	to do a while loop, use an While statement, and set the "FirstCommandOfWhile'dCodeAddress" 
@@ -195,14 +195,14 @@
 */
 
 // - for loops -
-	jmp For_ ;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00||
-			    ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
-	jmp For_E ;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_F_High8|EndNumber_F_Low8|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00||
-			    ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
-	jmp For_S ;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize_F_High8|StepSize_F_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00||
-			    ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
-	jmp For_ES ;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_F_High8|EndNumber_F_Low8|StepSize_F_High8|StepSize_F_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00||
-			    ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+	jmp For_	;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00||
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+	jmp For_E	;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_F_High8|EndNumber_F_Low8|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00||
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+	jmp For_S	;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize_F_High8|StepSize_F_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00||
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+	jmp For_ES	;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_F_High8|EndNumber_F_Low8|StepSize_F_High8|StepSize_F_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00||
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
 
 // - sub functions - (unfinished)
 ;	jmp SetUpFunction ;ComHigh8|ComLow8

@@ -16,8 +16,8 @@
 // -code- 
 ; -- example -- 
 
-//	jmp For_ ;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00|45| & |00|46|
-			    ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+//	jmp For_	;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00|45| & |00|46|
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
 For_:
 	;use program counter to select the first input
 		call UPCTSTFI
@@ -131,8 +131,8 @@ For_:
 		jmp discover
 ;end
 
-//	jmp For_E ;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_F_High8|EndNumber_F_Low8|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00|47|
-			    ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+//	jmp For_E	;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_F_High8|EndNumber_F_Low8|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00|47|
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
 For_E:
 	;use program counter to select the first input
 		call UPCTSTFI
@@ -248,8 +248,8 @@ For_E:
 		jmp discover
 ;end
 
-//	jmp For_S ;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize_F_High8|StepSize_F_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00|49|
-			    ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+//	jmp For_S	;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize_F_High8|StepSize_F_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00|49|
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
 For_S:
 	;use program counter to select the first input
 		call UPCTSTFI
@@ -365,8 +365,8 @@ For_S:
 		jmp discover
 ;end
 
-//	jmp For_ES ;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_F_High8|EndNumber_F_Low8|StepSize_F_High8|StepSize_F_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00|4C|
-			    ;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
+//	jmp For_ES	;ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_F_High8|EndNumber_F_Low8|StepSize_F_High8|StepSize_F_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8 ;|00|4C|
+			;00 = ;01 > ;02 < ;03 >= ;04 <= ;05 !=
 For_ES:
 	;use program counter to select the first input
 		call UPCTSTFI

@@ -23,26 +23,26 @@ Each page is 0x100 (256) bytes long
 0x00FN - 0 1 2 3 4 5 6 7 8 9 A B C D E F
 
 Used page bytes:
-0x0000 |Page Number				nn
-0x0001 |					nn
-0x0002 |				nn
+0x0000 |Page Number		nn
+0x0001 |			nn
+0x0002 |			nn
 0x0003 |			nn
 0x0004 Start of RAM space
 
 
 ; -- Command Code Layout -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 	// ----- Interrupt List ----- //		25
-	// - system commands -					7
-	// - Chip Pin Control -					3
-	// - bitwise operations -				6
-	// - move number -						2
-	// - And/Or commands -					12
-	// - number control	-					n
-	// - math operations -					26
+	// - system commands -				7
+	// - Chip Pin Control -				3
+	// - bitwise operations -			6
+	// - move number -				2
+	// - And/Or commands -				12
+	// - number control	-			n
+	// - math operations -				26
 	// - if statements - if with else -		2
-	// - while loop -						2
-	// - for loops -						4
-	// - sub functions -					c
+	// - while loop -				2
+	// - for loops -				4
+	// - sub functions -				c
 
 total: 89 + n + c
 
@@ -72,9 +72,8 @@ N(32)
 N(64)
 
 // -- Floating Point Numbers -- //
-		(accoring to the internet and college)
-	S N*10^M
-	Sign Mantissa*10^Exponent
+	(accoring to the internet and college)
+		S N*10^M - Sign Mantissa*10^Exponent
 8-Bit
 Sign(1)|Exponent(3)|Mantissa(4)
 16-bit
@@ -84,9 +83,8 @@ Sign(1)|Exponent(8)|Mantissa(23)
 64-bit
 Sign(1)|Exponent(11)|Mantissa(52)
 
-		(Brandon's world)
-	N*10^M
-	Mantissa*10^Exponent
+	(Brandon's world)
+		N*10^M - Mantissa*10^Exponent
 N is in 2's Compliment
 8-Bit
 Exponent(4)|Mantissa(4)
