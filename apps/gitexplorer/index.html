@@ -6,16 +6,70 @@
 	<meta charset="utf-8"></meta>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script>
+		var root = {
+			'foldername':'New Folder',
+			'address':'http://metasophiea.com/files/',
+			'folders':['SubFolder'],
+			'files':['text.txt','code.js','site.html']
+		};
 
-		$(document).ready(function(){
-			$.getJSON("http://metasophiea.com/apps/gitexplorer/fodlerdataexample.js", function(data){console.log(data);});
-		});
+		var NewFolder = {
+			'foldername':'New Folder',
+			'address':'http://metasophiea.com/files/NewFolder/',
+			'folders':['SubFolder2'],
+			'files':['tex2t.txt','code2.js','site2.html']
+		};
 
+		function go(){
+			document.getElementById('windowlist').insertCell().appendChild(createDrawer(root));
+			document.getElementById('windowlist').insertCell().appendChild(createDrawer(root));
+		}
+
+
+		function itemClick(type,itemaddress){
+			var filename = itemaddress.split('/')[itemaddress.split('/').length-1];
+			if(type == 'file'){type = filename.split('.')[filename.split('.').length-1]; filename = filename.split('.')[0];}
+
+			//we assume that we got 'NewFolder' back
+			
+		}
+
+		function createDrawer(data){
+			var table = document.createElement('table');
+				table.id = data.foldername; table.width = '100px';
+			var temp_1 = ''; var temp_2 = '';
+			for(var a = 0; a < data.folders.length; a++){
+				temp_1 = table.insertRow().insertCell();
+				temp_1.id = data.address+data.folders[a];
+				temp_1.innerHTML = data.folders[a]; temp_1.setAttribute('class','option');
+				temp_1.setAttribute('onclick','itemClick("folder",this.id);');	
+				temp_1.setAttribute('class',temp_1.getAttribute('class')+' filetype_folder');
+			}
+
+			for(var a = 0; a < data.files.length; a++){
+				temp_1 = table.insertRow().insertCell();
+				temp_1.id = data.address+data.files[a];
+				temp_1.innerHTML = data.files[a]; temp_1.setAttribute('class','option');
+				temp_1.setAttribute('onclick','itemClick("file",this.id);');	
+				temp_1.setAttribute('class',temp_1.getAttribute('class')+' filetype_'+data.files[a].split('.')[1]);
+			}
+			return table;
+		}
 
 	</script>
-	<style></style>
+	<style>
+		html, body{width:100%; height:100%; margin:0px;}
+		.option{
+			color:rgb(0,0,0);
+			background-color: rgb(220,220,220);
+			width: 50px;
+		}
+	</style>
 </head>
 
-<body>
+<body onload='go();'>
+	<table id='window' cellspacing='0'>
+		<tr id='windowlist'></tr>
+	</table>
 </body>
 </html>
