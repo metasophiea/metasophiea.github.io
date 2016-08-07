@@ -4,77 +4,23 @@
 <head>
 	<title>POST</title>
 	<meta charset="utf-8"></meta>
-	<script>function Go(){
-		console.log('hello');
-
-	//		var xhttp= new XMLHttpRequest();
-	//		xhttp.open("POST", "https://api.github.com/repos/metasophiea/metasophiea.github.io", true);
-	//		xhttp.setRequestHeader("Authorization", "token metasophiea");
-	//		xhttp.send();
-	//		xhttp.onreadystatechange = function(){
-	//			if (xhttp.readyState == 4 && xhttp.status == 200) {
-	//				console.log(xhttp.responseText);
-	//			}
-	//		}
+	<script>function Go(){console.log('hello');}
 
 
-//	https://github.com/login/oauth/authorize
-		var xhttp= new XMLHttpRequest();
-		xhttp.open("POST", "https://github.com/login/oauth/authorize", true);
-		xhttp.setRequestHeader("client_id", "db361c4edf01c4ee9304");
-		xhttp.setRequestHeader("redirect_uri", location.href);
-		xhttp.send();
-		xhttp.onreadystatechange = function(){
-			console.log(xhttp);
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				console.log(xhttp.responseText);
-			}
-		}			
-	
-
-
-
-
-
-
-
-/*
-function createCORSRequest(method, url) {
-	var xhr = new XMLHttpRequest();
-	if ("withCredentials" in xhr) {
-		xhr.open(method, url, true);
-	} else if (typeof XDomainRequest != "undefined") {
-		xhr = new XDomainRequest();
-		xhr.open(method, url);
-	} else {
-		xhr = null;
+//https://github.com/login/oauth/authorize
+	var xhttp= new XMLHttpRequest();
+	xhttp.open("GET", "https://github.com/login/oauth/authorize", true);
+	xhttp.setRequestHeader("client_id", "db361c4edf01c4ee9304");
+	xhttp.send();
+	xhttp.onreadystatechange = function(){console.log(xhttp);
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			console.log(xhttp.responseText);
+		}
 	}
-	return xhr;
-}
-var xhr = createCORSRequest('POST', 'https://github.com/login/oauth/authorize');
-xhr.onload = function() {var responseText = xhr.responseText; console.log(responseText);};
-xhr.onerror = function() { console.log('There was an error!');};
-xhr.withCredentials = true; 
-xhr.send();console.log(xhr);
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-	}</script>
+	</script>
 	<style></style>
 </head>
 
 <body onLoad="Go()">
-
 </body>
 </html>
