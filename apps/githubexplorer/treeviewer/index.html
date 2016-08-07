@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script>
+		function go(){}
+		var api_portal = 'https://api.github.com/repos/';
+		var username = 'metasophiea'; var repo = 'metasophiea.github.io';
+
+		printInfo(api_portal+username+'/'+repo+'/contents');
+		
+	//	$.getJSON(api_portal+username+'/'+repo+'/contents',function(data){
+	//		console.log(data);
+	//		console.log(data.length);
+	//		for(var a = 0; a < data.length; a++){
+	//			console.log(data[a].name +'|'+ data[a].type);
+	//			if(data[a].type == 'dir'){
+	//				$.getJSON('https://api.github.com/repos/'+username+'/'+repo+'/contents'+data[a].name,function(data){
+	//					console.log(data);
+	//				});
+	//			}
+	//		}
+	//	});
+
+
+
+
+		function printInfo(directory){
+			$.getJSON(directory,function(data){
+				for(var a = 0; a < data.length; a++){
+					if(data[a].type == 'dir'){
+						console.log(directory+'/'+data[a].name);
+						printInfo(directory+'/'+data[a].name);
+					}
+				}
+			});
+		}
+
+	</script>
+	<style>
+		html, body{width:100%; height:100%; margin:0px;}
+		.option{
+			color:rgb(0,0,0);
+			background-color: rgb(220,220,220);
+			width: 50px;
+		}
+	</style>
+</head>
+
+<body onload='go();'>
+</body>
+</html>
