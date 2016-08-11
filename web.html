@@ -37,8 +37,6 @@
 		}
 
 		function goFor(system,browser,version){
-			console.log('trying: '+ system +' '+ browser+' '+version);
-
 			function success(system,browser,version){
 				var URL = 'http://metasophiea.com/mainSite/display/'+system+'/'+browser+'/'+version+'/index.html';	
 				var xhttp= new XMLHttpRequest();
@@ -58,7 +56,7 @@
 		}
 
 
-		function testIfBrowserIsAvailable(system,browser,version,success,failure){console.log('trying: '+ system +' '+ browser);
+		function testIfBrowserIsAvailable(system,browser,version,success,failure){
 			var URL = 'http://metasophiea.com/mainSite/display/'+system+'/'+browser+'/'+0+'/index.html';	
 			var xhttp= new XMLHttpRequest();
 			xhttp.open("GET", URL, true);
