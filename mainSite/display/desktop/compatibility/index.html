@@ -20,7 +20,7 @@
 			document.getElementById('mainSection').innerHTML += "</br>";
 
 			for(var a = 0; a < data.length; a++){
-				document.getElementById('mainSection').innerHTML += a+": <a href='"+data[a].link_url+"'>"+data[a].headline+"</a></br>";
+				document.getElementById('mainSection').innerHTML += (a+1)+": <a href='"+data[a].link_url+"'>"+data[a].headline+"</a></br>";
 				document.getElementById('mainSection').innerHTML += "   "+data[a].text_line1+"</br>";				
 				document.getElementById('mainSection').innerHTML += "   "+data[a].text_line2+"</br>";	
 			}
