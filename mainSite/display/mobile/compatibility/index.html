@@ -20,7 +20,9 @@
 			document.getElementById('mainSection').innerHTML += "</br>";
 
 			for(var a = 0; a < data.length; a++){
-				document.getElementById('mainSection').innerHTML += (a+1)+": <a href='"+data[a].link_url+"'>"+data[a].headline+"</a></br>";
+				//window.parent.location
+	//			document.getElementById('mainSection').innerHTML += (a+1)+": <a href='"+data[a].link_url+"'>"+data[a].headline+"</a></br>";
+				document.getElementById('mainSection').innerHTML += (a+1)+": <a onclick='window.parent.location = \""+data[a].link_url+"\"'>"+data[a].headline+"</a></br>";	
 				document.getElementById('mainSection').innerHTML += "   "+data[a].text_line1+"</br>";				
 				document.getElementById('mainSection').innerHTML += "   "+data[a].text_line2+"</br>";	
 			}
@@ -39,6 +41,10 @@
 	<style title="Main">
 		html, body{
 			width:100%; height:100%;
+		}
+		a{
+			color:rgb(153, 51, 255);
+			text-decoration: underline;
 		}
 	</style>
 </head>
