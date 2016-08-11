@@ -51,7 +51,10 @@
 					}			
 				}
 			}
-			function failure(system){document.getElementById('mainFrame').src = 'http://metasophiea.com/mainSite/display/'+system+'/compatibility/index.html';}
+			function failure(system){
+				document.getElementById('mainFrame').src = 'http://metasophiea.com/mainSite/display/'+system+'/compatibility/index.html';
+				document.getElementById('report').innerHTML = " You're using " + system+'/'+browser+'/'+version;
+			}
 			testIfBrowserIsAvailable(system,browser,version,success,failure);
 		}
 
@@ -75,6 +78,7 @@
 
 <body onLoad='go();'>
 
+<pre id='report'></pre>
 <iframe id='mainFrame' src=""></iframe>
 
 </body>
