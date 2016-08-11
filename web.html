@@ -30,9 +30,47 @@
 			else if(bowser.hasOwnProperty('mobile')){fileAddress.system = 'mobile';}
 			else if(bowser.hasOwnProperty('xbox')){fileAddress.system = 'mobile';}	
 			else{fileAddress.system = 'unknown';}
-		
-			var URL = 'http://metasophiea.com/mainSite/display/'+fileAddress.system+'/'+fileAddress.browser+'/'+fileAddress.version+'/index.html';	
-			document.getElementById('mainFrame').src = URL;
+
+			if(fileAddress.system == 'unknown'){document.getElementById('mainFrame').src = 'http://metasophiea.com/mainSite/display/desktop/compatibility/index.html';}
+
+			goFor(fileAddress.system,fileAddress.browser.split(' ').join(''),fileAddress.version);
+		}
+
+		function goFor(system,browser,version){
+			console.log('trying: '+ system +' '+ browser+' '+version);
+
+			function success(system,browser,version){
+				var URL = 'http://metasophiea.com/mainSite/display/'+system+'/'+browser+'/'+version+'/index.html';	
+				var xhttp= new XMLHttpRequest();
+				xhttp.open("GET", URL, true);
+				xhttp.send();
+				xhttp.onreadystatechange = function(){
+					if(xhttp.readyState == 4){
+						switch(xhttp.status){
+							case 200: document.getElementById('mainFrame').src = URL; break;
+							case 404: document.getElementById('mainFrame').src = 'http://metasophiea.com/mainSite/display/'+system+'/'+browser+'/'+0+'/index.html'; break; 
+						}
+					}			
+				}
+			}
+			function failure(system){document.getElementById('mainFrame').src = 'http://metasophiea.com/mainSite/display/'+system+'/compatibility/index.html';}
+			testIfBrowserIsAvailable(system,browser,version,success,failure);
+		}
+
+
+		function testIfBrowserIsAvailable(system,browser,version,success,failure){console.log('trying: '+ system +' '+ browser);
+			var URL = 'http://metasophiea.com/mainSite/display/'+system+'/'+browser+'/'+0+'/index.html';	
+			var xhttp= new XMLHttpRequest();
+			xhttp.open("GET", URL, true);
+			xhttp.send();
+			xhttp.onreadystatechange = function(){
+				if(xhttp.readyState == 4){
+					switch(xhttp.status){
+						case 200: success(system,browser,version); break;
+						case 404: failure(system); break; 
+					}
+				}			
+			}
 		}
 	</script>
 </head>
