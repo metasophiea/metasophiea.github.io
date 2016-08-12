@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>function Go(){console.log('hello');}</script>
+	<style></style>
+</head>
+
+<script>
+
+	var AudioContext = new window.AudioContext();
+	var mainOutput = AudioContext.destination;
+
+	var oscillator	= function(){
+		var gain = 0;	var freq = 0; 
+		var wave = {'type':'sine','sin':[],'cos':[]};
+		var position = {'x':0,'y':0,'z':10};
+		var generator = {};		
+			generator.oscillator = AudioContext.createOscillator();
+				generator.oscillator.type = wave.type;
+				generator.oscillator.frequency.value = freq;
+				generator.oscillator.start(0);			
+			generator.pan = AudioContext.createPanner();
+				generator.pan.setPosition(0,0,10);		
+			generator.gain = AudioContext.createGain();					
+				generator.gain.gain.value = gain;
+			generator.oscillator.connect(generator.gain);
+			generator.gain.connect(generator.pan);
+
+		this.connect = function(node){generator.pan.connect(node);}
+		this.freq = function(input){freq = input;generator.oscillator.frequency.value = freq;}
+		this.gain = function(input){gain = input;generator.gain.gain.value = gain;}	
+		this.panX = function(input){position.x = input;generator.pan.setPosition(position.x,position.y,position.z);}
+		this.panY = function(input){position.y = input;generator.pan.setPosition(position.x,position.y,position.z);}	
+		this.panZ = function(input){position.z = input;generator.pan.setPosition(position.x,position.y,position.z);}
+		this.waveType = function(input){wave.type = input;generator.oscillator.type = wave.type;}
+		this.customWaveType = function(sin,cos){
+			wave.type = 'custom'; wave.sin = new Float32Array(sin); wave.cos = new Float32Array(cos);
+			var newWave = AudioContext.createPeriodicWave(wave.sin,wave.cos);
+			generator.oscillator.setPeriodicWave(newWave);
+		}		
+	}
+	
+
+
+
+	var osc = new oscillator();
+	osc.connect(mainOutput);
+	
+	osc.gain(10);
+	osc.freq(440);
+	osc.customWaveType([0,0,1,0,1,0,0,1],[0,0,0,0,0,0,1,0]);
+	
+	
+	
+	
+	
+	
+	var analyser = AudioContext.createAnalyser();
+		osc.connect(analyser);
+	analyser.fftSize = 2048;
+	var bufferLength = analyser.fftSize;
+	var dataArray = new Uint8Array(bufferLength);
+	analyser.getByteTimeDomainData(dataArray);
+	console.log(dataArray);
+
+	
+	
+</script>
+
+<body onLoad="Go()">
+
+</body>
+</html>

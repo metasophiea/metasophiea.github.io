@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>function Go(){console.log('hello');}</script>
+	<style></style>
+</head>
+
+<script>
+	var AudioContext = new window.AudioContext();
+	
+	var mainOutput = AudioContext.destination;
+	var Oscillator = {};
+	Oscillator.oscillator = AudioContext.createOscillator();
+	Oscillator.pan = AudioContext.createPanner();
+	Oscillator.gain = AudioContext.createGain();
+	
+
+	
+	
+	Oscillator.oscillator.type = 'sine';
+	Oscillator.oscillator.frequency.value = 440;
+	Oscillator.oscillator.start(0);
+	Oscillator.oscillator.connect(Oscillator.gain);
+	
+	Oscillator.gain.gain.value = 1;
+	Oscillator.gain.connect(Oscillator.pan);
+	
+	Oscillator.pan.setPosition(0,0,10);
+	Oscillator.pan.connect(mainOutput);
+	
+	
+	
+	
+</script>
+
+<body onLoad="Go()">
+
+</body>
+</html>
