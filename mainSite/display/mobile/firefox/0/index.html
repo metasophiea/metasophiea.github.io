@@ -54,7 +54,7 @@
 					h2.innerHTML = data[a].headline;
 					
 				var p = document.createElement('p');
-					p.class = 'articleText';
+					p.setAttribute('class','articleText');
 					p.style.color = data[a].textcolour; 
 					p.innerHTML = data[a].text_line1 + '<br>' + data[a].text_line2;	
 					
@@ -118,7 +118,7 @@
 				cursor:pointer;
 			}
 			.articleText{
-				font-size: 300%;
+				font-size: 200%;
 			}
 		</style>		
 	
