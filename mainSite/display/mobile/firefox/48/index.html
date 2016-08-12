@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
+
+	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	
+	
+	<!-- Graphical Script -->
+	<script>
+		$(document).ready(function(){
+   			$("#menuButton").click(function(){
+       			$("#menu").slideToggle("slow");
+    		});	
+		});
+	</script>
+	
+	
+	<script>
+		function getData(){
+			var array = Object.keys(articles); var outputarray = [];
+			for(var a = 0; a < array.length; a++){
+				outputarray[a] = articles[array[a]];
+				outputarray[a].id = array[a];
+			}
+			return outputarray;
+		}
+		function Go(){
+			var data = getData();
+			
+			document.getElementById('menu').innerHTML += "<p  linked_id='home' class='menuOption' id='home' style='margin:0px;' onclick='MenuClick(this);'>Home</p>";
+			for(var a = 0; a < data.length; a++){
+				var article = document.createElement('article');
+					article.id = data[a].id;
+					article.style.padding = '10% 0%';
+					article.style.background = "url('"+data[a].image_url+"') center";
+					article.style['background-size'] = '100%';
+					article.setAttribute('onclick','window.parent.location= "'+data[a].link_url+'";');
+					
+				var div = document.createElement('div');		
+					div.style.padding = '1%';
+					div.style.background = data[a].backerFill;	
+
+				var h2 = document.createElement('h2');
+					h2.style.color = data[a].textcolour; 
+					h2.style.margin = '0px';
+					h2.innerHTML = data[a].headline;
+					
+				var p = document.createElement('p');
+					p.setAttribute('class','articleText');
+					p.style.color = data[a].textcolour; 
+					p.innerHTML = data[a].text_line1 + '<br>' + data[a].text_line2;	
+					
+				div.appendChild(h2); div.appendChild(p);
+				article.appendChild(div);
+				document.getElementById('main').appendChild(article);
+				
+				document.getElementById('menu').innerHTML += "<p linked_id='"+data[a].id+"' order='"+a+"' class='menuOption' style='margin:0px;' onclick='MenuClick(this);'>"+data[a].headline+"</p>";
+			}
+		}
+		
+		function MenuClick(that){ $("#menu").slideToggle("slow"); 
+			if(that.getAttribute('linked_id') == 'home'){window.scrollTo(0,0); return;}
+			
+			var height = document.getElementById(that.getAttribute('linked_id')).getBoundingClientRect().height;
+			var pos = height*parseInt(that.getAttribute('order'));
+			
+			window.scrollTo(0, pos);
+		}
+	</script>
+	
+
+
+
+	<!-- Tags -->
+		<style>
+			html, body{
+				width:100%; height:100%; margin: 0px; background: rgb(144, 281, 232);
+			}
+			header{
+				background: linear-gradient(140deg, rgb(15, 184, 173) 0%, rgb(31, 200, 219) 50%, rgb(44, 181, 232) 100%);
+				color: rgb(255,255,255);
+				font-family: Lobster, sans-serif;	
+				padding: 10px;		
+			}
+			h1{
+				font-size: 500%;
+				margin: 0px;
+				display: inline;
+			}
+			h2{
+				font-size: 400%;
+			}			
+			table{
+				background: rgb(230, 204, 255); color: rgb(255,255,255);
+				font-size: 100%;
+				font-family: Arvo, sans-serif;
+			}
+			p{margin: 0px;}
+		</style>
+		
+	<!-- Class -->
+		<style>
+			.menuButton{
+				font-size: 400%;
+			}
+			.menuOption{
+				font-size: 400%;
+				color: rgb(181, 102, 255);
+				text-decoration: underline;
+				cursor:pointer;
+			}
+			.articleText{
+				font-size: 200%;
+			}
+		</style>		
+	
+	<!-- IDs -->
+		<style>
+			#floatingSection{position: fixed; width: 100%; top: 0px;}
+			#panel{display: none;}
+			#menu{
+				display: none; 
+				width: 100%;
+				
+				background: rgb(230, 224, 255); color: rgb(255,255,255);
+				font-size: 100%;
+				font-family: Arvo, sans-serif;
+				text-align: center;
+			}		
+		</style>	
+</head>
+
+<body onload='Go();'>
+<!-- Dummy Section to push out the section below -->
+	<section id='floatingSection_dummy'>
+		<header> 
+			<h1>Metasophiea.com</h1><p style='display: inline; font-size:200%;'> Cyan Edition</p>
+		</header>
+		<nav>
+			<table style="width:100%"><tbody>
+  				<tr>
+   	 			<th style="width:100%" class='menuButton'>M e n u</th>
+  				</tr>
+  			</tbody></table>
+		</nav>
+	</section>
+<!-- Floating menu -->
+	<section id='floatingSection'>
+		<header> 
+			<h1>Metasophiea.com</h1><p style='display: inline; font-size:200%;'> Cyan Edition</p>
+		</header>
+		<nav>
+			<table style="width:100%"><tbody>
+  				<tr>
+   	 			<th style="width:100%" class='menuButton' id='menuButton'>M e n u</th>
+  				</tr>
+  			</tbody></table>
+		</nav>
+		<div id='menu'></div>
+	</section>
+
+<!-- Meat of site -->
+	<section id='main'></section>
+
+</body>
+</html>
