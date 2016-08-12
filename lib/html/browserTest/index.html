@@ -5,7 +5,7 @@
 <head>
 	<title>metasophiea</title>
 	<meta charset="utf-8"></meta>
-
+	<script src="http://metasophiea.com/lib/js/browserWork/ded_bowser.js"></script>
 	<script>
 		function Go(){
 			var data = getData();
@@ -20,7 +20,8 @@
 			document.getElementById('output').innerHTML += 'I think...<br>';	
 			document.getElementById('output').innerHTML += data[2][0].split('/')[0] + ' version: ' + data[2][0].split('/')[1].split('.')[0];	
 
-
+			document.getElementById('output').innerHTML += '<br><br><br>';
+			document.getElementById('output').innerHTML += JSON.stringify(bowser,null,2);		
 		}
 
 
