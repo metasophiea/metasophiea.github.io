@@ -94,13 +94,13 @@
 			this.connect = function(node){WS.connect(node.getNode);}
 		}
 		
-		var convolver = function(){
+		var reverbe = function(){
 			var node = AudioContext.createConvolver();
 			
 			var soundSource, concertHallBuffer;
 
 			ajaxRequest = new XMLHttpRequest();
-			ajaxRequest.open('GET', 'file:///Users/metasophiea/Software/metasophiea.github.io/lib/html/examples/WebAudio/Musikvereinsaal.wav', true);
+			ajaxRequest.open('GET', 'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/lib/html/examples/WebAudio/Musikvereinsaal.wav', true);
 			ajaxRequest.responseType = 'arraybuffer';
 			ajaxRequest.onload = function() {
   				var audioData = ajaxRequest.response;
@@ -123,13 +123,13 @@
 		var mainOutput = new outputPort();
 		var scope = new oscilloscope();
 		var distortion = new distortion();
-		var convolver = new convolver();
+		var reverbe = new reverbe();
 		
 
 		osc.connect(distortion);
-		distortion.connect(convolver);
-		convolver.connect(scope);
-		convolver.connect(mainOutput);
+		distortion.connect(reverbe);
+		reverbe.connect(scope);
+		reverbe.connect(mainOutput);
 		
 		
 		osc.freq(440);
@@ -137,7 +137,7 @@
 
 
 		setTimeout(function(){osc.gain(10);},100);
-		setTimeout(function(){osc.gain(0);},1000);
+		setTimeout(function(){osc.gain(0);},200);
 
 
 	
