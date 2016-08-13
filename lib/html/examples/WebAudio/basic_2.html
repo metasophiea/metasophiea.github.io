@@ -5,72 +5,210 @@
 	<title>metasophiea</title>
 	<meta charset="utf-8"></meta>
 	<script>function Go(){console.log('hello');}</script>
-	<style></style>
+
+	<script>
+
+		var AudioContext = new window.AudioContext();
+		
+		var outputPort = function(){
+			this.getNode = AudioContext.destination;
+		}
+
+		var oscillator	= function(){
+			var gain = 0;	var freq = 0; 
+			var wave = {'type':'sine','sin':[],'cos':[]};
+			var position = {'x':0,'y':0,'z':10};
+			var generator = {};		
+				generator.oscillator = AudioContext.createOscillator();
+					generator.oscillator.type = wave.type;
+					generator.oscillator.frequency.value = freq;
+					generator.oscillator.start(0);			
+				generator.pan = AudioContext.createPanner();
+					generator.pan.setPosition(0,0,10);		
+				generator.gain = AudioContext.createGain();					
+					generator.gain.gain.value = gain;
+				generator.oscillator.connect(generator.gain);
+				generator.gain.connect(generator.pan);
+	
+			this.connect = function(node){
+				generator.pan.connect(node.getNode);
+			}
+			this.freq = function(input){freq = input;generator.oscillator.frequency.value = freq;}
+			this.gain = function(input){gain = input;generator.gain.gain.value = gain;}	
+			this.panX = function(input){position.x = input;generator.pan.setPosition(position.x,position.y,position.z);}
+			this.panY = function(input){position.y = input;generator.pan.setPosition(position.x,position.y,position.z);}	
+			this.panZ = function(input){position.z = input;generator.pan.setPosition(position.x,position.y,position.z);}
+			this.waveType = function(input){wave.type = input;generator.oscillator.type = wave.type;}
+			this.customWaveType = function(sin,cos){
+				wave.type = 'custom'; wave.sin = new Float32Array(sin); wave.cos = new Float32Array(cos);
+				var newWave = AudioContext.createPeriodicWave(wave.sin,wave.cos);
+				generator.oscillator.setPeriodicWave(newWave);
+			}		
+		}
+		
+		var oscilloscope = function(){
+			var analyser = AudioContext.createAnalyser();
+			var bufferSize = 256; analyser.fftSize = bufferSize;
+			var dataArray = new Uint8Array(analyser.fftSize);
+			
+			this.getNode = analyser;
+			this.getBufferSize = function(){return bufferSize;}
+			this.setBufferSize = function(newSize){
+				bufferSize = newSize;
+				analyser.fftSize = bufferSize;
+				dataArray = new Uint8Array(analyser.fftSize);
+			}
+			this.connect = function(node){analyser.connect(node);}
+			this.getDataNow = function(){
+				analyser.getByteTimeDomainData(dataArray);
+				return dataArray;
+			}
+		}
+		
+		var distortion = function(){
+			var WS = AudioContext.createWaveShaper();
+			var amount = 0;
+			
+			WS.curve = makeDistortionCurve(amount);
+			WS.oversample = '4x';
+			
+			function makeDistortionCurve(amount) {
+  				var k = typeof amount === 'number' ? amount : 50,
+    				n_samples = 44100,
+    				curve = new Float32Array(n_samples),
+    				deg = Math.PI / 180,
+    				i = 0,
+   					x;
+  				for ( ; i < n_samples; ++i ) {
+    				x = i * 2 / n_samples - 1;
+    				curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+ 				}
+  				return curve;
+			};
+			
+			this.getNode = WS;
+			this.setAmount = function(amount){
+				amount = amount;
+				WS.curve = makeDistortionCurve(amount);
+			}
+			this.connect = function(node){WS.connect(node.getNode);}
+		}
+		
+		var convolver = function(){
+			var node = AudioContext.createConvolver();
+			
+			var soundSource, concertHallBuffer;
+
+			ajaxRequest = new XMLHttpRequest();
+			ajaxRequest.open('GET', 'file:///Users/metasophiea/Software/metasophiea.github.io/lib/html/examples/WebAudio/Musikvereinsaal.wav', true);
+			ajaxRequest.responseType = 'arraybuffer';
+			ajaxRequest.onload = function() {
+  				var audioData = ajaxRequest.response;
+  				AudioContext.decodeAudioData(audioData, function(buffer) {
+      				concertHallBuffer = buffer;
+      				soundSource = AudioContext.createBufferSource();
+      					soundSource.buffer = concertHallBuffer;
+						node.buffer = concertHallBuffer;
+    			}, function(e){"Error with decoding audio data" + e.err});
+			}
+
+			ajaxRequest.send();
+			
+			this.getNode = node;
+			this.connect = function(connection){node.connect(connection.getNode);}
+		}
+	
+	
+		var osc = new oscillator();
+		var mainOutput = new outputPort();
+		var scope = new oscilloscope();
+		var distortion = new distortion();
+		var convolver = new convolver();
+		
+
+		osc.connect(distortion);
+		distortion.connect(convolver);
+		convolver.connect(scope);
+		convolver.connect(mainOutput);
+		
+		
+		osc.freq(440);
+		osc.customWaveType([0,1,1],[0,0,1]);
+
+
+		setTimeout(function(){osc.gain(10);},100);
+		setTimeout(function(){osc.gain(0);},1000);
+
+
+	
+		
+		var canvasElement; var canvas; 
+		var scopeRefresh;
+		function Go(){
+			document.getElementById('canvas').height = window.innerHeight;
+			document.getElementById('canvas').width = window.innerWidth;
+			canvasElement = document.getElementById('canvas');
+		
+			drawScpoe(scope.getDataNow(),canvasElement);			
+			scopeRefresh = setInterval(function(){
+				drawScpoe(scope.getDataNow(),canvasElement);		
+			},500);
+	
+		}
+		function drawScpoe(data,canvasElement){			
+			canvas = canvasElement.getContext("2d");
+			canvas.clearRect(0, 0, canvasElement.width, canvasElement.height);			
+			
+			canvas.beginPath();
+			canvas.strokeStyle = 'rgb(0,200,0)';
+			canvas.moveTo(0,canvasElement.height/2);	
+
+			for(var a = 0; a < data.length; a++){	
+				canvas.lineTo(canvasElement.width*(a/data.length),canvasElement.height*(data[a]/256));
+				canvas.stroke();
+			}
+		}
+		
+		
+/*		
+		var canvasElement; var canvas; 
+		var scopeRefresh;
+		function Go(){
+			document.getElementById('canvas').height = window.innerHeight;
+			document.getElementById('canvas').width = window.innerWidth;
+			canvasElement = document.getElementById('canvas');
+		
+			drawScpoe(dataArray,canvasElement);			
+			scopeRefresh = setInterval(function(){
+				analyser.getByteTimeDomainData(dataArray);
+				drawScpoe(dataArray,canvasElement);		
+			},500);
+	
+		}
+		function drawScpoe(data,canvasElement){			
+			canvas = canvasElement.getContext("2d");
+			canvas.clearRect(0, 0, canvasElement.width, canvasElement.height);			
+			
+			canvas.beginPath();
+			canvas.strokeStyle = 'rgb(0,200,0)';
+			canvas.moveTo(0,canvasElement.height/2);	
+
+			for(var a = 0; a < data.length; a++){	
+				canvas.lineTo(canvasElement.width*(a/data.length),canvasElement.height*(data[a]/256));
+				canvas.stroke();
+			}
+		}*/
+	</script>
+
+	<style>	
+		html, body{
+			width:100%; height:100%; margin:0px;
+			overflow-x: hidden; overflow-y: hidden; 
+		}
+	</style>
 </head>
-
-<script>
-
-	var AudioContext = new window.AudioContext();
-	var mainOutput = AudioContext.destination;
-
-	var oscillator	= function(){
-		var gain = 0;	var freq = 0; 
-		var wave = {'type':'sine','sin':[],'cos':[]};
-		var position = {'x':0,'y':0,'z':10};
-		var generator = {};		
-			generator.oscillator = AudioContext.createOscillator();
-				generator.oscillator.type = wave.type;
-				generator.oscillator.frequency.value = freq;
-				generator.oscillator.start(0);			
-			generator.pan = AudioContext.createPanner();
-				generator.pan.setPosition(0,0,10);		
-			generator.gain = AudioContext.createGain();					
-				generator.gain.gain.value = gain;
-			generator.oscillator.connect(generator.gain);
-			generator.gain.connect(generator.pan);
-
-		this.connect = function(node){generator.pan.connect(node);}
-		this.freq = function(input){freq = input;generator.oscillator.frequency.value = freq;}
-		this.gain = function(input){gain = input;generator.gain.gain.value = gain;}	
-		this.panX = function(input){position.x = input;generator.pan.setPosition(position.x,position.y,position.z);}
-		this.panY = function(input){position.y = input;generator.pan.setPosition(position.x,position.y,position.z);}	
-		this.panZ = function(input){position.z = input;generator.pan.setPosition(position.x,position.y,position.z);}
-		this.waveType = function(input){wave.type = input;generator.oscillator.type = wave.type;}
-		this.customWaveType = function(sin,cos){
-			wave.type = 'custom'; wave.sin = new Float32Array(sin); wave.cos = new Float32Array(cos);
-			var newWave = AudioContext.createPeriodicWave(wave.sin,wave.cos);
-			generator.oscillator.setPeriodicWave(newWave);
-		}		
-	}
 	
-
-
-
-	var osc = new oscillator();
-	osc.connect(mainOutput);
-	
-	osc.gain(10);
-	osc.freq(440);
-	osc.customWaveType([0,0,1,0,1,0,0,1],[0,0,0,0,0,0,1,0]);
-	
-	
-	
-	
-	
-	
-	var analyser = AudioContext.createAnalyser();
-		osc.connect(analyser);
-	analyser.fftSize = 2048;
-	var bufferLength = analyser.fftSize;
-	var dataArray = new Uint8Array(bufferLength);
-	analyser.getByteTimeDomainData(dataArray);
-	console.log(dataArray);
-
-	
-	
-</script>
-
 <body onLoad="Go()">
-
+	<canvas id='canvas'></canvas>
 </body>
 </html>

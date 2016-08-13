@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>
+			var canvas;
+	
+		function Go(){
+			document.getElementById('canvas').height = window.innerHeight;
+			document.getElementById('canvas').width = window.innerWidth;
+			canvas = document.getElementById('canvas').getContext("2d");
+			canvas.fillRect(10,10,100,100);
+			
+			canvas.beginPath();
+			canvas.strokeStyle = 'rgb(255,0,0)';
+			canvas.moveTo(100,0);
+			canvas.lineTo(200,100);
+			canvas.stroke();			
+		}
+	</script>
+	<style>	
+		html, body{
+			width:100%; height:100%; margin:0px;
+			overflow-x: hidden; overflow-y: hidden; 
+		}
+	</style>
+</head>
+
+<body onLoad="Go()">
+	<canvas id='canvas'></canvas>
+</body>
+</html>
