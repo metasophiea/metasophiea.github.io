@@ -133,10 +133,10 @@
 		
 		
 		osc.freq(440);
-		osc.customWaveType([0,1,1],[0,0,1]);
+		osc.customWaveType([0,1,0],[0,0,0]);
+		distortion.setAmount(1000);
 
-
-		setTimeout(function(){osc.gain(10);},100);
+		setTimeout(function(){osc.gain(100);},100);
 		setTimeout(function(){osc.gain(0);},200);
 
 
