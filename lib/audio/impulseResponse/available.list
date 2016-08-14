@@ -1,4 +1,5 @@
-{[	
+{
+	'list':[	
 	'Block Inside.wav',
 	'Bottle Hall.wav',
 	'Cement Blocks 1.wav',
@@ -36,5 +37,6 @@
 	'Small Prehistoric Cave.wav',
 	'St Nicolaes Church.wav',
 	'Trig Room.wav',
-	'Vocal Duo.wav',
-]}
+	'Vocal Duo.wav'
+	]
+}
