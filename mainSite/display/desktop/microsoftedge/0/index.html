@@ -9,59 +9,46 @@
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lobster">
 
-	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles.js"></script>
+	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles2.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	
 	
 	<!-- Graphical Script -->
-	<script>
-		$(document).ready(function(){
-   			$("#menuButton").click(function(){
-       			$("#menu").slideToggle("slow");
-    		});	
-		});
-	</script>
-	
+	<script> $(document).ready(function(){ $("#menuButton").click(function(){ $("#menu").slideToggle("slow"); }); }); </script>
 	
 	<script>
-		function getData(){
-			var array = Object.keys(articles); var outputarray = [];
-			for(var a = 0; a < array.length; a++){
-				outputarray[a] = articles[array[a]];
-				outputarray[a].id = array[a];
-			}
-			return outputarray;
-		}
-		function Go(){
-			var data = getData();
-			
-			document.getElementById('menu').innerHTML += "<p  linked_id='home' class='menuOption' id='home' style='margin:0px;' onclick='MenuClick(this);'>Home</p>";
-			for(var a = 0; a < data.length; a++){
-				var article = document.createElement('article');
-					article.id = data[a].id;
-					article.style.padding = '5% 0%';
-					article.style.background = "url('"+data[a].image_url+"') center";
-					article.style['background-size'] = '100%';
-					article.setAttribute('onclick','window.parent.location= "'+data[a].link_url+'";');
-					
-				var div = document.createElement('div');		
-					div.style.padding = '1%';
-					div.style.background = data[a].backerFill;	
 
-				var h2 = document.createElement('h2');
-					h2.style.color = data[a].textcolour; 
+		function Go(){
+			document.getElementById('menu').innerHTML += "<p  linked_id='home' class='menuOption' id='home' style='margin:0px;' onclick='MenuClick(this);'> -> Home</p>";
+			
+			for(var a = 0; a < articles.length; a++){
+				var article = document.createElement('article');
+					article.id = articles[a].id;
+					article.style.padding = '5% 0%';
+					article.style.background = "url('"+articles[a].image_url+"') center";
+					article.style['background-size'] = '100%';
+					article.setAttribute('onclick','window.parent.location= "'+articles[a].link_url+'";');				
+				var div = document.createElement('div');
+					div.style.padding = '1%';
+					div.style.background = articles[a].backerFill;					
+				var h2 = document.createElement('h2');	
+					h2.style.color = articles[a].textcolour; 
 					h2.style.margin = '0px';
-					h2.innerHTML = data[a].headline;
+					h2.innerHTML = articles[a].headline;
+					div.appendChild(h2);
+				
+				for(var b = 0; b < articles[a].text.length; b++){
+					var p = document.createElement('p');
+					p.style.color = articles[a].textcolour; 
+					p.innerHTML = articles[a].text[b];
+					div.appendChild(p);
+				}
 					
-				var p = document.createElement('p');
-					p.style.color = data[a].textcolour; 
-					p.innerHTML = data[a].text_line1 + '<br>' + data[a].text_line2;	
-					
-				div.appendChild(h2); div.appendChild(p);
+				
 				article.appendChild(div);
 				document.getElementById('main').appendChild(article);
 				
-				document.getElementById('menu').innerHTML += "<p linked_id='"+data[a].id+"' order='"+a+"' class='menuOption' style='margin:0px;' onclick='MenuClick(this);'>"+data[a].headline+"</p>";
+				document.getElementById('menu').innerHTML += "<p linked_id='"+articles[a].id+"' order='"+a+"' class='menuOption' style='margin:0px;' onclick='MenuClick(this);'> -> "+articles[a].headline+"</p>";			
 			}
 		}
 		
