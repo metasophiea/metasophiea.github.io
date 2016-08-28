@@ -1,0 +1,28 @@
+var content = [
+	{
+		'id':'post_20160827-a',
+		'date':'2016-08-27-20-15',
+		'headline':'Test Post',
+		'content':{
+			'h1':'Heading',
+			'h2':'Heading 2',
+			'h3':'Heading 3',
+			'p':'A large section of words about many important things, such as cheese, milk and other dairy product',
+			'i':'http://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/myst.jpg',
+			'p':'A large section of words about many important things, such as cheese, milk and other dairy product'			
+		}
+	},
+	{
+		'id':'post_20160807-a',
+		'date':'2016-08-27-20-15',
+		'headline':'Test Post',
+		'content':{
+			'h1':'Heading',
+			'h2':'Heading 2',
+			'h3':'Heading 3',
+			'p':'A large section of words about many important things, such as cheese, milk and other dairy product',
+			'i':'http://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/myst.jpg',
+			'p':'A large section of words about many important things, such as cheese, milk and other dairy product'			
+		}
+	}
+];
