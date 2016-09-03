@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+	
+<html lang="en">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+			<title>metasophiea</title>
+
+
+
+			<script>
+
+				var pixSize = 10;
+				var pixMatrix = [];
+				function Go(){
+					adjustCanvasToFill(document.getElementById('mainCanvas'));
+
+					console.log(getPixSpaceDimentions());
+					createMatrix();
+					randomPixles();
+					render();
+				}
+
+				function adjustCanvasToFill(canvas){canvas.height = window.innerHeight;canvas.width = window.innerWidth;}
+				function getPixSpaceDimentions(){
+					return {'x':Math.floor(window.innerHeight/pixSize),'y':Math.floor(window.innerWidth/pixSize)};
+				}
+				function createMatrix(){
+					var dimentions = getPixSpaceDimentions();
+					pixMatrix = new Array(dimentions.x);
+					for(var a = 0; a < pixMatrix.length; a++){
+						pixMatrix[a] = new Array(dimentions.y);
+					}
+
+					for(var x = 0; x < pixMatrix.length; x++){for(var y = 0; y < pixMatrix[x].length; y++){
+						pixMatrix[x][y] = '000000';
+					}}
+				}
+				function setPixles(value){
+					for(var x = 0; x < pixMatrix.length; x++){for(var y = 0; y < pixMatrix[x].length; y++){
+						pixMatrix[x][y] = value;
+					}}
+				}
+				function randomPixles(){
+					for(var x = 0; x < pixMatrix.length; x++){for(var y = 0; y < pixMatrix[x].length; y++){
+						pixMatrix[x][y] = Math.floor(Math.random()*256).toString(16) + Math.floor(Math.random()*256).toString(16) + Math.floor(Math.random()*256).toString(16);
+					}}
+				}				
+				function render(){
+					var canvas = document.getElementById("mainCanvas").getContext("2d");
+						
+					for(var x = 0; x < pixMatrix.length; x++){for(var y = 0; y < pixMatrix[x].length; y++){
+						canvas.fillStyle = '#' + pixMatrix[x][y];
+						canvas.fillRect(pixSize*y,pixSize*x,pixSize,pixSize);
+					}}					
+					
+				}
+
+				function slowRender(){
+					var i = {'x':0,'y':0};
+					var interval = setInterval(function(){
+						var canvas = document.getElementById("mainCanvas").getContext("2d");
+						canvas.fillStyle = '#' + pixMatrix[i.x][i.y];
+						canvas.fillRect(pixSize*i.y,pixSize*i.x,pixSize,pixSize);
+						i.y++; if(i.y >= pixMatrix[0].length){i.y = 0; i.x++;}
+						if(i.x >= pixMatrix.length){clearInterval(interval);}			
+					},1);
+				}
+
+				function adv_slowRender(num){
+					if(pixMatrix.length/num % 1 != 0){for(var a = 0; a < num+1; a++){slowRenderAt(a*Math.floor(pixMatrix.length/num),1/num);}}
+					else{for(var a = 0; a < num+1; a++){slowRenderAt(a*Math.floor(pixMatrix.length/num),1/num);}}
+
+					function slowRenderAt(val,fraction){
+						var i = {'x':val,'y':0};
+						var interval = setInterval(function(){
+							var canvas = document.getElementById("mainCanvas").getContext("2d");
+							canvas.fillStyle = '#' + pixMatrix[i.x][i.y];
+							canvas.fillRect(pixSize*i.y,pixSize*i.x,pixSize,pixSize);
+							i.y++; if(i.y >= pixMatrix[0].length){i.y = 0; i.x++;}
+							if(i.x >= val+Math.floor(pixMatrix.length*fraction) || i.x >= pixMatrix.length){clearInterval(interval);}			
+						},1);
+					}
+				}
+		
+	</script>
+
+
+		
+	<style>
+				html,body{
+					width:100%; height:100%; margin:0px;
+					overflow-x: hidden; overflow-y: hidden;
+				}
+			</style>
+
+		</head>
+
+
+
+	<body onload="Go()">
+
+		<canvas id='mainCanvas'></canvas>
+	
+
+</body>
+</html>
