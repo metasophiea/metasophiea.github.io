@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+	
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>metasophiea</title>
+		<script type="text/javascript" src="./pixelMagic.js"></script>
+		<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles2.js"></script>
+		<script>
+			var log = [
+				{'text':'loading drivers..','colour':'888888'},
+				{'text':'stabilizing matrix generators..','colour':'888888'},
+				{'text':'greeting double ETC connections..','colour':'888888'},	
+				{'text':'conneting..','colour':'888888'},								
+				{'text':'ready','colour':'888888'},
+				{'text':' ','colour':'ffffff'},
+				{'text':'type help for help','colour':'ffffff'}
+				];
+			var printingArray = [];
+			var workingCode = ''; var displayCode = ''; var scroll = 0;
+
+			function adjustCanvas(canvas){
+				if(window.innerHeight > window.innerWidth){
+					canvas.height = window.innerWidth;
+					canvas.width = window.innerWidth;
+				}
+				else{
+					canvas.height = window.innerHeight;
+					canvas.width = window.innerHeight;
+				}
+			}
+
+			function Go(){
+				console.log('Hello');
+				adjustCanvas(document.getElementById('pixelMatrix'));
+				pixelMatrix.attachCanvas(document.getElementById('pixelMatrix'));
+				pixelMatrix.screenDimentions({'width':200,'height':200});
+				pixelMatrix.FPS(15);
+				pixelMatrix.autoRender(true);	
+
+				
+
+				var flash = false; var flashCount = 0;
+				setInterval(function(){
+					pixelMatrix.setAllPixels('000000'); var height = 0;
+					for(var a = 0; a < log.length; a++){
+						if(pixelMatrix.drawString_calculateSize(log[a].text).width > pixelMatrix.screenDimentions().width){
+							var lineColour = log[a].colour; printingArray = log[a].text.split(' '); log.pop(); var temp = [];
+							for(var i = 0; i <= printingArray.length; i++){
+								temp.push(printingArray[i]);
+								if(pixelMatrix.drawString_calculateSize(temp).width+pixelMatrix.drawString_calculateSize(' ').width*temp.length > pixelMatrix.screenDimentions().width){temp.pop();log.push({'text':temp.join(' '),'colour':lineColour}); temp = [printingArray[i]];}
+							}
+							temp.pop();log.push({'text':temp.join(' '),'colour':lineColour});
+						}else{height += pixelMatrix.drawString({'x':1,'y':scroll+height},log[a].text,log[a].colour).height;}
+					}
+					if(height > pixelMatrix.screenDimentions().height-10){
+						scroll = pixelMatrix.screenDimentions().height-10 - height;
+					}
+
+					var width = pixelMatrix.drawString({'x':1,'y':pixelMatrix.screenDimentions().height-6},workingCode,'ffffff').width;
+					if(flash){pixelMatrix.drawString({'x':width+2,'y':pixelMatrix.screenDimentions().height-6},'|','ffffff');}
+					if(flashCount > 4){flashCount = 0;if(flash){flash = false;}else{flash = true;}}
+					flashCount++;
+				},100);		
+			}
+
+			function key(data){
+				switch(data){				
+					case 'Enter': log.push({'text':workingCode, 'colour':'000000'}); RunCommand(workingCode); workingCode = ''; break;
+					case 'Backspace': var temp = workingCode.split(''); temp.pop(); workingCode = temp.join(''); break;
+					case ' ': case '.': case '\\': case '|': case ';': case ':':case '<': case '>': case '(': case ')': case '-': case '"': case "'": case ',':  case '+': case '#': case '?': case '_': case '!':
+					case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': 
+					case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h': case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p': case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x': case 'y': case 'z':
+					case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H': case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P': case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X': case 'Y': case 'Z':					
+					workingCode += data; break;
+				}
+			}
+
+			function RunCommand(command){
+				switch(command.substring(0,4)){
+					case 'con ': eval(command.substring(4)); return; break;
+					case 'pst ': var temp = command.split(' '); 
+						if(temp[1] >= articles.length || temp[1] < 0 || isNaN(temp[1])){log.push('bad article number'); return;}
+						switch(temp[2]){
+							case 'view': 
+								var article = articles[temp[1]];
+								log.push({'text':' ', 'colour':'000000'});		
+								log.push({'text':article.headline, 'colour':'ffffff'});							
+								for(var a = 0; a < article.text.length; a++){log.push({'text':article.text[a], 'colour':'cccccc'});}
+							break;
+							case 'go':
+								window.location = articles[temp[1]].link_url;
+							break; 	
+							default:log.push({'text':'unknown command -> "' + command + '"', 'colour':'ff8888'}); break;						
+						}
+
+					return; break;
+				}
+
+				switch(command){
+					case 'exit':window.history.back(); break;
+					case 'reset': location.reload(); break;
+					case 'clear': log2 = []; scroll = 0; break;
+					case 'help': 	
+						log.push({'text':' ', 'colour':'000000'});	
+						log.push({'text':' --Help -- -- --', 'colour':'ffffff'});	
+						log.push({'text':'- help', 'colour':'aaaaaa'});	
+						log.push({'text':'- pst n ', 'colour':'aaaaaa'});	
+						log.push({'text':'- - view ', 'colour':'aaaaaa'});	
+						log.push({'text':'- - go ', 'colour':'aaaaaa'});	
+						log.push({'text':'- clear', 'colour':'aaaaaa'});	
+						log.push({'text':'- con ', 'colour':'aaaaaa'});	
+						log.push({'text':'- - log.push();', 'colour':'aaaaaa'});	
+						log.push({'text':'- reset', 'colour':'aaaaaa'});	
+						log.push({'text':'- exit', 'colour':'aaaaaa'});	
+						log.push({'text':' -- -- -- -- --', 'colour':'ffffff'});	
+					break;
+					default:log.push({'text':'unknown command -> "' + command + '"', 'colour':'ff8888'}); break;
+				}
+			}
+		</script>
+
+		<style>
+			html,body{
+				width:100%; height:100%; margin:0px;
+				overflow-x: hidden; overflow-y: hidden;
+				background-color:#101010;
+			}
+		</style>
+	</head>
+		
+	<body onLoad='Go()' onkeydown='key(event.key);'>
+		<canvas id='pixelMatrix' width='800' height='600' style='display: block; margin: auto; cursor: none;'></canvas>
+	</body>
+</html>

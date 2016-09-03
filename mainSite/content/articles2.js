@@ -1,7 +1,7 @@
 var articles = [
 	{	"id":"article_20160807-a",
 		"headline":"Canvas Viewing Space Project",
-		"text":["A pure JS 2d graphics engine, currently developing into dynamic presentation app"],	
+		"text":["A pure JS 2d graphics engine, currently developing into a dynamic presentation app"],	
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
 		"image_url":"http://metasophiea.com/lib/image/canvasViewingSpace_splash1.bmp",

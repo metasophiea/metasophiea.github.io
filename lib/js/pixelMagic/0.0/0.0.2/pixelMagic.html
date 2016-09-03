@@ -10,27 +10,28 @@
 				console.log('Hello');
 				adjustCanvas(document.getElementById('pixelMatrix'));
 				pixelMatrix.attachCanvas(document.getElementById('pixelMatrix'));
-				pixelMatrix.setAllPixels('000000');//pixelMatrix.setAllPixels('459ecf');
-				
+				pixelMatrix.screenDimentions({'width':200,'height':200});
+				pixelMatrix.setAllPixels('459ecf');		
 				pixelMatrix.autoRender(true);	
-				pixelMatrix.dimentions({'width':200,'height':200});
-				
-				pixelMatrix.drawLine({'x':10,'y':42},{'x':40,'y':39},'ffffff');	
-				pixelMatrix.drawPoly([{'x':99,'y':100},{'x':98,'y':150},{'x':200,'y':200},{'x':200,'y':100},{'x':150,'y':150}],'ffffff')
-				pixelMatrix.drawSquare({'x':100,'y':50},0.1,10,'ffffff');
-				
+		
+//				pixelMatrix.drawLine({'x':195,'y':195},{'x':200,'y':200},'ffffff');	
+//				pixelMatrix.drawPoly([{'x':99,'y':100},{'x':98,'y':150},{'x':200,'y':200},{'x':200,'y':100},{'x':150,'y':150}],'ffffff')
+//				pixelMatrix.drawSquare({'x':100,'y':50},0.1,10,'ff00ff');
 
 
-				var i = 0;
+
+
+
+				var i = 0; var dim = pixelMatrix.screenDimentions();
 				setInterval(function(){
 					pixelMatrix.setAllPixels('000000');
-					pixelMatrix.drawSquare({'x':Math.floor(pixelMatrix.dimentions().width*0.9/2)-10*2,'y':Math.floor(pixelMatrix.dimentions().height/2)+2},i,10,'ffffff');
-					pixelMatrix.drawString({'x':Math.floor(pixelMatrix.dimentions().width*0.9/2),'y':Math.floor(pixelMatrix.dimentions().height/2)},'METASOPHIEA.COM','ffffff');
-					pixelMatrix.drawString({'x':Math.floor(pixelMatrix.dimentions().width*1.2/2),'y':Math.floor(pixelMatrix.dimentions().height*1.06/2)},'TR16 edition','888888');								
-
-					i += 0.2;
+					pixelMatrix.drawSquare({'x':Math.floor(dim.width*0.9/2)-10*2,'y':Math.floor(dim.height/2)+2},i,10,'ffffff');
+					pixelMatrix.drawString({'x':Math.floor(dim.width*0.9/2),'y':Math.floor(dim.height/2)},'METASOPHIEA.COM','ffffff');
+					pixelMatrix.drawString({'x':Math.floor(dim.width*1/2),'y':Math.floor(dim.height*1.06/2)},'NCC1700 edition','888888');								
+					i += 0.2; if(i > 2*Math.PI){i = i - 2*Math.PI;}
 				},100);
-
+	
+				pixelMatrix.render();
 			}
 			function adjustCanvas(canvas){
 				if(window.innerHeight > window.innerWidth){
