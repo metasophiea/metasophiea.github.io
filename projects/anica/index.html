@@ -7,18 +7,50 @@
 	<script type='text/javascript' src="file:///Users/metasophiea/Software/GitHub/metasophiea.github.io/projects/anica/content"></script>	
 	<script>
 		function Go(){
-			for(var a = 0; a < content.length; a++){	
-				console.log(content[a].id);	
-				console.log(content[a].date);	
-				console.log(content[a].headline);							
-				console.log(content[a].content);
-				
-				
-				document.createElement()
-				document.getElementById('channel');
-				
+			for(var a = 0; a < content.length; a++){
+				var title = document.createElement('title');
+					title.innerHTML = content[a].title;
+				var description = generateDescription(content[a].content);
+				item = document.createElement('item')
+					item.appendChild(title);
+					item.appendChild(description);
+				document.getElementById('channel').appendChild(item);
+			}	
+		}
+
+		function generateDescription(contentArray){
+			var temp; var description = document.createElement('description');
+			for(var a = 0; a < contentArray.length; a++){
+				switch(contentArray[a].type){
+					case 'img': temp = document.createElement(contentArray[a].type); temp.src = contentArray[a].src; break;
+					case 'list': temp = createList(contentArray[a]); break;
+					default: temp = document.createElement(contentArray[a].type); temp.innerHTML = contentArray[a].innerHTML; break;
+				}
+				description.appendChild(temp);
 			}
-		}		
+			return description;
+		}
+
+		function createList(contentArrayItem){
+			if(contentArrayItem.form == 'ordered'){
+				var list = document.createElement('ol');
+				list.type = contentArrayItem.notation;
+			}
+			else{	var list = document.createElement('ul');
+				list.style['list-style-type'] = contentArrayItem.notation;
+			}
+			var li; var item;
+			for(var a = 0; a < contentArrayItem.items.length; a++){
+				li = document.createElement('li'); 
+				switch(contentArrayItem.items[a].type){
+					case 'img': item = document.createElement(contentArrayItem.items[a].type); item.src = contentArrayItem.items[a].src; break;
+					case 'list': item = createList(contentArrayItem.items[a]); break;
+					default: item = document.createElement(contentArrayItem.items[a].type); item.innerHTML = contentArrayItem.items[a].innerHTML; break;
+				}
+				li.appendChild(item);list.appendChild(li);					
+			}
+			return list;
+		}
 	</script>
 	
 	<style></style>

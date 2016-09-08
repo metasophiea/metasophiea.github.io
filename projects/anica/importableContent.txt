@@ -1,0 +1,69 @@
+How to Build a Computer (Probably) - Chapter Seven - This Number Is Small, But That Number Is Far Away 
+It's Like You Never Left
+
+Today, we're moving on up to Number Judgements, things like 'greater than' or 'less than' and so on. Afterwards (in the next post) we'll do Multiplication And Division.
+Techy Section - Higher or Lower?
+
+There's going to be five of these operators:
+> - Greater Than
+< - Less Than
+= - Equal To
+>= - Greater Than or Equal To
+<= - Less Than or Equal To
+     Luckily, we can be clever here and only use 3 of these five. We don't actually have to figure out 4 and 5, as the result is going to always be one of the first three.
+
+Here's the diagram
+
+
+     Brilliant, so we have a thing that will figure out whether 'A' is greater than, less than, or equal to '1', now we just have to add in the parts that will let us select which one we want to know.
+
+
+
+
+     Now the user can select what judgement they want performed, and the response is simply 'yes' or 'no'
+"Is 5 Greater than 7?" -> No 
+     Beautiful 
+Arty Section - The Desktop
+
+     I was talking to a non-techy friend of mine the other day about this whole Anica thing. I skipped over all the stuff we've done here (and all the other hardware and software) and went straight to the end-user experience.
+     See, the thing about computers, is that they haven't changed in 30 years. The Macintosh came out in 1984, and they've all been more or less the same since then.
+- Mouse
+- Windows
+- 'File' 'Edit' 'Tools' 'Help' options along the top
+- Folders 
+- An X in the top corner
+- Some kind of Application launcher
+etc.
+
+     So when I told her that Anica was going to be a tabletop, she was quite confused. "You'd have to break the screen in half, if you want more than one person using it" she said, still stuck in the idea that a "Desktop" looked like this:
+
+
+Or
+
+
+
+
+     For her, a "Desktop" was that and nothing else. It was my mistake for using a word that has been tied to a specific idea. TableTop sounds nicer.
+     
+     TableTops aren't a new thing ofcourse, I remember Microsoft tried a type of coffee table design. 
+
+
+
+
+
+
+     It's kinda nice. The top two look like a bin, and you might recognise the bottom one. As you might have guessed, this eventually became Microsoft's answer to the iPad and Android, and it sorta works for a tablet. Apple came up with the basic interface first (there had been other touch screen devises before, but they were kinda crappy and looked like a desktop)
+
+Kinda Crappy
+     But never mind all that, that's a discussion for another time. Point is, seemingly no one has ever been able to get the TableTop design right. 
+     Lucky for us -smug face-
+
+     I don't know all the details of everything just yet, but so far, it's pretty damm amazing. The concepts are so simple and elegant, it's actually a wondrous thing (if I do say so myself) and I think you're gonna love it!
+
+Shine On You Crazy Diamond
+
+     Well, it's been fun. I'm still working on division (I've gotten multiplication), I've decided on a name for the language for the system (when we get there); "Kodachrome" (or maybe Codachrome, CodaKhrome, something like that) I like it because Kodachrome is all about colour, and I want the coding process to be colourful, as apposed to the black-n-white coding experience you'd have today. Colour's just nicer. It's prettier, and it makes the coding process more shape driven, helping the programmer wrap their head around what's going on.
+     Anyway, that's just one of the unique elements that I'm planning on putting into the finished system (aside from the desktop), I'm going create a presentation on the elements, because hay, presentations are due a renewal.
+
+Until next time;
+
