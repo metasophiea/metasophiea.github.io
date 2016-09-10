@@ -5,7 +5,7 @@ var articles = {
 		"text_line2":"currently developing into dynamic presentation app",
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/canvasViewingSpace_splash1.bmp",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/canvasViewingSpace_splash1.bmp",
 		"link_url":"http://metasophiea.com/lib/js/canvasViewingSpace"
 	},
 	"article_20160807-b":{
@@ -14,7 +14,7 @@ var articles = {
 		"text_line2":"not particularly useful..but somewhat handy n_n",
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,100,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/wordstats_splash1.bmp",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/wordstats_splash1.bmp",
 		"link_url":"http://metasophiea.com/apps/wordstats"
 	},
 	"article_20160614-a":{

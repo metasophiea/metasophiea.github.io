@@ -4,7 +4,7 @@ var articles = [
 		"text":["A pure JS 2d graphics engine, currently developing into a dynamic presentation app"],	
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/canvasViewingSpace_splash1.bmp",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/canvasViewingSpace_splash1.bmp",
 		"link_url":"http://metasophiea.com/lib/js/canvasViewingSpace"
 	},
 	{	"id":"article_20160807-b",
@@ -12,7 +12,7 @@ var articles = [
 		"text":["A mini webapp showing you some info on things you write in ... not particularly useful..but somewhat handy n_n"],
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,100,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/wordstats_splash1.bmp",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/wordstats_splash1.bmp",
 		"link_url":"http://metasophiea.com/apps/wordstats"
 	},	
 	{	"id":"article_20160614-a",
@@ -36,7 +36,7 @@ var articles = [
 		"text":["Ever wonder how all this magic works? Turns out its a controlled mess! Check it out for yourself on the github.com repo"],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(245,245,245,0.65)",
-		"image_url":"http://metasophiea.com/lib/image/metasophiea.github.io.png",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/metasophiea.github.io.png",
 		"link_url":"https://github.com/metasophiea/metasophiea.github.io"		
 	},	
 ];

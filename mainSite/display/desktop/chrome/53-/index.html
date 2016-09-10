@@ -6,11 +6,12 @@
 	<meta charset="utf-8"></meta>
 	<meta name="theme-color" content="#202020"></meta>
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Bitter">
-	<script type='text/javascript' src="http://metasophiea.com/mainSite/display/desktop/chrome/53/js/mainmenu.js"></script>
-	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles.js"></script>
+	<script type='text/javascript' src="./contentDisplay.js"></script>
+	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles2.js"></script>
 
 	<script>
-		var RegularSquareSize = 100; var ChangeClours = true;
+		var RegularSquareSize = 100;
+		var ChangeClours = true;
 		var SpinningSquare = document.createElementNS('http://www.w3.org/2000/svg','rect');
 			SpinningSquare.id = "SpinningSquare";
 			SpinningSquare.style.fill = "rgb(153,0,204)";
@@ -38,7 +39,6 @@
 				else{document.getElementById('SpinningSquare').style.fill = "rgb(255,255,255)";}				
 			},1000);
 		}
-
 		
 		function WindowAdjust(){
 			document.getElementById('MainText').setAttribute("x",window.innerWidth/3);
@@ -57,22 +57,16 @@
 			if(document.getElementById('SpinningSquare').getAttribute("clicked") == "true"){CloseSquare();}
 			else{OpenSquare();}
 		}
-		
-
 		function OpenSquare(){
-			document.getElementById('SpinningSquare').setAttribute("clicked","true");
+        	document.getElementById('SpinningSquare').setAttribute("clicked","true");
 			SetSquareSize(5000);
 			ChangeClours=false;
-			ShowMainMenu();
 		}
 		function CloseSquare(){
-			document.getElementById('SpinningSquare').setAttribute("clicked","false");
+        	document.getElementById('SpinningSquare').setAttribute("clicked","false");
 			SetSquareSize(RegularSquareSize);
 			ChangeClours=true;
-			HideMainMenu();
 		}
-
-
 	</script>
 
 	<style title="Main">
