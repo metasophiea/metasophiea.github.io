@@ -81,8 +81,14 @@
 			function RunCommand(command){
 				switch(command.substring(0,4)){
 					case 'con ': eval(command.substring(4)); return; break;
-					case 'pst ': var temp = command.split(' '); 
-						if(temp[1] >= articles.length || temp[1] < 0 || isNaN(temp[1])){log.push('bad article number'); return;}
+					case 'pst ': var temp = command.split(' ');
+						if(temp[1] == 'list'){
+							var temp = [];
+							for(var a = 0; a < articles.length; a++){ temp.push(a); }
+							log.push({'text':temp.join(' '), 'colour':'ffffff'});	
+							return;
+						}
+						else if(temp[1] >= articles.length || temp[1] < 0 || isNaN(temp[1])){log.push({'text':'bad article number','colour':'ff8888'}); return;}
 						switch(temp[2]){
 							case 'view': 
 								var article = articles[temp[1]];
@@ -107,9 +113,10 @@
 						log.push({'text':' ', 'colour':'000000'});	
 						log.push({'text':' --Help -- -- --', 'colour':'ffffff'});	
 						log.push({'text':'- help', 'colour':'aaaaaa'});	
-						log.push({'text':'- pst n ', 'colour':'aaaaaa'});	
-						log.push({'text':'- - view ', 'colour':'aaaaaa'});	
-						log.push({'text':'- - go ', 'colour':'aaaaaa'});	
+						log.push({'text':'- pst ', 'colour':'aaaaaa'});	
+						log.push({'text':'- - list ', 'colour':'aaaaaa'});							
+						log.push({'text':'- - n view ', 'colour':'aaaaaa'});	
+						log.push({'text':'- - n go ', 'colour':'aaaaaa'});	
 						log.push({'text':'- clear', 'colour':'aaaaaa'});	
 						log.push({'text':'- con ', 'colour':'aaaaaa'});	
 						log.push({'text':'- - log.push();', 'colour':'aaaaaa'});	
