@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script src='http://metasophiea.com/lib/js/pixelMagic/0.1.2/pixelMagic.js'></script>
+	<script>
+	function Go(){
+
+		adjustCanvas(document.getElementById('screen'));
+		pixelMatrix.attachCanvas(document.getElementById('screen'));
+		pixelMatrix.screenDimentions({'width':60,'height':60});
+		pixelMatrix.FPS(15);
+		pixelMatrix.autoRender(true);
+		pixelMatrix.setAllPixels('000000');
+
+		var red = {'pos':{'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':pixelMatrix.screenDimentions().height-1},'dir':'north','nextStep':{'x':0,'y':0},'lose':false,'colour':'ff0000'};
+		var yellow = {'pos':{'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':0},'dir':'south','nextStep':{'x':0,'y':0},'lose':false,'colour':'ffff00'};
+		var interval = setInterval(function(){
+			switch(red.dir){
+				case 'north': red.nextStep = {'x':red.pos.x,'y':red.pos.y-1}; break;
+				case 'south': red.nextStep = {'x':red.pos.x,'y':red.pos.y+1}; break;
+				case 'east': red.nextStep = {'x':red.pos.x+1,'y':red.pos.y}; break;
+				case 'west': red.nextStep = {'x':red.pos.x-1,'y':red.pos.y}; break;
+			}
+
+			switch(yellow.dir){
+				case 'north': yellow.nextStep = {'x':yellow.pos.x,'y':yellow.pos.y-1}; break;
+				case 'south': yellow.nextStep = {'x':yellow.pos.x,'y':yellow.pos.y+1}; break;
+				case 'east': yellow.nextStep = {'x':yellow.pos.x+1,'y':yellow.pos.y}; break;
+				case 'west': yellow.nextStep = {'x':yellow.pos.x-1,'y':yellow.pos.y}; break;
+			}
+
+			if(red.nextStep.x < 0 || red.nextStep.x >= pixelMatrix.screenDimentions().width || red.nextStep.y < 0 || red.nextStep.y >= pixelMatrix.screenDimentions().height){red.lose = true;}
+			else if(pixelMatrix.pixel(red.nextStep) != '000000'){red.lose = true;}
+			if(yellow.nextStep.x < 0 || yellow.nextStep.x >= pixelMatrix.screenDimentions().width || yellow.nextStep.y < 0 || yellow.nextStep.y >= pixelMatrix.screenDimentions().height){yellow.lose = true;}	
+			else if(pixelMatrix.pixel(yellow.nextStep) != '000000'){yellow.lose = true;}
+
+			if(red.lose && yellow.lose){console.log('tie'); clearInterval(interval);}
+			else if(red.lose){console.log('yellow win'); clearInterval(interval);}
+			else if(yellow.lose){console.log('red win'); clearInterval(interval);}
+			else{	
+				red.pos = red.nextStep; yellow.pos = yellow.nextStep;
+				pixelMatrix.setPixel({'x':red.pos.x,'y':red.pos.y},red.colour);	
+				pixelMatrix.setPixel({'x':yellow.pos.x,'y':yellow.pos.y},yellow.colour);	
+			}
+		},200);
+
+		//controls
+		window.addEventListener("keydown", function(event){
+			switch(event.key){	
+				case 'a':
+					switch(red.dir){
+						case 'north': red.dir = 'west'; break;
+						case 'south': red.dir = 'east'; break;
+						case 'east': red.dir = 'north'; break;
+						case 'west': red.dir = 'south'; break;
+					}
+				break;
+				case 's':
+					switch(red.dir){
+						case 'north': red.dir = 'east'; break;
+						case 'south': red.dir = 'west'; break;
+						case 'east': red.dir = 'south'; break;
+						case 'west': red.dir = 'north'; break;
+					}
+				break;
+
+				case '4':
+					switch(yellow.dir){
+						case 'north': yellow.dir = 'west'; break;
+						case 'south': yellow.dir = 'east'; break;
+						case 'east': yellow.dir = 'north'; break;
+						case 'west': yellow.dir = 'south'; break;
+					}
+				break;
+				case '5':
+					switch(yellow.dir){
+						case 'north': yellow.dir = 'east'; break;
+						case 'south': yellow.dir = 'west'; break;
+						case 'east': yellow.dir = 'south'; break;
+						case 'west': yellow.dir = 'north'; break;
+					}
+				break;
+			}
+		}, false);
+	}
+
+	function adjustCanvas(canvas){
+		if(window.innerHeight > window.innerWidth){
+			canvas.height = window.innerWidth;
+			canvas.width = window.innerWidth;
+		}
+		else{
+			canvas.height = window.innerHeight;
+			canvas.width = window.innerHeight;
+		}
+	}
+	</script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+	<canvas id='screen'></canvas>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script src='http://metasophiea.com/lib/js/pixelMagic/0.1.2/pixelMagic.js'></script>
+	<script>
+	var player = [];
+	var interval;
+	
+	function makePlayer(startingPosition,startingDirection,colour,controls){
+		return {'pos':{'x':startingPosition.x,'y':startingPosition.y},'dir':startingDirection,'nextStep':{'x':0,'y':0},'lose':false,'colour':colour, 'controls':controls,'trail':[]};
+	}
+
+	function deRezPlayer(num){
+		for(var a = 0; a < player[num].trail.length; a++){
+			pixelMatrix.setPixel({'x':player[num].trail[a].x,'y':player[num].trail[a].y},'000000');
+		}
+	}
+
+	function checkForWin(){
+		var count = player.length; var winner = -1;
+		for(var a = 0; a < player.length; a++){
+			if(player[a].lose){count--;}
+			else{winner = a;}
+		}
+
+		if(count == 1){
+			console.log('winner: ' + player[winner].colour);
+			clearInterval(interval);
+		}
+	}
+
+	function Go(){
+		adjustCanvas(document.getElementById('screen'));
+		pixelMatrix.attachCanvas(document.getElementById('screen'));
+		pixelMatrix.screenDimentions({'width':60,'height':60});
+		pixelMatrix.FPS(15);
+		pixelMatrix.autoRender(true);
+		pixelMatrix.setAllPixels('000000');
+
+		player = [
+			makePlayer({'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':pixelMatrix.screenDimentions().height-1},'north','ff0000',{'left':'a','right':'s'}),
+			makePlayer({'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':0},'south','ffff00',{'left':'4','right':'5'}),
+		];
+
+		interval = setInterval(function(){
+			for(var a = 0; a < player.length; a++){
+				switch(player[a].dir){
+					case 'north': player[a].nextStep = {'x':player[a].pos.x,'y':player[a].pos.y-1}; break;
+					case 'south': player[a].nextStep = {'x':player[a].pos.x,'y':player[a].pos.y+1}; break;
+					case 'east': player[a].nextStep = {'x':player[a].pos.x+1,'y':player[a].pos.y}; break;
+					case 'west': player[a].nextStep = {'x':player[a].pos.x-1,'y':player[a].pos.y}; break;
+				}
+
+				if(player[a].nextStep.x < 0 || player[a].nextStep.x >= pixelMatrix.screenDimentions().width || player[a].nextStep.y < 0 || player[a].nextStep.y >= pixelMatrix.screenDimentions().height){player[a].lose = true;}
+				if(!player[a].lose){
+					for(var b = 0; b < player.length; b++){
+						if(pixelMatrix.pixel(player[a].nextStep) == player[b].colour){player[a].lose = true;}
+					}
+				}
+
+				if(player[a].lose){deRezPlayer(a);checkForWin();}
+				else{
+					player[a].pos = player[a].nextStep; 
+					pixelMatrix.setPixel({'x':player[a].pos.x,'y':player[a].pos.y},player[a].colour);
+					player[a].trail.push({'x':player[a].pos.x,'y':player[a].pos.y});
+				}
+			}
+
+		},200);
+
+
+		//controls
+		window.addEventListener("keydown", function(event){
+			for(var a = 0; a < player.length; a++){
+				if(event.key == player[a].controls.left){
+					switch(player[a].dir){
+						case 'north': player[a].dir = 'west'; break;
+						case 'south': player[a].dir = 'east'; break;
+						case 'east': player[a].dir = 'north'; break;
+						case 'west': player[a].dir = 'south'; break;
+					}					
+				}
+				else if(event.key == player[a].controls.right){
+					switch(player[a].dir){
+						case 'north': player[a].dir = 'east'; break;
+						case 'south': player[a].dir = 'west'; break;
+						case 'east': player[a].dir = 'south'; break;
+						case 'west': player[a].dir = 'north'; break;
+					}					
+				}
+			}
+		}, false);
+	}
+
+	function adjustCanvas(canvas){
+		if(window.innerHeight > window.innerWidth){
+			canvas.height = window.innerWidth;
+			canvas.width = window.innerWidth;
+		}
+		else{
+			canvas.height = window.innerHeight;
+			canvas.width = window.innerHeight;
+		}
+	}
+	</script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+	<canvas id='screen'></canvas>
+</body>
+</html>
