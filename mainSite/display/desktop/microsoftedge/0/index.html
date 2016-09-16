@@ -7,17 +7,7 @@
 		<script type="text/javascript" src="http://metasophiea.com/lib/js/pixelMagic/0.1.2/pixelMagic.js"></script>
 		<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles2.js"></script>
 		<script>
-			var log = [
-				{'text':'loading drivers..','colour':'888888'},
-				{'text':'stabilizing matrix generators..','colour':'888888'},
-				{'text':'greeting double ETC connections..','colour':'888888'},	
-				{'text':'conneting..','colour':'888888'},								
-				{'text':'ready','colour':'888888'},
-				{'text':' ','colour':'ffffff'},
-				{'text':'  Metasophiea.com - NCC1700 Edition','colour':'ffffff'},	
-				{'text':' ','colour':'ffffff'},						
-				{'text':'type help for help','colour':'ffffff'}
-				];
+			var log = [];
 			var printingArray = [];
 			var workingCode = ''; var displayCode = ''; var scroll = 0;
 
@@ -32,6 +22,29 @@
 				}
 			}
 
+
+			function printStartingText(){
+				var lines = [
+					{'text':'loading drivers..','colour':'888888'},
+					{'text':'stabilizing matrix generators..','colour':'888888'},
+					{'text':'greeting double ETC connections..','colour':'888888'},
+					{'text':'conneting..','colour':'888888'},								
+					{'text':'ready','colour':'888888'},
+					{'text':' ','colour':'ffffff'},
+					{'text':'  Metasophiea.com - NCC1700 Edition','colour':'ffffff'},
+					{'text':' ','colour':'ffffff'},
+					{'text':'type help for help','colour':'ffffff'}	
+				];
+
+				var maxTime = 0;
+				for(var a = 0; a < lines.length; a++){
+					var time = 1000+Math.floor(Math.random()*3000); if(maxTime < time){maxTime = time;}
+					setTimeout(function(){log.push(lines.shift());},time);
+				}
+
+				setTimeout(function(){document.body.setAttribute('onkeydown','key(event.key)');},maxTime);
+			}
+
 			function Go(){
 				console.log('Hello');
 				adjustCanvas(document.getElementById('pixelMatrix'));
@@ -39,8 +52,7 @@
 				pixelMatrix.screenDimentions({'width':200,'height':200});
 				pixelMatrix.FPS(15);
 				pixelMatrix.autoRender(true);	
-
-				
+				printStartingText();		
 
 				var flash = false; var flashCount = 0;
 				setInterval(function(){
@@ -138,7 +150,7 @@
 		</style>
 	</head>
 		
-	<body onLoad='Go()' onkeydown='key(event.key);'>
+	<body onLoad='Go()'>
 		<canvas id='pixelMatrix' width='800' height='600' style='display: block; margin: auto; cursor: none;'></canvas>
 	</body>
 </html>
