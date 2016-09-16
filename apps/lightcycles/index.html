@@ -2,87 +2,167 @@
 <html lang="en">
 
 <head>
-	<title>metasophiea</title>
+	<title>Light Cycles - metasophiea</title>
 	<meta charset="utf-8"></meta>
 	<script src='http://metasophiea.com/lib/js/pixelMagic/0.1.2/pixelMagic.js'></script>
 	<script>
-	function Go(){
+	var spaceDimentions = {'width':101,'height':101};
+	var player = []; var wallMatrix = [[]];
+	var background = [[]];
+	var interval;
+	
+	function produceBackground(){
+		var background = new Array(spaceDimentions.width);for(var a = 0; a < background.length; a++){background[a] = new Array(spaceDimentions.height);for(var b = 0; b < background[a].length; b++){background[a][b] = '000000';}}
+		
+		for(var a = 0; a <= 100; a++){
+			for(var b = 0; b <= 100; b+= 10){
+				background[b][a] = '111122'; background[a][b] = '111122';
+			}
+		}
 
+		return background;
+	}
+		
+	function makePlayer(name,team,startingPosition,startingDirection,colour,controls){
+		return {
+			'name':name,'team':team,
+			'pos':{'x':startingPosition.x,'y':startingPosition.y},
+			'dir':startingDirection,
+			'nextStep':{'x':0,'y':0},
+			'alive':true,
+			'colour':colour,
+			'controls':controls,
+			'trail':[]
+		};
+	}
+
+	function makePlayers(count){
+		var players = [];
+		switch(count){
+			case 6:
+				players.push( makePlayer('Yellow Three','yellow',{'x':Math.floor(pixelMatrix.screenDimentions().width/1.85),'y':0},'south','aaff00',{'left':'3','right':'2'}) );
+			case 5:
+				players.push( makePlayer('Red Three','red',{'x':Math.floor(pixelMatrix.screenDimentions().width/1.85),'y':pixelMatrix.screenDimentions().height-1},'north','ff0055',{'left':'b','right':'n'}) );
+			case 4:
+				players.push( makePlayer('Yellow Two','yellow',{'x':Math.floor(pixelMatrix.screenDimentions().width/2.15),'y':0},'south','ffff99',{'left':'7','right':'8'}) );
+			case 3:
+				players.push( makePlayer('Red Two','red',{'x':Math.floor(pixelMatrix.screenDimentions().width/2.15),'y':pixelMatrix.screenDimentions().height-1},'north','ff5500',{'left':'d','right':'f'}) );
+			case 2: 
+				players.push( makePlayer('Yellow One','yellow',{'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':5},'south','ffff00',{'left':'o','right':'p'}) );
+				players.push( makePlayer('Red One','red',{'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':pixelMatrix.screenDimentions().height-5},'north','ff0000',{'left':'q','right':'w'}) );
+			break;
+			default: console.error('incompatible player count specified'); break;
+		}
+
+		return players;
+	}
+
+
+	function deRezPlayer(num){
+		for(var a = 0; a < player[num].trail.length; a++){
+			var colour_1 = player[num].colour.match(/.{1,2}/g);
+			var colour_2 = background[player[num].trail[a].x][player[num].trail[a].y].match(/.{1,2}/g);
+			var colour_3 = [0,0,0];
+
+			for(var b = 0; b < 3; b++){
+				colour_3[b] = (parseInt(colour_1[b],16)+parseInt(colour_2[b],16))/2;
+				colour_3[b] = Math.floor(colour_3[b]).toString(16);
+				if(colour_3[b].length == 1){colour_3[b] = '0'+colour_3[b];}
+			}
+			colour_3 = colour_3.join('');
+			
+			pixelMatrix.setPixel({'x':player[num].trail[a].x,'y':player[num].trail[a].y},colour_3);
+			wallMatrix[player[num].trail[a].x][player[num].trail[a].y] = '000000';
+		}
+	}
+
+	function checkForWin(){
+		var count = player.length; var teamMemebersRemaining = {};
+		for(var a = 0; a < player.length; a++){
+			if(player[a].alive){teamMemebersRemaining[player[a].team] = 0;}
+		}
+
+		if( Object.keys(teamMemebersRemaining).length == 1){
+			console.log('winner: ' + Object.keys(teamMemebersRemaining)[0]);
+			clearInterval(interval);			
+		}		
+	}
+
+	function Go(){
 		adjustCanvas(document.getElementById('screen'));
 		pixelMatrix.attachCanvas(document.getElementById('screen'));
-		pixelMatrix.screenDimentions({'width':60,'height':60});
+		wallMatrix = new Array(spaceDimentions.width);for(var a = 0; a < wallMatrix.length; a++){wallMatrix[a] = new Array(spaceDimentions.height);for(var b = 0; b < wallMatrix[a].length; b++){wallMatrix[a][b] = '000000';}}
+		pixelMatrix.screenDimentions({'width':wallMatrix.length,'height':wallMatrix[0].length});
 		pixelMatrix.FPS(15);
 		pixelMatrix.autoRender(true);
-		pixelMatrix.setAllPixels('000000');
+		background = produceBackground();
+		for(var a = 0; a < background.length; a++){for(var b = 0; b < background[0].length; b++){pixelMatrix.setPixel({'x':a,'y':b},background[a][b]);}}
 
-		var red = {'pos':{'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':pixelMatrix.screenDimentions().height-1},'dir':'north','nextStep':{'x':0,'y':0},'lose':false,'colour':'ff0000'};
-		var yellow = {'pos':{'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':0},'dir':'south','nextStep':{'x':0,'y':0},'lose':false,'colour':'ffff00'};
-		var interval = setInterval(function(){
-			switch(red.dir){
-				case 'north': red.nextStep = {'x':red.pos.x,'y':red.pos.y-1}; break;
-				case 'south': red.nextStep = {'x':red.pos.x,'y':red.pos.y+1}; break;
-				case 'east': red.nextStep = {'x':red.pos.x+1,'y':red.pos.y}; break;
-				case 'west': red.nextStep = {'x':red.pos.x-1,'y':red.pos.y}; break;
+		player = makePlayers(2);
+
+		interval = setInterval(function(){
+			var derezList = []; var nextSteps = [];
+
+			for(var a = 0; a < player.length; a++){
+				if(player[a].alive){				
+					switch(player[a].dir){
+						case 'north': player[a].nextStep = {'x':player[a].pos.x,'y':player[a].pos.y-1}; break;
+						case 'south': player[a].nextStep = {'x':player[a].pos.x,'y':player[a].pos.y+1}; break;
+						case 'east': player[a].nextStep = {'x':player[a].pos.x+1,'y':player[a].pos.y}; break;
+						case 'west': player[a].nextStep = {'x':player[a].pos.x-1,'y':player[a].pos.y}; break;
+					}
+
+					if(player[a].nextStep.x < 0 || player[a].nextStep.x >= pixelMatrix.screenDimentions().width || player[a].nextStep.y < 0 || player[a].nextStep.y >= pixelMatrix.screenDimentions().height){player[a].alive = false; derezList.push(a);}
+				}
+				if(player[a].alive){
+					if(wallMatrix[player[a].nextStep.x][player[a].nextStep.y] != '000000'){player[a].alive = false; derezList.push(a);}	
+					nextSteps.push([player[a].nextStep.x,player[a].nextStep.y]);				
+				}
+
+				if(player[a].alive){
+					player[a].pos = player[a].nextStep; 
+					wallMatrix[player[a].pos.x][player[a].pos.y] = player[a].colour;
+					pixelMatrix.setPixel({'x':player[a].pos.x,'y':player[a].pos.y},player[a].colour);
+					player[a].trail.push({'x':player[a].pos.x,'y':player[a].pos.y});
+				}
 			}
 
-			switch(yellow.dir){
-				case 'north': yellow.nextStep = {'x':yellow.pos.x,'y':yellow.pos.y-1}; break;
-				case 'south': yellow.nextStep = {'x':yellow.pos.x,'y':yellow.pos.y+1}; break;
-				case 'east': yellow.nextStep = {'x':yellow.pos.x+1,'y':yellow.pos.y}; break;
-				case 'west': yellow.nextStep = {'x':yellow.pos.x-1,'y':yellow.pos.y}; break;
+			//Collision check
+			for(var a = 0; a < nextSteps.length; a++){
+				for(var b = 0; b < nextSteps.length; b++){
+					if(nextSteps[a][0] == nextSteps[b][0] && nextSteps[a][1] == nextSteps[b][1] && a != b){
+						if( (player[a].dir == 'north' && player[b].dir == 'south') ||
+						(player[a].dir == 'south' && player[b].dir == 'north') ||
+						(player[a].dir == 'east' && player[b].dir == 'west') ||
+						(player[a].dir == 'west' && player[b].dir == 'east') ){derezList.push(a); player[a].alive = false;}
+					}
+				}
 			}
+			
+			while(derezList.length != 0){deRezPlayer( derezList.shift() ); }
+			checkForWin();
+		},100);
 
-			if(red.nextStep.x < 0 || red.nextStep.x >= pixelMatrix.screenDimentions().width || red.nextStep.y < 0 || red.nextStep.y >= pixelMatrix.screenDimentions().height){red.lose = true;}
-			else if(pixelMatrix.pixel(red.nextStep) != '000000'){red.lose = true;}
-			if(yellow.nextStep.x < 0 || yellow.nextStep.x >= pixelMatrix.screenDimentions().width || yellow.nextStep.y < 0 || yellow.nextStep.y >= pixelMatrix.screenDimentions().height){yellow.lose = true;}	
-			else if(pixelMatrix.pixel(yellow.nextStep) != '000000'){yellow.lose = true;}
-
-			if(red.lose && yellow.lose){console.log('tie'); clearInterval(interval);}
-			else if(red.lose){console.log('yellow win'); clearInterval(interval);}
-			else if(yellow.lose){console.log('red win'); clearInterval(interval);}
-			else{	
-				red.pos = red.nextStep; yellow.pos = yellow.nextStep;
-				pixelMatrix.setPixel({'x':red.pos.x,'y':red.pos.y},red.colour);	
-				pixelMatrix.setPixel({'x':yellow.pos.x,'y':yellow.pos.y},yellow.colour);	
-			}
-		},200);
 
 		//controls
 		window.addEventListener("keydown", function(event){
-			switch(event.key){	
-				case 'a':
-					switch(red.dir){
-						case 'north': red.dir = 'west'; break;
-						case 'south': red.dir = 'east'; break;
-						case 'east': red.dir = 'north'; break;
-						case 'west': red.dir = 'south'; break;
-					}
-				break;
-				case 's':
-					switch(red.dir){
-						case 'north': red.dir = 'east'; break;
-						case 'south': red.dir = 'west'; break;
-						case 'east': red.dir = 'south'; break;
-						case 'west': red.dir = 'north'; break;
-					}
-				break;
-
-				case '4':
-					switch(yellow.dir){
-						case 'north': yellow.dir = 'west'; break;
-						case 'south': yellow.dir = 'east'; break;
-						case 'east': yellow.dir = 'north'; break;
-						case 'west': yellow.dir = 'south'; break;
-					}
-				break;
-				case '5':
-					switch(yellow.dir){
-						case 'north': yellow.dir = 'east'; break;
-						case 'south': yellow.dir = 'west'; break;
-						case 'east': yellow.dir = 'south'; break;
-						case 'west': yellow.dir = 'north'; break;
-					}
-				break;
+			for(var a = 0; a < player.length; a++){
+				if(event.key == player[a].controls.left){
+					switch(player[a].dir){
+						case 'north': player[a].dir = 'west'; break;
+						case 'south': player[a].dir = 'east'; break;
+						case 'east': player[a].dir = 'north'; break;
+						case 'west': player[a].dir = 'south'; break;
+					}					
+				}
+				else if(event.key == player[a].controls.right){
+					switch(player[a].dir){
+						case 'north': player[a].dir = 'east'; break;
+						case 'south': player[a].dir = 'west'; break;
+						case 'east': player[a].dir = 'south'; break;
+						case 'west': player[a].dir = 'north'; break;
+					}					
+				}
 			}
 		}, false);
 	}
@@ -98,10 +178,10 @@
 		}
 	}
 	</script>
-	<style></style>
+	<style>html,body{background:#000000; margin:0px;}</style>
 </head>
 
 <body onLoad="Go()">
-	<canvas id='screen'></canvas>
+	<canvas id='screen' style='display: block; margin: auto;'></canvas>
 </body>
 </html>
