@@ -1,5 +1,25 @@
 var content = [
 	{
+		'id':'post_20160917-b',
+		'date':'2016-09-17-20-50',
+		'title':'How To Build a Computer (Probably) - Nigel - Chapter 2: Graphically Speaking..',
+		'content':[
+				{'type':'h1', 'innerHTML':"How To Build a Computer (Probably) - Nigel - Chapter 2: Graphically Speaking.."},		
+				{'type':'p', 'innerHTML':"(We assume chapter one is those two 'side quest' posts from before...I may rewrite them into a proper chapter in future, but keeping with my new found drive to post weekly,  lets start here)"},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obviously any computer we make needs a graphic display...something to help the user interact with the machine, let them know whats going on and what their options are; so begins the Nigel Graphics Card, made using two of the Atmega328p chips (same as before) one to talk to the screen and one that does that actual drawing...I'll show you what I mean.."},
+								
+
+
+
+
+		]
+	},
+
+
+
+
+
+	{
 		'id':'post_20160827-a',
 		'date':'2016-08-27-20-15',
 		'title':'Test Post',
@@ -23,5 +43,39 @@ var content = [
 					]
 				}
 		]
+	},
+
+	{
+		'id':'post_20160917-a',
+		'date':'2016-09-17-20-22',
+		'title':'Test Post 2',
+		'content':[
+				{'type':'h1', 'innerHTML':'Heading 1'},
+				{'type':'h2', 'innerHTML':'Heading 2'},
+				{'type':'h3', 'innerHTML':'Heading 3'},
+				{'type':'p', 'innerHTML':'A large section of words about <i>many important things</i>, such as cheese, milk and other dairy products'},
+				{'type':'img', 'src':'http://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/myst.jpg', 'caption':'unrelated to cheese'},
+				{'type':'p', 'innerHTML':'A large section of words about many important things, such as cheese, milk and other dairy products'},
+				{'type':'list','form':'unordered','notation':'I','items':[
+						{'type':'h1', 'innerHTML':'Heading 1'},
+						{'type':'h2', 'innerHTML':'Heading 2'},
+						{'type':'h3', 'innerHTML':'Heading 3'},
+						{'type':'list','form':'unordered','notation':'square','items':[
+								{'type':'h1', 'innerHTML':'Heading 1'},
+								{'type':'h2', 'innerHTML':'Heading 2'},
+								{'type':'h3', 'innerHTML':'Heading 3'}
+							]
+						}
+					]
+				}
+		]
 	}
+
+
+
+
+
+
+
+
 ];
