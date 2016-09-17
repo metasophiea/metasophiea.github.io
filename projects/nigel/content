@@ -1,0 +1,95 @@
+var content = [
+	{
+		'id':'post_20160917-b',
+		'date':'2016-09-17-20-50',
+		'title':'How To Build a Computer (Probably) - Nigel - Chapter 2: Graphically Speaking..',
+		'content':[
+				{'type':'h1', 'innerHTML':"How To Build a Computer (Probably) - Nigel - Chapter 2: Graphically Speaking.."},		
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/1.jpg', 'caption':''},
+				{'type':'p', 'innerHTML':"(We assume chapter one is those two 'side quest' posts from before...I may rewrite them into a proper chapter in future, but keeping with my new found drive to post weekly,  lets start here)"},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obviously any computer we make needs a graphic display...something to help the user interact with the machine, let them know whats going on and what their options are; so begins the Nigel Graphics Card, made using two of the Atmega328p chips (same as before) one to talk to the screen and one that does that actual drawing...I'll show you what I mean.."},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/2.png', 'caption':''},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The output chip, is connected to the actual screen through a VGA port, and talks to the screen using the VGA protocols (we'll get to that a little later) this chip contains the information for every pixel that's to be displayed, and instructs the screen to display them. The input chip receives commands from the main Nigel system and stores them in its own graphic language (commands like; draw a circle here of this size and colour) all coded in a similar way to Nigel. This chip then communicates with the output chip to change its stored pixel information."},				
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So far, I've only written the output chip, and am working on the input chip, and inter-chip communication...hopefully it'll go well."},
+				{'type':'h2', 'innerHTML':"The Output Chip"},
+				{'type':'h3', 'innerHTML':"The Prolonged VGA Port/Protocol Problem Which Previously Pushed My Patience With Practical Powered Products, But Proved Pretty Plainly Psychologically Palpable And Programmable"},				
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VGA ports (and cables and protocols and whatever) were invented back in the 80's by IBM for their fresh new personal computers, to connect their shiny new computers to their glistening new screens."},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/3.jpg', 'caption':''},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Originally it was just for PS/2 (Personal System/2) IBM machines and screens, but eventually became a global standard and is used in almost every computer since then as an available (and quite nifty) graphical output port. I think it's gradually being replaced by HDMI and DVI-I ports, but mostly all computers and screens still support good 'ol VGA."},
+				{'type':'h3', 'innerHTML':"The Plug"},				
+				{'type':'p', 'innerHTML':"VGA looks like this:"},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/4.jpg', 'caption':''},
+				{'type':'p', 'innerHTML':"There's 15 little connections, or Pins "},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/5.png', 'caption':''},
+				{'type':'list','form':'ordered','notation':'1','items':[
+					{'type':'p','style':'color:red; margin:0px;','innerHTML':"Red"},
+					{'type':'p','style':'color:lime;  margin:0px;','innerHTML':"Green"},
+					'<batch>',	{'type':'p','style':'color:blue;  margin:0px;','innerHTML':"Blue"},
+								{'type':'p','style':'margin:0px;','innerHTML':"These pins are where the colour data flows in for each line, with a value between 0v and 0.7v to vary the intensity of the colour. "},
+					'</batch>',
+					{'type':'p','style':'margin:0px;','innerHTML':"Used to be for Screen ID information, but that was replaced by the I2C connections, so this one sits unused, and unloved. I'll plug it into ground.."},
+					{'type':'p','style':'margin:0px;','innerHTML':"Ground, completing the circuit."},
+					{'type':'p','style':'color:red; margin:0px;','innerHTML':"Red Ground"},
+					{'type':'p','style':'color:lime; margin:0px;','innerHTML':"Green Ground"},
+					'<batch>',	{'type':'p','style':'color:blue; margin:0px;','innerHTML':"Blue Ground"},
+								{'type':'p','style':'margin:0px;','innerHTML':"for completing the <span style='color:red;'>Red</span>, <span style='color:lime;'>Green</span> and <span style='color:blue;'>Blue</span> circuits...it's kinda pointless as I plug these into the regular ground anyway"},
+					'</batch>',
+					{'type':'p','style':'margin:0px;','innerHTML':"+5v, I'm not sure what this is for..I've plugged it into the ground before and there's been no obvious effect.. I'll just leave it at +5v"},
+					{'type':'p','style':'margin:0px;','innerHTML':"Ground, completing the circuit....again."},
+					{'type':'p','style':'margin:0px;','innerHTML':"Also used to be for Screen ID information, but that was replaced by the I2C connections, so this one sits unused, but has a more resilient, independent spirit. I'll plug it into ground too.."},
+					{'type':'p','style':'margin:0px;','innerHTML':"Used with 'I2C Clock' this pin is used to talk with the screen about what size it is and what it's all about. I don't use it here...maybe in future. Till then: ground."},
+					{'type':'p','style':'margin:0px;','innerHTML':"Used for timing the screens horizontal drawing patterns"},
+					{'type':'p','style':'margin:0px;','innerHTML':"Used for timing the screens vertical drawing pattern"},
+					{'type':'p','style':'margin:0px;','innerHTML':"Used with 'I2C Data'. Grounded."},
+					]
+				},
+
+				{'type':'h3', 'innerHTML':"The Protocol"},
+				{'type':'p', 'innerHTML':"Basic operation is unusual, but pretty simple."},
+				{'type':'list','form':'unordered','notation':'disc','items':[
+					{'type':'p', 'innerHTML':"As this port was created back when cathode ray tube monitors were still in use; displaying information on screen is based on this idea of the Electron Gun."},
+					{'type':'p', 'innerHTML':"The gun is at the back of your screen, pointing at you; shooting electrons at the glass, where a layer of Phosphor, turns this energy into colour...it's a bit more complicated, but since we don't use them anymore it's not really an issue."},
+					{'type':'p', 'innerHTML':"The gun shoots from left to right (in the viewers perspective) then goes down a line, and starts from the left again. Once at the bottom, it starts back from the top."}					
+					]
+				},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/6.png', 'caption':''},		
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Now, here's the confusing bit; we have to use the Horizontal and Vertical sync pins, to teach the screen how long its journey from left to right, and top to bottom should take. It needs a signal from the Horizontal Pin every time we want a new line, and from the Vertical Pin every time we're finished the whole screen. This timing, coupled with how many Horizontal signals occur between Vertical signals, enable the screen to figure out what resolution it should be using."},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Honestly; I've no idea as to how to select any resolution I want..maybe it has something to do with the I2C pins, but I've yet to figure it out. I have (through blind luck) gotten it to assume a 800x600 pixel resolution, which we can stick with for now (the chips are too slow to get above around 96x96 pixels anyway) "},
+
+				{'type':'h3', 'innerHTML':"But Anyway"},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Horizontal and Vertical Sync pins (which I'll be calling HSync and VSync) are normally at 5v, and a signal, is a pulse of 0v. The three colour pins are also important to the timing."},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There's quite a specific layout for the timing of when these pulses and colour occur. I've divided it into three basic tables, or 'loops' (which makes programming it easy) and I've included the timings that I'm using for the 800x600 output."},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/7.png', 'caption':''},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/8.png', 'caption':''},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/9.png', 'caption':''},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When running; the Video time, governs how wide the image is, while the combination of Blank and nonBlank HSyncLoops allows you to change its height."},
+				{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Through experimentation, I've discovered a little bit of leeway with the timings. I plan on finding the maximum values possible, though for the most part it doesn't really matter. Two of note however: "},
+				{'type':'list','form':'unordered','notation':'disc','items':[
+					'<batch>',	{'type':'p','style':'margin:0px;','innerHTML':"Video (where all the colour information is put out)"},
+								{'type':'p','style':'margin:0px;','innerHTML':"More time here, would allow more information to be sent, effectively increasing the number of pixels."},
+					'</batch>',
+					'<batch>',	{'type':'p','style':'margin:0px;','innerHTML':"Vertical Sync Pulse"},
+								{'type':'p','style':'margin:0px;','innerHTML':"Though not specific because of its job (I used to have this at 0.5us) I found I could get it to around 400us, so I plan on using this time for talking to the other chip. I may use other sections for this job too."},
+					'</batch>',
+					]
+				},
+
+				{'type':'h3', 'innerHTML':"The Prototype"},
+				{'type':'p', 'innerHTML':"It took me days to get the screen to do anything at all, but once I did, I got it together pretty fast:"},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/10.jpg', 'caption':"First ever image created. It didn't work properly, it would flash random redish squares, and that text box was the screen telling me that the signal was broken. You can see my little Arduino in the bottom right."},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/11.jpg', 'caption':"The Error Message"},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/12.jpg', 'caption':"Finally Getting It Stabilized"},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/13.jpg', 'caption':"Attempting To Get It To Read Data From The Memory (The pixels are all stretched as I hadn't figured out how to square them yet)"},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/14.jpg', 'caption':"Squared!...ish"},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/15.jpg', 'caption':"The Test Card - After some time, I'd gotten the chip to output cohesive colour"},
+				{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/16.jpg', 'caption':"Nigel's First Message To The World"},
+
+
+
+		]
+	}
+];
+
+//{'type':'img', 'src':'', 'caption':''},
+//{'type':'p', 'innerHTML':""},
+//{'type':'h2', 'innerHTML':""},
