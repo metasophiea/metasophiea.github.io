@@ -168,18 +168,264 @@ var content = [
 				{'type':'p','style':'margin:0px;', 'innerHTML':"When I (through random selection) settled on a chip, the older software package didn't have the chip type on it, so I had to get the newer vision. MPLab X it was called...it was useless, overcomplicated and horrific; never get it. Ever."},
 				]
 			},
+			{'type':'p', 'innerHTML':"So I was feeling down about that, when I realized; hay, Arduino's have the same sorta chip in them...so I got one of those :D"},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/2.jpg', 'caption':''},
+			{'type':'h2', 'innerHTML':"Arduino"},	
+			{'type':'p', 'innerHTML':
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An Arduino, is a cheap little development board. It comes with a microprocessor (the little computer, you can see it there, it's the big chip in the board), usb port (for uploading programs to it), power plug (so you can plug it into a battery), and pins (those black rectangles along the sides)" +"<br>"+
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The idea is, that you can buy one of these (for about 20euro), plug it into your computer with a usb cable, and then using the software that they give you (for free online); you can write programs for it. The pins are useful as you can slot wires into them, and have the Arduino control whatever is attached to them. Like a motor or speaker or lights. With a bit of skill and imagination, you can get them to do just about anything! They're pretty cool." +"<br>"+
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So, I played around with them for a while (I bought two of them, so I had them communicating with eachother, and singing in time) and this was fun, but I wanted to start on Nigel again."
+			},
+			{'type':'p', 'innerHTML':
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The chip that runs the board (the microprocessor) is made by Atmel, and is called the Atmega328p. It's got a much bigger program memory, and 100+ commands (as apposed to the other chip's 35 or so) so Nigel commands have more to work with, and can be potentially faster." +"<br>"+
+				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The company makes software for working with their chips called AtmelStudio, which is a much more friendly environment then MPLabX's one. It's still a little complicated, but is clearly better."
+			},
 
+			{'type':'p', 'innerHTML':"And it was here, that we began to build our masterpiece; introducing;"},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/3.jpg', 'caption':''},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is still a work in progress, but is already more functional that the previous one (and from here on out, this is the main version too) The chip is alot more complicated, there's alot more features, and I still don't know what much of it does..but I'm learning, and Nigel is coming along well. There's a slightly different code layout, and a few fundamental differences in the new chip means none of the old code could be transferred over. So, I guess we'll start again. Strap yourselves in for a wild ride! (in a sorta, gentle and a little boring sort way)"},
+
+			{'type':'h2', 'innerHTML':"(Hot Out Of The Oven) Overview"},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So the chip is pretty simple; there's"},
+			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
+				{'type':'p', 'innerHTML':"a program store (where all the code is kept (this is where Nigel is written))"},
+				{'type':'p', 'innerHTML':"the memory (where all the data is kept (this is where Nigel programs are written, and where data those programs are using is stored))"},
+				{'type':'p', 'innerHTML':"the working registers (32 hidden bytes, where all the calculations and manipulation of data is done)"},
+				]
+			},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The program store can only be edited by the programmer (an external machine), so once the program is in there, it can't be changed, only erased and reloaded (I've heard there are ways of getting the chip to reprogram itself, but we're not getting into that) On the plus side though, code written there stays there, unlike in the Memory, where once you turn the power off, all data is lost. The Memory is used to store data for calculations, while calculating them. So like, if you were counting up a number, then needed to switch to a different task, you could store your progress in the Memory, and get back to it later."},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The main difference between the two is; one can't change, the other can."},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nigel, will be written in the Program Store, and Nigel code will be written in the Memory. This way, we can write all sorts of programs without having to reload the entire chip. And if we plug the chip into a Hard-drive, we can store these programs there, meaning we don't have to worry about losing everything when the power goes off!"},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The working registers are just for Nigel and won't be available to the Nigel code. Unlike in the last version, I'm not going to bother with 'secret registers' and two 'working registers', we only really needed the 'secret register' because there was only one real working register, but now with 32, we have no such issues. And really, you don't need the working registers for the Nigel code, so we're gonna simplify."},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Also, important note; this \"0x00\" is a Hexadecimal number. It's a different way of counting."},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"Decimal goes: 0 1 2 3 4 5 6 7 8 9 10"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"Hexadecimal goes: 0 1 2 3 4 5 6 7 8 9 A B C D E F 10"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"So, the number 0x10 in hexadecimal, is 16 in decimal"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"0x01 = 1"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"0x0A = 10"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"0x23 = 35"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can also have bigger numbers, where you just add more numbers after the 'x'"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"0x0023 = 35"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"0x64BF = 25791"},
+
+			{'type':'h2', 'innerHTML':"(New And Improved) Bendy Code"},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(similar to last time) There are five sections to Nigel;"},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/4.png', 'caption':''},
+			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
+				{'type':'p','style':'margin:0px;','innerHTML':
+					"Goto" +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is a single line of code, that moves the execution down to the StartUp code section (skipping over the Interrupt and Command lists)"
+				},
+				{'type':'p','style':'margin:0px;','innerHTML':
+					"Startup Code" +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is the first section that runs. Here the machine is refreshed, memory stores that the Nigel commands use are cleared out, checks can be done, all sorts of cleaning, autocoding and preparing of the machine. Once finished we move onto.."
+				},
+				{'type':'p','style':'margin:0px;','innerHTML':
+					"Discovery" +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This piece of code, looks at the Memory for the next command, if it's zero, it looks at the next byte for a command (and does that continuously until it finds one)" +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When it finds one, it puts it into the 'Z register' and then tells the chip to jump to this line in the Program Store. This number has to be between 0x0034 and 0xFFFF (which is way too much, so we're good)"
+				},
+				{'type':'p','style':'margin:0px;','innerHTML':
+					"Command List" +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The linking section. Jumping here, the code figures out what the command number refers to, then this section links forward to the Command Code section to perform the command." +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Commands are written as high as possible (in the program) to allow for the largest space possible (between 0x0034 and 0xFFFF) it also helps keep things stable. Each command is on a specific line and having code above that is sure to never change, means we don't have to continually change the Nigel command numbers every time some other code changes."
+				},
+				{'type':'p','style':'margin:0px;','innerHTML':
+					"Command Code" +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The bulk of the code, this section takes up most of the space, here all the workings of all the commands are written. Each command code's last action is to add the number of bytes its command took up to the \"program counter\", go back to the start of the Discovery section, and we start all over again."
+				},
+				{'type':'p','style':'margin:0px;','innerHTML':
+					"Interrupt List" +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This section is a little stranger. Similar to the Command Code section, it contains linking code to jump to different areas in the code. Most of these (probably all, infact) haven't been written yet. They are placed at the very top of the program because these are controlled by the chip itself. These commands allow you to avail of the chips features; so you can set up a timer and have the chip notify you when that timer reaches a certain number. Or have it notify you when there's a signal coming in from outside the chip." +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;These notifications are called 'Interrupts', and when they occur, execution jumps to one of the lines in the interrupt section (depending on which one it is) from there, the chip carries on to whatever you have written for it." +"<br>"+
+					"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It can get kinda complicated, but can be really handy for accurate timing and preforming tasks when an external input says its ready. Super handy, though I haven't written anything yet for it, so don't worry about it just yet."
+				},
+				]
+			},
+
+			{'type':'h2', 'innerHTML':"(Shiny And Fresh) Byte Storage"},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The new Memory is huge. The old version had about 80 bytes worth of space; this chip has 2304 bytes. With that said, the first 256 are reserved by the chip (for timers, working registers, output/input control, all sorts of things) leaving 2048 bytes of total usable space, or 2Kb."},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Because it's so much bigger, the addressing system has to be bigger, and in turn I've made the command numbering larger too."},
+			{'type':'list','style':'margin:0px;','form':'unordered','notation':'none','items':[
+				{'type':'p', 'innerHTML':"- Each byte is addressed using a 4 digit hexadecimal number. But each byte is only 2 digits, thus to have a command that accesses bytes you need two bytes to store the address. Which changes the command code a little."},
+				{'type':'p', 'innerHTML':"- Also, because the command list has to start at 0x34 (and for an odd reason, each linking command therein, is considered to be 2 lines long) to have one byte commands would limit us to 101 commands. Using two bytes gives us 32741 commands, which feels much more comfortable. This changes the Discover loop code a little, but fits nicely with the chip, so it's all good"},
+				]
+			},
+
+			{'type':'h2', 'innerHTML':"Fresh New Nigel Commands"},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nigel commands have the following byte components;"},
+			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|Com_High8|Com_Low8| --- The Command number" +"<br>"+
+						"This is always the first part of a Nigel command, after this, inputs are optional depending on what the command does"
+					},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|N| --- A simple plain single byte number"},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|N_High8|N_Low8| --- A simple plain double byte number"},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|F_High8|F_Low8| --- An address to a byte in the Memory"},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|Com| --- a command switch for the command (for example, telling the If command, whether to to judge as equal, less than, greater than, etc.)"},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|Port| --- used in input/output commands to select the desired port number"},
+				]
+			},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- used by For commands ---"},
+			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|i_F_High8|i_F_Low8| --- used  to select the location in Memory where the counter will be held"},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|EndNumber| --- A simple plain single byte number to determine what the ending number is (if the 'i' value is equal to it; the For loop ends (assuming |Com| was set to '=' )) "},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|EndNumber_F_High8|EndNumber_F_Low8| ---  An address to a byte in the Memory where the ending number can be found (if the 'i' value is equal to it; the For loop ends (assuming |Com| was set to '=' ))"},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|StepSize| --- A simple plain single byte number to determine the step size will be (what number will be added or subtracted to 'i' on the completion of every loop)"},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|StepSize_F_High8|StepSize_F_Low8| --- An address to a byte in the Memory where the step size can be found (what number will be added or subtracted to 'i' on the completion of every loop)"},
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8| --- An address to the first byte of all the code the programmer wants to be placed in the For loop"},
+				]
+			},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- used by If commands ---"},
+			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
+					{'type':'p','style':'margin:0px;', 'innerHTML':"|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8| --- An address to the first byte after all of the code that the programmer wants to be placed in the If command"},
+				]
+			},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So far, the functional commands are.. "},
+
+			{'type':'h3', 'innerHTML':"- System Commands -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"STOP - |Com_High8|Com_Low8| "},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Traps execution in infinite loop, essentially ending the program (though if interrupts are set up, program could conceivably start again...may change this in future)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"RESET_ - |Com_High8|Com_Low8| "},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Sends execution back to the start of the program (way up at the first Goto)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"Soft_Restart - |Com_High8|Com_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Places a zero in Nigels program counter. This way, the StartUp section isn't run again, but we start the Nigel code from the start."},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"Goto_- |Com_High8|Com_Low8|N_High8|N_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Goes to the byte in Memory selected with |HighN|LowN| (automatically adds 0x0100 to it, so it's the first byte of usable Memory)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"Sleep_ - |Com_High8|Com_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Activates the chips 'Sleep' function (a low power mode, where an interrupt can wake it back up) "},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"Nop_ - |Com_High8|Com_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Do nothing"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"Wait - |Com_High8|Com_Low8|Com|N_High8|N_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Makes the chip wait for a length of time (selected by the |N_High8|N_Low8| inputs) can wait in milliseconds or seconds"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00 Milliseconds (desired time + 0.00425 milliseconds) (gains 3.1 milliseconds every 10 seconds)"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01 Seconds (can't recommend it right now for accuracy reasons)"},
+			{'type':'p', 'innerHTML':""},
+
+			{'type':'h3', 'innerHTML':"- Chip Pin Control -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"PortDirection - |Com_High8|Com_Low8|Port|N|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Allows the user to set a port's pins to input or output (1 for in, 0 for out) "},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"SetPort - |Com_High8|Com_Low8|Port|N|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Sets a port's pins to Powered or Unpowered (during output)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"ReadPort - |Com_High8|Com_Low8|Port|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Reads a port's pins (during input) and place results in a byte in memory"},
+			{'type':'p', 'innerHTML':""},			
+
+			{'type':'h3', 'innerHTML':"- Bitwise Operations -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"SetFbit - |Com_High8|Com_Low8|F_High8|F_Low8|N|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Sets bit number N in byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so for example, Set bit 6 means 00000000 becomes 01000000)"},			
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"ClearFbit - |Com_High8|Com_Low8|F_High8|F_Low8|N|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Clears bit number N in byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so for example, Clear bit 6 means 11111111 becomes 10111111)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"BitShiftFLeft - |Com_High8|Com_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Left shifts the bits in byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so for example, 01010110 becomes 10101100)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"BitShiftFRight - |Com_High8|Com_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Right shifts the bits in byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so for example, 01010110 becomes 00101011)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"SwapNibblesInF - |Com_High8|Com_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Swaps the first and last 4 bits of byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so for example, 01100101 becomes 01010110)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"FlipBits - |Com_High8|Com_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Inverts the bits of byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so for example, 01100101 becomes 10011010)"},
+			{'type':'p', 'innerHTML':""},
+
+			{'type':'h3', 'innerHTML':"- Move Number -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"putNinF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Places N into byte |F_High8|F_Low8|"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"putFinF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Places the first byte |F_High8|F_Low8| into the second byte |F_High8|F_Low8|"},
+			{'type':'p', 'innerHTML':""},
+
+			{'type':'h3', 'innerHTML':"- And/Or commands -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"AndNwithF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'AND' operation on the bits in N and the byte |F_High8|F_Low8|, and places the result in the byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00001111 AND 01010101. becomes 00000101, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"AndFwithF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'AND' operation on the bits in the first byte |F_High8|F_Low8| and the second byte |F_High8|F_Low8|, and places the result in the second byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00110011 AND 01010101. becomes 00010001, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"NAndNwithF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'NotAND' operation on the bits in N and the byte |F_High8|F_Low8|, and places the result in the byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00001111 AND 01010101. becomes 11111010, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"NAndFwithF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'NotAND' operation on the bits in the first byte |F_High8|F_Low8| and the second byte |F_High8|F_Low8|, and places the result in the second byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00110011 AND 01010101. becomes 11101110, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"OrNwithF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'OR' operation on the bits in N and the byte |F_High8|F_Low8|, and places the result in the byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00001111 AND 01010101. becomes 01011111, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"OrFwithF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'OR' operation on the bits in the first byte |F_High8|F_Low8| and the second byte |F_High8|F_Low8|, and places the result in the second byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00110011 AND 01010101. becomes 01110111, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"NOrNwithF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'NotOR' operation on the bits in N and the byte |F_High8|F_Low8|, and places the result in the byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00001111 AND 01010101. becomes 10100000, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"NOrFwithF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'NotOR' operation on the bits in the first byte |F_High8|F_Low8| and the second byte |F_High8|F_Low8|, and places the result in the second byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00110011 AND 01010101. becomes 10001000, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"EOrNwithF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'ExclusiveOR' operation on the bits in N and the byte |F_High8|F_Low8|, and places the result in the byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00001111 AND 01010101. becomes 01011010, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"EOrFwithF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'ExclusiveOR' operation on the bits in the first byte |F_High8|F_Low8| and the second byte |F_High8|F_Low8|, and places the result in the second byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00110011 AND 01010101. becomes 01100110, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"NEOrNwithF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'NotExclusiveOR' operation on the bits in N and the byte |F_High8|F_Low8|, and places the result in the byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00001111 AND 01010101. becomes 10100101, for example)"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"NEOrFwithF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'NotExclusiveOR' operation on the bits in the first byte |F_High8|F_Low8| and the second byte |F_High8|F_Low8|, and places the result in the second byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00110011 AND 01010101. becomes 10011001, for example)"},
+
+
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"},
 		]
 	}
-
-
-
 ];
 
 //{'type':'img', 'src':'', 'caption':''},
 //{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"},
 //{'type':'p', 'innerHTML':""},
 //{'type':'h2', 'innerHTML':""},
+
+/*
+				{'type':'p','style':'margin:0px;','innerHTML':
+					"" +"<br>"+
+				},
+*/
+
 
 /*
 	{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
