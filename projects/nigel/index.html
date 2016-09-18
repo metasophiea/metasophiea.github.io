@@ -10,6 +10,14 @@
             for(var a = 0; a < content.length; a++){
                 document.body.appendChild(generateArticle(content[a].id,content[a].content));
             }
+
+
+
+
+            
+            setTimeout(function(){
+                window.scrollTo(0,document.body.offsetHeight);
+            },1000);
         }
 
 
@@ -98,7 +106,7 @@
 
         article{
             width: 50%;
-            margin: auto;
+            margin: 10px auto;
             min-width: 600px; max-width: 800px;
             background: #fcfcfc;
             padding: 10px;

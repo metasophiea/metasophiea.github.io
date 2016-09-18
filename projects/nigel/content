@@ -128,7 +128,6 @@ var content = [
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;74x55=4070 (2035 bytes)"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wondeful"},
 
-
 			{'type':'h3', 'innerHTML':"Talking To The Chip"},	
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is all well and good, but we need to find a way of changing the pixel data in the chip..This means both finding a way for chips to talk to eachother, and figuring out how the input chip's graphical code will work.."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It's somewhat easy to simply transfer in new pixels one by one into the memory, but we need to draw things into the memory..a more complex task."},
@@ -150,15 +149,44 @@ var content = [
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Until next time:"},
 			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/22.jpg', 'caption':''},
 
-
 			{'type':'p', 'innerHTML':"&nbsp;"},
 			{'type':'p','style':'margin:0px; text-align: right;', 'innerHTML':"Posted 14th August 2015"},
 
 		]
+	},
+	{
+		'id':'post_20160917-b',
+		'date':'2016-09-17-20-50',
+		'title':'How to Build a Computer (Probably) - Side Quest 2 - Nigel (upgraded)',
+		'content':[
+			{'type':'h1', 'innerHTML':"How to Build a Computer (Probably) - Side Quest 2 - Nigel (upgraded)"},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/1.jpg', 'caption':''},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So here's what happened; I was happily programming away and I'd just finished the SquareF command, when I encountered an odd error. Apparently, Nigel had gotten so big that I'd filled the chip's program memory, and the software I was using to write the program wouldn't let me compile anything until I shortened the code. I did, and the final version of Nigel for the PIC16F84A (the proper name of the chip I was working on) will work properly."},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;But I wasn't finished, I wanted Nigel to be bigger and smarter, so I started looking through the website where you can get the PIC16F84A, to see if I could find a bigger one. Two things happened;"},
+			{'type':'list','style':'margin:0px;','form':'ordered','notation':'1','items':[
+				{'type':'p','style':'margin:0px;', 'innerHTML':"There were thousands of chips to choose from, and I couldn't see the difference between many of them...the website was confusing and unhelpful."},
+				{'type':'p','style':'margin:0px;', 'innerHTML':"When I (through random selection) settled on a chip, the older software package didn't have the chip type on it, so I had to get the newer vision. MPLab X it was called...it was useless, overcomplicated and horrific; never get it. Ever."},
+				]
+			},
+
+		]
 	}
+
+
+
 ];
 
 //{'type':'img', 'src':'', 'caption':''},
 //{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"},
 //{'type':'p', 'innerHTML':""},
 //{'type':'h2', 'innerHTML':""},
+
+/*
+	{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
+		'<batch>',	{'type':'p','style':'margin:0px;','innerHTML':""},
+		'</batch>',
+		'<batch>',	{'type':'p','style':'margin:0px;','innerHTML':""},
+		'</batch>',
+		]
+	},
+*/
