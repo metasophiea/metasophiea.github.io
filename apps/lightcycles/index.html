@@ -84,6 +84,8 @@
 
 		if( Object.keys(teamMemebersRemaining).length == 1){
 			console.log('winner: ' + Object.keys(teamMemebersRemaining)[0]);
+			console.log(teamMemebersRemaining);
+			pixelMatrix.drawString({'x':20,'y':50},'Winner: ' + Object.keys(teamMemebersRemaining)[0],'ffffff');
 			clearInterval(interval);			
 		}		
 	}
@@ -96,10 +98,23 @@
 		pixelMatrix.FPS(15);
 		pixelMatrix.autoRender(true);
 		background = produceBackground();
-		for(var a = 0; a < background.length; a++){for(var b = 0; b < background[0].length; b++){pixelMatrix.setPixel({'x':a,'y':b},background[a][b]);}}
 
 		player = makePlayers(2);
 
+		var countdown = 3;
+		var interval = setInterval(function(){
+			for(var a = 0; a < background.length; a++){for(var b = 0; b < background[0].length; b++){pixelMatrix.setPixel({'x':a,'y':b},background[a][b]);}}
+			pixelMatrix.drawString({'x':50,'y':50},countdown,'ffffff');
+
+			if(countdown == 0){
+				clearInterval(interval);	
+				StartGame();
+				for(var a = 0; a < background.length; a++){for(var b = 0; b < background[0].length; b++){pixelMatrix.setPixel({'x':a,'y':b},background[a][b]);}}
+			}
+			countdown--;
+		},1000);
+	}
+	function StartGame(){
 		interval = setInterval(function(){
 			var derezList = []; var nextSteps = [];
 

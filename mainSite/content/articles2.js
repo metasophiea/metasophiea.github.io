@@ -1,4 +1,12 @@
 var articles = [
+	{	"id":"article_20160919-a",
+		"headline":"Light Cycles",
+		"text":["Simple but fun game of skill for two players","(red uses Q and W, yellow uses O and P)"],	
+		"textcolour":"rgb(255,255,255)",
+		"backerFill":"rgba(0,0,0,0.75)",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/lightcycles.png",
+		"link_url":"http://metasophiea.com/apps/lightcycles"
+	},
 	{	"id":"article_20160807-a",
 		"headline":"Canvas Viewing Space Project",
 		"text":["A pure JS 2d graphics engine, currently developing into a dynamic presentation app"],	
@@ -38,7 +46,7 @@ var articles = [
 		"backerFill":"rgba(245,245,245,0.65)",
 		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/metasophiea.github.io.png",
 		"link_url":"https://github.com/metasophiea/metasophiea.github.io"		
-	},	
+	},
 ];
 
 console.log('%c'+Object.keys(articles).length+' articles loaded', 'color:rgb(202,136,202); font-style:italic;');
