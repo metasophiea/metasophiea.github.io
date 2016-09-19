@@ -107,7 +107,7 @@ var content = [
 			{'type':'p','style':'margin:0px;', 'innerHTML':"There's two main reasons I can't get a higher resolution:"},
 			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
 				'<batch>',	{'type':'p','style':'margin:0px;','innerHTML':"The chip isn't that fast."},
-							{'type':'p','style':'margin:0px;','innerHTML':"Using the current settings and timings, I'm able to program the chip to send out 96 pixels each HSyncLoop. Each action of gathering a pixel, and sending it out, takes 0.18μs (micro seconds) Faster chips can do these types of actions quicker, but I'm limited by this chips speed."},
+							{'type':'p','style':'margin:0px;','innerHTML':"Using the current settings and timings, I'm able to program the chip to send out 96 pixels each HSyncLoop. Each action of gathering a pixel, and sending it out, takes 0.18µs (micro seconds) Faster chips can do these types of actions quicker, but I'm limited by this chips speed."},
 							{'type':'p','style':'margin:0px;','innerHTML':"\"But wait, if you can do 96 pixels across, why don't you?\" Well I'll tell you.."},
 				'</batch>',
 				'<batch>',	{'type':'p','style':'margin:0px;','innerHTML':"I don't have enough memory."},
@@ -149,7 +149,6 @@ var content = [
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Until next time:"},
 			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/22.jpg', 'caption':''},
 
-			{'type':'p', 'innerHTML':"&nbsp;"},
 			{'type':'p','style':'margin:0px; text-align: right;', 'innerHTML':"Posted 14th August 2015"},
 
 		]
@@ -272,12 +271,12 @@ var content = [
 					{'type':'p','style':'margin:0px;', 'innerHTML':"|EndNumber_F_High8|EndNumber_F_Low8| ---  An address to a byte in the Memory where the ending number can be found (if the 'i' value is equal to it; the For loop ends (assuming |Com| was set to '=' ))"},
 					{'type':'p','style':'margin:0px;', 'innerHTML':"|StepSize| --- A simple plain single byte number to determine the step size will be (what number will be added or subtracted to 'i' on the completion of every loop)"},
 					{'type':'p','style':'margin:0px;', 'innerHTML':"|StepSize_F_High8|StepSize_F_Low8| --- An address to a byte in the Memory where the step size can be found (what number will be added or subtracted to 'i' on the completion of every loop)"},
-					{'type':'p','style':'margin:0px;', 'innerHTML':"|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8| --- An address to the first byte of all the code the programmer wants to be placed in the For loop"},
+					{'type':'p','style':'margin:0px; word-break: break-all;', 'innerHTML':"|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8| --- An address to the first byte of all the code the programmer wants to be placed in the For loop"},
 				]
 			},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- used by If commands ---"},
 			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
-					{'type':'p','style':'margin:0px;', 'innerHTML':"|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8| --- An address to the first byte after all of the code that the programmer wants to be placed in the If command"},
+					{'type':'p','style':'margin:0px; word-break: break-all;', 'innerHTML':"|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8| --- An address to the first byte after all of the code that the programmer wants to be placed in the If command"},
 				]
 			},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So far, the functional commands are.. "},
@@ -356,7 +355,7 @@ var content = [
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Places the first byte |F_High8|F_Low8| into the second byte |F_High8|F_Low8|"},
 			{'type':'p', 'innerHTML':""},
 
-			{'type':'h3', 'innerHTML':"- And/Or commands -"},
+			{'type':'h3', 'innerHTML':"- And/Or -"},
 			{'type':'p', 'innerHTML':""},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"AndNwithF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'AND' operation on the bits in N and the byte |F_High8|F_Low8|, and places the result in the byte |F_High8|F_Low8|"},
@@ -405,14 +404,119 @@ var content = [
 			{'type':'p','style':'margin:0px;', 'innerHTML':"NEOrFwithF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Performs an 'NotExclusiveOR' operation on the bits in the first byte |F_High8|F_Low8| and the second byte |F_High8|F_Low8|, and places the result in the second byte |F_High8|F_Low8|"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, 00110011 AND 01010101. becomes 10011001, for example)"},
-
-
 			{'type':'p', 'innerHTML':""},
-			{'type':'p','style':'margin:0px;', 'innerHTML':""},
-			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"},
-			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"},
+
+			{'type':'h3', 'innerHTML':"- Math Operations -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"incrimentFby1 - |Com_High8|Com_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Adds 1 to the byte |F_High8|F_Low8|"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"decrimentFby1 - |Com_High8|Com_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Subtracts 1 from the byte |F_High8|F_Low8|"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"MakeFnegitive - |Com_High8|Com_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Makes the byte |F_High8|F_Low8| negative (by inverting the bits then adding one (two's compliment)) "},		
+			{'type':'p', 'innerHTML':"&nbsp;"},	
+			{'type':'p','style':'margin:0px;', 'innerHTML':"addNtoF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Adds the value N to byte |F_High8|F_Low8|"},
+			{'type':'p', 'innerHTML':""},	
+			{'type':'p','style':'margin:0px;', 'innerHTML':"addFtoF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Adds the value in the first byte |F_High8|F_Low8| to the second byte |F_High8|F_Low8|"},
+			{'type':'p', 'innerHTML':""},	
+			{'type':'p','style':'margin:0px;', 'innerHTML':"subtractNtoF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Subtracts the value N from byte |F_High8|F_Low8|"},
+			{'type':'p', 'innerHTML':""},	
+			{'type':'p','style':'margin:0px;', 'innerHTML':"subtractFtoF - |Com_High8|Com_Low8|N|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Subtracts the value in the first byte |F_High8|F_Low8| from the second byte |F_High8|F_Low8|"},		
+			{'type':'p', 'innerHTML':"&nbsp;"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"SquareF - |Com_High8|Com_Low8|F_High8|F_Low8|F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- Squares the value in the first byte |F_High8|F_Low8| and places the result back in it. If the result is larger than what one byte can hold (and assuming the second bytes details have been added) the higher byte value is placed in the second byte |F_High8|F_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, if you write xx xx 02 00 00 00, and the value in byte 0x0200 is 0x05; it will put the value 0x19 in byte 0x0200. If you type xx xx 02 00 02 01, and the value in 0x0200 is 0x14, it will place 0x90 in 0x0200 and 0x01 in 0x0201. But, if you type xx xx 02 00 00 00, and the value in 0x0200 is 0x14, it will place 0x90 in 0x0200 and do nothing else)"},
+			{'type':'p', 'innerHTML':""},
+			
+			{'type':'h3', 'innerHTML':"- If Statements -"},			
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px; word-break: break-all;', 'innerHTML':"IsN_F - |ComHigh8|ComLow8|Com|N|F_High8|F_Low8|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- This command judges N off byte |F_High8|F_Low8|, if it returns true, the code contained in the If statement is run, if not, it jumps to the first command after the code contained in the If statement. You have to use your imagination a little for this one."},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px; word-break: break-all;', 'innerHTML':"IsF_F - |ComHigh8|ComLow8|Com|F_High8|F_Low8|F_High8|F_Low8|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- This command judges the first byte |F_High8|F_Low8| off the second byte |F_High8|F_Low8|, if it returns true, the code contained in the If statement is run, if not, it jumps to the first command after the code contained in the If statement. You have to use your imagination a little for this one too, but not as much."},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/5.png', 'caption':''},			
+			
+			{'type':'h3', 'innerHTML':"- If With Else -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There is no specific command for this, you need to use an 'if' statement with a 'Goto' command to achieve this."},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/6.png', 'caption':''},
+
+			{'type':'h3', 'innerHTML':"- Do While Loop -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To do a dowhile loop, use a While statement, and set the \"FirstCommandOfWhile'dCodeAddress\" to a location before the While statement begins (and don't forget a way to change the byte |F_High8|F_Low8| so you don't get an infinite loop)"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the statement returns false, the loop starts again."},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/7.png', 'caption':''},	
+
+			{'type':'h3', 'innerHTML':"- While Loop -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To do a while loop, use a While statement, and set the \"FirstCommandOfWhile'dCodeAddress\" to a location before the While statement begins. Then before this point, add in a Goto command to bring you to the start of the if statement (and don't forget a way to change the byte |F_High8|F_Low8| so you don't get an infinite loop)"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the statement returns false, the loop starts again."},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/8.png', 'caption':''},
+
+			{'type':'h3', 'innerHTML':"- For Loop -"},
+			{'type':'p', 'innerHTML':""},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are a few different flavors of the ForLoop, but they all basically work the same way. You write the code you want to loop before the For command, then tell the For command where this code starts. The command needs a byte as a counter for itself - I, an EndNumber (a value to judge this counter off (it can be a simple value or an address to a byte)) and a StepSize (a value that it added to the counter at the end of each loop (it also can be a simple value or an address to a byte))"},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/9.png', 'caption':''},			
+			{'type':'p','style':'margin:2px; word-break: break-all;', 'innerHTML':"For_ - |ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- For so long as byte |i_F_High8|i_F_Low8| is |Com| than value |EndNumber|, perform code in For loop, when completed add value |StepSize| to byte |i_F_High8|i_F_Low8| and start again"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},			
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, for example, xx xx 00 02 00 03 01 01 10; assuming the value in 0x0200 is 0x00, the code between the end of this For command, and byte number 0x0110 will be run, then 0x01 will be added to byte 0x0200, and the value in there will be judged against the value 0x03 to see if they are equal. If they are, the code is skipped, and we go to byte 0x0110 to run the rest of the program. This loop should happen 3 times)"},			
+			{'type':'p', 'innerHTML':"&nbsp;"},
+			{'type':'p','style':'margin:2px; word-break: break-all;', 'innerHTML':"For_E - |ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_High8|EndNumber_Low8|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- For so long as byte |i_F_High8|i_F_Low8| is |Com| than value in byte |EndNumber_High8|EndNumber_Low8 |, perform code in For loop, when completed add value |StepSize| to byte |i_F_High8|i_F_Low8| and start again"},			
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},			
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, for example, xx xx 00 02 00 02 01 01 01 10; assuming the value in 0x0200 is 0x00, the code between the end of this For command, and byte number 0x0110 will be run, then 0x01 will be added to byte 0x0200, and the value in there will be judged against the value in byte 0x0201 to see if they are equal. If they are, the code is skipped, and we go to byte 0x0110 to run the rest of the program. This loop should happen 3 times)"},		
+			{'type':'p', 'innerHTML':"&nbsp;"},
+			{'type':'p','style':'margin:2px; word-break: break-all;', 'innerHTML':"For_S - |ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize_High8|StepSize_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- For so long as byte |i_F_High8|i_F_Low8| is |Com| than value |EndNumber|, perform code in For loop, when completed add the value in byte |StepSize_High8|StepSize_Low8| to byte |i_F_High8|i_F_Low8| and start again"},			
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},			
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, for example, xx xx 00 02 00 03 02 01 01 10; assuming the value in 0x0200 is 0x00,  the code between the end of this For command, and byte number 0x0110 will be run, then byte 0x0201 will be added to byte 0x0200, and the value in there will be judged against the value 0x03 to see if they are equal. If they are, the code is skipped, and we go to byte 0x0110 to run the rest of the program. This loop should happen 3 times)"},
+			{'type':'p', 'innerHTML':"&nbsp;"},
+			{'type':'p','style':'margin:2px; word-break: break-all;', 'innerHTML':"For_ES - |ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber_High8|EndNumber_Low8|StepSize_High8|StepSize_Low8|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8|"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- For so long as byte |i_F_High8|i_F_Low8| is |Com| than the value in byte |EndNumber_High8|EndNumber_Low8 |, perform code in For loop, when completed add the value in byte |StepSize_High8|StepSize_Low8| to byte |i_F_High8|i_F_Low8| and start again"},			
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},			
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(so, for example, xx xx 00 02 00 02 01 02 02 01 10; assuming the value in 0x0200 is 0x00,  the code between the end of this For command, and byte number 0x0110 will be run, then byte 0x0202 will be added to byte 0x0200, and the value in there will be judged against the value in byte 0x0201 to see if they are equal. If they are, the code is skipped, and we go to byte 0x0110 to run the rest of the program. This loop should happen 3 times)"},
+			{'type':'p', 'innerHTML':""},
+
+			{'type':'h2', 'innerHTML':"So, what now?"},			
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obviously, this list of commands is going to be expanded, and I'm planning on creating (at least) two new different versions of Nigel for audio and graphics, so any changes from here out, I'll talk about in later posts (instead of editing this one) and if you wanna download the code for yourself, you can get it aswel as my handy chip information files from the Google Drive"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I'm still gonna make this project public, so you can go see the Nigel Develpoment Log and download the workspace to look at and mess around with from here: "},
+			{'type':'p','style':'margin:0px; word-break: break-all;', 'innerHTML':"<a href='https://drive.google.com/folderview?id=0B7-r9goff8SZfi1wdEQwQXRFeHRIRTlzdThGRjA1MW5mZkxyRmpzWlgzbTVEbU85anpNWnc&usp=sharing'>https://drive.google.com/folderview?id=0B7-r9goff8SZfi1wdEQwQXRFeHRIRTlzdThGRjA1MW5mZkxyRmpzWlgzbTVEbU85anpNWnc&usp=sharing</a>"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"You're also going to need a version of Atmel Studio "},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"<a href='http://www.atmel.com/microsite/atmel_studio6/'>http://www.atmel.com/microsite/atmel_studio6/</a>"},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This could be the start of something very interesting. We have a chip that we can program easily, that has plenty of space and is quite fast (20MHz). We have a language that shows real promise, and we have a clear direct vision (ish) of where we're going. Chaps; this could be really cool :D"},
+			
+			{'type':'h2', 'innerHTML':"Remember Anica?"},	
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yeah..the Anica project has essentially been shelved, but it is not forgotten. Having a chip that we can program and wire into things, brings us way forward, but we lose alot of the control and complete features that we would have gotten from the custom architecture. What is does do though, is give us a better insight into what is really required from a chip. By programming this one, and going as far and as advanced as we can go, we will learn more about what the Anica architecture needs to be, when we return. "},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Till then, let's keep coding, working on Nigel. There needs to be some way of writing Nigel code, using the machine, so graphics and an input device are required. I'm hoping to make a higher language that can convert into Nigel code, allowing for programs to be less machine like, and more natural to how people think. That is, ofcourse, way down the line (but maybe not that far)"},
+			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anyway, until next time,"},
+			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/10.jpg', 'caption':''},
+
+			{'type':'p','style':'margin:0px; text-align: right;', 'innerHTML':"Posted 5th June 2015"},
 		]
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 ];
 
 //{'type':'img', 'src':'', 'caption':''},
