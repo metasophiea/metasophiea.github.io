@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script src="file:///home/metasophiea/Software/metasophiea.github.io/lib/js/getJS/2.4.0/getJS.js"></script>
+	<script>
+		function Go(){
+			console.log('hello');
+
+			showManifest('http://metasophiea.com/',0);
+			showManifest('http://metasophiea.com/lib/js/getJS/',1);
+			showManifest('http://metasophiea.com/',2);
+			showManifest('http://metasophiea.com/',3);
+		}
+
+
+		function showManifest(link,column){
+			getJS.getManifest(link,displayFiles);
+
+			function displayFiles(manifest){
+				for(var a = 0; a < manifest.length; a++){
+					var element = document.createElement('p');
+						element.style.margin = '0px'; element.style.padding = '5px'; element.setAttribute('class','thing');
+						if(manifest[a].type == 'dir'){element.innerHTML = manifest[a].name;}
+						else{element.innerHTML = manifest[a].name + '.' + manifest[a].type;}
+					document.getElementById('column_'+column).appendChild(element);
+				}
+			}
+		}
+
+	</script>
+	<style>
+		p{
+			text-overflow: ellipsis; white-space: nowrap; width: 100px; overflow: hidden;
+		}
+		td{
+			border: 1px solid #aaaaaa; padding: 0px; vertical-align: top
+		}
+		.thing:hover{
+			background: #dddddd;
+			transition: background 0.1s;
+			overflow: visible;
+			width: auto;
+		}
+	</style>
+</head>
+
+<body onLoad="Go()">
+	<table cellspacing='0px'><tbody>
+		<tr>
+			<td id='column_0'></td>
+			<td id='column_1'></td>
+			<td id='column_2'></td>
+			<td id='column_3'></td>
+		</tr>
+	</tbody></table>
+</body>
+</html>
