@@ -1,0 +1,6 @@
+manifest manifest
+autoViewportControl js
+mouseInterfaceControls js
+pan js
+spin js
+zoom js

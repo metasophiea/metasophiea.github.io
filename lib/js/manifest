@@ -1,10 +1,2 @@
 manifest manifest
-audiophile dir
-browserWork dir
-canvasViewingSpace dir
-getJS dir
-io dir
-liveEdit dir
-math dir
-pixelMagic dir
-string dir
+wordstats dir
