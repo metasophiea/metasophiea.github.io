@@ -1,0 +1,6 @@
+manifest manifest
+distortion js
+globalOutputPort js
+oscillator js
+oscilloscope js
+reverb js
