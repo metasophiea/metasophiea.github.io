@@ -11,9 +11,6 @@
 			document.getElementById('mainTable').style.height = (window.innerHeight-10) + 'px';
 
 			showManifest('http://metasophiea.com/',0);
-			showManifest('http://metasophiea.com/',1);
-			showManifest('http://metasophiea.com/',2);
-			showManifest('http://metasophiea.com/',3);
 		}
 
 
@@ -46,7 +43,7 @@
 						element.onmouseover = function(){this.parentElement.style['max-width'] = '200px';}
 						element.onmouseout = function(){this.parentElement.style['max-width'] = '100px';}
 						element.onclick = function(){
-							if(this.address.type == 'dir'){showManifest(this.address.link,column+1);}
+							if(this.address.type == 'dir'){showManifest(this.address.link+'/',column+1);}
 							else{window.open(this.address.link, '_blank');}
 						}
 					document.getElementById('column_'+column).appendChild(element);
