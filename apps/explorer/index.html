@@ -31,7 +31,7 @@
 
 			function displayFiles(manifest){
 				if(manifest.length == 0){
-					document.getElementById('column_'+column).parentNode.removeChild(document.getElementById('column_'+column));
+				//	document.getElementById('column_'+column).parentNode.removeChild(document.getElementById('column_'+column));
 					return;
 				}
 
@@ -45,7 +45,8 @@
 						element.onmouseout = function(){this.parentElement.style['max-width'] = '100px';}
 						element.onclick = function(){
 							if(this.address.type == 'dir'){showManifest(this.address.link+'/',column+1);}
-							else{window.open(this.address.link, '_blank');}
+							else if(this.address.type == 'manifest'){window.open(this.address.link, '_blank');}
+							else{window.open(this.address.link+'.'+this.address.type, '_blank');}
 						}
 					document.getElementById('column_'+column).appendChild(element);
 				}
