@@ -1,0 +1,8 @@
+manifest manifest
+parts dir
+
+automoveScriptEditor js
+automoveScriptElementEditor js
+present js
+start js
+windowMotion js
