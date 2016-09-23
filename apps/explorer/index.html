@@ -4,27 +4,51 @@
 <head>
 	<title>metasophiea</title>
 	<meta charset="utf-8"></meta>
-	<script src="file:///home/metasophiea/Software/metasophiea.github.io/lib/js/getJS/2.4.0/getJS.js"></script>
+	<script src="http://metasophiea.com/lib/js/getJS/2.4.0/getJS.js"></script>
 	<script>
 		function Go(){
 			console.log('hello');
+			document.getElementById('mainTable').style.height = (window.innerHeight-10) + 'px';
 
 			showManifest('http://metasophiea.com/',0);
-			showManifest('http://metasophiea.com/lib/js/getJS/',1);
+			showManifest('http://metasophiea.com/',1);
 			showManifest('http://metasophiea.com/',2);
 			showManifest('http://metasophiea.com/',3);
 		}
 
 
 		function showManifest(link,column){
+			if(column > document.getElementById('columSpace').children.length-1){
+				var element = document.createElement('td');
+					element.id = 'column_'+column;
+				document.getElementById('columSpace').appendChild(element);
+			}
+			else if(column < document.getElementById('columSpace').children.length-1){
+				for(var a = document.getElementById('columSpace').children.length-1; a > column; a--){
+					document.getElementById('column_'+a).parentNode.removeChild(document.getElementById('column_'+a));
+				}
+			}
+
 			getJS.getManifest(link,displayFiles);
 
 			function displayFiles(manifest){
+				if(manifest.length == 0){
+					document.getElementById('column_'+column).parentNode.removeChild(document.getElementById('column_'+column));
+					return;
+				}
+
 				for(var a = 0; a < manifest.length; a++){
 					var element = document.createElement('p');
-						element.style.margin = '0px'; element.style.padding = '5px'; element.setAttribute('class','thing');
+						element.address = {'link':link + manifest[a].name,'type':manifest[a].type};
+						element.style.margin = '0px'; element.setAttribute('class','thing');
 						if(manifest[a].type == 'dir'){element.innerHTML = manifest[a].name;}
 						else{element.innerHTML = manifest[a].name + '.' + manifest[a].type;}
+						element.onmouseover = function(){this.parentElement.style['max-width'] = '200px';}
+						element.onmouseout = function(){this.parentElement.style['max-width'] = '100px';}
+						element.onclick = function(){
+							if(this.address.type == 'dir'){showManifest(this.address.link,column+1);}
+							else{window.open(this.address.link, '_blank');}
+						}
 					document.getElementById('column_'+column).appendChild(element);
 				}
 			}
@@ -32,28 +56,29 @@
 
 	</script>
 	<style>
+		body {margin: 5px;}
 		p{
-			text-overflow: ellipsis; white-space: nowrap; width: 100px; overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			padding: 5px;
 		}
 		td{
-			border: 1px solid #aaaaaa; padding: 0px; vertical-align: top
+			border: 1px solid #aaaaaa; padding: 0px; vertical-align: top;
+			max-width: 100px; min-width: 100px;
+			transition: max-width 1s;
 		}
 		.thing:hover{
 			background: #dddddd;
 			transition: background 0.1s;
-			overflow: visible;
-			width: auto;
 		}
 	</style>
 </head>
 
 <body onLoad="Go()">
-	<table cellspacing='0px'><tbody>
-		<tr>
+	<table id='mainTable' cellspacing='0px'><tbody>
+		<tr id='columSpace'>
 			<td id='column_0'></td>
-			<td id='column_1'></td>
-			<td id='column_2'></td>
-			<td id='column_3'></td>
 		</tr>
 	</tbody></table>
 </body>
