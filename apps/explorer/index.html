@@ -30,10 +30,7 @@
 			getJS.getManifest(link,displayFiles);
 
 			function displayFiles(manifest){
-				if(manifest.length == 0){
-				//	document.getElementById('column_'+column).parentNode.removeChild(document.getElementById('column_'+column));
-					return;
-				}
+				if(manifest.length == 0){return;}
 
 				for(var a = 0; a < manifest.length; a++){
 					var element = document.createElement('p');
