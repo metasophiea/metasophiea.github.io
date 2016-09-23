@@ -25,7 +25,7 @@
 					document.getElementById('column_'+a).parentNode.removeChild(document.getElementById('column_'+a));
 				}
 			}
-			else{document.getElementById('column_'+column).innerHTML = '';}
+			document.getElementById('column_'+column).innerHTML = '';
 
 			getJS.getManifest(link,displayFiles);
 
