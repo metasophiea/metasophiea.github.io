@@ -21,7 +21,8 @@
 			document.getElementById('output').innerHTML += data[2][0].split('/')[0] + ' version: ' + data[2][0].split('/')[1].split('.')[0];	
 
 			document.getElementById('output').innerHTML += '<br><br><br>';
-			document.getElementById('output').innerHTML += JSON.stringify(bowser,null,2);		
+			document.getElementById('output').innerHTML += JSON.stringify(bowser,null,2) + '<br>';	
+			document.getElementById('output').innerHTML += 'width: ' + window.innerWidth + ' - height: ' + window.innerHeight;	
 		}
 
 
