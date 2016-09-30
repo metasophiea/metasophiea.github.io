@@ -5,18 +5,23 @@
 	<title>metasophiea</title>
 	<meta charset="utf-8"></meta>
 	<meta name="theme-color" content="#202020"></meta>
-	<link rel="icon" href="https://3.bp.blogspot.com/-L1kqNHRCp3k/Vsg4mftph4I/AAAAAAAALaw/8749dzjaeCk/s1600/favcon.gif" type="image/gif" sizes="100x100"></link>
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Bitter">
-	<script type='text/javascript' src="http://metasophiea.com/mainSite/display/desktop/chrome/49/js/mainmenu.js"></script>
-	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles.js"></script>
+	<script type='text/javascript' src="./contentDisplay.js"></script>
+	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles2.js"></script>
 
 	<script>
 		var RegularSquareSize = 100;
 		var ChangeClours = true;
+		var backing = document.createElementNS('http://www.w3.org/2000/svg','rect');
+			backing.id = "backing";
+			backing.style.fill = "rgb(20,20,20)";
+			backing.style.height = '100%';
+			backing.style.width = '100%';
+
 		var SpinningSquare = document.createElementNS('http://www.w3.org/2000/svg','rect');
 			SpinningSquare.id = "SpinningSquare";
 			SpinningSquare.style.fill = "rgb(153,0,204)";
-			SpinningSquare.style.x = window.innerWidth/3.9;
+			SpinningSquare.style.x = window.innerWidth/3;
 			SpinningSquare.style.y = window.innerHeight/2;
 			SpinningSquare.style.height = 0;
 			SpinningSquare.style.width = 0;
@@ -29,18 +34,18 @@
 			MainText.innerHTML = "metasophiea.com";
 			MainText.style["font-size"] = "60";
 			MainText.style["font-family"] = "Bitter";
-			MainText.setAttribute("x", window.innerWidth/3); MainText.setAttribute("y", (window.innerHeight/2+(60/4)));
+			MainText.setAttribute("x", window.innerWidth/2.5); MainText.setAttribute("y", (window.innerHeight/2+(60/4)));
 
 		function Go(){
-			MainSVG.appendChild(MainText);
-			MainSVG.appendChild(SpinningSquare);
+			document.getElementById('MainSVG').appendChild(backing);			
+			document.getElementById('MainSVG').appendChild(MainText);
+			document.getElementById('MainSVG').appendChild(SpinningSquare);
 			setTimeout(function(){SetSquareSize(RegularSquareSize);},1);
 			setInterval(function(){
 				if(ChangeClours){document.getElementById('SpinningSquare').style.fill = "rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";}
 				else{document.getElementById('SpinningSquare').style.fill = "rgb(255,255,255)";}				
 			},1000);
 		}
-
 		
 		function WindowAdjust(){
 			document.getElementById('MainText').setAttribute("x",window.innerWidth/3);
@@ -49,7 +54,7 @@
 		}
 
 		function SetSquareSize(size){
-			document.getElementById('SpinningSquare').style.x = (window.innerWidth/3.9 -size/2);
+			document.getElementById('SpinningSquare').style.x = document.getElementById('MainText').getBoundingClientRect().left - size*1.25;
 			document.getElementById('SpinningSquare').style.y = (window.innerHeight/2 -size/2);
 			document.getElementById('SpinningSquare').style.height = size;
 			document.getElementById('SpinningSquare').style.width = size;	
@@ -59,28 +64,31 @@
 			if(document.getElementById('SpinningSquare').getAttribute("clicked") == "true"){CloseSquare();}
 			else{OpenSquare();}
 		}
-		
-
 		function OpenSquare(){
-			document.getElementById('SpinningSquare').setAttribute("clicked","true");
-			SetSquareSize(5000);
+			var size = 3000;
+        	document.getElementById('SpinningSquare').setAttribute("clicked","true");
+			document.getElementById('SpinningSquare').style.x = (window.innerWidth/2 -size/2);
+			document.getElementById('SpinningSquare').style.y = (window.innerHeight/2 -size/2);
+			document.getElementById('SpinningSquare').style.height = size;
+			document.getElementById('SpinningSquare').style.width = size;	
 			ChangeClours=false;
-			ShowMainMenu();
+			setTimeout(function(){
+				ShowSite();
+				document.body.style.overflowY = 'visible';
+			},1750);
 		}
 		function CloseSquare(){
-			document.getElementById('SpinningSquare').setAttribute("clicked","false");
+        	document.getElementById('SpinningSquare').setAttribute("clicked","false");
 			SetSquareSize(RegularSquareSize);
 			ChangeClours=true;
-			HideMainMenu();
+			document.body.style.overflowY = 'hidden';
 		}
-
-
 	</script>
 
 	<style title="Main">
-		html, body{width:100%; height:100%; margin:0px;overflow-x: hidden; overflow-y: hidden; background:rgb(20,20,20);}
+		body{width:100%; height:100%; margin:0px;overflow-x: hidden; background:rgb(255,255,255);}
 		@keyframes example {
-    			from {transform: rotate(0deg);}
+    		from {transform: rotate(0deg);}
    			to {transform: rotate(360deg);}
 		}
 
@@ -105,13 +113,29 @@
   			-o-user-select:none;
   			user-select:none;
 		}
+		#MainSVG{
+			position: absolute;
+    		left: 0px;
+    		top: 0px;
+		}
 
 		.menu{transition: opacity 1s, fill 1s, x 0.5s, y 0.5s;}
 		.imageoct{transition: opacity 1s;}
+
+		.articleHeading{
+			margin: 0px;
+			font-size: 30px;
+			font-family: "Bitter";
+		}
+		.articleBody{
+			margin: 0px;
+			font-size: 16px;
+			font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}		
 	</style>
 </head>
 
-<body onLoad="Go()" onresize="WindowAdjust();">
+<body onLoad="Go()" onresize="WindowAdjust();" style='overflow-y: hidden;'>
 	<svg id="MainSVG" width="100%" height="100%"  xmlns="http://www.w3.org/2000/svg"></svg>
 </body>
 </html>
