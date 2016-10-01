@@ -32,7 +32,7 @@
 			function displayFiles(manifest){
 				if(manifest.length == 0){return;}
 
-				for(var a = 0; a < manifest.length; a++){console.log(manifest[a]);
+				for(var a = 0; a < manifest.length; a++){
 					var element = document.createElement('p');
 						element.address = {'link':link + manifest[a].name,'type':manifest[a].type};
 						element.style.margin = '0px'; element.setAttribute('class','thing');
@@ -41,8 +41,7 @@
 						element.onmouseout = function(){this.parentElement.style['max-width'] = '100px';}
 						element.onclick = function(){
 							if(this.address.type == 'dir'){showManifest(this.address.link+'/',column+1);}
-							else if(this.address.type == 'manifest'){window.open(this.address.link, '_blank');}
-							else{window.open(this.address.link+'.'+this.address.type, '_blank');}
+							else{window.open(this.address.link, '_blank');}
 						}
 					document.getElementById('column_'+column).appendChild(element);
 				}
