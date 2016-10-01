@@ -1,4 +1,4 @@
-boot.js
-canvas
-lavendel.js
-mouse.js
+{'name':'boot.js','type':'file'}
+{'name':'canvas','type':'dir'}
+{'name':'lavendel.js','type':'file'}
+{'name':'mouse.js','type':'file'}

@@ -1,5 +1,5 @@
-autoViewportControl.js
-mouseInterfaceControls.js
-pan.js
-spin.js
-zoom.js
+{'name':'autoViewportControl.js','type':'file'}
+{'name':'mouseInterfaceControls.js','type':'file'}
+{'name':'pan.js','type':'file'}
+{'name':'spin.js','type':'file'}
+{'name':'zoom.js','type':'file'}

@@ -1,4 +1,4 @@
-boot.js
-calculations.js
-canvas
-presenter.js
+{'name':'boot.js','type':'file'}
+{'name':'calculations.js','type':'file'}
+{'name':'canvas','type':'dir'}
+{'name':'presenter.js','type':'file'}

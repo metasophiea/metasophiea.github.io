@@ -1,5 +1,5 @@
-ID.js
-objectcanvas.js
-render.js
-shape
-viewportcontrol.js
+{'name':'ID.js','type':'file'}
+{'name':'objectcanvas.js','type':'file'}
+{'name':'render.js','type':'file'}
+{'name':'shape','type':'dir'}
+{'name':'viewportcontrol.js','type':'file'}

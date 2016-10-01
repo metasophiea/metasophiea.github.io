@@ -1,4 +1,4 @@
-audiophile.js
-boot.js
-index.html
-modules
+{'name':'audiophile.js','type':'file'}
+{'name':'boot.js','type':'file'}
+{'name':'index.html','type':'file'}
+{'name':'modules','type':'dir'}

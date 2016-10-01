@@ -1,5 +1,5 @@
-distortion.js
-globalOutputPort.js
-oscillator.js
-oscilloscope.js
-reverb.js
+{'name':'distortion.js','type':'file'}
+{'name':'globalOutputPort.js','type':'file'}
+{'name':'oscillator.js','type':'file'}
+{'name':'oscilloscope.js','type':'file'}
+{'name':'reverb.js','type':'file'}

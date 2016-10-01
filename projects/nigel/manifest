@@ -1,3 +1,3 @@
-content
-images
-index.html
+{'name':'content','type':'file'}
+{'name':'images','type':'dir'}
+{'name':'index.html','type':'file'}

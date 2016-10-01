@@ -1,6 +1,6 @@
-chrome
-compatibility
-firefox
-microsoftedge
-opera
-safari
+{'name':'chrome','type':'dir'}
+{'name':'compatibility','type':'dir'}
+{'name':'firefox','type':'dir'}
+{'name':'microsoftedge','type':'dir'}
+{'name':'opera','type':'dir'}
+{'name':'safari','type':'dir'}

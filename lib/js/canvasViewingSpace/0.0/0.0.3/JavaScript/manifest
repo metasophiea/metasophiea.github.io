@@ -1,7 +1,7 @@
-AutoControl.js
-KeyboardInput.js
-Menu.js
-Render.js
-Script.js
-Shape
-ViewportControls.js
+{'name':'AutoControl.js','type':'file'}
+{'name':'KeyboardInput.js','type':'file'}
+{'name':'Menu.js','type':'file'}
+{'name':'Render.js','type':'file'}
+{'name':'Script.js','type':'file'}
+{'name':'Shape','type':'dir'}
+{'name':'ViewportControls.js','type':'file'}

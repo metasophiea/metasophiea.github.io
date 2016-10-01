@@ -1,4 +1,4 @@
-basic
-mouseInterface_draw
-regular
-super
+{'name':'basic','type':'dir'}
+{'name':'mouseInterface_draw','type':'dir'}
+{'name':'regular','type':'dir'}
+{'name':'super','type':'dir'}

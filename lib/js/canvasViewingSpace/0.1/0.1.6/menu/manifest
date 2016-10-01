@@ -1,6 +1,6 @@
-automoveScriptEditor.js
-automoveScriptElementEditor.js
-parts
-present.js
-start.js
-windowMotion.js
+{'name':'automoveScriptEditor.js','type':'file'}
+{'name':'automoveScriptElementEditor.js','type':'file'}
+{'name':'parts','type':'dir'}
+{'name':'present.js','type':'file'}
+{'name':'start.js','type':'file'}
+{'name':'windowMotion.js','type':'file'}

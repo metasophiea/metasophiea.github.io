@@ -1,5 +1,5 @@
-ViewportControl
-canvaselement.js
-mouseinterface.js
-objects
-render.js
+{'name':'ViewportControl','type':'dir'}
+{'name':'canvaselement.js','type':'file'}
+{'name':'mouseinterface.js','type':'file'}
+{'name':'objects','type':'dir'}
+{'name':'render.js','type':'file'}

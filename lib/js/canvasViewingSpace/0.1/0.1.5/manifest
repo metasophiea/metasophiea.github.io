@@ -1,4 +1,4 @@
-boot.js
-canvas
-object
-presenter.js
+{'name':'boot.js','type':'file'}
+{'name':'canvas','type':'dir'}
+{'name':'object','type':'dir'}
+{'name':'presenter.js','type':'file'}

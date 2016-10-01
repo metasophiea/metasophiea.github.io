@@ -1,4 +1,4 @@
-audio
-html
-image
-js
+{'name':'audio','type':'dir'}
+{'name':'html','type':'dir'}
+{'name':'image','type':'dir'}
+{'name':'js','type':'dir'}
