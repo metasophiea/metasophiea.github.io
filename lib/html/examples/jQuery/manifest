@@ -1,4 +1,4 @@
-manifest manifest
-GETPOST html
-load htmlselection html
-test html
+GETPOST.html
+load.html
+selection.html
+test.html

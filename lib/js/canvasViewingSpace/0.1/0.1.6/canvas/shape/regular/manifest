@@ -1,5 +1,4 @@
-manifest manifest
-image js
-rectangle js
-rectangle_hover js
-text js
+image.js
+rectangle.js
+rectangle_hover.js
+text.js

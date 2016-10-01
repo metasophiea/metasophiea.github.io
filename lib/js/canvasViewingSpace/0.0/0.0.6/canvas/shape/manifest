@@ -1,5 +1,4 @@
-manifest manifest
-image js
-image2 js
-poly js
-text js
+image.js
+image2.js
+poly.js
+text.js

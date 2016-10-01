@@ -1,13 +1,12 @@
-manifest manifest
-basic_108osc_synth js
-basic_8osc_synth js
-basic_oscillosocop js
-conversionTable js
-distortionModule js
-gainModule js
-globalOutputPort js
-matrixRoll js
-moduleCasing js
-oscillator js
-performer js
-reverbModule js
+basic_108osc_synth.js
+basic_8osc_synth.js
+basic_oscilloscope.js
+conversionTable.js
+distortionModule.js
+gainModule.js
+globalOutputPort.js
+matrixRoll.js
+moduleCasing.js
+oscillator.js
+performer.js
+reverbModule.js

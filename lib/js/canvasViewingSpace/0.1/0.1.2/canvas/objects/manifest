@@ -1,5 +1,3 @@
-manifest manifest
-shape dir
-
-drawlist js
-numberlist js
+drawlist.js
+numberlist.js
+shape

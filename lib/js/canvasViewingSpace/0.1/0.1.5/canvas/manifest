@@ -1,8 +1,6 @@
-manifest manifest
-shape dir
-viewportControl dir
-
-canvasElement js
-mouseInterface js
-numberlist js
-render js
+canvasElement.js
+mouseInterface.js
+numberlist.js
+render.js
+shape
+viewportControl

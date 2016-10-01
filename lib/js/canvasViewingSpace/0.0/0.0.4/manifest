@@ -1,5 +1,3 @@
-manifest manifest
-css dir
-js dir
-
-index html
+css
+index.html
+js

@@ -1,4 +1,3 @@
-manifest manifest
-pan js
-spin js
-zoom js
+pan.js
+spin.js
+zoom.js

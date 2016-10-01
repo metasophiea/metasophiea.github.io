@@ -1,5 +1,4 @@
-manifest manifest
-basic dir
-mouseInterface_draw dir
-regular dir
-super dir
+basic
+mouseInterface_draw
+regular
+super

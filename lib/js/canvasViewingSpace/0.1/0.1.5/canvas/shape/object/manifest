@@ -1,4 +1,3 @@
-manifest manifest
-adjustable_rectangleObject js
-rectangleObject js
-super_rectangleObject js
+adjustable_rectangleObject.js
+rectangleObject.js
+super_rectangleObject.js

@@ -1,3 +1,2 @@
-manifest manifest
-frequencyResponseAnalyser js
-oscilloscope js
+frequencyResponseAnalyser.js
+oscilloscope.js

@@ -1,7 +1,5 @@
-manifest manifest
-shape dir
-
-list js
-objectcanvas js
-render js
-viewportcontrol js
+list.js
+objectcanvas.js
+render.js
+shape
+viewportcontrol.js

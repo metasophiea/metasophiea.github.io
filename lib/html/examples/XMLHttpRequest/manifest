@@ -1,4 +1,3 @@
-manifest manifest
-GET html
-POST html
-POST_non html
+GET.html
+POST.html
+POST_non.html

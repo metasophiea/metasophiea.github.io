@@ -1,5 +1,3 @@
-manifest manifest
-window dir
-
-Menu js
-WindowShapes js
+Menu.js
+WindowShapes.js
+window

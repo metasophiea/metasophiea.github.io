@@ -1,10 +1,8 @@
-manifest manifest
-modules dir
-controllers dir
-synths dir
-tools dir
-
-audiophile js
-boot js
-index html
-axioms js
+audiophile.js
+axioms.js
+boot.js
+controllers
+index.html
+modules
+synths
+tools

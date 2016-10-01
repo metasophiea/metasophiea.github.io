@@ -1,7 +1,5 @@
-manifest manifest
-canvas dir
-jQuery dir
-WebAudio dir
-XMLHttpRequest dir
-
-load-save html
+WebAudio
+XMLHttpRequest
+canvas
+jQuery
+load-save.html

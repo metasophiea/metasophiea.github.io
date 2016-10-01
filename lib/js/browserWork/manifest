@@ -1,3 +1,2 @@
-manifest manifest
-ded_browser js
-detectBrowser js
+ded_bowser.js
+detectBroswer.js

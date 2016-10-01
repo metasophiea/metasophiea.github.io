@@ -1,9 +1,7 @@
-manifest manifest
-Shape dir
-
-AutoControl js
-KeyboardInput js
-Menu js
-Render js
-Script js
-ViewportControls js
+AutoControl.js
+KeyboardInput.js
+Menu.js
+Render.js
+Script.js
+Shape
+ViewportControls.js

@@ -1,4 +1,3 @@
-manifest manifest
-content dir
-display dir
-rss dir
+content
+display
+rss

@@ -1,5 +1,3 @@
-manifest manifest
-pixelMagic js
-object js
-
-index html
+index.html
+object.js
+pixelMagic.js

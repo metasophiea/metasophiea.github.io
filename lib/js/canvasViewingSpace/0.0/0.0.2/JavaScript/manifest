@@ -1,9 +1,7 @@
-manifest manifest
-shapes dir
-
-DataManipulation js
-DrawControl js
-KeyBoardControl js
-Render js
-ToolMenu js
-UserViewControl js
+DataManipulation.js
+DrawControl.js
+KeyBoardControl.js
+Render.js
+ToolMenu.js
+UserViewControl.js
+shapes

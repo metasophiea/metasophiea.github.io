@@ -1,5 +1,3 @@
-manifest manifest
-css dir
-
-create js
-startmenu js
+create.js
+css
+startmenu.js

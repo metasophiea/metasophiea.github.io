@@ -1,5 +1,4 @@
-manifest manifest
-elements dir
-audiophile js
-boot js
-index html
+audiophile.js
+boot.js
+elements
+index.html

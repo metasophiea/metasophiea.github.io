@@ -1,6 +1,5 @@
-manifest manifest
-browserTest dir
-examples dir
-oldCode dir
-SVGViewingSpace dir
-templates dir
+SVGViewingSpace
+browserTest
+examples
+oldCode
+templates

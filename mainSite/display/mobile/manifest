@@ -1,6 +1,5 @@
-manifest manifest
-chrome dir
-compatibility dir
-firefox dir
-oprea dir
-safari dir
+chrome
+compatibility
+firefox
+opera
+safari

@@ -1,9 +1,9 @@
-apps dir
-lib dir
-mainSite dir
-projects dir
-theAuthor dir
-404 html
-CNAME txt
-index html
-manifest manifest
+.git
+404.html
+CNAME
+apps
+index.html
+lib
+mainSite
+projects
+theAuthor

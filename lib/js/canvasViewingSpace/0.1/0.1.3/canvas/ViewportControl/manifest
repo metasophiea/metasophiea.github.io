@@ -1,5 +1,4 @@
-manifest manifest
-autocontrol js
-pan js
-spin js
-zoom js
+autocontrol.js
+pan.js
+spin.js
+zoom.js

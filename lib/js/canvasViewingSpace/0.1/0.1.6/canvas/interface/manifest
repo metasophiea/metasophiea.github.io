@@ -1,5 +1,4 @@
-manifest manifest
-automoveScript js
-file js
-keyboardInterface js
-mouseInterface js
+automoveScript.js
+file.js
+keyboardInterface.js
+mouseInterface.js

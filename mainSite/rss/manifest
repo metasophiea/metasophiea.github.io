@@ -1,3 +1,2 @@
-manifest manifest
-generator html
-index html
+generator.html
+index.html

@@ -1,8 +1,6 @@
-manifest manifest
-parts dir
-
-automoveScriptEditor js
-automoveScriptElementEditor js
-present js
-start js
-windowMotion js
+automoveScriptEditor.js
+automoveScriptElementEditor.js
+parts
+present.js
+start.js
+windowMotion.js

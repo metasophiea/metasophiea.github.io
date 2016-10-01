@@ -1,5 +1,4 @@
-manifest manifest
-audio dir
-html dir
-image dir
-js dir
+audio
+html
+image
+js

@@ -1,8 +1,6 @@
-manifest manifest
-canvas dir
-css dir
-dataStructure dir
-menu dir
-
-boot js
-presenter js
+boot.js
+canvas
+css
+dataStructure
+menu
+presenter.js

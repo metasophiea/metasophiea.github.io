@@ -1,6 +1,4 @@
-manifest manifest
-canvas dir
-
-boot js
-calculations js
-presenter js
+boot.js
+calculations.js
+canvas
+presenter.js

@@ -1,9 +1,7 @@
-manifest manifest
-Canvas dir
-CSS dir
-Menu dir
-
-Boot js
-Globals js
-Lavendel js
-MouseInteraction js
+Boot.js
+CSS
+Canvas
+Globals.js
+Lavendel.js
+Menu
+MouseInteraction.js

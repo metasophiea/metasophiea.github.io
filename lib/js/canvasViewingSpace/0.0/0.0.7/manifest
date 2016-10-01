@@ -1,7 +1,5 @@
-manifest manifest
-canvas dir
-menu js
-
-boot js
-lavendel js
-mouse js
+boot.js
+canvas
+lavendel.js
+menu
+mouse.js

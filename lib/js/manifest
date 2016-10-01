@@ -1,10 +1,10 @@
-manifest manifest
-audiophile dir
-browserWrok dir
-canvasViewingSpace dir
-getJS dir
-io dir
-liveEdit dir
-math dir
-pixelMagic dir
-string dir
+SIMON
+audiophile
+browserWork
+canvasViewingSpace
+getJS
+io
+liveEdit
+math
+pixelMagic
+string

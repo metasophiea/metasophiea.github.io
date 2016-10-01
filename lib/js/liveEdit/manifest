@@ -1,5 +1,4 @@
-manifest manifest
-getJS dir
-CSS_Edit js
-getCSS js
-getJS js
+CSS_Edit.js
+getCSS.js
+getJS
+getJS.js

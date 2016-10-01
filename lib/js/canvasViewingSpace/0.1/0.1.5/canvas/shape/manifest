@@ -1,9 +1,7 @@
-manifest manifest
-object dir
-
-character js
-commonFunctions js
-image js
-poly js
-rectangle js
-square js
+character.js
+commonFunctions.js
+image.js
+object
+poly.js
+rectangle.js
+square.js

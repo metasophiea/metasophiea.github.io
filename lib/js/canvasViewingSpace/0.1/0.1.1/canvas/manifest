@@ -1,7 +1,5 @@
-manifest manifest
-objects dir
-ViewportControl dir
-
-canvaselement js
-mouseinterface js
-render js
+ViewportControl
+canvaselement.js
+mouseinterface.js
+objects
+render.js

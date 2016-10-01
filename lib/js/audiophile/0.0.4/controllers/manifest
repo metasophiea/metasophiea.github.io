@@ -1,3 +1,2 @@
-manifest manifest
-8x8_matrix js
-clock js
+8x8_matrix.js
+clock.js
