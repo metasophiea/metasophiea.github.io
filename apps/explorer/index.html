@@ -4,7 +4,7 @@
 <head>
 	<title>metasophiea</title>
 	<meta charset="utf-8"></meta>
-	<script src="http://metasophiea.com/lib/js/getJS/2.4.0/getJS.js"></script>
+	<script src="http://metasophiea.com/lib/js/getJS/2.5.0/getJS.js"></script>
 	<script>
 		function Go(){
 			console.log('hello');
@@ -32,12 +32,11 @@
 			function displayFiles(manifest){
 				if(manifest.length == 0){return;}
 
-				for(var a = 0; a < manifest.length; a++){
+				for(var a = 0; a < manifest.length; a++){console.log(manifest[a]);
 					var element = document.createElement('p');
 						element.address = {'link':link + manifest[a].name,'type':manifest[a].type};
 						element.style.margin = '0px'; element.setAttribute('class','thing');
-						if(manifest[a].type == 'dir'){element.innerHTML = manifest[a].name;}
-						else{element.innerHTML = manifest[a].name + '.' + manifest[a].type;}
+						element.innerHTML = manifest[a].name;
 						element.onmouseover = function(){this.parentElement.style['max-width'] = '200px';}
 						element.onmouseout = function(){this.parentElement.style['max-width'] = '100px';}
 						element.onclick = function(){
