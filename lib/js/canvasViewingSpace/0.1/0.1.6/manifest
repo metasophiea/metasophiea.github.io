@@ -1,6 +1,6 @@
-{'name':'boot.js','type':'file'}
-{'name':'canvas','type':'dir'}
-{'name':'css','type':'dir'}
-{'name':'dataStructure','type':'dir'}
-{'name':'menu','type':'dir'}
-{'name':'presenter.js','type':'file'}
+{"name":"boot.js","type":"file"}
+{"name":"canvas","type":"dir"}
+{"name":"css","type":"dir"}
+{"name":"dataStructure","type":"dir"}
+{"name":"menu","type":"dir"}
+{"name":"presenter.js","type":"file"}

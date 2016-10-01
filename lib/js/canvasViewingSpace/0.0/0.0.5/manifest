@@ -1,7 +1,7 @@
-{'name':'Boot.js','type':'file'}
-{'name':'CSS','type':'dir'}
-{'name':'Canvas','type':'dir'}
-{'name':'Globals.js','type':'file'}
-{'name':'Lavendel.js','type':'file'}
-{'name':'Menu','type':'dir'}
-{'name':'MouseInteraction.js','type':'file'}
+{"name":"Boot.js","type":"file"}
+{"name":"CSS","type":"dir"}
+{"name":"Canvas","type":"dir"}
+{"name":"Globals.js","type":"file"}
+{"name":"Lavendel.js","type":"file"}
+{"name":"Menu","type":"dir"}
+{"name":"MouseInteraction.js","type":"file"}

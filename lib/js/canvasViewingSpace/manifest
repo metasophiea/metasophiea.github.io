@@ -1,6 +1,6 @@
-{'name':'0.0','type':'dir'}
-{'name':'0.1','type':'dir'}
-{'name':'blog','type':'dir'}
-{'name':'index.html','type':'file'}
-{'name':'info','type':'dir'}
-{'name':'test','type':'dir'}
+{"name":"0.0","type":"dir"}
+{"name":"0.1","type":"dir"}
+{"name":"blog","type":"dir"}
+{"name":"index.html","type":"file"}
+{"name":"info","type":"dir"}
+{"name":"test","type":"dir"}
