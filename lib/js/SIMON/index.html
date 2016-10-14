@@ -4,7 +4,7 @@
 <head>
 	<title>metasophiea</title>
 	<meta charset="utf-8"></meta>
-    <script src="./0.0.4/SIMON.js"></script>
+    <script src="./0.0.5/SIMON.js"></script>
 	<script>
         function Go(){
             // http://eprint.iacr.org/2013/404.pdf
@@ -13,7 +13,7 @@
             // Ciphertext: c69b e9bb
 
 
-            SIMON_16_v0_0_4.test();
+            SIMON_16_v0_0_5.test();
 
             var key = ['1918','1110','0908','0100'];
             var message = ['6565', '6877'];
@@ -21,9 +21,9 @@
             document.body.innerHTML += 'Key: ' + key.join('') + '<br>';
             document.body.innerHTML += 'Message: ' + message.join('') + '<br>';
             document.body.innerHTML += '<br>';
-            document.body.innerHTML += 'Encrypted Message: ' + SIMON_16_v0_0_4.encrypt(message,key).join('') + '<br>';
+            document.body.innerHTML += 'Encrypted Message: ' + SIMON_16_v0_0_5.encrypt(message,key).join('') + '<br>';
             document.body.innerHTML += '<br>';
-            document.body.innerHTML += 'Decrypted Message: ' + SIMON_16_v0_0_4.decrypt(message,key).join('') + '<br>';
+            document.body.innerHTML += 'Decrypted Message: ' + SIMON_16_v0_0_5.decrypt(message,key).join('') + '<br>';
         }
     </script>
 	<style></style>
