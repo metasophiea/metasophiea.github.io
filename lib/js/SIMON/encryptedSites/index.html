@@ -7,12 +7,13 @@
     <script src="../0.0.7/SIMON.js"></script>
 	<script>
         function Go(){
-            var URL = '';
+            var URL = 'http://metasophiea.com/lib/js/SIMON/encryptedSites/encrypted_LightCycles.crypt';
+
 
 
             var xhttp = new XMLHttpRequest();
 		    xhttp.onloadend = function(){
-			    if(this.status == 200){ callback(processManifest(this.responseText)); }
+			    if(this.status == 200){ console.log(JSON.parse(this.responseText)); }
 		    }
 		    xhttp.open('get',URL,true);
 		    xhttp.send();	
