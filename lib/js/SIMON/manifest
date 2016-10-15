@@ -5,5 +5,7 @@
 {"name":"0.0.5","type":"dir"}
 {"name":"0.0.6","type":"dir"}
 {"name":"0.0.7","type":"dir"}
+{"name":"encoder.html","type":"file"}
+{"name":"encryptedSites","type":"dir"}
 {"name":"index.html","type":"file"}
 {"name":"test.html","type":"file"}
