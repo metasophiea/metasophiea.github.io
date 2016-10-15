@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+    <script src="./0.0.5/SIMON.js"></script>
+	<script>
+        function Go(){
+            // http://eprint.iacr.org/2013/404.pdf
+
+			var testVectors = [
+				{'key':['1918','1110','0908','0100'],'message':['6565', '6877'],'correctEncryptedMessage':['c69b','e9bb']},
+				{'key':['121110','0a0908','020100'],'message':['612067','6e696c'],'correctEncryptedMessage':['dae5ac','292cac']},
+				{'key':['1a1918','121110','0a0908','020100'],'message':['726963','20646e'],'correctEncryptedMessage':['6e06a5','acf156']},
+				{'key':['13121110','0b0a0908','03020100'],'message':['6f722067','6e696c63'],'correctEncryptedMessage':['5ca2e27f','111a8fc8']},
+				{'key':['1b1a1918','13121110','0b0a0908','03020100'],'message':['656b696c','20646e75'],'correctEncryptedMessage':['44c8fc20','b9dfa07a']},
+				{'key':['0d0c0b0a0908','050403020100'],'message':['2072616c6c69','702065687420'],'correctEncryptedMessage':['602807a462b4','69063d8ff082']},
+				{'key':['151413121110','0d0c0b0a0908','050403020100'],'message':['746168742074','73756420666f'],'correctEncryptedMessage':['ecad1c6c451e','3f59c5db1ae9']},
+				{'key':['0f0e0d0c0b0a0908','0706050403020100'],'message':['6373656420737265','6c6c657661727420'],'correctEncryptedMessage':['49681b1e1e54fe3f','65aa832af84e0bbc']},
+				{'key':['1716151413121110','0f0e0d0c0b0a0908','0706050403020100'],'message':['206572656874206e','6568772065626972'],'correctEncryptedMessage':['c4ac61effcdc0d4f','6c9c8d6e2597b85b']},
+				{'key':['1f1e1d1c1b1a1918','1716151413121110','0f0e0d0c0b0a0908','0706050403020100'],'message':['74206e69206d6f6f','6d69732061207369'],'correctEncryptedMessage':['8d2b5579afc8a3a0','3bf72a87efe7b868']}
+			];
+
+			var encryptedMessage; var encryptedMessage;
+			for(var a = 0; a < testVectors.length; a++){
+				document.body.innerHTML += 'Key: ' + testVectors[a].key.join(' ') + '<br>';
+				document.body.innerHTML += 'Message: ' +  testVectors[a].message.join(' ') + '<br>';
+
+				encryptedMessage = SIMON_16_v0_0_5.encrypt(testVectors[a].message,testVectors[a].key);
+				document.body.innerHTML += 'Computed Encrypted Message: ' + encryptedMessage.join(' ') + '<br>';
+				decryptedMessage = SIMON_16_v0_0_5.decrypt(encryptedMessage,testVectors[a].key);
+				document.body.innerHTML += 'Computed Decrypted Message: ' + decryptedMessage.join(' ') + '<br>';
+				if(0 == (encryptedMessage[0].localeCompare(testVectors[a].correctEncryptedMessage[0]) & encryptedMessage[1].localeCompare(testVectors[a].correctEncryptedMessage[1]))){
+					document.body.innerHTML += '-> Encryption succeeded' + '<br>';
+				}else{
+					document.body.innerHTML += '-> Encryption failed' + '<br>';
+				}
+
+				document.body.innerHTML += '<br>';
+			}
+        }
+    </script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+
+</body>
+</html>

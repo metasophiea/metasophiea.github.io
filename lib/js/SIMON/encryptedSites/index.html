@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+    <script src="../0.0.7/SIMON.js"></script>
+	<script>
+        function Go(){
+            var URL = '';
+
+
+            var xhttp = new XMLHttpRequest();
+		    xhttp.onloadend = function(){
+			    if(this.status == 200){ callback(processManifest(this.responseText)); }
+		    }
+		    xhttp.open('get',URL,true);
+		    xhttp.send();	
+        }
+    </script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+
+</body>
+</html>

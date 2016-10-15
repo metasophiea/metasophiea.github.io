@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>encoder</title>
+	<meta charset="utf-8"></meta> <meta name="theme-color" content="#FFFFFF"></meta>
+    <script src="./0.0.7/SIMON.js"></script>
+	<script>
+        function RunEncryption(){ document.getElementById('encryptedTextBox').value = SIMON_16_v0_0_7.encrypt(document.getElementById('methodTextBox').value,document.getElementById('mainTextBox').value,document.getElementById('keyTextBox').value); }
+        function RunDecryption(){ document.getElementById('mainTextBox').value = SIMON_16_v0_0_7.decrypt(document.getElementById('methodTextBox').value,document.getElementById('encryptedTextBox').value,document.getElementById('keyTextBox').value); }
+
+	</script>
+
+	<style>
+		html, body{ width:100%; height:100%; margin:0px; overflow-x: hidden; overflow-y: hidden; text-align: center;}
+        #mainTextBox{ font-size:15px; }   
+        #encryptedTextBox{ font-size:15px; }
+        #keyTextBox{ font-size:15px; overflow-x: hidden; }   
+        #methodTextBox{ font-size:15px; }      
+        #EncryptButton{ font-size:20px; font-style: italic; }
+        #DecryptButton{ font-size:20px; font-style: italic; }       
+	</style>
+</head>
+
+<body>
+	<textarea id='mainTextBox' autofocus='true' placeholder='unencrypted message goes here...' style='margin: 5% 15% 0% 15%; resize: none; width:70%; height:40%;'></textarea>
+	<textarea id='keyTextBox' placeholder='encryption key' wrap="off" style='margin: 0%; resize: none; width:30%; height:2%;'>1f1e1d1c1b1a191817161514131211100f0e0d0c0b0a09080706050403020100</textarea>    
+    <button id='EncryptButton' onClick='RunEncryption();' style='margin: 1%'>Encrypt</button>
+    <button id='DecryptButton' onClick='RunDecryption();' style='margin: 1%'>Decrypt</button>   
+    <textarea id='methodTextBox' placeholder='encryption method' style='margin: 0%; resize: none; width:30%; height:2%;'>128/256</textarea>   
+    <textarea id='encryptedTextBox' placeholder='..encrypted message goes here' style='margin: 0% 15% 5% 15%; resize: none; width:70%; height:40%;'></textarea>
+</body>
+</html>
