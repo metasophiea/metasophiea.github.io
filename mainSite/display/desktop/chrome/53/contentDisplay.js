@@ -90,5 +90,5 @@ function fadeOut(element,duration){
 }
 
 function goToURL(URL){
-    location.assign(URL);
+    location.replace(URL);
 }
