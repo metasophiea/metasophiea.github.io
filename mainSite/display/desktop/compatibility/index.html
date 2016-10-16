@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Arvo">
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles.js"></script>
+	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles2.js"></script>
 	<script>
 		function getData(){
 			var array = Object.keys(articles); var outputarray = [];
@@ -20,12 +20,10 @@
 			document.getElementById('mainSection').innerHTML += "</br>";
 
 			for(var a = 0; a < data.length; a++){
-	//			document.getElementById('mainSection').innerHTML += (a+1)+": <a href='"+data[a].link_url+"'>"+data[a].headline+"</a></br>";
 				document.getElementById('mainSection').innerHTML += (a+1)+": <a onclick='window.parent.location = \""+data[a].link_url+"\"'>"+data[a].headline+"</a></br>";	
-				document.getElementById('mainSection').innerHTML += "   "+data[a].text_line1+"</br>";				
-				document.getElementById('mainSection').innerHTML += "   "+data[a].text_line2+"</br>";	
+				for(var b = 0; b < data[a].text.length; b++){document.getElementById('mainSection').innerHTML += data[a].text[b]+'<br>';}
+				document.getElementById('mainSection').innerHTML += "<br>";
 			}
-
 
 			document.getElementById('mainSection').innerHTML += "</br>";
 			document.getElementById('mainSection').innerHTML += "------------------------------------------------------------------";
@@ -33,9 +31,6 @@
 
 
 	</script>
-
-
-
 
 	<style title="Main">
 		html, body{

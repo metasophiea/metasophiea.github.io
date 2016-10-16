@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+    <script src="http://metasophiea.com/lib/js/SIMON/0.0.7/SIMON.js"></script>
+	<script>
+        function Go(){
+            adjustElement(document.getElementById('mainFrame'));
+            document.getElementById('AddressBox').value = 'http://metasophiea.com/lib/js/SIMON/encryptedSites/encrypted_LightCycles.crypt';
+            document.getElementById('PasswordBox').value = '0000000000000000000000000000000000000000000000000000000000000000';
+            document.getElementById('MethodBox').value = '128/256';
+        }
+
+        function getSite(URL,password,method){
+            getFile(URL,recieve,password,method);
+
+            function getFile(URL,callback,password,method){
+                var xhttp = new XMLHttpRequest();
+		        xhttp.onloadend = function(){ if(this.status == 200){ callback(this.responseText,password,method); } }
+		        xhttp.open('get',URL,true);
+		        xhttp.send();	
+            }
+            function recieve(data,password,method){
+                var decryptedMessage = SIMON_16_v0_0_7.decrypt(method,data,password);
+
+                iframe = document.getElementById('mainFrame').contentWindow;
+                iframe.document.open();
+                iframe.document.write(decryptedMessage);
+                iframe.document.close();
+            }           
+        }
+        
+        function updateSite(that,event){
+            if(event.charCode == 13){
+                var temp = that.getElementsByTagName('input');
+                var URL = temp[0].value; var password = temp[1].value; var method = temp[2].value;
+                getSite(URL,password,method);
+            }
+        }
+
+	    function adjustElement(element){
+	    	if(window.innerHeight > window.innerWidth){ element.height = window.innerWidth*0.9; element.width = window.innerWidth*0.9; }
+	    	else{ element.height = window.innerHeight*0.9; element.width = window.innerHeight*0.9; }
+	    }
+    </script>
+	<style>
+        html, body{ width:100%; height:100%; margin:0px; overflow-x: hidden; overflow-y: hidden; text-align: center; }
+        iframe{ border: 0px; margin:2%;}
+        .dataEntry{
+			border:0px; padding:0px; 
+			background-color:rgba(240,240,240,1);
+			color:rgb(100,100,100);
+			font-size:20px;
+		}
+    </style>
+</head>
+
+<body onLoad="Go()">
+    <section>
+        <form onkeypress='updateSite(this,event)'>
+		    <input type="text" id="AddressBox" class='dataEntry' style='width:62%;'>
+            <input type="text" id="PasswordBox" class='dataEntry' style='width:30%;'>
+            <input type="text" id="MethodBox" class='dataEntry' style='width:5%;'>           
+	    </form>
+    </section>
+    <iframe id='mainFrame'></iframe>
+</body>
+</html>

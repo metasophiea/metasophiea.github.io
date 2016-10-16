@@ -96,11 +96,12 @@
 				text-decoration: underline;
 				cursor:pointer;
 			}
+			.widthLimit{max-width:1000px; margin: auto;}
 		</style>		
 	
 	<!-- IDs -->
 		<style>
-			#floatingSection{position: fixed; width: 100%; top: 0px;}
+			#floatingSection{position: fixed; width: 100%; top: 0px; margin-left:100%;}
 			#panel{display: none;}
 			#menu{
 				display: none; 
@@ -116,7 +117,7 @@
 
 <body onload='Go();'>
 <!-- Dummy Section to push out the section below -->
-	<section id='floatingSection_dummy'>
+	<section id='floatingSection_dummy' class='widthLimit'>
 		<header> 
 			<h1>Metasophiea.com</h1><p style='display: inline; font-size:200%;'> Cyan Edition</p>
 		</header>
@@ -131,7 +132,7 @@
 		</nav>
 	</section>
 <!-- Floating menu -->
-	<section id='floatingSection'>
+	<section id='floatingSection' class='widthLimit'>
 		<header> 
 			<h1>Metasophiea.com</h1><p style='display: inline; font-size:200%;'> Cyan Edition</p>
 		</header>
@@ -148,7 +149,7 @@
 	</section>
 
 <!-- Meat of site -->
-	<section id='main'></section>
+	<section id='main' class='widthLimit'></section>
 
 </body>
 </html>
