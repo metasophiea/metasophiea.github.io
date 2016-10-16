@@ -46,8 +46,7 @@ function makePannel(data){
         section.style['background-position'] = 'center'; 
         section.style.padding = '90px 60px';
         section.style.margin = '10px';
-        //section.setAttribute("onclick","window.location.href = '"+data.link_url+"';");
-        section.setAttribute("onclick","goToURL('"+data.link_url+"');");      
+        section.setAttribute("onclick","window.open('"+data.link_url+"', '_blank');");  
     var strip = document.createElement('section');
         strip.style['background-color'] = data.backerFill;
         strip.style.padding = '10px';
@@ -87,8 +86,4 @@ function fadeOut(element,duration){
         element.style.opacity = opacity;
         if(opacity <= 0){element.style.opacity = 0; clearInterval(interval);}
     },1000/resolution);
-}
-
-function goToURL(URL){
-    window.open(URL, '_blank');
 }
