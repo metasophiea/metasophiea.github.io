@@ -90,5 +90,5 @@ function fadeOut(element,duration){
 }
 
 function goToURL(URL){
-    location.replace(URL);
+    window.open(URL, '_blank');
 }
