@@ -1,4 +1,13 @@
 var articles = [
+	{	"id":"article_20161016-a",
+		"headline":"SIMON Encryption",
+		"text":["For my final year engineering project, I've been asked to impliment the SIMON cipher in VHDL. To understand how the cipher works I've implimented it in pure Javascript. This site is an encoder/decoder tool for encrypting and decrypting messages using the SIMON cipher","The unencrypted message can be any text, though the encrypted message is hexadecimal as is the password used for encryption"],	
+		"textcolour":"rgb(255,255,255)",
+		"backerFill":"rgba(0,0,0,0.75)",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/SIMONencryption.png",
+		"link_url":"http://metasophiea.com/apps/encryption/SIMON/translater"
+	},
+
 	{	"id":"article_20160919-a",
 		"headline":"Light Cycles",
 		"text":["Simple but fun game of skill for two players","(red uses Q and W, yellow uses O and P)"],	
