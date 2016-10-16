@@ -21,7 +21,7 @@
 
 			for(var a = 0; a < data.length; a++){
 				document.getElementById('mainSection').innerHTML += (a+1)+": <a onclick='window.parent.location = \""+data[a].link_url+"\"'>"+data[a].headline+"</a></br>";	
-				for(var b = 0; b < data[a].text.length; b++){document.getElementById('mainSection').innerHTML += data[a].text[b]+'<br>';}
+				for(var b = 0; b < data[a].text.length; b++){document.getElementById('mainSection').innerHTML += Chucker(data[a].text[b],70) +'<br>';}
 				document.getElementById('mainSection').innerHTML += "<br>";
 			}
 
@@ -29,7 +29,13 @@
 			document.getElementById('mainSection').innerHTML += "------------------------------------------------------------------";
 		}
 
-
+		function Chucker(inputString,length){
+			var output = ''; inputString = inputString.split(''); var counter = 0;
+			for(var a = 0; a < inputString.length; a++){ counter++;
+				output += inputString[a]; if(counter >= 70){ counter = 0; output += '<br>'; }
+			}
+			return output;
+		}
 	</script>
 
 	<style title="Main">
