@@ -17,7 +17,6 @@
 	<script> $(document).ready(function(){ $("#menuButton").click(function(){ $("#menu").slideToggle("slow"); }); }); </script>
 	
 	<script>
-
 		function Go(){
 			document.getElementById('menu').innerHTML += "<p  linked_id='home' class='menuOption' id='home' style='margin:0px;' onclick='MenuClick(this);'> -> Home</p>";
 			
@@ -50,6 +49,13 @@
 				
 				document.getElementById('menu').innerHTML += "<p linked_id='"+articles[a].id+"' order='"+a+"' class='menuOption' style='margin:0px;' onclick='MenuClick(this);'> -> "+articles[a].headline+"</p>";			
 			}
+
+			WindowAdjust();
+		}
+
+		function WindowAdjust(){
+			document.getElementById('main').style.margin = document.getElementById('floatingSection').offsetHeight + 'px auto 0px auto';
+			document.getElementById('floatingSection').style.margin = '0px ' + document.getElementById('main').getBoundingClientRect().left + 'px';		
 		}
 		
 		function MenuClick(that){ $("#menu").slideToggle("slow"); 
@@ -101,7 +107,7 @@
 	
 	<!-- IDs -->
 		<style>
-			#floatingSection{position: fixed; width: 100%; top: 0px; margin-left:100%;}
+			#floatingSection{position: fixed; top: 0px; width:100%;}
 			#panel{display: none;}
 			#menu{
 				display: none; 
@@ -111,26 +117,11 @@
 				font-size: 100%;
 				font-family: Arvo, sans-serif;
 				text-align: center;
-			}		
+			}
 		</style>	
 </head>
 
-<body onload='Go();'>
-<!-- Dummy Section to push out the section below -->
-	<section id='floatingSection_dummy' class='widthLimit'>
-		<header> 
-			<h1>Metasophiea.com</h1><p style='display: inline; font-size:200%;'> Cyan Edition</p>
-		</header>
-		<nav>
-			<table style="width:100%"><tbody>
-  				<tr>
-   	 			<th style="width:33%">M e n u</th>
-   	 			<th style="width:33%"></th>
-   	 			<th style="width:33%"></th>
-  				</tr>
-  			</tbody></table>
-		</nav>
-	</section>
+<body onload='Go();' onresize="WindowAdjust();">
 <!-- Floating menu -->
 	<section id='floatingSection' class='widthLimit'>
 		<header> 
