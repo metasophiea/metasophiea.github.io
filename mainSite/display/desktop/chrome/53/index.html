@@ -10,7 +10,7 @@
 	<script type='text/javascript' src="http://metasophiea.com/mainSite/content/articles2.js"></script>
 
 	<script>
-		var RegularSquareSize = 100;
+		var RegularSquareSize = 100; var squareOpen = false;
 		var ChangeClours = true;
 		var backing = document.createElementNS('http://www.w3.org/2000/svg','rect');
 			backing.id = "backing";
@@ -50,7 +50,7 @@
 		function WindowAdjust(){console.log('Adjusting window');
 			document.getElementById('MainText').setAttribute("x",window.innerWidth/3);
 			document.getElementById('MainText').setAttribute("y",window.innerHeight/2+(60/4) );	
-			SetSquareSize(RegularSquareSize);
+			if(!squareOpen){ SetSquareSize(RegularSquareSize); }
 		}
 
 		function SetSquareSize(size){
@@ -64,7 +64,7 @@
 			if(document.getElementById('SpinningSquare').getAttribute("clicked") == "true"){CloseSquare();}
 			else{OpenSquare();}
 		}
-		function OpenSquare(){console.log('Opening square');
+		function OpenSquare(){console.log('Opening square'); squareOpen = true;
 			var size = 3000;
         	document.getElementById('SpinningSquare').setAttribute("clicked","true");
 			document.getElementById('SpinningSquare').style.x = (window.innerWidth/2 -size/2);
@@ -77,7 +77,7 @@
 				document.body.style.overflowY = 'visible';
 			},1750);
 		}
-		function CloseSquare(){console.log('Closing square');
+		function CloseSquare(){console.log('Closing square'); squareOpen = false;
         	document.getElementById('SpinningSquare').setAttribute("clicked","false");
 			SetSquareSize(RegularSquareSize);
 			ChangeClours=true;
