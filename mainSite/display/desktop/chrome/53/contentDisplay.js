@@ -46,7 +46,8 @@ function makePannel(data){
         section.style['background-position'] = 'center'; 
         section.style.padding = '90px 60px';
         section.style.margin = '10px';
-        section.setAttribute("onclick","window.location = '"+data.link_url+"';");
+        section.setAttribute("onclick","window.location.href = '"+data.link_url+"';");
+        //section.setAttribute("onclick","goToSite('"+data.link_url+"');");      
     var strip = document.createElement('section');
         strip.style['background-color'] = data.backerFill;
         strip.style.padding = '10px';
