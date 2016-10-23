@@ -40,6 +40,14 @@ var articles = [
 		"image_url":"http://newbornstartups.com/wp-content/uploads/2015/06/fcc-logo.png",
 		"link_url":"http://metasophiea.com/projects/FreeCodeCamp/"		
 	},
+	{	"id":"article_20161023-a",
+		"headline":"Nigel",
+		"text":["An old assembly language project I started a few years ago but decided to stop when I began learning web programming (as I felt that was a more employable skill)","These two posts are taken from my old blogspot blog, and have been recreated here for your reading pleasure. I will be uploading more posts from old blogs as time goes on (though Nigel wasn't developed beyond what is there now... I fully intend to return to the project when I get the opportunity)"],
+		"textcolour":"rgb(0,0,0)",
+		"backerFill":"rgba(255,255,255,0.75)",
+		"image_url":"http://metasophiea.com/projects/nigel/images/20150814/16.jpg",
+		"link_url":"http://metasophiea.com/projects/nigel/"		
+	},
 	{	"id":"article_20160616-a",
 		"headline":"Curve and Curve 2 Beta",
 		"text":["my soundcloud, where I store 2 of my latest musical works, i haven't worked on this for a while..unfortunately (I'm in a band now though)"],
