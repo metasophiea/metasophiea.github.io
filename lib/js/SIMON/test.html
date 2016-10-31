@@ -4,7 +4,7 @@
 <head>
 	<title>metasophiea</title>
 	<meta charset="utf-8"></meta>
-    <script src="./0.0.5/SIMON.js"></script>
+    <script src="./pureSystem/SIMON.js"></script>
 	<script>
         function Go(){
             // http://eprint.iacr.org/2013/404.pdf
@@ -27,9 +27,9 @@
 				document.body.innerHTML += 'Key: ' + testVectors[a].key.join(' ') + '<br>';
 				document.body.innerHTML += 'Message: ' +  testVectors[a].message.join(' ') + '<br>';
 
-				encryptedMessage = SIMON_16_v0_0_5.encrypt(testVectors[a].message,testVectors[a].key);
+				encryptedMessage = SIMON_pureSystem.encrypt(testVectors[a].message,testVectors[a].key);
 				document.body.innerHTML += 'Computed Encrypted Message: ' + encryptedMessage.join(' ') + '<br>';
-				decryptedMessage = SIMON_16_v0_0_5.decrypt(encryptedMessage,testVectors[a].key);
+				decryptedMessage = SIMON_pureSystem.decrypt(encryptedMessage,testVectors[a].key);
 				document.body.innerHTML += 'Computed Decrypted Message: ' + decryptedMessage.join(' ') + '<br>';
 				if(0 == (encryptedMessage[0].localeCompare(testVectors[a].correctEncryptedMessage[0]) & encryptedMessage[1].localeCompare(testVectors[a].correctEncryptedMessage[1]))){
 					document.body.innerHTML += '-> Encryption succeeded' + '<br>';
