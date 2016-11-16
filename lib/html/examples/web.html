@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>
+		var GL;
+
+		function Go(){
+			console.log('hello');
+			
+			var canvas = document.getElementById('mainCanvas');
+			GL = canvas.getContext("webgl");
+			
+			GL.clearColor(0.0, 0.0, 0.0, 1.0);
+			GL.enable(GL.DEPTH_TEST);
+			GL.depthFunc(GL.LEQUAL);
+			GL.clear(GL.COLOR_BUFFER_BIT | GL.DEPTH_BUFFER_BIT);
+			
+			GL.viewport(0, 0, canvas.width, canvas.height);
+		}
+	</script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+	<canvas id='mainCanvas' width='640' height='480'></canvas>
+</body>
+</html>
