@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>
+        var tick = 1;
+
+		function Go(){
+			console.log('hello');
+
+            var waveform = createWaveform([1,0,0],[0,0,0],100,2,1000,2);
+            drawScope_2(document.getElementById('mainCanvas'),waveform,1);
+
+             setInterval(function(){
+                 var waveform = createWaveform([1,0,0],[0,0,0],100,2,1000,2);
+
+                 drawScope_2(document.getElementById('mainCanvas'),waveform,tick);
+                 tick += 0.1;
+                 console.log(tick);
+             },1000);
+            
+        }
+
+        function createWaveform(sinArray,cosArray,gain,freq,points,time){
+            var data = [];
+            var startRAD = 0; var endRAD = (Math.PI*2)*time; var stepRAD = endRAD/(points-1);
+
+            for(var a = startRAD; a < endRAD; a+=stepRAD){
+ 				var current = 0;
+				for(var b = 0; b < sinArray.length-1; b++){
+					var sin = (1/(b+1))*freq; /**/ var cos = (1/(b+1))*freq;
+					
+					current += gain*(Math.sin(a*sin)*sinArray[b] + Math.cos(a*cos)*cosArray[b]);
+				}
+				data.push(current);
+            }
+
+ 			var current = 0;
+			var sin = (1/(b+1))*freq; /**/ var cos = (1/(b+1))*freq;
+					
+			current += Math.sin(endRAD*sin)*sinArray[b] + Math.cos(endRAD*cos)*cosArray[b];
+			data.push(current);
+
+            return data;
+        }
+
+
+        function drawScope_2(canvasElement,data,magnification){
+			//scaling for retina displays 
+			    // var scaling = 2;
+			    var width = canvasElement.width; var height = canvasElement.height;
+			    // canvasElement.width = canvasElement.width*scaling; canvasElement.height = canvasElement.height*scaling;
+			    // canvasElement.style.width = width+"px"; canvasElement.style.height = height+"px";
+
+			//clear canvas
+			    var canvas = canvasElement.getContext("2d"); //canvas.scale(scaling,scaling);
+			    canvas.clearRect(0, 0, canvasElement.width, canvasElement.height);
+			    canvas.beginPath();
+
+            var verticalCenter = height/2;
+
+			//draw grid
+
+                canvas.strokeStyle = 'rgb(100,250,100)';
+                canvas.moveTo(0,height/2); canvas.lineTo(width,height/2); canvas.stroke();    
+
+                var graphStep = 100/magnification;
+                canvas.moveTo(0,graphStep+verticalCenter); canvas.lineTo(width,graphStep+verticalCenter); canvas.stroke();   
+                canvas.moveTo(0,2*graphStep+verticalCenter); canvas.lineTo(width,2*graphStep+verticalCenter); canvas.stroke();   
+
+			//draw line
+                canvas.strokeStyle = 'rgb(0,200,0)';
+                canvas.beginPath();
+                var step = 0; 
+                for(var a = 0; a < data.length; a++){	
+                    step = a/(data.length-1);
+                    canvas.lineTo(width*step,(-data[a])*magnification+verticalCenter);
+                    canvas.stroke();
+                }
+                canvas.closePath();
+        }
+
+
+		function drawScope(canvasElement,data,horizontalZero = 0){
+			//scaling for retina displays 
+			var scaling = 2;
+			var width = canvasElement.width; var height = canvasElement.height;
+			canvasElement.width = canvasElement.width*scaling; canvasElement.height = canvasElement.height*scaling;
+			canvasElement.style.width = width+"px"; canvasElement.style.height = height+"px";
+
+			//clear canvas
+			var canvas = canvasElement.getContext("2d"); canvas.scale(scaling,scaling);
+			canvas.clearRect(0, 0, canvasElement.width, canvasElement.height);
+			canvas.beginPath();
+
+			//pre draw math
+			upperLimit = Math.max.apply(Math, data); lowerLimit = Math.min.apply(Math, data);
+			var additor = lowerLimit; if(lowerLimit < 0){additor = -lowerLimit;}
+			var multiplier_width = (width/(data.length-1));
+			var multiplier_height = (height/(upperLimit - lowerLimit));
+
+			//draw grid
+				canvas.strokeStyle = 'rgb(100,250,100)';
+				canvas.font="10px Verdana"; canvas.fillStyle = 'rgb(100,250,100)';
+				var textSpacing = {'fromLeft':1,'vertical':10};
+				var horizontalLineSpacing = 10; var verticalLineSpacing = 50;
+				//horizontal lines
+					var step = horizontalLineSpacing*multiplier_height; var zero = height-(0+additor)*multiplier_height; var temp = zero;
+
+					/*zero upwards*/while(temp >= 0){canvas.moveTo(0,temp); canvas.lineTo(width,temp); canvas.stroke();canvas.fillText((Math.round((((height - temp)/multiplier_height)-additor) * 100) / 100), textSpacing.fromLeft, temp+textSpacing.vertical); temp -= step;}
+					temp = zero + step;
+					/*zero downwards*/while(temp <= height){canvas.moveTo(0,temp); canvas.lineTo(width,temp); canvas.stroke(); canvas.fillText((Math.round((((height - temp)/multiplier_height)-additor) * 100) / 100), textSpacing.fromLeft, temp+textSpacing.vertical); temp += step;}
+
+				//vertical lines
+					var step = multiplier_width*verticalLineSpacing; var zero = horizontalZero*multiplier_width; var temp = zero;
+					
+					/*zero to left*/while(temp >= 0){canvas.moveTo(temp,0); canvas.lineTo(temp,height); canvas.stroke(); temp -= step;}
+					temp = zero + step;
+					/*zero to right*/while(temp <= width){canvas.moveTo(temp,0); canvas.lineTo(temp,height); canvas.stroke(); temp += step;}
+					
+			//draw line
+			canvas.strokeStyle = 'rgb(0,200,0)';
+			canvas.beginPath();
+			var step = 0;
+			for(var a = 0; a < data.length; a++){	
+				step = a/(data.length-1);
+				canvas.lineTo(width*step,height-(data[a]+additor)*multiplier_height);
+				canvas.stroke();
+			}
+			canvas.closePath();
+		}
+	</script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+	<canvas id='mainCanvas' width='640px' height='480px' style='image-rendering: pixelated;'></canvas>
+</body>
+</html>

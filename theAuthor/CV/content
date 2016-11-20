@@ -1,0 +1,95 @@
+var content = {
+            'experience':[
+                {
+                    'title':'Alexion Pharmaceuticals – IT Intern',
+                    'details':{'address':'College Business & Technology Park, Bóthar Bhaile Bhlainséir Thuaidh, Dublin 15','time':'April-September 2016'},
+                    'description':[
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In my time here, I served the role of IT support Intern; a task that primarily consisted of helping others with technical difficulties with their laptops or related equipment / software. Whether that was setting up a desk for a new starter (complete with docking station, monitor, phone, etc.) installing software or helping people through setting up, or issues encountered with some of the Alexion systems.',
+                        "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beyond this lead role, I also took up the tasks of general maintenance, performing regular meeting room inspections, or formatting and installing fresh copies of the company's flavour of Windows Professional onto laptops that would be distributed out to users."
+                    ]
+                },
+                {
+                    'title':'Jack Cody’s Brewery – Workhand',
+                    'details':{'address':'Drogheda, Co. Louth','time':'Summer 2015'},
+                    'description':[
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capped, labeled and boxed the various beverages for distribution.'
+                    ]
+                },
+                {
+                    'title':'Office Assistant/Cash Processer',
+                    'details':{'address':'Rialto, Dublin 8','time':'December 2014 – January 2015'},
+                    'description':[
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cash Processing involved handling large cash volumes in the replenishment of ATM cassette strongboxes.',
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My main duties within the G4S Office were, to create contract schedules for over 1,000 clients.  I also assisted in updating their GPS System by providing GPS coordinates for all current business.'
+                    ]
+                },
+                {
+                    'title':'Walsh\'s Shop - Shop Assistant',
+                    'details':{'address':'Knightstown, Co. Kerry','time':'Summer 2014'},
+                    'description':[
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A seasonal position within own family store.  Main duties include stock replenishment, merchandising, pricing and stock rotation.'
+                    ]
+                },
+            ],
+            'projects':[
+                {
+                    'title':'metasophiea.com',
+                    'link':'http://metasophiea.com',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My home on the web. Hosted on a pages.github.com, this is my main storage/showcase for all my web programming projects, as well as one or two non-programming projects.']
+                },
+                {
+                    'title':'SIMON Cipher',
+                    'link':'http://metasophiea.com/apps/encryption/SIMON/translater/',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For my final year engineering project, I\'ve been asked to impliment the SIMON cipher in VHDL. To understand how the cipher works I\'ve implimented it in pure Javascript. This site is an encoder/decoder tool for encrypting and decrypting messages using the SIMON cipher.','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The unencrypted message can be any text, though the encrypted message is hexadecimal as is the password used for encryption.','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The encryption is done in pure JS, which you can find here: http://metasophiea.com/lib/js/SIMON/0.0.7/SIMON.js','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I later had the idea of encoding entire websites using this system. This experiment page demonstrates an encrypted site being downloaded, decrypted and displayed in an iFrame: http://metasophiea.com/apps/encryption/SIMON/siteviewer/ (the site in question happens to be a "Light Cycles" game that I also created)']
+                },
+                {
+                    'title':'Canvas Viewing Space / Presenter',
+                    'link':'http://metasophiea.com/lib/js/canvasViewingSpace/',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Over the summer of 2016, while I was employed with Alexion as an intern; one of the end of employment tasks that my college set for me was to make a 5-6 minute presentation on my time there. Before I began at Alexion I had already been experimenting with 2d graphics, and had the idea to create my own presentation software with which to make a presentation.',
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Although not very featured, this is that program. Its presentation style is akin to Prezi, though with a UI that is border-agnostic.',
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A little bulky at times, and not super user-friendly, it has all the ability that I need to create my presentation. In future I hope to update it with new objects and editing features.'
+                    ]
+                },
+                {
+                    'title':'Ongoing Music Projects',
+                    'link':'https://soundcloud.com/metasophiea',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Since 2011 I have been writing and recording music as sort of a hobby project. I\'ve recorded (around) 2.8 hours of music to date, including 2 albums and two album-length pieces. Note; only the most recent stuff is on my SoundCloud profile.']
+                },
+                {
+                    'title':'Nigel',
+                    'link':'http://metasophiea.com/projects/nigel/',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An old assembly language project I started a few years ago but decided to stop when I began learning web programming (as I felt that was a more employable skill)',
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;These posts are taken from my old blogspot blog, and have been recreated here for your reading pleasure. I will be uploading more posts from old blogs as time goes on (though Nigel wasn\'t developed beyond what is there now... I fully intend to return to the project when I get the opportunity)',
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can find the (currently undocumented) code here: <a href=\'https://github.com/metasophiea/nigel\'>https://github.com/metasophiea/nigel</a>'
+                    ]
+                },    
+                {
+                    'title':'Anica',
+                    'link':'http://metasophiea.blogspot.ie/',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log of my explorations into designing a computer. I try not to take designs from other places just ideas, and slowly work to put it all together.']
+                },
+            ],
+            'education':[
+                {
+                    'school':'Dublin City University',
+                    'degree':'B.Eng in Electronic and Computer Engineering',
+                    'time':'2013-present',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"This single programme, with four Major options in Year Four, replaces and combines the best of DCU\'s previous offerings in Electronic Engineering, Digital Media Engineering and Information and Communications Engineering. As well as knowledge of the science and mathematics foundations needed by the electronic and computer engineer, this course develops expertise in object-oriented and embedded software in electronic circuit analysis and design, and in control system design. You will learn how to model and analyse the dynamics of a wide range of technological systems, and will be skilled in subjects such as analogue and digital systems, microelectronics, mechatronic systems, computer architecture, electromagnetics and ultra high speed communications." - DCU Prospectus Course Description']
+                },
+                {
+                    'school':'St. Mary\'s Diocesan School',
+                    'degree':'Leaving Certificate',
+                    'time':'2007-2013',
+                    'description':[]
+                },
+                {
+                    'school':'Free Code Camp',
+                    'degree':'Front End Development Certification',
+                    'time':'2015',
+                    'description':[]
+                }
+            ]
+        };
