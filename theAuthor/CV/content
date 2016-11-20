@@ -42,8 +42,8 @@ var content = {
                     'link':'http://metasophiea.com/apps/encryption/SIMON/translater/',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For my final year engineering project, I\'ve been asked to impliment the SIMON cipher in VHDL. To understand how the cipher works I\'ve implimented it in pure Javascript. This site is an encoder/decoder tool for encrypting and decrypting messages using the SIMON cipher.','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The unencrypted message can be any text, though the encrypted message is hexadecimal as is the password used for encryption.','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
-                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The encryption is done in pure JS, which you can find here: http://metasophiea.com/lib/js/SIMON/0.0.7/SIMON.js','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
-                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I later had the idea of encoding entire websites using this system. This experiment page demonstrates an encrypted site being downloaded, decrypted and displayed in an iFrame: http://metasophiea.com/apps/encryption/SIMON/siteviewer/ (the site in question happens to be a "Light Cycles" game that I also created)']
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The encryption is done in pure JS, which you can find here: <a href="http://metasophiea.com/lib/js/SIMON/0.0.7/SIMON.js">http://metasophiea.com/lib/js/SIMON/0.0.7/SIMON.js</a>','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I later had the idea of encoding entire websites using this system. This experiment page demonstrates an encrypted site being downloaded, decrypted and displayed in an iFrame: <a href="http://metasophiea.com/apps/encryption/SIMON/siteviewer/">http://metasophiea.com/apps/encryption/SIMON/siteviewer/</a> (the site in question happens to be a "Light Cycles" game that I also created)']
                 },
                 {
                     'title':'Canvas Viewing Space / Presenter',

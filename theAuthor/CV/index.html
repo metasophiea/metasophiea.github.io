@@ -118,37 +118,60 @@
             padding: 10px;
         }
 
-        a{color:rgb(150,150,150);}
+        a{color:rgb(180,180,180);}
         a:hover{color:rgb(150,0,150);}
 
         .titleTableCell{
             width: 50%;
         }
 
-        .sectionTitle{color:rgb(150,150,150);font-weight: normal; margin: 14px 0px;}
-        .sectionDivider{height:1px; background-color:rgb(150,150,150);}
+        .sectionTitle{color:rgb(180,180,180);font-weight: normal; margin: 14px 0px;}
+        .sectionDivider{height:1px; background-color:rgb(180,180,180);}
 
         .articlePanel{margin:10px;}
         .articleTitle{margin:0px;font-weight: normal;}
-        .articleDetails{color:rgb(150,150,150);}
+        .articleDetails{color:rgb(180,180,180);}
         .articleText{margin:0px;}
+    </style>
 
+    <style type="text/css" media="print">
+        @page{
+            size: auto;
+            margin: 20px;
+        }
+
+        html{font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px;}
     </style>
 </head>
 
 <body onLoad="Go()">
     <section id='leadInfo'>
         <article class='articlePanel'>
-            <h1 style='font-weight: normal; font-size:25px; margin: 10px 0px;'>Brandon Walsh</h1>
 
             <table width='100%'><tbody>
-                <tr><td class='titleTableCell'>5 Oaten Vale</td> <td style='text-align:right;' class='titleTableCell'>Tel: (041) 9843478</td></tr>
-                <tr><td class='titleTableCell'>Wheaton Hall</td> <td style='text-align:right;' class='titleTableCell'>Mobile: 087 3109848</td></tr>
-                <tr><td class='titleTableCell'>Drogheda</td> <td style='text-align:right;' class='titleTableCell'>Email: brandon.walsh43@mail.dcu.ie</td></tr>
-                <tr><td class='titleTableCell'>Co. Louth</td> <td style='text-align:right;' class='titleTableCell'>Website: <a href='http://metasophiea.com/'>metasophiea.com</a></td></tr>
-            </tbody></table>
+                <tr>
+                    <td width='20%'>
+                         <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAiNAAAAJDVlNTFiMTA3LTBhN2YtNGJiYi1hMDJlLTVmNWY1ZTk0NjY0ZQ.jpg" height="150"></img>
+                    </td>
+                    <td>
+                        <h1 style='font-weight: normal; font-size:25px; margin: 10px 0px;'>Brandon Walsh</h1>
 
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fourth year Electronic & Computer Engineering Student, computer literate, extremely diligent and conscientious, has high personal standards and attention to detail, coordinated, a good communicator and works well with others</p>
+                        <table width='100%'><tbody>
+                            <tr><td class='titleTableCell'>5 Oaten Vale</td> <td style='text-align:right;' class='titleTableCell'>Tel: (041) 9843478</td></tr>
+                            <tr><td class='titleTableCell'>Wheaton Hall</td> <td style='text-align:right;' class='titleTableCell'>Mobile: 087 3109848</td></tr>
+                            <tr><td class='titleTableCell'>Drogheda</td> <td style='text-align:right;' class='titleTableCell'>Email: brandon.walsh43@mail.dcu.ie</td></tr>
+                            <tr><td class='titleTableCell'>Co. Louth</td> <td style='text-align:right;' class='titleTableCell'>Website: <a href='http://metasophiea.com/'>metasophiea.com</a></td></tr>
+                        </tbody></table>
+
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fourth year Electronic & Computer Engineering Student, computer literate, extremely diligent and conscientious, has high personal standards and attention to detail, coordinated, a good communicator and works well with others</p>
+                    </td>
+                </tr>
+           </tbody></table>
+
+
+
+
+
         </article>
     </section>
 
@@ -158,6 +181,10 @@
     <section id='projects'><h1 class='sectionTitle'>Projects</h1></section>
     <section class='sectionDivider'></section>
     <section id='education'><h1 class='sectionTitle'>Education</h1></section>
+    <section class='sectionDivider'></section>
+    <section id='tailInfo'>
+        <h1 class='sectionTitle'>References available upon request</h1>
+    </section>
 
 </body>
 </html>
