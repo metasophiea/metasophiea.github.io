@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>cellspace</title>
+	<meta charset="utf-8"></meta> <meta name="theme-color" content="#FFFFFF"></meta>
+	
+	<script>
+		var cellSize = {'height':30,'width':80};
+		var cellCount = {'x':20,'y':20};
+	
+		function Go(){
+			var cellspace = document.getElementById('cellspace');
+			var tbody = document.createElement('tbody');
+				cellspace.appendChild(tbody);
+				
+			var tr, td, div;
+			for(var a = 0; a < cellCount.y; a++){
+				tr = document.createElement('tr');
+				for(var b = 0; b < cellCount.x; b++){
+					td = document.createElement('td');
+						td.style.padding = '0px';
+					div = document.createElement('div');
+						div.style.height = cellSize.height+'px'; div.style.width = cellSize.width+'px';
+						div.style.overflow = 'hidden';
+						div.id = 'cell_'+a+'|'+b;
+						div.setAttribute('onclick','cellClick('+a+','+b+')');
+						div.innerHTML = 'Hello';
+					
+					td.appendChild(div);
+					tr.appendChild(td);
+				}
+				tbody.appendChild(tr);
+			}
+		}
+		
+		function cellClick(x,y){
+			var data = document.getElementById('cell_'+x+'|'+y).innerHTML;
+			console.log(data);
+		}
+		
+	</script>
+
+	<style>
+		html, body{ width:100%; height:100%; margin:0px;}
+		table {border-collapse: collapse;}
+		tr,td{border: 1px solid #888888;}
+	</style>
+</head>
+
+<body onLoad='Go()'>
+	<table id='cellspace'></table>
+</body>
+</html>
