@@ -4,27 +4,25 @@
 <head>
 	<title>comp</title>
 	<meta charset="utf-8"></meta>
-	<script type="text/javascript" src="http://metasophiea.com/lib/js/cellspace/0.0.2/cellspace.js"></script>
+	<script type="text/javascript" src="file:///Users/metasophiea/Code/GitHub/metasophiea.github.io/lib/js/cellspace/0.0.2/cellspace.js"></script>
 
 	<script>
         var cellspace;
 
         function Go(){
-            console.log('hello');
             cellspace = cellspace.newCellspace('cellspace',document.getElementById('cellspace'));
             cellspace.cellSize(20,30);
-            cellspace.cellCount(32,8);           
-
-            cellspace.cellData(0,0,"ff");
+            cellspace.cellCount(32,8);
         }
     </script>
 	<style>
 		html, body{ width:100%; height:100%; margin:0px; overflow-x: hidden; overflow-y: hidden;}
+        #mainTextBox{font-size:16px;}
     </style>
 </head>
 
 <body onLoad="Go()">
 	<textarea id='mainTextBox' autofocus='true' placeholder='type something...' style='margin: 2% 15%; resize: none; width:70%; height:65%;'></textarea>
-    <section id='cellspace' style='margin: 0% 10%; width:80%; height:25%;'></section>
+    <section id='cellspace' style='margin:auto; width:85%; height:25%;'></section>
 </body>
 </html>
