@@ -3,19 +3,37 @@
 <head>
 	<title>cellspace</title>
 	<meta charset="utf-8"></meta> <meta name="theme-color" content="#FFFFFF"></meta>
-	<script type="text/javascript" src="./0.0.1/cellspace.js"></script>
+	<script type="text/javascript" src="./0.0.2/cellspace.js"></script>
 
 	<script>	
-        function Go(){
-            cellspace.attachDiv(document.getElementById('cellspace'));
-        }
+		var cellspace_1, cellspace_2, cellspace_3, cellspace_4;
 
+        function Go(){
+			cellspace_1 = cellspace.newCellspace('cellspace_1',document.getElementById('cellspace_1'));
+			cellspace_2 = cellspace.newCellspace('cellspace_2',document.getElementById('cellspace_2'));
+			cellspace_3 = cellspace.newCellspace('cellspace_3',document.getElementById('cellspace_3'));
+			cellspace_4 = cellspace.newCellspace('cellspace_4',document.getElementById('cellspace_4'));
+		}
 	</script>
 
 	<style></style>
 </head>
 
 <body onLoad='Go()'>
-	<section id='cellspace'></section>
+
+	<table style="padding:0px;">
+		<tbody>
+			<tr>
+				<td style="width:400px; height:400px;"><section id='cellspace_1' style='width:100%; height: 100%;'></section></td>
+				<td style="width:400px; height:400px;"><section id='cellspace_2' style='width:100%; height: 100%;'></section></td>				
+			</tr>
+			<tr>
+				<td style="width:400px; height:400px;"><section id='cellspace_3' style='width:100%; height: 100%;'></section></td>
+				<td style="width:400px; height:400px;"><section id='cellspace_4' style='width:100%; height: 100%;'></section></td>				
+			</tr>
+		</tbody>
+	</table>
+
+
 </body>
 </html>

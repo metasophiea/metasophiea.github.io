@@ -3,6 +3,7 @@
 {"name":"browserWork","type":"dir"}
 {"name":"canvasGraphics","type":"dir"}
 {"name":"canvasViewingSpace","type":"dir"}
+{"name":"cellspace","type":"dir"}
 {"name":"getJS","type":"dir"}
 {"name":"io","type":"dir"}
 {"name":"liveEdit","type":"dir"}
