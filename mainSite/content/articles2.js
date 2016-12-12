@@ -4,7 +4,7 @@ var articles = [
 		"text":["A simple workstation for developing programs in the P'' language","I plan on developing this tool further, and creating other workstations for more complex assembly languages"],	
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
-		"image_url":"/lib/image/mainSiteImageStorage/P_code.png",
+		"image_url":"/lib/image/mainSiteImagery/P_code.png",
 		"link_url":"/apps/virtualMachine/P%27%27"
 	},
 	{	"id":"article_20161016-a",
@@ -44,7 +44,7 @@ var articles = [
 		"text":["check out some of my original websites from when I was first learning HTML, JS and CSS"],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,255,255,0.75)",
-		"image_url":"/lib/image/mainSiteImageStorage/freecodecamp_logo.png",
+		"image_url":"/lib/image/mainSiteImagery/freecodecamp_logo.png",
 		"link_url":"http://metasophiea.com/projects/FreeCodeCamp/"		
 	},
 	{	"id":"article_20161023-a",
