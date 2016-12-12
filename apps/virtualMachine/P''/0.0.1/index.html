@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>P′′</title>
+	<meta charset="utf-8"></meta>
+	<script type="text/javascript" src="file:///Users/metasophiea/Code/GitHub/metasophiea.github.io/lib/js/cellspace/0.0.2/cellspace.js"></script>
+
+	<script>
+        /*
+            >   62  increment the data pointer (to point to the next cell to the right).
+            <   60  decrement the data pointer (to point to the next cell to the left).
+            +   43  increment (increase by one) the byte at the data pointer.
+            -   45  decrement (decrease by one) the byte at the data pointer.
+            [   93  if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ']' command.
+            ]   91  if the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching '[' command.
+
+            /   47
+        */
+        var cellspace;
+        var dataPointer = 0; var programCounter = 0; var program = '';
+        var intervalID;
+
+        function Go(){
+            cellspace = cellspace.newCellspace('cellspace',document.getElementById('cellspace'));
+            cellspace.cellSize(20,30);
+            cellspace.cellCount(32,8);
+            cellspace.setAllCells(0);
+
+        }
+
+        function buttonPress(command){
+            cellspace.disactivateCurrentFocus();
+            switch(command){
+                case'run': programCounter = 0; run(); break;
+                case'loop':
+                    if(document.getElementById('loopButton').getAttribute('activated') == 'false'){document.getElementById('loopButton').setAttribute('activated','true'); document.getElementById('loopButton').style['background-color'] = '#ffe680';}
+                    else{document.getElementById('loopButton').setAttribute('activated','false'); document.getElementById('loopButton').style['background-color'] = '';}
+                break;
+            }
+        }
+
+
+
+
+        function run(){
+            program = cleanProgram(document.getElementById('mainTextBox').value);
+
+            intervalID = setInterval(function(){
+                if(programCounter == program.length){clearInterval(intervalID); console.log('- end of program -');}
+                else{
+                    executeCommand(program[programCounter].charCodeAt(0));
+                    programCounter++;
+                }
+            },100);
+        }
+        function cleanProgram(program){
+            var resultProgram = [];
+
+            for(var a = 0; a < program.length; a++){
+                if(program[a].charCodeAt(0) == 47){ while(program[a].charCodeAt(0) != 10){a++; if(a > program.length){break;}} }
+                else{
+                    switch(program[a].charCodeAt(0)){
+                        case 62: case 60: case 43: case 45: case 93: case 91:
+                            resultProgram.push(program[a]);
+                        break;
+                    }
+                }
+            }
+
+            return resultProgram.join('');
+        }
+
+        function executeCommand(command){
+            switch(command){
+                case 62: var space = cellspace.cellCount(); dataPointer++; if(dataPointer >= space.x*space.y){dataPointer = 0;} break;
+                case 60: var space = cellspace.cellCount(); dataPointer--; if(dataPointer < 0){dataPointer = space.x*space.y-1;} break;
+                case 43: 
+                    var address = memoryAddres_to_cellspaceAddress(dataPointer); 
+                    var data = parseInt(cellspace.cellData(address.x,address.y)) + 1;
+                    cellspace.cellData(address.x,address.y,data);
+                break; 
+                case 45: 
+                    var address = memoryAddres_to_cellspaceAddress(dataPointer);
+                    var data = parseInt(cellspace.cellData(address.x,address.y)) - 1; 
+                    cellspace.cellData(address.x,address.y,data);
+                break; 
+                case 91:
+                    var address = memoryAddres_to_cellspaceAddress(dataPointer);
+                    if(parseInt(cellspace.cellData(address.x,address.y)) == 0){
+                        programCounter = findClosingBrace(programCounter);
+                    }
+                break;
+                case 93:
+                    var address = memoryAddres_to_cellspaceAddress(dataPointer);
+                    if(parseInt(cellspace.cellData(address.x,address.y)) != 0){
+                        programCounter = findOpeningBrace(programCounter); 
+                    }
+                break;
+            }
+        }
+
+        function findClosingBrace(startingPoint){
+            var stack = 0;
+
+            for(var a = startingPoint+1; a < program.length; a++){
+                if(program[a].charCodeAt(0) == 91){stack++;}
+                else if(program[a].charCodeAt(0) == 93 && stack == 0){return a;}          
+                else if(program[a].charCodeAt(0) == 93){{stack--;}}
+            }
+            return a;
+        }
+        function findOpeningBrace(startingPoint){
+            var stack = 0;
+
+            for(var a = startingPoint-1; a > 0; a--){
+                if(program[a].charCodeAt(0) == 93){stack++;}
+                else if(program[a].charCodeAt(0) == 91 && stack == 0){return a;}          
+                else if(program[a].charCodeAt(0) == 91){{stack--;}}  
+            }
+            return a;
+        }
+
+
+
+
+        function memoryAddres_to_cellspaceAddress(a){
+            var temp = a; var space = cellspace.cellCount(); var result = {y: 0, x: 0};
+
+            while(temp > space.x){ temp = temp - space.x; result.y++; } result.x = temp;
+
+            if(result.y >= space.y || result.x >= space.x){return {y: 0, x: 0};}
+            else{return result;}
+        }
+        function cellspaceAddress_to_memoryAddres(x,y){ var space = cellspace.cellCount(); var ans = y*space.x + x; if(ans >= space.x*space.y){ans = 0;} return ans; }
+
+    </script>
+	<style>
+		html, body{ width:100%; height:100%; margin:0px; overflow-x: hidden; overflow-y: hidden;}
+        #mainTextBox{font-size:16px;}
+
+        .button{
+            width:100px; height:50px;
+
+            background-color: #dddddd;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button:focus {outline:0;}
+    </style>
+</head>
+
+<body onLoad="Go()">
+	<textarea id='mainTextBox' autofocus='true' placeholder='type something...' style='margin: 2% 15%; resize: none; width:70%; height:65%;'>><+-[>>>]</textarea>
+    <section style='text-align: center;'>
+       <button id='runButton' class='button' type="button" onClick="buttonPress('run')">run</button>
+       <button id='stepButton' class='button' type="button" onClick="buttonPress('step')">step</button>
+       <button id='pauseButton' class='button' type="button" onClick="buttonPress('pause')">pause</button>
+       <button id='stopButton' class='button' type="button" onClick="buttonPress('stop')">stop</button>
+       <button id='resetButton' class='button' type="button" onClick="buttonPress('reset')">reset</button>   
+       <button id='loopButton' class='button' type="button" onClick="buttonPress('loop')" activated='false'>loop</button>    
+    </section>
+    <section id='cellspace' style='margin:2% auto; width:85%; height:25%;'></section>
+</body>
+</html>

@@ -1,4 +1,12 @@
 var articles = [
+	{	"id":"article_20161212-a",
+		"headline":"P'' Workstation",
+		"text":["A simple workstation for developing programs in the P'' language","I plan on developing this tool further, and creating other workstations for more complex assembly languages"],	
+		"textcolour":"rgb(255,255,255)",
+		"backerFill":"rgba(0,0,0,0.75)",
+		"image_url":"/lib/image/mainSiteImageStorage/P_code.png",
+		"link_url":"/apps/virtualMachine/P%27%27"
+	},
 	{	"id":"article_20161016-a",
 		"headline":"SIMON Encryption",
 		"text":["For my final year engineering project, I've been asked to impliment the SIMON cipher in VHDL. To understand how the cipher works I've implimented it in pure Javascript. This site is an encoder/decoder tool for encrypting and decrypting messages using the SIMON cipher","The unencrypted message can be any text, though the encrypted message is hexadecimal as is the password used for encryption"],	
@@ -7,7 +15,6 @@ var articles = [
 		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/SIMONencryption.png",
 		"link_url":"http://metasophiea.com/apps/encryption/SIMON/translater"
 	},
-
 	{	"id":"article_20160919-a",
 		"headline":"Light Cycles",
 		"text":["Simple but fun game of skill for two players","(red uses Q and W, yellow uses O and P)"],	
@@ -37,7 +44,7 @@ var articles = [
 		"text":["check out some of my original websites from when I was first learning HTML, JS and CSS"],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,255,255,0.75)",
-		"image_url":"http://newbornstartups.com/wp-content/uploads/2015/06/fcc-logo.png",
+		"image_url":"/lib/image/mainSiteImageStorage/freecodecamp_logo.png",
 		"link_url":"http://metasophiea.com/projects/FreeCodeCamp/"		
 	},
 	{	"id":"article_20161023-a",
