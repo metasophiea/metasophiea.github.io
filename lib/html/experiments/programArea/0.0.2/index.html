@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>cellspace</title>
+	<meta charset="utf-8"></meta> <meta name="theme-color" content="#FFFFFF"></meta>
+
+	<script>	
+        function Go(){
+
+		}
+
+
+        function writeNewLine(){
+            var line = document.createElement('span');
+                line.setAttribute('onmousedown','click(this);console.log("hello");');
+                line.innerHTML = 'Hello';
+            document.getElementById('codeSpace').appendChild(line);
+        }
+
+        function click(that){
+            console.log(that);
+        }
+
+	</script>
+
+	<style></style>
+</head>
+
+<body onLoad='Go()'>
+
+
+<pre id=codeSpace></pre>
+<!--
+<pre id=codeSpace><code><span>Hello</span><span>
+</span><span>Hello</span><span>Hello</span></code></pre>
+-->
+
+<!--
+            <span class="tag">&lt;hangout-module&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;hangout-chat</span>
+            <span class="pln"> </span>
+            <span class="atn">from</span>
+            <span class="pun">=</span>
+            <span class="atv">"Paul, Addy"</span>
+            <span class="tag">&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;hangout-discussion&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;hangout-message</span>
+            <span class="pln"> </span>
+            <span class="atn">from</span>
+            <span class="pun">=</span>
+            <span class="atv">"Paul"</span>
+            <span class="pln"> </span>
+            <span class="atn">profile</span>
+            <span class="pun">=</span>
+            <span class="atv">"profile.png"</span>
+            <span class="pln"></span>
+            <span class="atn">profile</span>
+            <span class="pun">=</span>
+            <span class="atv">"118075919496626375791"</span>
+            <span class="pln"> </span>
+            <span class="atn">datetime</span>
+            <span class="pun">=</span>
+            <span class="atv">"2013-07-17T12:02"</span>
+            <span class="tag">&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;p&gt;</span>
+            <span class="pln">Feelin' this Web Components thing.</span>
+            <span class="tag">&lt;/p&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;p&gt;</span>
+            <span class="pln">Heard of it?</span>
+            <span class="tag">&lt;/p&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;/hangout-message&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;/hangout-discussion&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;/hangout-chat&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;hangout-chat&gt;</span>
+            <span class="pln">...</span>
+            <span class="tag">&lt;/hangout-chat&gt;</span>
+            <span class="pln"></span>
+            <span class="tag">&lt;/hangout-module&gt;</span>
+-->
+
+
+</body>
+</html>

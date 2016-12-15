@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>P''</title>
+	<meta charset="utf-8"></meta>
+	<script type="text/javascript" src="../../../../lib/js/virtualMachine/P''/0.0.2/machine.js"></script>
+	<script type="text/javascript" src="../../../../lib/js/cellspace/0.0.5/cellspace.js"></script>	
+
+    <script>
+        var runningMachineInterval_ID; var pause = false; var loop = false;
+        var memorysize = {'x':32,'y':8}; 
+        var machine = new machine(memorysize.x*memorysize.y,8);
+        machine.liveDataCallback = callback;
+
+        function Go(){
+            document.getElementById('memoryDisplay').setCellSize(30,20);
+            document.getElementById('memoryDisplay').setCellCount(memorysize.x,memorysize.y);
+            document.getElementById('memoryDisplay').setAllData("00");
+            document.getElementById('memoryDisplay').setAllCellStyle('font-family','monospace');
+            document.getElementById('memoryDisplay').setAllCellStyle('text-align','center');
+        }
+
+        function loadProgram(){
+            var textProgram = document.getElementById('mainTextBox').value;
+            var program = machine.compileProgram(textProgram);
+            machine.loadProgram(program);
+        }
+
+        function buttonPress(command){
+            switch(command){
+                case 'compile': loadProgram(); break;
+                case 'run': machine.step(); runningMachineInterval_ID = setInterval(function(){if(!pause){machine.step();}},10); break;
+                case 'step': machine.step(); break;
+                case 'pause': if(pause){pause = false;}else{pause = true;} break;
+                case 'stop': clearInterval(runningMachineInterval_ID); break;
+                case 'reset': machine.reset(); clearInterval(runningMachineInterval_ID); document.getElementById('memoryDisplay').setAllData("00"); break;
+                case 'loop': if(loop){loop = false;}else{loop = true;} toggleLoopButton(); break;
+            }
+        }
+
+        function toggleLoopButton(){
+            if(document.getElementById('loopButton').getAttribute('activated') == 'false'){
+                document.getElementById('loopButton').setAttribute('activated','true');
+                document.getElementById('loopButton').style['background-color'] = '#ffaaff';
+            }
+            else{
+                document.getElementById('loopButton').setAttribute('activated','false');
+                document.getElementById('loopButton').style['background-color'] = '';
+            }
+        }
+
+        var previousAddress;
+        function callback(data){
+            if(data.loopback && !loop){clearInterval(runningMachineInterval_ID);}
+
+			var address = document.getElementById('memoryDisplay').getAddressFromIndex(data.pointer); 
+            if(data.dataHere < 10){data.dataHere = '0'+data.dataHere;}
+			document.getElementById('memoryDisplay').setData(address.x,address.y,data.dataHere);
+			if(previousAddress != null){document.getElementById('memoryDisplay').setCellStyle(previousAddress.x,previousAddress.y,'background-color','#ffffff');}
+			document.getElementById('memoryDisplay').setCellStyle(address.x,address.y,'background-color','#ffbbff');
+			previousAddress = address;
+        }
+
+    </script>
+
+	<style>
+		html, body{ width:100%; height:100%; margin:0px; overflow-x: hidden;}
+        #mainTextBox{font-size:16px; content: counter(line);}
+
+        .button{
+            width:100px; height:50px;
+
+            background-color: #dddddd;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button:focus {outline:0;}
+    </style>
+</head>
+
+<body onload='Go()'>
+	<textarea id='mainTextBox' autofocus='true' style='margin: 2% 15%; resize: none; width:70%; height:55%;'></textarea>
+    <section style='text-align: center;'>
+       <button id='compileButton' class='button' type="button" onClick="buttonPress('compile')">compile</button>   
+       <button id='runButton' class='button' type="button" onClick="buttonPress('run')">run</button>
+       <button id='stepButton' class='button' type="button" onClick="buttonPress('step')">step</button>
+       <button id='pauseButton' class='button' type="button" onClick="buttonPress('pause')">pause</button>
+       <button id='stopButton' class='button' type="button" onClick="buttonPress('stop')">stop</button>
+       <button id='resetButton' class='button' type="button" onClick="buttonPress('reset')">reset</button>   
+       <button id='loopButton' class='button' type="button" onClick="buttonPress('loop')" activated='false'>loop</button>    
+    </section>
+    <metasophiea-cellspace id='memoryDisplay' style='margin:2% auto; width:85%; height:25%;'></metasophiea-cellspace>
+</body>
+</body>
+</html>

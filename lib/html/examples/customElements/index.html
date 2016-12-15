@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>
+
+customElements.define('metasophiea-customelement',
+    class extends HTMLElement{
+        //Called when the element is inserted into a document, including into a shadow tree
+        connectedCallback(){console.log('connectedCallback');this.build();}
+        //Called when the element is removed from a document
+        disconnectedCallback(){console.log('disconnectedCallback');}
+        //Called when an attribute is changed, appended, removed, or replaced on the element. Only called for observed attributes.
+        attributeChangedCallback(attributeName, oldValue, newValue, namespace){console.log('attributeChangedCallback');}
+        //Called when the element is adopted into a new document
+        adoptedCallback(oldDocument, newDocument){console.log('adoptedCallback');}
+
+        //Called when the element is created or upgraded
+        constructor(){console.log('constructor'); 
+            super();
+            var godElement = this.attachShadow({mode: 'open'});
+            var masterElement = document.createElement('section');
+            godElement.appendChild(masterElement);
+
+            this.build = function(){
+                masterElement.style.width = dealWithDimension('width',this);
+                masterElement.style.height = dealWithDimension('height',this);   
+            }
+
+            this.hello = function(){return "hello";}
+
+            //for setting up master Element's size, is a recursive fashion, because I'm hardcore and that's how I roll
+            function dealWithDimension(attribute,that){ var result = '0';
+                if(that.hasAttribute(attribute)){result = that.getAttribute(attribute);}
+                if(that.style[attribute] != ''){result = that.style[attribute];}
+                if(/%/g.test(result)){ result = (parseInt(dealWithDimension(attribute,that.parentElement).split('p')[0]) * parseInt(result.split('%')[0])/100) + 'px'; }
+                else if(/[0-9]/g.test(result[result.length-1])){ result = result + 'px'; }
+
+                return result;
+            }
+        }
+    }
+); 
+
+
+
+
+        function Go(){
+            console.log('hello');
+        }
+
+
+
+
+    </script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+    <metasophiea-customelement></metasophiea-customelement>
+</body>
+</html>
