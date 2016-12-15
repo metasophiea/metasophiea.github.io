@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>cellspace</title>
+	<meta charset="utf-8"></meta> <meta name="theme-color" content="#FFFFFF"></meta>
+	<script type="text/javascript" src="./cellspace.js"></script>
+
+	<script>	
+		var cellspace_1, cellspace_2, cellspace_3, cellspace_4;
+
+        function Go(){
+			cellspace_1 = cellspace.newCellspace('cellspace_1',document.getElementById('cellspace_1'));
+			cellspace_2 = cellspace.newCellspace('cellspace_2',document.getElementById('cellspace_2'));
+			cellspace_3 = cellspace.newCellspace('cellspace_3',document.getElementById('cellspace_3'));
+			cellspace_4 = cellspace.newCellspace('cellspace_4',document.getElementById('cellspace_4'));
+
+			cellspace_1.cellColour(0,0,"#ff0000");	
+			cellspace_1.cellData(1,5,0);
+			cellspace_1.cellSize(20,20);
+			cellspace_1.cellCount(20,10);	
+			cellspace_1.cellColour(0,10,"#ff0000");	
+		}
+	</script>
+
+	<style></style>
+</head>
+
+<body onLoad='Go()'>
+
+	<table style="padding:0px;">
+		<tbody>
+			<tr>
+				<td style="width:400px; height:400px;"><section id='cellspace_1' style='width:400px; height:400px;'></section></td>
+				<td style="width:400px; height:400px;"><section id='cellspace_2' style='width:400px; height:400px;'></section></td>				
+			</tr>
+			<tr>
+				<td style="width:400px; height:400px;"><section id='cellspace_3' style='width:400px; height:400px;'></section></td>
+				<td style="width:400px; height:400px;"><section id='cellspace_4' style='width:400px; height:400px;'></section></td>				
+			</tr>
+		</tbody>
+	</table>
+
+
+</body>
+</html>

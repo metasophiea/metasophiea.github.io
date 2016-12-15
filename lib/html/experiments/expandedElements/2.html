@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>
+
+        window.customElements.define('app-drawer', class extends HTMLDivElement {
+            constructor() {
+                super();
+
+                var number = 5;
+                this.hello = function(){console.log('hello');}
+                this.getNumber = function(){return number;}
+            };
+        });
+
+        function Go(){
+            console.log('hello');
+
+
+
+        }
+    </script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+    <app-drawer id='test' style='height:100px; width:100px;'height='100' width='100'></app-drawer>
+    <app-drawer id='test2'></app-drawer>  
+    <HTMLElement id='test3'></HTMLElement>  
+</body>
+</html>

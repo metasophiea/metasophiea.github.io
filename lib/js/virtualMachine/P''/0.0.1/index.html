@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script src="./machine.js"></script>
+	<script>
+    /*
+        >   62 -> 0 increment the data pointer (to point to the next cell to the right).
+        <   60 -> 1 decrement the data pointer (to point to the next cell to the left).
+        +   43 -> 2 increment (increase by one) the byte at the data pointer.
+        -   45 -> 3 decrement (decrease by one) the byte at the data pointer.
+        [   91 -> 4 if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ']' command.
+        ]   93 -> 5 if the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching '[' command.
+    */
+
+    
+		var machine = new machine();
+		var program = '>+';
+		program = machine.compileProgram(program);
+		machine.loadProgram(program);
+
+		machine.liveDataCallback = console.log;
+		
+		function Go(){
+			console.log('hello');
+			machine.step();
+			setInterval(function(){machine.step();},1000);
+		}
+	</script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+
+</body>
+</html>

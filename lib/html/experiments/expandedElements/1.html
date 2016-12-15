@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>
+        function Go(){
+            console.log('hello');
+
+            var array = document.getElementsByTagName('programbox');
+            for(var a = 0; a < array.length; a++){
+                array[a].sayHello = function(){ console.log("Hello from " + this.id); }
+            }
+
+
+
+            // document.getElementById('test').sayHello = function(){
+            //     console.log("Hello");
+            // }
+
+
+        }
+    </script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+    <programbox id='test'></programbox>
+    <programbox id='test2'></programbox>  
+</body>
+</html>

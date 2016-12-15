@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>
+
+        // class XProduct extends HTMLElement {
+        //     constructor() {
+        //         super();
+        //         var number = 5;
+        //         this.hello = function(){console.log('hello');}
+        //         this.getNumber = function(){return number;}
+
+
+        //         var shadow = this.attachShadow({mode: 'open'});
+
+        //         var section = document.createElement('section');
+        //             section.style.width = '150px'; section.style.height = '150px';
+        //             section.innerHTML = 'Hello';
+        //             shadow.appendChild(section);
+        //     }
+        // }
+
+
+        // customElements.define('x-product', XProduct);
+
+        customElements.define('x-product', 
+            class XProduct extends HTMLElement {
+                constructor() {
+                    super();
+                    var number = 5;
+                    this.hello = function(){console.log('hello');}
+                    this.getNumber = function(){return number;}
+
+
+                    var shadow = this.attachShadow({mode: 'open'});
+
+                    var section = document.createElement('section');
+                        section.style.width = '150px'; section.style.height = '150px';
+                        section.innerHTML = 'Hello';
+                        shadow.appendChild(section);
+                }
+            }
+        );
+
+
+
+        function Go(){
+            console.log('hello');
+        }
+    </script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+If nothing appeared below, then your browser does not support Custom Elements yet.
+<x-product id='test' data-name="Ruby" data-img="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4621/ruby.png" data-url="http://example.com/1"></x-product>
+<x-product data-name="JavaScript" data-img="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4621/javascript.png" data-url="http://example.com/2"></x-product>
+<x-product data-name="Python" data-img="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4621/python.png" data-url="http://example.com/3"></x-product>
+</body>
+</html>

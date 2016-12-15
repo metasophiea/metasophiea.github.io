@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script type="text/javascript" src="../../../cellspace/0.0.5/cellspace.js"></script>
+	<script src="./machine.js"></script>
+	<script>
+    /*
+        >   62 -> 0 increment the data pointer (to point to the next cell to the right).
+        <   60 -> 1 decrement the data pointer (to point to the next cell to the left).
+        +   43 -> 2 increment (increase by one) the byte at the data pointer.
+        -   45 -> 3 decrement (decrease by one) the byte at the data pointer.
+        [   91 -> 4 if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ']' command.
+        ]   93 -> 5 if the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching '[' command.
+    */
+
+		var machine = new machine(32,8);
+		
+		function Go(){
+			console.log('hello');
+
+			var program = '+>';
+			program = machine.compileProgram(program);
+			machine.loadProgram(program);
+
+			document.getElementById('cellspace').build();
+			document.getElementById('cellspace').setCellSize(30,30);
+			document.getElementById('cellspace').setCellCount(8,4);
+			document.getElementById('cellspace').setAllData('0');
+
+			machine.step(); setInterval(function(){machine.step();},10);
+		}
+
+		machine.liveDataCallback = updateDisplay;
+		var previousAddress;
+		function updateDisplay(data){
+			var address = document.getElementById('cellspace').getAddressFromIndex(data.pointer); 
+			document.getElementById('cellspace').setData(address.x,address.y,data.dataHere);
+			if(previousAddress != null){document.getElementById('cellspace').setCellStyle(previousAddress.x,previousAddress.y,'background-color','#ffffff');}
+			document.getElementById('cellspace').setCellStyle(address.x,address.y,'background-color','#ffbbff');
+			previousAddress = address;
+		}
+		
+	</script>
+	<style></style>
+</head>
+
+<body onLoad="Go()">
+	<metasophiea-cellspace class='cellspace' id='cellspace' style='width:600px; height:300px; margin:auto;'></metasophiea-cellspace>
+</body>
+</html>
