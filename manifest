@@ -1,9 +1,11 @@
 {"name":"404.html","type":"file"}
+{"name":"apps","type":"dir"}
 {"name":"CNAME","type":"file"}
 {"name":"CommonRoomRadio","type":"dir"}
-{"name":"apps","type":"dir"}
 {"name":"index.html","type":"file"}
 {"name":"lib","type":"dir"}
 {"name":"mainSite","type":"dir"}
+{"name":"manifester","type":"file"}
+{"name":"manifester.cpp","type":"file"}
 {"name":"projects","type":"dir"}
 {"name":"theAuthor","type":"dir"}

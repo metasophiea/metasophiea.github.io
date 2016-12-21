@@ -1,4 +1,3 @@
-{"name":"SIMON","type":"dir"}
 {"name":"audiophile","type":"dir"}
 {"name":"browserWork","type":"dir"}
 {"name":"canvasGraphics","type":"dir"}
@@ -9,5 +8,6 @@
 {"name":"liveEdit","type":"dir"}
 {"name":"math","type":"dir"}
 {"name":"pixelMagic","type":"dir"}
+{"name":"SIMON","type":"dir"}
 {"name":"string","type":"dir"}
 {"name":"virtualMachine","type":"dir"}

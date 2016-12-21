@@ -2,6 +2,6 @@
 {"name":"DrawControl.js","type":"file"}
 {"name":"KeyBoardControl.js","type":"file"}
 {"name":"Render.js","type":"file"}
+{"name":"shapes","type":"dir"}
 {"name":"ToolMenu.js","type":"file"}
 {"name":"UserViewControl.js","type":"file"}
-{"name":"shapes","type":"dir"}
