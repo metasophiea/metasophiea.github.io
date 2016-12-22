@@ -5,7 +5,6 @@
 {"name":"index.html","type":"file"}
 {"name":"lib","type":"dir"}
 {"name":"mainSite","type":"dir"}
-{"name":"manifester","type":"file"}
-{"name":"manifester.cpp","type":"file"}
+{"name":"manifester","type":"dir"}
 {"name":"projects","type":"dir"}
 {"name":"theAuthor","type":"dir"}
