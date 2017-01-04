@@ -1,4 +1,13 @@
 var articles = {
+	"article_20170104-a":{
+		"headline":"Please Update Your Browser",
+		"text_line1":"It appears that you're using an old version,",
+		"text_line2":" and all the best stuff is on the newer site :(",
+		"textcolour":"rgb(255,255,255)",
+		"backerFill":"rgba(0,0,0,0.75)",
+		"image_url":"",
+		"link_url":""
+	},
 	"article_20160807-a":{
 		"headline":"Canvas Viewing Space Project",
 		"text_line1":"A pure JS 2d graphics engine",
