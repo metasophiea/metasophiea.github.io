@@ -5,7 +5,7 @@ var articles = [
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
 		"image_url":"/lib/image/mainSiteImagery/P_code.png",
-		"link_url":"/apps/virtualMachine/P''"
+		"link_url":"/apps/virtualMachine/P"
 	},
 	{	"id":"article_20161016-a",
 		"headline":"SIMON Encryption",
