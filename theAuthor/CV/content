@@ -63,7 +63,7 @@ var content = {
                     'title':'Nigel',
                     'link':'http://metasophiea.com/projects/nigel/',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An old assembly language project I started a few years ago but decided to stop when I began learning web programming (as I felt that was a more employable skill)',
-                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can find the (currently undocumented) code here: <a href=\'https://github.com/metasophiea/nigel\'>https://github.com/metasophiea/nigel</a>'
+                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can find the (currently undocumented) code here: <a href=\'https://github.com/metasophiea/nigel\'>https://github.com/metasophiea/nigel</a>'
                     ]
                 },    
                 {
