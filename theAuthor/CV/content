@@ -63,7 +63,6 @@ var content = {
                     'title':'Nigel',
                     'link':'http://metasophiea.com/projects/nigel/',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An old assembly language project I started a few years ago but decided to stop when I began learning web programming (as I felt that was a more employable skill)',
-                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;These posts are taken from my old blogspot blog, and have been recreated here for your reading pleasure. I will be uploading more posts from old blogs as time goes on (though Nigel wasn\'t developed beyond what is there now... I fully intend to return to the project when I get the opportunity)',
                         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can find the (currently undocumented) code here: <a href=\'https://github.com/metasophiea/nigel\'>https://github.com/metasophiea/nigel</a>'
                     ]
                 },    
