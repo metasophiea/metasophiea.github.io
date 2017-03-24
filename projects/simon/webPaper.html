@@ -9,12 +9,13 @@
 	<script>
 		var mainAddress = 'https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation';
 		var pages = [
-			{'title':'What Is Simon','address':'/system/1_whatIsSimon'},
-			{'title':'Key Expander','address':'/system/2_keyExpander'},
-			{'title':'Message Encryption','address':'/system/3_messageEncryption'},
-			{'title':'Message Decryption','address':'/system/4_messageDecryption'},
-			{'title':'Layout','address':'/system/5_layout'},
-			{'title':'Advised Usage Layout','address':'/advice'}
+			{'type':'article','title':'What Is Simon','address':'/system/1_whatIsSimon'},
+			{'type':'article','title':'Key Expander','address':'/system/2_keyExpander'},
+			{'type':'image', 'description':'', 'link':'https://drive.google.com/file/d/0B7-r9goff8SZbkt6SGJlZzdiVHc/view?usp=sharing'},
+			{'type':'article','title':'Message Encryption','address':'/system/3_messageEncryption'},
+			{'type':'article','title':'Message Decryption','address':'/system/4_messageDecryption'},
+			{'type':'article','title':'Layout','address':'/system/5_layout'},
+			{'type':'article','title':'Advised Usage Layout','address':'/advice'}
 		];
 	
 		function addToSpace(text){
@@ -25,11 +26,19 @@
 	
 		function Go(){
 			for(var a = 0; a < pages.length; a++){
-				var h2 = document.createElement('h2');
-				h2.innerHTML = pages[a].title; h2.setAttribute('class','subheading');
-				document.getElementById('textSpace').appendChild(h2);
+				if( pages[a].type == 'article' ){
+					var h2 = document.createElement('h2');
+					h2.innerHTML = pages[a].title; h2.setAttribute('class','subheading');
+					document.getElementById('textSpace').appendChild(h2);
 
-				httpGet(addToSpace,mainAddress+pages[a].address);
+					httpGet(addToSpace,mainAddress+pages[a].address);
+				}
+				else if( pages[a].type == 'image' ){
+					var img = document.createElement('img');
+					img.src = pages[a].link;
+					document.getElementById('textSpace').appendChild(img);
+					//<img src="smiley.gif" alt="Smiley face" height="42" width="42">
+				}
 			}
 		}
 	
