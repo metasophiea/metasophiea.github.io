@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Simon Implementation Web Paper</title>
+	<meta charset="utf-8"></meta>
+	<meta http-equiv="Cache-control" content="No-Cache">
+	
+	<script>
+		var mainAddress = 'https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation';
+		var pages = [
+			{'type':'article','title':'What Is Simon','address':'/system/1_whatIsSimon'},
+			{'type':'article','title':'Key Expander','address':'/system/2_keyExpander'},
+			{'type':'image', 'title':'Key Expander Example Diagram', 'link':'https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/system/keyExpander_32_64_example_large.png'},
+			{'type':'article','title':'Message Encryption','address':'/system/3_messageEncryption'},
+			{'type':'image', 'title':'Message Encryptor Example Diagram', 'link':'https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/system/messageEncryptor_32_64_example_large.png'},
+			{'type':'article','title':'Message Decryption','address':'/system/4_messageDecryption'},
+			{'type':'image', 'title':'Message Decryptor Example Diagram', 'link':'https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/system/messageDecryptor_32_64_example_large.png'},
+			{'type':'article','title':'Designs','address':'/system/5_designs'},
+			{'type':'article','title':'Advised Usage Layout','address':'/advice'},
+			{'type':'image', 'title':'Broadcast And Response - Spider Layout Diagram', 'link':'https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/system/layout_spider_broadcastAndResponse.png'},
+		];
+	
+		function addToSpace(text){
+			var pre = document.createElement('pre');
+			pre.innerHTML = text; pre.setAttribute('class','preSections');
+			document.getElementById('textSpace').appendChild(pre);
+		}
+	
+		function Go(){
+			for(var a = 0; a < pages.length; a++){
+				if( pages[a].type == 'article' ){
+					var h2 = document.createElement('h2');
+					h2.innerHTML = pages[a].title; h2.setAttribute('class','subheading');
+					document.getElementById('textSpace').appendChild(h2);
+
+					httpGet(addToSpace,mainAddress+pages[a].address);
+				}
+				else if( pages[a].type == 'image' ){
+					var h3 = document.createElement('h3');
+					h3.innerHTML = pages[a].title; h3.setAttribute('class','subheading');
+					document.getElementById('textSpace').appendChild(h3);
+				
+					var img = document.createElement('img');
+					img.src = pages[a].link; img.width = 600;
+					document.getElementById('textSpace').appendChild(img);
+				}
+			}
+		}
+	
+		function httpGet(callback,theUrl){
+			if (window.XMLHttpRequest){ xmlhttp=new XMLHttpRequest(); }
+			else{ xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}
+			xmlhttp.onreadystatechange=function(){
+				if (xmlhttp.readyState==4 && xmlhttp.status==200){ callback(xmlhttp.responseText); return xmlhttp.responseText; }
+			}
+			xmlhttp.open("GET", theUrl, false );
+			xmlhttp.send();    
+		}
+	</script>
+	
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet">
+	<style>
+		.subheading{
+			margin:10px;
+			color: rgb(150,150,150);
+			font-family: 'Raleway', sans-serif;
+		}
+		
+		.preSections{
+			padding: 5px;
+		}
+		
+		.links{
+			margin:10px; 
+			color: rgb(200,200,200);
+			text-decoration: none;
+			font-family: 'Raleway', sans-serif;
+			font-weight: bold;
+		}
+		.links:hover{color:rgb(150,0,150); text-decoration:underline;}
+	</style>
+</head>
+
+<body onLoad="Go()">
+	<section id='textSpace'></section>
+	
+	<section>
+		<h2 class='subheading'>Samples</h2>
+		<a class='links' href='https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/samples/expandedKeys'>expandedKeys</a><br>
+		<a class='links' href='https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/samples/encryptedMessages'>encryptedMessages</a><br>
+		<a class='links' href='https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/samples/decryptedMessages'>decryptedMessages</a><br>
+		<a class='links' href='https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/samples/fullEncryption'>fullEncryption</a><br>
+		<a class='links' href='https://raw.githubusercontent.com/metasophiea/SIMON_VHDL/master/documents/implementation/samples/fullDecryption'>fullDecryption</a>
+	</section>
+</body>
+</html>
