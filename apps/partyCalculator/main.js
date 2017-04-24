@@ -95,7 +95,7 @@ function Go(){
         segmentArray = [0,1,0,0,1,0,1]; printLCD(6,segmentArray);
         segmentArray = [1,1,1,0,1,1,1]; printLCD(5,segmentArray);
         segmentArray = [1,1,1,1,1,1,0]; printLCD(4,segmentArray);
-        segmentArray = [0,0,1,1,1,1,0]; printLCD(3,segmentArray);
+        segmentArray = [0,0,1,1,1,1,1]; printLCD(3,segmentArray);
         segmentArray = [0,0,0,1,0,0,0]; printLCD(2,segmentArray);
         segmentArray = [0,0,0,1,0,0,0]; printLCD(1,segmentArray);
         segmentArray = [0,0,0,1,0,0,0]; printLCD(0,segmentArray);
