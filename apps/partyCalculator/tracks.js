@@ -1,5 +1,6 @@
 var tracks = [
     [
+        './tracks/0-drums/0.mp3',
         './tracks/0-drums/1.mp3',
         './tracks/0-drums/2.mp3',
         './tracks/0-drums/3.mp3',
