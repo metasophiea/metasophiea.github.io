@@ -1,0 +1,34 @@
+.fancyText{
+    fill: rgb(247,217,24); 
+    font-family: 'Lobster', cursive;
+    font-size: 4px;
+}
+
+.button_base{fill: rgb(220,220,220);}
+.button_symbol{
+    fill: rgb(0,0,0); 
+    font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8px;
+}
+.button_cover{fill: rgba(0,0,0,0);}
+.button_cover:hover{fill: rgba(255,255,255,.5);}
+.LCD_background{fill:rgb(40,40,40);}
+.LCD_0_dark{fill: rgb(0,100,0);}
+.LCD_1_dark{fill: rgb(0,100,0);}
+.LCD_2_dark{fill: rgb(0,100,0);}
+.LCD_3_dark{fill: rgb(0,100,0);}
+.LCD_4_dark{fill: rgb(0,100,0);}
+.LCD_5_dark{fill: rgb(0,100,0);}
+.LCD_6_dark{fill: rgb(0,100,0);}
+.LCD_7_dark{fill: rgb(0,100,0);}
+.LCD_8_dark{fill: rgb(0,100,0);}
+
+.LCD_0_lit{fill: rgb(0,200,0);}
+.LCD_1_lit{fill: rgb(0,200,0);}
+.LCD_2_lit{fill: rgb(0,200,0);}
+.LCD_3_lit{fill: rgb(0,200,0);}
+.LCD_4_lit{fill: rgb(0,200,0);}
+.LCD_5_lit{fill: rgb(0,200,0);}
+.LCD_6_lit{fill: rgb(0,200,0);}
+.LCD_7_lit{fill: rgb(0,200,0);}
+.LCD_8_lit{fill: rgb(0,200,0);}
