@@ -9,18 +9,14 @@
         function Go(){
             //fill experience
             for(var a = 0; a < content.experience.length; a++){ document.getElementById('workExperience').appendChild(createExperiencePanel(content.experience[a])); }
-
             //fill projects
             for(var a = 0; a < content.projects.length; a++){ document.getElementById('projects').appendChild(createProjectPanel(content.projects[a])); }
-
             //fill education
             for(var a = 0; a < content.education.length; a++){ document.getElementById('education').appendChild(createEducationPanel(content.education[a])); }
         }
-
         function createProjectPanel(data){
             var articleElement = document.createElement('article');
                 articleElement.setAttribute('class','articlePanel');  
-
             //title
             var a = document.createElement('a');
                 a.setAttribute('href',data.link); 
@@ -29,7 +25,6 @@
                 title.setAttribute('class','articleTitle');
                 title.appendChild(a);   
                 articleElement.appendChild(title);   
-
             //description
             for(var a = 0; a < data.description.length; a++){
                 var p = document.createElement('p');
@@ -37,20 +32,16 @@
                     p.innerHTML = data.description[a];
                     articleElement.appendChild(p);
             }
-
             return articleElement;
         }
-
         function createEducationPanel(data){
             var articleElement = document.createElement('article');
                 articleElement.setAttribute('class','articlePanel');
-
             //title
             var title = document.createElement('h2');
                 title.setAttribute('class','articleTitle');
                 title.innerHTML = data.degree;
                 articleElement.appendChild(title);
-
             //school and dates
             var table = document.createElement('table');
                 table.width = '100%';
@@ -61,7 +52,6 @@
                 tr.appendChild(td_1); tr.appendChild(td_2);
                 tbody.appendChild(tr); table.appendChild(tbody);
                 articleElement.appendChild(table); 
-
             //description
             for(var a = 0; a < data.description.length; a++){
                 var p = document.createElement('p');
@@ -69,20 +59,16 @@
                     p.innerHTML = data.description[a];
                     articleElement.appendChild(p);
             }
-
             return articleElement;
         }
-
         function createExperiencePanel(data){
             var articleElement = document.createElement('article');
                 articleElement.setAttribute('class','articlePanel');
-
             //title
             var title = document.createElement('h2');
                 title.setAttribute('class','articleTitle');
                 title.innerHTML = data.title;
                 articleElement.appendChild(title);
-
             //address and dates
             var table = document.createElement('table');
                 table.width = '100%';
@@ -93,7 +79,6 @@
                 tr.appendChild(td_1); tr.appendChild(td_2);
                 tbody.appendChild(tr); table.appendChild(tbody);
                 articleElement.appendChild(table); 
-
             //description
             for(var a = 0; a < data.description.length; a++){
                 var p = document.createElement('p');
@@ -101,10 +86,8 @@
                     p.innerHTML = data.description[a];
                     articleElement.appendChild(p);
             }
-
             return articleElement;
         }
-
     </script>
 	<style>
         html{font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px;}
@@ -115,13 +98,10 @@
             min-width: 600px; max-width: 850px;
             padding: 10px;
         }
-
         a{color:rgb(0,0,0); text-decoration:none;}
         a:hover{color:rgb(150,0,150); text-decoration:underline;}
-
         .sectionTitle{color:rgb(150,150,150);font-weight: normal; margin: 14px 0px;}
         .sectionDivider{height:1px; background-color:rgb(220,220,220);}
-
         .articlePanel{margin:10px;}
         .articleTitle{margin:0px;font-weight: normal;}
         .articleDetails{color:rgb(150,150,150);}
@@ -133,7 +113,6 @@
             size: auto;
             margin: 20px;
         }
-
         html{font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px;}
         body{min-width: 500px; width: 90%;}
     </style>
@@ -154,9 +133,10 @@
                             <tr><td >Drogheda</td> <td style='text-align:right;'>Email: brandon.walsh43@mail.dcu.ie</td></tr>
                             <tr><td >Co. Louth</td> <td style='text-align:right;'>Website: <a href='http://metasophiea.com/'>metasophiea.com</a></td></tr>
                             <tr><td ></td> <td style='text-align:right;'>LinkedIn: <a href='https://www.linkedin.com/in/metasophiea'>linkedin.com/in/metasophiea</a></td></tr>
+                            <tr><td ></td> <td style='text-align:right;'>Github: <a href='https://www.github.com/metasophiea'>github.com/metasophiea</a></td></tr>
                         </tbody></table>
 
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fourth year Electronic & Computer Engineering Student currently performing at a 2.1 level, avid programmer and designer, diligent and conscientious, has high personal standards and attention to detail, coordinated, creative, a good communicator that works well with others</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fourth year Electronic & Computer Engineering Student currently performing at a 2.1 level, avid programmer and designer, diligent and conscientious, has high personal standards and attention to detail, coordinated, creative, a good communicator that works well with others.<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Language skills: C/C++, JavaScript, HTML, VHDL, Java, Assembly</p>
                     </td>
                     <td width='20%'>
                          <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAiNAAAAJDVlNTFiMTA3LTBhN2YtNGJiYi1hMDJlLTVmNWY1ZTk0NjY0ZQ.jpg" height="150"></img>

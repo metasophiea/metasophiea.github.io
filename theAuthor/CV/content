@@ -16,7 +16,7 @@ var content = {
                     ]
                 },
                 {
-                    'title':'Office Assistant/Cash Processer',
+                    'title':'G4S - Office Assistant/Cash Processer',
                     'details':{'address':'Rialto, Dublin 8','time':'December 2014 – January 2015'},
                     'description':[
                         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cash Processing involved handling large cash volumes in the replenishment of ATM cassette strongboxes.',
@@ -78,7 +78,7 @@ var content = {
                     'school':'Dublin City University',
                     'degree':'B.Eng in Electronic and Computer Engineering',
                     'time':'2013-present',
-                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"This single programme, with four Major options in Year Four, replaces and combines the best of DCU\'s previous offerings in Electronic Engineering, Digital Media Engineering and Information and Communications Engineering. As well as knowledge of the science and mathematics foundations needed by the electronic and computer engineer, this course develops expertise in object-oriented and embedded software in electronic circuit analysis and design, and in control system design. You will learn how to model and analyse the dynamics of a wide range of technological systems, and will be skilled in subjects such as analogue and digital systems, microelectronics, mechatronic systems, computer architecture, electromagnetics and ultra high speed communications." - DCU Prospectus Course Description']
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This program - where I have selected the major \'Digital Interaction\' - replaces and combines the best of DCU\'s previous offerings in Electronic Engineering, Digital Media Engineering and Information and Communications Engineering. As well as knowledge of the science and mathematics foundations needed by the electronic and computer engineer; this course develops a wide knowledge in computer systems; from digital & analogue circuitry embedded software and hardware design, to Human Computer Interface Technology, Web Application Development and Image Processing & Analysis']
                 },
                 {
                     'school':'St. Mary\'s Diocesan School',
