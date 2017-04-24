@@ -3,11 +3,49 @@ var digitCount = 9;
 var calculatorValues = [0,0,0,0,0,0,0,0,0];
 var calculatorValues_inputNumber = [0,0,0,0,0,0,0,0,0];
 
-var audioMachines = [];
+var audioMachine = new audioMachine(AudioContext);
 for(var a = 0; a < digitCount; a++){
-    audioMachines[a] = new audioMachine(AudioContext);
-    audioMachines[a].loadAudio(tracks[a]);
+    audioMachine.loadAudio(a,tracks[a]);
 }
+audioMachine.setCallback(
+    function(){
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_0').setAttribute('class','LED_lit');
+            }, (0) );  
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_1').setAttribute('class','LED_lit');
+            }, (1000) );  
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_2').setAttribute('class','LED_lit');
+            }, (2000) );  
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_3').setAttribute('class','LED_lit');
+            }, (3000) );  
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_4').setAttribute('class','LED_lit');
+            }, (4000) );  
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_5').setAttribute('class','LED_lit');
+            }, (5000) );  
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_6').setAttribute('class','LED_lit');
+            }, (6000) );  
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_7').setAttribute('class','LED_lit');
+            }, (7000) );  
+
+            setTimeout(function(){ 
+                document.getElementById('LED_progress_0').setAttribute('class','LED_dark');
+                document.getElementById('LED_progress_1').setAttribute('class','LED_dark');
+                document.getElementById('LED_progress_2').setAttribute('class','LED_dark');
+                document.getElementById('LED_progress_3').setAttribute('class','LED_dark');
+                document.getElementById('LED_progress_4').setAttribute('class','LED_dark');
+                document.getElementById('LED_progress_5').setAttribute('class','LED_dark');
+                document.getElementById('LED_progress_6').setAttribute('class','LED_dark');
+                document.getElementById('LED_progress_7').setAttribute('class','LED_dark');
+            }, (8000) );  
+    }
+);
 
 function Go(){
     var startX = 70; var startY = 11;
@@ -50,12 +88,10 @@ function Go(){
         document.getElementById('LCD_'+a+'_6').setAttribute('x',startX-(a*(length+thickness*2+spacing)));
     }
 
-    setTimeout(function(){ 
-        for(var a = 0; a < 9; a++){ 
-            audioMachines[a].go();
-        }
+     setTimeout(function(){ 
+        audioMachine.go();
         update();
-    }, 1000);
+     }, 1000);
 }
 
 var calculationAction = null; var equalsPressedLast = true;
@@ -69,6 +105,7 @@ function buttonPress(buttonAction){
         case '+': case '-':  case '*': case '/': 
             equalsPressedLast = false;
             calculationAction = buttonAction;
+            calculatorValues_inputNumber = [0,0,0,0,0,0,0,0,0];
         break;
 
         case 'Cl': 
@@ -112,7 +149,7 @@ function update(){
     for(var a = 0; a < 9; a++){ 
         if(equalsPressedLast){setLCD(a,calculatorValues[a]);}
         else{setLCD(a,calculatorValues_inputNumber[a]);}
-        audioMachines[a].switchToTrack(calculatorValues[a]);
+        audioMachine.switchToTrack(a,calculatorValues[a]);
     }
 }
 
@@ -132,8 +169,8 @@ function setLCD(digit,value){
     }
 
     for(var a = 0; a < 7; a++){
-        if(segmentArray[a] == 1){ document.getElementById('LCD_'+digit+'_'+a).setAttribute('class','LCD_'+digit+'_lit'); }
-        else{ document.getElementById('LCD_'+digit+'_'+a).setAttribute('class','LCD_'+digit+'_dark'); }
+        if(segmentArray[a] == 1){ document.getElementById('LCD_'+digit+'_'+a).setAttribute('class','LCD_lit_'+calculatorValues[digit]); }
+        else{ document.getElementById('LCD_'+digit+'_'+a).setAttribute('class','LCD_dark_'+calculatorValues[digit]); }     
     }
 
 }

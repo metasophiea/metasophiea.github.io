@@ -4,7 +4,6 @@
 <head>
 	<title>metasophiea</title>
 	<meta charset="utf-8"></meta>
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' "> -->
     
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
     <link href="./style.css" rel="stylesheet">
@@ -23,6 +22,16 @@
         <!-- extra text -->
             <text class='fancyText' x="20" y="95">partyCalculator</text>
 
+        <!-- LEDs -->
+            <rect id='LED_progress_back' class='LED_back' height='2.5' width='22.25' y='23.5' x='18'/>
+            <rect id='LED_progress_0' class='LED_dark' height='2' width='2.5' y='23.75' x='18.25'/>
+            <rect id='LED_progress_1' class='LED_dark' height='2' width='2.5' y='23.75' x='21'/>
+            <rect id='LED_progress_2' class='LED_dark' height='2' width='2.5' y='23.75' x='23.75'/>
+            <rect id='LED_progress_3' class='LED_dark' height='2' width='2.5' y='23.75' x='26.5'/>
+            <rect id='LED_progress_4' class='LED_dark' height='2' width='2.5' y='23.75' x='29.25'/>
+            <rect id='LED_progress_5' class='LED_dark' height='2' width='2.5' y='23.75' x='32'/>
+            <rect id='LED_progress_6' class='LED_dark' height='2' width='2.5' y='23.75' x='34.75'/>
+            <rect id='LED_progress_7' class='LED_dark' height='2' width='2.5' y='23.75' x='37.5'/>
         <!-- buttons -->
             <!-- base -->
                 <rect id='button_0'  class='button_base' height='14' width='14' y='30' x='18'/>
@@ -35,12 +44,12 @@
                 <rect id='button_7'  class='button_base' height='14' width='14' y='45' x='63'/>
                 <rect id='button_8'  class='button_base' height='14' width='14' y='60' x='18'/>
                 <rect id='button_9'  class='button_base' height='14' width='14' y='60' x='33'/>
-                <rect id='button_10'  class='button_base' height='14' width='14' y='60' x='48'/>
-                <rect id='button_11'  class='button_base' height='14' width='14' y='60' x='63'/>
-                <rect id='button_12'  class='button_base' height='14' width='14' y='75' x='18'/>
-                <rect id='button_13'  class='button_base' height='14' width='14' y='75' x='33'/>
-                <rect id='button_14'  class='button_base' height='14' width='14' y='75' x='48'/>
-                <rect id='button_15'  class='button_base' height='14' width='14' y='75' x='63'/>
+                <rect id='button_10' class='button_base' height='14' width='14' y='60' x='48'/>
+                <rect id='button_11' class='button_base' height='14' width='14' y='60' x='63'/>
+                <rect id='button_12' class='button_base' height='14' width='14' y='75' x='18'/>
+                <rect id='button_13' class='button_base' height='14' width='14' y='75' x='33'/>
+                <rect id='button_14' class='button_base' height='14' width='14' y='75' x='48'/>
+                <rect id='button_15' class='button_base' height='14' width='14' y='75' x='63'/>
             <!-- symbol -->
                 <text class='button_symbol' x="23" y="40">7</text>
                 <text class='button_symbol' x="38" y="40">8</text>
@@ -81,77 +90,77 @@
         <!-- LCD Screen -->
             <rect class='LCD_background' height='15' width='59' y='8' x='18'/>
             
-            <rect id='LCD_0_0' class='LCD_0_dark'/>
-            <rect id='LCD_0_1' class='LCD_0_dark'/>
-            <rect id='LCD_0_2' class='LCD_0_dark'/>
-            <rect id='LCD_0_3' class='LCD_0_dark'/>
-            <rect id='LCD_0_4' class='LCD_0_dark'/>
-            <rect id='LCD_0_5' class='LCD_0_dark'/>
-            <rect id='LCD_0_6' class='LCD_0_dark'/>
+            <rect id='LCD_0_0' class='LCD_dark_0'/>
+            <rect id='LCD_0_1' class='LCD_dark_0'/>
+            <rect id='LCD_0_2' class='LCD_dark_0'/>
+            <rect id='LCD_0_3' class='LCD_dark_0'/>
+            <rect id='LCD_0_4' class='LCD_dark_0'/>
+            <rect id='LCD_0_5' class='LCD_dark_0'/>
+            <rect id='LCD_0_6' class='LCD_dark_0'/>
 
-            <rect id='LCD_1_0' class='LCD_1_dark'/>
-            <rect id='LCD_1_1' class='LCD_1_dark'/>
-            <rect id='LCD_1_2' class='LCD_1_dark'/>
-            <rect id='LCD_1_3' class='LCD_1_dark'/>
-            <rect id='LCD_1_4' class='LCD_1_dark'/>
-            <rect id='LCD_1_5' class='LCD_1_dark'/>
-            <rect id='LCD_1_6' class='LCD_1_dark'/>
+            <rect id='LCD_1_0' class='LCD_dark_0'/>
+            <rect id='LCD_1_1' class='LCD_dark_0'/>
+            <rect id='LCD_1_2' class='LCD_dark_0'/>
+            <rect id='LCD_1_3' class='LCD_dark_0'/>
+            <rect id='LCD_1_4' class='LCD_dark_0'/>
+            <rect id='LCD_1_5' class='LCD_dark_0'/>
+            <rect id='LCD_1_6' class='LCD_dark_0'/>
 
-            <rect id='LCD_2_0' class='LCD_2_dark'/>
-            <rect id='LCD_2_1' class='LCD_2_dark'/>
-            <rect id='LCD_2_2' class='LCD_2_dark'/>
-            <rect id='LCD_2_3' class='LCD_2_dark'/>
-            <rect id='LCD_2_4' class='LCD_2_dark'/>
-            <rect id='LCD_2_5' class='LCD_2_dark'/>
-            <rect id='LCD_2_6' class='LCD_2_dark'/>
+            <rect id='LCD_2_0' class='LCD_dark_0'/>
+            <rect id='LCD_2_1' class='LCD_dark_0'/>
+            <rect id='LCD_2_2' class='LCD_dark_0'/>
+            <rect id='LCD_2_3' class='LCD_dark_0'/>
+            <rect id='LCD_2_4' class='LCD_dark_0'/>
+            <rect id='LCD_2_5' class='LCD_dark_0'/>
+            <rect id='LCD_2_6' class='LCD_dark_0'/>
 
-            <rect id='LCD_3_0' class='LCD_3_dark'/>
-            <rect id='LCD_3_1' class='LCD_3_dark'/>
-            <rect id='LCD_3_2' class='LCD_3_dark'/>
-            <rect id='LCD_3_3' class='LCD_3_dark'/>
-            <rect id='LCD_3_4' class='LCD_3_dark'/>
-            <rect id='LCD_3_5' class='LCD_3_dark'/>
-            <rect id='LCD_3_6' class='LCD_3_dark'/>
+            <rect id='LCD_3_0' class='LCD_dark_0'/>
+            <rect id='LCD_3_1' class='LCD_dark_0'/>
+            <rect id='LCD_3_2' class='LCD_dark_0'/>
+            <rect id='LCD_3_3' class='LCD_dark_0'/>
+            <rect id='LCD_3_4' class='LCD_dark_0'/>
+            <rect id='LCD_3_5' class='LCD_dark_0'/>
+            <rect id='LCD_3_6' class='LCD_dark_0'/>
 
-            <rect id='LCD_4_0' class='LCD_4_dark'/>
-            <rect id='LCD_4_1' class='LCD_4_dark'/>
-            <rect id='LCD_4_2' class='LCD_4_dark'/>
-            <rect id='LCD_4_3' class='LCD_4_dark'/>
-            <rect id='LCD_4_4' class='LCD_4_dark'/>
-            <rect id='LCD_4_5' class='LCD_4_dark'/>
-            <rect id='LCD_4_6' class='LCD_4_dark'/>
+            <rect id='LCD_4_0' class='LCD_dark_0'/>
+            <rect id='LCD_4_1' class='LCD_dark_0'/>
+            <rect id='LCD_4_2' class='LCD_dark_0'/>
+            <rect id='LCD_4_3' class='LCD_dark_0'/>
+            <rect id='LCD_4_4' class='LCD_dark_0'/>
+            <rect id='LCD_4_5' class='LCD_dark_0'/>
+            <rect id='LCD_4_6' class='LCD_dark_0'/>
 
-            <rect id='LCD_5_0' class='LCD_5_dark'/>
-            <rect id='LCD_5_1' class='LCD_5_dark'/>
-            <rect id='LCD_5_2' class='LCD_5_dark'/>
-            <rect id='LCD_5_3' class='LCD_5_dark'/>
-            <rect id='LCD_5_4' class='LCD_5_dark'/>
-            <rect id='LCD_5_5' class='LCD_5_dark'/>
-            <rect id='LCD_5_6' class='LCD_5_dark'/>
+            <rect id='LCD_5_0' class='LCD_dark_0'/>
+            <rect id='LCD_5_1' class='LCD_dark_0'/>
+            <rect id='LCD_5_2' class='LCD_dark_0'/>
+            <rect id='LCD_5_3' class='LCD_dark_0'/>
+            <rect id='LCD_5_4' class='LCD_dark_0'/>
+            <rect id='LCD_5_5' class='LCD_dark_0'/>
+            <rect id='LCD_5_6' class='LCD_dark_0'/>
 
-            <rect id='LCD_6_0' class='LCD_6_dark'/>
-            <rect id='LCD_6_1' class='LCD_6_dark'/>
-            <rect id='LCD_6_2' class='LCD_6_dark'/>
-            <rect id='LCD_6_3' class='LCD_6_dark'/>
-            <rect id='LCD_6_4' class='LCD_6_dark'/>
-            <rect id='LCD_6_5' class='LCD_6_dark'/>
-            <rect id='LCD_6_6' class='LCD_6_dark'/>
+            <rect id='LCD_6_0' class='LCD_dark_0'/>
+            <rect id='LCD_6_1' class='LCD_dark_0'/>
+            <rect id='LCD_6_2' class='LCD_dark_0'/>
+            <rect id='LCD_6_3' class='LCD_dark_0'/>
+            <rect id='LCD_6_4' class='LCD_dark_0'/>
+            <rect id='LCD_6_5' class='LCD_dark_0'/>
+            <rect id='LCD_6_6' class='LCD_dark_0'/>
 
-            <rect id='LCD_7_0' class='LCD_7_dark'/>
-            <rect id='LCD_7_1' class='LCD_7_dark'/>
-            <rect id='LCD_7_2' class='LCD_7_dark'/>
-            <rect id='LCD_7_3' class='LCD_7_dark'/>
-            <rect id='LCD_7_4' class='LCD_7_dark'/>
-            <rect id='LCD_7_5' class='LCD_7_dark'/>
-            <rect id='LCD_7_6' class='LCD_7_dark'/>
+            <rect id='LCD_7_0' class='LCD_dark_0'/>
+            <rect id='LCD_7_1' class='LCD_dark_0'/>
+            <rect id='LCD_7_2' class='LCD_dark_0'/>
+            <rect id='LCD_7_3' class='LCD_dark_0'/>
+            <rect id='LCD_7_4' class='LCD_dark_0'/>
+            <rect id='LCD_7_5' class='LCD_dark_0'/>
+            <rect id='LCD_7_6' class='LCD_dark_0'/>
 
-            <rect id='LCD_8_0' class='LCD_8_dark'/>
-            <rect id='LCD_8_1' class='LCD_8_dark'/>
-            <rect id='LCD_8_2' class='LCD_8_dark'/>
-            <rect id='LCD_8_3' class='LCD_8_dark'/>
-            <rect id='LCD_8_4' class='LCD_8_dark'/>
-            <rect id='LCD_8_5' class='LCD_8_dark'/>
-            <rect id='LCD_8_6' class='LCD_8_dark'/>
+            <rect id='LCD_8_0' class='LCD_dark_0'/>
+            <rect id='LCD_8_1' class='LCD_dark_0'/>
+            <rect id='LCD_8_2' class='LCD_dark_0'/>
+            <rect id='LCD_8_3' class='LCD_dark_0'/>
+            <rect id='LCD_8_4' class='LCD_dark_0'/>
+            <rect id='LCD_8_5' class='LCD_dark_0'/>
+            <rect id='LCD_8_6' class='LCD_dark_0'/>
 
 	</svg>
 
