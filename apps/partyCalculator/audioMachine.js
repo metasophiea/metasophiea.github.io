@@ -30,6 +30,7 @@ var audioMachine = function(audioContext){
 
     function playbackManager(){
         if(nextTrack == null){return;}
+        console.log('looping');
         performingTrack = nextTrack;
         play(playbackManager);
     }
