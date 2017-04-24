@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<script>function Go(){console.log('hello');}</script>
+	<style></style>
+</head>
+
+<script>
+	var AudioContext = new window.AudioContext();
+	var mainOutput = AudioContext.destination;
+
+    var buffer;
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://raw.githubusercontent.com/fail0verflow/hbc/master/channel/banner/sound/wiibrew-banner-loop-part.wav', true);
+    request.responseType = 'arraybuffer';
+    request.onload = function() {
+        AudioContext.decodeAudioData(request.response, function(data) {
+            buffer = data;
+            console.log('done');
+            play();
+        }, function(e){"Error with decoding audio data" + e.err});
+    }
+    request.send();
+
+    var source;
+
+
+    function play(){
+        source = AudioContext.createBufferSource();
+        source.buffer = buffer;
+        //source.loop = true;
+        source.loopend = function(){
+            console.log('end');
+        }
+        source.connect(mainOutput);
+        source.start(0);
+    }
+
+</script>
+
+<body onLoad="Go()">
+
+    <audio 
+        id='audioFile' 
+        src="wiibrew-banner-loop-part.wav" 
+        type="audio/wav"
+    ></audio>
+
+</body>
+</html>
