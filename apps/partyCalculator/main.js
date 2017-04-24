@@ -3,11 +3,7 @@ var digitCount = 9;
 var calculatorValues = [0,0,0,0,0,0,0,0,0];
 var calculatorValues_inputNumber = [0,0,0,0,0,0,0,0,0];
 
-var audioMachine = new audioMachine(AudioContext);
-for(var a = 0; a < digitCount; a++){
-    audioMachine.loadAudio(a,tracks[a]);
-}
-audioMachine.setCallback(
+audioMachine.setLoopCallback(
     function(){
             setTimeout(function(){ 
                 document.getElementById('LED_progress_0').setAttribute('class','LED_lit');
@@ -47,7 +43,12 @@ audioMachine.setCallback(
     }
 );
 
+audioMachine.setOnTrackLoadedCallback( function(track){ document.getElementById('LED_load_'+track).setAttribute('class','LCD_lit_'+(track+1)); } );
+audioMachine.setOnCompleteLoadedCallback( function(){ audioMachine.go(); update(); } );
+
 function Go(){
+    for(var a = 0; a < digitCount; a++){ audioMachine.loadAudio(a,tracks[a]); }
+
     var startX = 70; var startY = 11;
     var thickness = 1; var length = 3; var spacing = 1;
 
@@ -88,10 +89,17 @@ function Go(){
         document.getElementById('LCD_'+a+'_6').setAttribute('x',startX-(a*(length+thickness*2+spacing)));
     }
 
-     setTimeout(function(){ 
-        audioMachine.go();
-        update();
-     }, 1000);
+    //write 'loading'
+        var segmentArray = [0,0,0,1,0,0,0]; printLCD(8,segmentArray);
+        segmentArray = [0,0,0,1,0,0,0]; printLCD(7,segmentArray);
+        segmentArray = [0,1,0,0,1,0,1]; printLCD(6,segmentArray);
+        segmentArray = [1,1,1,0,1,1,1]; printLCD(5,segmentArray);
+        segmentArray = [1,1,1,1,1,1,0]; printLCD(4,segmentArray);
+        segmentArray = [0,0,1,1,1,1,0]; printLCD(3,segmentArray);
+        segmentArray = [0,0,0,1,0,0,0]; printLCD(2,segmentArray);
+        segmentArray = [0,0,0,1,0,0,0]; printLCD(1,segmentArray);
+        segmentArray = [0,0,0,1,0,0,0]; printLCD(0,segmentArray);
+
 }
 
 var calculationAction = null; var equalsPressedLast = true;
@@ -168,9 +176,12 @@ function setLCD(digit,value){
         case 9: case '9': segmentArray = [1,1,1,1,0,1,0]; break;
     }
 
+    printLCD(digit,segmentArray);
+}
+
+function printLCD(digit,segmentArray){
     for(var a = 0; a < 7; a++){
         if(segmentArray[a] == 1){ document.getElementById('LCD_'+digit+'_'+a).setAttribute('class','LCD_lit_'+calculatorValues[digit]); }
         else{ document.getElementById('LCD_'+digit+'_'+a).setAttribute('class','LCD_dark_'+calculatorValues[digit]); }     
     }
-
 }
