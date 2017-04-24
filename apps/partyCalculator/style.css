@@ -13,15 +13,15 @@
 .button_cover{fill: rgba(0,0,0,0);}
 .button_cover:hover{fill: rgba(255,255,255,.5);}
 .LCD_background{fill:rgb(40,40,40);}
-.LCD_0_dark{fill: rgb(0,100,0);}
-.LCD_1_dark{fill: rgb(0,100,0);}
-.LCD_2_dark{fill: rgb(0,100,0);}
-.LCD_3_dark{fill: rgb(0,100,0);}
-.LCD_4_dark{fill: rgb(0,100,0);}
-.LCD_5_dark{fill: rgb(0,100,0);}
-.LCD_6_dark{fill: rgb(0,100,0);}
-.LCD_7_dark{fill: rgb(0,100,0);}
-.LCD_8_dark{fill: rgb(0,100,0);}
+.LCD_0_dark{fill: rgb(0,70,0);}
+.LCD_1_dark{fill: rgb(0,70,0);}
+.LCD_2_dark{fill: rgb(0,70,0);}
+.LCD_3_dark{fill: rgb(0,70,0);}
+.LCD_4_dark{fill: rgb(0,70,0);}
+.LCD_5_dark{fill: rgb(0,70,0);}
+.LCD_6_dark{fill: rgb(0,70,0);}
+.LCD_7_dark{fill: rgb(0,70,0);}
+.LCD_8_dark{fill: rgb(0,70,0);}
 
 .LCD_0_lit{fill: rgb(0,200,0);}
 .LCD_1_lit{fill: rgb(0,200,0);}

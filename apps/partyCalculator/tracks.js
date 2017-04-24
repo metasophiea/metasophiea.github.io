@@ -1,19 +1,27 @@
 var tracks = [
     [
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/01.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/02.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/03.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/04.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/05.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/06.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/07.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/08.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/09.mp3',
-        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/10.mp3'
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/01.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/02.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/03.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/04.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/05.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/06.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/07.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/08.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/09.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/0-drums/10.wav'
     ],
     [
-        //'https://raw.githubusercontent.com/fail0verflow/hbc/master/channel/banner/sound/wiibrew-banner-loop-part.wav',
-        //'https://raw.githubusercontent.com/fail0verflow/hbc/master/channel/banner/sound/wiibrew-banner-intro-part.wav'
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/01.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/02.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/03.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/04.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/05.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/06.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/07.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/08.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/09.wav',
+        'https://raw.githubusercontent.com/metasophiea/metasophiea.github.io/master/apps/partyCalculator/tracks/1-bass/10.wav'
     ],
     [
         //'https://raw.githubusercontent.com/fail0verflow/hbc/master/channel/banner/sound/wiibrew-banner-loop-part.wav',

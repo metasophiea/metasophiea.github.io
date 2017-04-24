@@ -1,5 +1,5 @@
 var AudioContext = new window.AudioContext();
-var digitCount = 1;
+var digitCount = 9;
 var calculatorValues = [0,0,0,0,0,0,0,0,0];
 var calculatorValues_inputNumber = [0,0,0,0,0,0,0,0,0];
 
