@@ -35,7 +35,6 @@ var audioMachine = new function(){
         for(var a = 0; a < trackCount; a++){ trackLog[a] = 0; }
         this.registerLoadedTrack = function(track,buffer){
             trackLog[track]++;
-            console.log('loaded track: ' + track + ' buffer: ' + buffer);
             for(var a = 0; a < trackCount; a++){
                 if(trackLog[a] == bufferCount){
                     onTrackLoadedCallback(a);
