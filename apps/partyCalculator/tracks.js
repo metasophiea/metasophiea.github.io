@@ -26,15 +26,15 @@ var tracks = [
     ],
     [
         URLpreface+'silence.wav',
-        URLpreface+'2_mallet_01.wav',
-        URLpreface+'2_mallet_02.wav',
-        URLpreface+'2_mallet_03.wav',
-        URLpreface+'2_mallet_04.wav',
-        URLpreface+'2_mallet_05.wav',
-        URLpreface+'2_mallet_06.wav',
-        URLpreface+'2_mallet_07.wav',
-        URLpreface+'2_mallet_08.wav',
-        URLpreface+'2_mallet_09.wav'
+        URLpreface+'2-mallet_01.wav',
+        URLpreface+'2-mallet_02.wav',
+        URLpreface+'2-mallet_03.wav',
+        URLpreface+'2-mallet_04.wav',
+        URLpreface+'2-mallet_05.wav',
+        URLpreface+'2-mallet_06.wav',
+        URLpreface+'2-mallet_07.wav',
+        URLpreface+'2-mallet_08.wav',
+        URLpreface+'2-mallet_09.wav'
     ],
     [
         URLpreface+'silence.wav',
