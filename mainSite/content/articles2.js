@@ -1,4 +1,12 @@
 var articles = [
+	{	"id":"article_20170425-a",
+		"headline":"Party Calculator",
+		"text":["Now, we can accurately calculate just how much party there is"],	
+		"textcolour":"rgb(255,255,255)",
+		"backerFill":"rgba(0,0,0,0.75)",
+		"image_url":"/lib/image/mainSiteImagery/partyCalculator.png",
+		"link_url":"/apps/partyCalculator"
+	},
 	{	"id":"article_20161212-a",
 		"headline":"P'' Workstation",
 		"text":["A simple workstation for developing programs in the P'' language","I plan on developing this tool further, and creating other workstations for more complex assembly languages"],	
