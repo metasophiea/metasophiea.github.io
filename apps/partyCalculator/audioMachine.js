@@ -79,7 +79,6 @@ var audioMachine = new function(){
         function play(callback=null){
             for(var a = 0; a < trackCount-1; a++){
                     sources[a] = AudioContext.createBufferSource();
-                    console.log(a +'|'+ performingTracks[a]);
                     sources[a].buffer = buffers[a][performingTracks[a]];
                     sources[a].connect(mainOutput);
                     sources[a].start(0);
