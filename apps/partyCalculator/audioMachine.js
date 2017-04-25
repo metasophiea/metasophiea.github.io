@@ -22,9 +22,9 @@ var audioMachine = new function(){
                     request.onload = function() {
                         var number = this.number;
                         var track = this.track;
-                        audioMachine.registerLoadedTrack(track,number);
                         AudioContext.decodeAudioData(this.response, function(data) {
                             buffers[track][number] = data;
+                            audioMachine.registerLoadedTrack(track,number);
                         }, function(e){"Error with decoding audio data" + e.err});
                     }
                     request.send();
@@ -35,6 +35,7 @@ var audioMachine = new function(){
         for(var a = 0; a < trackCount; a++){ trackLog[a] = 0; }
         this.registerLoadedTrack = function(track,buffer){
             trackLog[track]++;
+            console.log('loaded track: ' + track + ' buffer: ' + buffer);
             for(var a = 0; a < trackCount; a++){
                 if(trackLog[a] == bufferCount){
                     onTrackLoadedCallback(a);
@@ -78,6 +79,7 @@ var audioMachine = new function(){
         function play(callback=null){
             for(var a = 0; a < trackCount-1; a++){
                     sources[a] = AudioContext.createBufferSource();
+                    console.log(a +'|'+ performingTracks[a]);
                     sources[a].buffer = buffers[a][performingTracks[a]];
                     sources[a].connect(mainOutput);
                     sources[a].start(0);

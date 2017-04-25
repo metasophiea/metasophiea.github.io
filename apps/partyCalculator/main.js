@@ -131,6 +131,7 @@ function buttonPress(buttonAction){
                 case '/': ans = parseInt(calculatorValues.reverse().join('')) / parseInt(calculatorValues_inputNumber.reverse().join('')); break;
             }
             ans = Math.floor(ans);
+            if(ans < 0){ans = 0;}
             ans = ans.toString();
             while(ans.length < 9){ ans = "0" + ans; }
             ans = ans.split('').reverse();
