@@ -67,11 +67,13 @@ var audioMachine = new function(){
         }
 
         function playbackManager(){
+            var complexity = 0;
             for(var a = 0; a < performingTracks.length; a++){ 
                 performingTracks[a] = nextTracks[a];
+                if(performingTracks[a] != 0){complexity++;}
             }
 
-            onLoopCallback();
+            onLoopCallback(complexity);
             play(playbackManager);
         }
 

@@ -4,179 +4,166 @@
 <head>
 	<title>partyCalculator</title>
 	<meta charset="utf-8"></meta>
+	<meta name="theme-color" content="#202020"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     
+	<link rel="icon" href="http://metasophiea.com/lib/image/icon.gif" type="image/gif" sizes="100x100"></link>
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
     <link href="./style.css" rel="stylesheet">
 
+    <script> var pixelDigit = {'width':4, 'height':5, 'count':9}; </script>
+	<script src="./digitManipulation.js"></script>
+    <script src="./calculatorLogic.js"></script>
     <script src="./audioMachine.js"></script>
     <script src="./tracks.js"></script>
-    <script src="./main.js"></script>
+    <script src="./musicLogic.js"></script>
+    <script src="./go.js"></script>
 
 </head>
 
-<body onload='Go()'>
+<body onload='Go()' onResize='resize()' onkeyup="calculatorInput(event.key)">
 
-	<svg id='SVG_Space' style='height:100%; width:100%;' viewbox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-		<rect height='100' width='65' y='0' x='15' fill='rgb(240,240,240)'/>
+<!-- display - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->
+    <table id='LCD_container' class='LCD_background' style='width:100%; height:20%;' cellspacing='0'><tbody>
+        <tr>
+            <td id='LCD_digitContainer_symbol' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_8' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_7' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_6' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_5' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_4' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_3' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_2' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_1' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_0' class='LCD_digitContainer'></td>
+        </tr>
+    </tbody></table>
+    <script>
+        //generate pixel display
+            //numbers
+                var pixels = ''; var temp = '';
+                for(var a = 0; a < pixelDigit.count; a++){
+                    pixels = " <table style='width:100%; height:100%;' cellspacing='0'><tbody>";
+                    for(var b = 0; b < pixelDigit.height; b++){
+                        pixels += "<tr>";
+                        for(var c = 0; c < pixelDigit.width; c++){
+                            pixels += " <td id='LCD_digitPixel_"+a+"_"+(c+(b*pixelDigit.width))+"'></td> ";
+                        }
+                        pixels += "</tr>";
+                    }
+                    pixels += " </tbody></table>";
 
-        <!-- extra text -->
-            <rect  class='stickerBack' height='7' width='29' x='19' y='91'/>
-            <text class='fancyText' x="20" y="95">partyCalculator</text>
-            <text class='fancySubtext' x="20.25" y="97">it's not a party until math is involved</text>
+                    document.getElementById('LCD_digitContainer_'+a).innerHTML = pixels;
+                }
 
-        <!-- LEDs -->
-            <rect id='LED_progress_back' class='LED_back' height='2.5' width='22.25' y='23.5' x='18'/>
-            <rect id='LED_progress_0' class='LED_dark' height='2' width='2.5' y='23.75' x='18.25'/>
-            <rect id='LED_progress_1' class='LED_dark' height='2' width='2.5' y='23.75' x='21'/>
-            <rect id='LED_progress_2' class='LED_dark' height='2' width='2.5' y='23.75' x='23.75'/>
-            <rect id='LED_progress_3' class='LED_dark' height='2' width='2.5' y='23.75' x='26.5'/>
-            <rect id='LED_progress_4' class='LED_dark' height='2' width='2.5' y='23.75' x='29.25'/>
-            <rect id='LED_progress_5' class='LED_dark' height='2' width='2.5' y='23.75' x='32'/>
-            <rect id='LED_progress_6' class='LED_dark' height='2' width='2.5' y='23.75' x='34.75'/>
-            <rect id='LED_progress_7' class='LED_dark' height='2' width='2.5' y='23.75' x='37.5'/>
+            //symbol
+                pixels = " <table style='width:100%; height:100%;' cellspacing='0'><tbody>";
+                for(var b = 0; b < pixelDigit.height; b++){
+                    pixels += "<tr>";
+                    for(var c = 0; c < pixelDigit.width; c++){
+                        pixels += " <td id='LCD_digitPixel_symbol_"+(c+(b*pixelDigit.width))+"'></td> ";
+                    }
+                    pixels += "</tr>";
+                }
+                pixels += " </tbody></table>";
 
-            <rect id='LED_load_back' class='LED_back' height='2.5' width='25' y='23.5' x='52'/>
-            <rect id='LED_load_0' class='LED_dark' height='2' width='2.5' y='23.75' x='52.25'/>
-            <rect id='LED_load_1' class='LED_dark' height='2' width='2.5' y='23.75' x='55'/>
-            <rect id='LED_load_2' class='LED_dark' height='2' width='2.5' y='23.75' x='57.75'/>
-            <rect id='LED_load_3' class='LED_dark' height='2' width='2.5' y='23.75' x='60.5'/>
-            <rect id='LED_load_4' class='LED_dark' height='2' width='2.5' y='23.75' x='63.25'/>
-            <rect id='LED_load_5' class='LED_dark' height='2' width='2.5' y='23.75' x='66'/>
-            <rect id='LED_load_6' class='LED_dark' height='2' width='2.5' y='23.75' x='68.75'/>
-            <rect id='LED_load_7' class='LED_dark' height='2' width='2.5' y='23.75' x='71.5'/>
-            <rect id='LED_load_8' class='LED_dark' height='2' width='2.5' y='23.75' x='74.25'/>
+                document.getElementById('LCD_digitContainer_symbol').innerHTML = pixels;
+            //reset
+                digitDisplay.reset();
+    </script>
 
-        <!-- buttons -->
-            <!-- base -->
-                <rect id='button_0'  class='button_base' height='14' width='14' y='30' x='18'/>
-                <rect id='button_1'  class='button_base' height='14' width='14' y='30' x='33'/>
-                <rect id='button_2'  class='button_base' height='14' width='14' y='30' x='48'/>
-                <rect id='button_3'  class='button_base' height='14' width='14' y='30' x='63'/>
-                <rect id='button_4'  class='button_base' height='14' width='14' y='45' x='18'/>
-                <rect id='button_5'  class='button_base' height='14' width='14' y='45' x='33'/>
-                <rect id='button_6'  class='button_base' height='14' width='14' y='45' x='48'/>
-                <rect id='button_7'  class='button_base' height='14' width='14' y='45' x='63'/>
-                <rect id='button_8'  class='button_base' height='14' width='14' y='60' x='18'/>
-                <rect id='button_9'  class='button_base' height='14' width='14' y='60' x='33'/>
-                <rect id='button_10' class='button_base' height='14' width='14' y='60' x='48'/>
-                <rect id='button_11' class='button_base' height='14' width='14' y='60' x='63'/>
-                <rect id='button_12' class='button_base' height='14' width='14' y='75' x='18'/>
-                <rect id='button_13' class='button_base' height='14' width='14' y='75' x='33'/>
-                <rect id='button_14' class='button_base' height='14' width='14' y='75' x='48'/>
-                <rect id='button_15' class='button_base' height='14' width='14' y='75' x='63'/>
-            <!-- symbol -->
-                <text class='button_symbol' x="23" y="40">7</text>
-                <text class='button_symbol' x="38" y="40">8</text>
-                <text class='button_symbol' x="53" y="40">9</text>
-                <text class='button_symbol' x="68" y="40">+</text>
-                <text class='button_symbol' x="23" y="55">4</text>
-                <text class='button_symbol' x="38" y="55">5</text>
-                <text class='button_symbol' x="53" y="55">6</text>
-                <text class='button_symbol' x="68" y="55">-</text>
-                <text class='button_symbol' x="23" y="70">1</text>
-                <text class='button_symbol' x="38" y="70">2</text>
-                <text class='button_symbol' x="53" y="70">3</text>
-                <text class='button_symbol' x="68" y="70">*</text>
-                <text class='button_symbol' x="21.5" y="85">Cl</text>
-                <text class='button_symbol' x="38" y="85">0</text>
-                <text class='button_symbol' x="52.5" y="84">=</text>
-                <text class='button_symbol' x="68" y="85">/</text>
-            
-            <!-- cover -->
-                <rect id='button_0'  class='button_cover' height='14' width='14' y='30' x='18' onclick='buttonPress("7")'/>
-                <rect id='button_1'  class='button_cover' height='14' width='14' y='30' x='33' onclick='buttonPress("8")'/>
-                <rect id='button_2'  class='button_cover' height='14' width='14' y='30' x='48' onclick='buttonPress("9")'/>
-                <rect id='button_3'  class='button_cover' height='14' width='14' y='30' x='63' onclick='buttonPress("+")'/>
-                <rect id='button_4'  class='button_cover' height='14' width='14' y='45' x='18' onclick='buttonPress("4")'/>
-                <rect id='button_5'  class='button_cover' height='14' width='14' y='45' x='33' onclick='buttonPress("5")'/>
-                <rect id='button_6'  class='button_cover' height='14' width='14' y='45' x='48' onclick='buttonPress("6")'/>
-                <rect id='button_7'  class='button_cover' height='14' width='14' y='45' x='63' onclick='buttonPress("-")'/>
-                <rect id='button_8'  class='button_cover' height='14' width='14' y='60' x='18' onclick='buttonPress("1")'/>
-                <rect id='button_9'  class='button_cover' height='14' width='14' y='60' x='33' onclick='buttonPress("2")'/>
-                <rect id='button_10' class='button_cover' height='14' width='14' y='60' x='48' onclick='buttonPress("3")'/>
-                <rect id='button_11' class='button_cover' height='14' width='14' y='60' x='63' onclick='buttonPress("*")'/>
-                <rect id='button_12' class='button_cover' height='14' width='14' y='75' x='18' onclick='buttonPress("Cl")'/>
-                <rect id='button_13' class='button_cover' height='14' width='14' y='75' x='33' onclick='buttonPress("0")'/>
-                <rect id='button_14' class='button_cover' height='14' width='14' y='75' x='48' onclick='buttonPress("=")'/>
-                <rect id='button_15' class='button_cover' height='14' width='14' y='75' x='63' onclick='buttonPress("/")'/>
+<!-- progress bar - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->  
+    <table id='LCD_container' class='progressBar_background' style='width:100%; height:3%;' cellspacing='0'><tbody>
+        <tr>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_0' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_1' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_2' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_3' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_4' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_5' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_6' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_7' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+        </tr>
+    </tbody></table>
+    
+<!-- buttons - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->
+    <table id='button_container' class='button_background' style='width:100%; height:78%;' cellspacing='0' cellpadding='0'><tbody>
+        <tr>    <td id='button_15' class='button' onclick='calculatorInput(this.innerHTML)'>7</td>
+                <td id='button_14' class='button' onclick='calculatorInput(this.innerHTML)'>8</td>
+                <td id='button_13' class='button' onclick='calculatorInput(this.innerHTML)'>9</td>
+                <td id='button_12' class='button' onclick='calculatorInput(this.innerHTML)'>+</td> </tr>
+        <tr>    <td id='button_11' class='button' onclick='calculatorInput(this.innerHTML)'>4</td>
+                <td id='button_10' class='button' onclick='calculatorInput(this.innerHTML)'>5</td>
+                <td id='button_9'  class='button' onclick='calculatorInput(this.innerHTML)'>6</td>
+                <td id='button_8'  class='button' onclick='calculatorInput(this.innerHTML)'>-</td> </tr>
+        <tr>    <td id='button_7'  class='button' onclick='calculatorInput(this.innerHTML)'>1</td>
+                <td id='button_6'  class='button' onclick='calculatorInput(this.innerHTML)'>2</td>
+                <td id='button_5'  class='button' onclick='calculatorInput(this.innerHTML)'>3</td>
+                <td id='button_4'  class='button' onclick='calculatorInput(this.innerHTML)'>*</td> </tr>
+        <tr>    <td id='button_3'  class='button' onclick='calculatorInput(this.innerHTML)'>C</td>
+                <td id='button_2'  class='button' onclick='calculatorInput(this.innerHTML)'>0</td>
+                <td id='button_1'  class='button' onclick='calculatorInput(this.innerHTML)'>=</td>
+                <td id='button_0'  class='button' onclick='calculatorInput(this.innerHTML)'>/</td> </tr>
+    </tbody></table>
+    <script>
+        function setButtonColour(button,colour){ document.getElementById('button_'+button).style['background-color'] = colour; }
+        function shuffleArray(array){
+            var outputArray = [];
+            while(array.length != 0){ outputArray.push(array.splice( Math.floor(Math.random() * array.length) ,1)[0]);  }
+            return outputArray;
+        }
+        function randomColoursBasedOnComplexity(complexity){ //0-9
+            switch(complexity){
+                case 0: complexity = 0; break;
+                case 1: complexity = 2; break;
+                case 2: complexity = 3; break;
+                case 3: complexity = 4; break;
+                case 4: complexity = 6; break;
+                case 5: complexity = 8; break;
+                case 6: complexity = 10; break;
+                case 7: complexity = 12; break;
+                case 8: complexity = 14; break;
+                case 9: complexity = 16; break;
+            }
 
+            var array = []; for(var a = 0; a < 16; a++){ array.push(a); } array = shuffleArray(array);
 
-        <!-- LCD Screen -->
-            <rect class='LCD_background' height='15' width='59' y='8' x='18'/>
-            
-            <rect id='LCD_0_0' class='LCD_dark_0'/>
-            <rect id='LCD_0_1' class='LCD_dark_0'/>
-            <rect id='LCD_0_2' class='LCD_dark_0'/>
-            <rect id='LCD_0_3' class='LCD_dark_0'/>
-            <rect id='LCD_0_4' class='LCD_dark_0'/>
-            <rect id='LCD_0_5' class='LCD_dark_0'/>
-            <rect id='LCD_0_6' class='LCD_dark_0'/>
+            //reset colours
+                for(var a = 0; a < 16; a++){ setButtonColour(a,'rgb(180,180,180)'); }
+            //randomly assign colours
+                var colourArray = [
+                    'rgb(200,0,0)',
+                    'rgb(0,200,0)',
+                    'rgb(0,0,200)',
+                    'rgb(0,200,200)',
+                    'rgb(200,200,0)',
+                    'rgb(200,0,200)',
+                    'rgb(153,51,255)',
+                    'rgb(210,166,121)',
+                    'rgb(102,255,204)',
+                    'rgb(255, 86, 139)',
+                    'rgb(237, 158, 40)',
+                    'rgb(255, 0, 191)',
+                    'rgb(187, 255, 0)',
+                    'rgb(255, 72, 0)',
+                    'rgb(249, 195, 47)',
+                    'rgb(255, 73, 73)'
+                ]; colourArray = shuffleArray(colourArray);
+                for(var a = 0; a < complexity; a++){ 
+                    setButtonColour(array[a],colourArray[a]);
+                }
+        }
 
-            <rect id='LCD_1_0' class='LCD_dark_0'/>
-            <rect id='LCD_1_1' class='LCD_dark_0'/>
-            <rect id='LCD_1_2' class='LCD_dark_0'/>
-            <rect id='LCD_1_3' class='LCD_dark_0'/>
-            <rect id='LCD_1_4' class='LCD_dark_0'/>
-            <rect id='LCD_1_5' class='LCD_dark_0'/>
-            <rect id='LCD_1_6' class='LCD_dark_0'/>
+    </script>
 
-            <rect id='LCD_2_0' class='LCD_dark_0'/>
-            <rect id='LCD_2_1' class='LCD_dark_0'/>
-            <rect id='LCD_2_2' class='LCD_dark_0'/>
-            <rect id='LCD_2_3' class='LCD_dark_0'/>
-            <rect id='LCD_2_4' class='LCD_dark_0'/>
-            <rect id='LCD_2_5' class='LCD_dark_0'/>
-            <rect id='LCD_2_6' class='LCD_dark_0'/>
+<!-- wrong way overlay - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->  
+    <section id='wrongWayOverlay' class='overlay'>
+        <p class='overlayContent'>please adjust the screen into a portrait aspect ratio</p>
+    </section>
 
-            <rect id='LCD_3_0' class='LCD_dark_0'/>
-            <rect id='LCD_3_1' class='LCD_dark_0'/>
-            <rect id='LCD_3_2' class='LCD_dark_0'/>
-            <rect id='LCD_3_3' class='LCD_dark_0'/>
-            <rect id='LCD_3_4' class='LCD_dark_0'/>
-            <rect id='LCD_3_5' class='LCD_dark_0'/>
-            <rect id='LCD_3_6' class='LCD_dark_0'/>
-
-            <rect id='LCD_4_0' class='LCD_dark_0'/>
-            <rect id='LCD_4_1' class='LCD_dark_0'/>
-            <rect id='LCD_4_2' class='LCD_dark_0'/>
-            <rect id='LCD_4_3' class='LCD_dark_0'/>
-            <rect id='LCD_4_4' class='LCD_dark_0'/>
-            <rect id='LCD_4_5' class='LCD_dark_0'/>
-            <rect id='LCD_4_6' class='LCD_dark_0'/>
-
-            <rect id='LCD_5_0' class='LCD_dark_0'/>
-            <rect id='LCD_5_1' class='LCD_dark_0'/>
-            <rect id='LCD_5_2' class='LCD_dark_0'/>
-            <rect id='LCD_5_3' class='LCD_dark_0'/>
-            <rect id='LCD_5_4' class='LCD_dark_0'/>
-            <rect id='LCD_5_5' class='LCD_dark_0'/>
-            <rect id='LCD_5_6' class='LCD_dark_0'/>
-
-            <rect id='LCD_6_0' class='LCD_dark_0'/>
-            <rect id='LCD_6_1' class='LCD_dark_0'/>
-            <rect id='LCD_6_2' class='LCD_dark_0'/>
-            <rect id='LCD_6_3' class='LCD_dark_0'/>
-            <rect id='LCD_6_4' class='LCD_dark_0'/>
-            <rect id='LCD_6_5' class='LCD_dark_0'/>
-            <rect id='LCD_6_6' class='LCD_dark_0'/>
-
-            <rect id='LCD_7_0' class='LCD_dark_0'/>
-            <rect id='LCD_7_1' class='LCD_dark_0'/>
-            <rect id='LCD_7_2' class='LCD_dark_0'/>
-            <rect id='LCD_7_3' class='LCD_dark_0'/>
-            <rect id='LCD_7_4' class='LCD_dark_0'/>
-            <rect id='LCD_7_5' class='LCD_dark_0'/>
-            <rect id='LCD_7_6' class='LCD_dark_0'/>
-
-            <rect id='LCD_8_0' class='LCD_dark_0'/>
-            <rect id='LCD_8_1' class='LCD_dark_0'/>
-            <rect id='LCD_8_2' class='LCD_dark_0'/>
-            <rect id='LCD_8_3' class='LCD_dark_0'/>
-            <rect id='LCD_8_4' class='LCD_dark_0'/>
-            <rect id='LCD_8_5' class='LCD_dark_0'/>
-            <rect id='LCD_8_6' class='LCD_dark_0'/>
-
-	</svg>
+<!-- //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->
 
 </body>
+
 </html>

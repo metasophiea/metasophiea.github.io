@@ -1,7 +1,10 @@
 {"name":"audioMachine.js","type":"file"}
+{"name":"calculatorLogic.js","type":"file"}
+{"name":"digitManipulation.js","type":"file"}
+{"name":"go.js","type":"file"}
 {"name":"index.html","type":"file"}
-{"name":"main.js","type":"file"}
+{"name":"musicLogic.js","type":"file"}
 {"name":"style.css","type":"file"}
 {"name":"tracks","type":"dir"}
 {"name":"tracks.js","type":"file"}
-{"name":"v2","type":"dir"}
+{"name":"v1-old","type":"dir"}

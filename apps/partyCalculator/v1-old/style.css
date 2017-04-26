@@ -1,0 +1,59 @@
+html,body{
+    margin:0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.fancyText{
+    fill: rgb(247,217,24); 
+    font-family: 'Lobster', cursive;
+    font-size: 4px;
+}
+.fancySubtext{
+    fill: rgb(247,217,24); 
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-style: italic;
+    font-size: 1.5px;
+}
+.stickerBack{
+    fill: rgb(235,235,235); 
+}
+
+.button_base{fill: rgb(220,220,220);}
+.button_symbol{
+    fill: rgb(0,0,0); 
+    font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 8px;
+}
+.button_cover{fill: rgba(0,0,0,0);}
+.button_cover:hover{fill: rgba(255,255,255,.5);}
+
+.LED_back{fill:rgb(40,40,40);}
+.LED_lit{fill:rgb(250,250,250);}
+.LED_dark{fill:rgb(50,50,50);}
+
+.LCD_background{fill:rgb(40,40,40); background-color:rgb(40,40,40); }
+.LCD_lit_0 {fill: rgb(200,200,200);}
+.LCD_dark_0{fill: rgb(70,70,70); }
+.LCD_lit_1 {fill: rgb(200,0,0);}
+.LCD_dark_1{fill: rgb(70,0,0); }
+.LCD_lit_2 {fill: rgb(0,200,0);}
+.LCD_dark_2{fill: rgb(0,70,0); }
+.LCD_lit_3 {fill: rgb(0,0,200);}
+.LCD_dark_3{fill: rgb(0,0,70); }
+.LCD_lit_4 {fill: rgb(0,200,200);}
+.LCD_dark_4{fill: rgb(0,70,70); }
+.LCD_lit_5 {fill: rgb(200,200,0);}
+.LCD_dark_5{fill: rgb(70,70,0); }
+.LCD_lit_6 {fill: rgb(200,0,200);}
+.LCD_dark_6{fill: rgb(70,0,70); }
+.LCD_lit_7 {fill: rgb(153, 51, 255);}
+.LCD_dark_7{fill: rgb(51, 0, 102); }
+.LCD_lit_8 {fill: rgb(210, 166, 121);}
+.LCD_dark_8{fill: rgb(77, 51, 25); }
+.LCD_lit_9 {fill: rgb(102, 255, 204);}
+.LCD_dark_9{fill: rgb(0, 128, 85); }
