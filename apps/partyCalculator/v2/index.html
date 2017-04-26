@@ -16,57 +16,11 @@
     <script src="./audioMachine.js"></script>
     <script src="./tracks.js"></script>
     <script src="./musicLogic.js"></script>
-
-    <script> 
-        function Go(){
-            digitDisplay.setSymbol('l',10);
-            digitDisplay.setDigit(8,'o');
-            digitDisplay.setDigit(7,'a');
-            digitDisplay.setDigit(6,'d');
-            digitDisplay.setDigit(5,'i');
-            digitDisplay.setDigit(4,'n');
-            digitDisplay.setDigit(3,'g');
-            digitDisplay.setDigit(2,'.');
-            digitDisplay.setDigit(1,'.');
-            digitDisplay.setDigit(0,'.');
-
-            for(var a = 0; a < pixelDigit.count; a++){ audioMachine.loadAudio(a,tracks[a]); }
-
-            audioMachine.setOnTrackLoadedCallback( function(track){ 
-                digitDisplay.setDigit((pixelDigit.count-track-1),'loading...'[track+1],track+1);
-            });
-            audioMachine.setOnCompleteLoadedCallback( function(){ digitDisplay.reset(); audioMachine.go(); } );
-            audioMachine.setLoopCallback(     
-                function(complexity){
-                    setTimeout(function(){ document.getElementById('progressBar_pixel_0').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (0) );  
-                    setTimeout(function(){ document.getElementById('progressBar_pixel_1').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (1000) );  
-                    setTimeout(function(){ document.getElementById('progressBar_pixel_2').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (2000) );  
-                    setTimeout(function(){ document.getElementById('progressBar_pixel_3').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (3000) );  
-                    setTimeout(function(){ document.getElementById('progressBar_pixel_4').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (4000) );  
-                    setTimeout(function(){ document.getElementById('progressBar_pixel_5').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (5000) );  
-                    setTimeout(function(){ document.getElementById('progressBar_pixel_6').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (6000) );  
-                    setTimeout(function(){ document.getElementById('progressBar_pixel_7').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (7000) );  
-
-                    setTimeout(function(){ 
-                        document.getElementById('progressBar_pixel_0').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
-                        document.getElementById('progressBar_pixel_1').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
-                        document.getElementById('progressBar_pixel_2').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
-                        document.getElementById('progressBar_pixel_3').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
-                        document.getElementById('progressBar_pixel_4').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
-                        document.getElementById('progressBar_pixel_5').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
-                        document.getElementById('progressBar_pixel_6').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
-                        document.getElementById('progressBar_pixel_7').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
-                    }, (8000) );  
-
-                    console.log(complexity);
-                } 
-            );
-        }
-    </script>
+    <script src="./go.js"></script>
 
 </head>
 
-<body onload='Go()' onkeyup="calculatorInput(event.key)">
+<body onload='Go()' onResize='resize()' onkeyup="calculatorInput(event.key)">
 
 <!-- display - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->
     <table id='LCD_container' class='LCD_background' style='width:100%; height:20%;' cellspacing='0'><tbody>
@@ -150,6 +104,62 @@
                 <td id='button_1'  class='button' onclick='calculatorInput(this.innerHTML)'>=</td>
                 <td id='button_0'  class='button' onclick='calculatorInput(this.innerHTML)'>/</td> </tr>
     </tbody></table>
+    <script>
+        function setButtonColour(button,colour){ document.getElementById('button_'+button).style['background-color'] = colour; }
+        function shuffleArray(array){
+            var outputArray = [];
+            while(array.length != 0){ outputArray.push(array.splice( Math.floor(Math.random() * array.length) ,1)[0]);  }
+            return outputArray;
+        }
+        function randomColoursBasedOnComplexity(complexity){ //0-9
+            switch(complexity){
+                case 0: complexity = 0; break;
+                case 1: complexity = 2; break;
+                case 2: complexity = 3; break;
+                case 3: complexity = 4; break;
+                case 4: complexity = 6; break;
+                case 5: complexity = 8; break;
+                case 6: complexity = 10; break;
+                case 7: complexity = 12; break;
+                case 8: complexity = 14; break;
+                case 9: complexity = 16; break;
+            }
+
+            var array = []; for(var a = 0; a < 16; a++){ array.push(a); } array = shuffleArray(array);
+
+            //reset colours
+                for(var a = 0; a < 16; a++){ setButtonColour(a,'rgb(180,180,180)'); }
+            //randomly assign colours
+                var colourArray = [
+                    'rgb(200,0,0)',
+                    'rgb(0,200,0)',
+                    'rgb(0,0,200)',
+                    'rgb(0,200,200)',
+                    'rgb(200,200,0)',
+                    'rgb(200,0,200)',
+                    'rgb(153,51,255)',
+                    'rgb(210,166,121)',
+                    'rgb(102,255,204)',
+                    'rgb(255, 86, 139)',
+                    'rgb(237, 158, 40)',
+                    'rgb(255, 0, 191)',
+                    'rgb(187, 255, 0)',
+                    'rgb(255, 72, 0)',
+                    'rgb(249, 195, 47)',
+                    'rgb(255, 73, 73)'
+                ]; colourArray = shuffleArray(colourArray);
+                for(var a = 0; a < complexity; a++){ 
+                    setButtonColour(array[a],colourArray[a]);
+                }
+        }
+
+    </script>
+
+<!-- wrong way overlay - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->  
+    <section id='wrongWayOverlay' class='overlay'>
+        <p class='overlayContent'>please adjust the screen into a portrait aspect ratio</p>
+    </section>
+
 <!-- //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->
 
 </body>

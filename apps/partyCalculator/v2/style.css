@@ -22,6 +22,7 @@ html,body{
 
 .LCD_digitContainer{ padding:1%; }
 
+.LCD_digit_off{ background-color:rgb(40,40,40); }
 .LCD_digit_lit_0 { background-color:rgb(200,200,200); }
 .LCD_digit_dark_0{ background-color:rgb(80,80,80); }
 .LCD_digit_lit_1 { background-color:rgb(200,0,0); }
@@ -49,6 +50,38 @@ html,body{
     width: 25%; height: 25%;
     font-family: 'Josefin Sans';
     text-align: center;
-    font-size: 80px;
+    font-size: 600%;
     background-color:rgb(180,180,180); 
+}
+
+
+
+
+
+
+
+
+
+
+
+.overlay {
+    height: 0; width: 100%;
+    position: fixed;
+    z-index: 1; 
+    left: 0; top: 0;
+    background-color: rgba(0,0,0, 1); 
+    overflow-x: hidden; 
+    transition: 0.5s;
+}
+
+.overlayContent {
+    color: rgb(240,240,240);
+    font-family: 'Josefin Sans';
+    font-size: 400%;
+    top: 25%
+    position: relative;
+    width: 80%;
+    text-align: center; 
+    padding: 10%;
+    margin: 0;
 }

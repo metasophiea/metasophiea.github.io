@@ -29,11 +29,11 @@ digitDisplay.setSymbol = function(symbol=null,colorStyle=0){
     switch(symbol){
         case '-':
             stamp = [
-                [0,0,0,0],
-                [0,0,0,0],
+                [2,2,2,2],
+                [2,2,2,2],
                 [1,1,1,1],
-                [0,0,0,0],
-                [0,0,0,0]
+                [2,2,2,2],
+                [2,2,2,2]
             ];
         break;
         case 'l': 
@@ -47,11 +47,11 @@ digitDisplay.setSymbol = function(symbol=null,colorStyle=0){
         break;
         default:
             stamp = [
+                [2,2,2,2],
+                [2,2,2,2],
                 [0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0],
-                [0,0,0,0]
+                [2,2,2,2],
+                [2,2,2,2]
             ];
         break;
     }
@@ -59,6 +59,7 @@ digitDisplay.setSymbol = function(symbol=null,colorStyle=0){
     for(var b = 0; b < pixelDigit.height; b++){
         for(var c = 0; c < pixelDigit.width; c++){
             if( stamp[b][c] == 1 ){ document.getElementById('LCD_digitPixel_symbol_'+(c+(b*pixelDigit.width))).setAttribute('class','LCD_digit_lit_'+colorStyle); }
+            else if( stamp[b][c] == 2 ){document.getElementById('LCD_digitPixel_symbol_'+(c+(b*pixelDigit.width))).setAttribute('class','LCD_digit_off'); }
             else{ document.getElementById('LCD_digitPixel_symbol_'+(c+(b*pixelDigit.width))).setAttribute('class','LCD_digit_dark_'+colorStyle); }
         }
     }
