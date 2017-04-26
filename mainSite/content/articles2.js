@@ -1,7 +1,7 @@
 var articles = [
 	{	"id":"article_20170425-a",
 		"headline":"Party Calculator",
-		"text":["Now, we can accurately calculate just how much party there is"],	
+		"text":["Now, we can accurately calculate just how much party there is; because it's not a party until math is involved"],	
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
 		"image_url":"/lib/image/mainSiteImagery/partyCalculator.png",
