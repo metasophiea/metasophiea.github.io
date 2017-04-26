@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>partyCalculator</title>
+	<meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+
+    <script> var pixelDigit = {'width':4, 'height':5, 'count':9}; </script>
+	<script src="./digitManipulation.js"></script>
+    <script src="./calculatorLogic.js"></script>
+    <script src="./audioMachine.js"></script>
+    <script src="./tracks.js"></script>
+    <script src="./musicLogic.js"></script>
+
+    <script> 
+        function Go(){
+            digitDisplay.setSymbol('l',10);
+            digitDisplay.setDigit(8,'o');
+            digitDisplay.setDigit(7,'a');
+            digitDisplay.setDigit(6,'d');
+            digitDisplay.setDigit(5,'i');
+            digitDisplay.setDigit(4,'n');
+            digitDisplay.setDigit(3,'g');
+            digitDisplay.setDigit(2,'.');
+            digitDisplay.setDigit(1,'.');
+            digitDisplay.setDigit(0,'.');
+
+            for(var a = 0; a < pixelDigit.count; a++){ audioMachine.loadAudio(a,tracks[a]); }
+
+            audioMachine.setOnTrackLoadedCallback( function(track){ 
+                digitDisplay.setDigit((pixelDigit.count-track-1),'loading...'[track+1],track+1);
+            });
+            audioMachine.setOnCompleteLoadedCallback( function(){ digitDisplay.reset(); audioMachine.go(); } );
+            audioMachine.setLoopCallback(     
+                function(complexity){
+                    setTimeout(function(){ document.getElementById('progressBar_pixel_0').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (0) );  
+                    setTimeout(function(){ document.getElementById('progressBar_pixel_1').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (1000) );  
+                    setTimeout(function(){ document.getElementById('progressBar_pixel_2').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (2000) );  
+                    setTimeout(function(){ document.getElementById('progressBar_pixel_3').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (3000) );  
+                    setTimeout(function(){ document.getElementById('progressBar_pixel_4').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (4000) );  
+                    setTimeout(function(){ document.getElementById('progressBar_pixel_5').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (5000) );  
+                    setTimeout(function(){ document.getElementById('progressBar_pixel_6').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (6000) );  
+                    setTimeout(function(){ document.getElementById('progressBar_pixel_7').setAttribute('class','progressBar_pixel progressBar_pixel_lit'); }, (7000) );  
+
+                    setTimeout(function(){ 
+                        document.getElementById('progressBar_pixel_0').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
+                        document.getElementById('progressBar_pixel_1').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
+                        document.getElementById('progressBar_pixel_2').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
+                        document.getElementById('progressBar_pixel_3').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
+                        document.getElementById('progressBar_pixel_4').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
+                        document.getElementById('progressBar_pixel_5').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
+                        document.getElementById('progressBar_pixel_6').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
+                        document.getElementById('progressBar_pixel_7').setAttribute('class','progressBar_pixel progressBar_pixel_dark');
+                    }, (8000) );  
+
+                    console.log(complexity);
+                } 
+            );
+        }
+    </script>
+
+</head>
+
+<body onload='Go()' onkeyup="calculatorInput(event.key)">
+
+<!-- display - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->
+    <table id='LCD_container' class='LCD_background' style='width:100%; height:20%;' cellspacing='0'><tbody>
+        <tr>
+            <td id='LCD_digitContainer_symbol' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_8' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_7' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_6' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_5' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_4' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_3' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_2' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_1' class='LCD_digitContainer'></td>
+            <td id='LCD_digitContainer_0' class='LCD_digitContainer'></td>
+        </tr>
+    </tbody></table>
+    <script>
+        //generate pixel display
+            //numbers
+                var pixels = ''; var temp = '';
+                for(var a = 0; a < pixelDigit.count; a++){
+                    pixels = " <table style='width:100%; height:100%;' cellspacing='0'><tbody>";
+                    for(var b = 0; b < pixelDigit.height; b++){
+                        pixels += "<tr>";
+                        for(var c = 0; c < pixelDigit.width; c++){
+                            pixels += " <td id='LCD_digitPixel_"+a+"_"+(c+(b*pixelDigit.width))+"'></td> ";
+                        }
+                        pixels += "</tr>";
+                    }
+                    pixels += " </tbody></table>";
+
+                    document.getElementById('LCD_digitContainer_'+a).innerHTML = pixels;
+                }
+
+            //symbol
+                pixels = " <table style='width:100%; height:100%;' cellspacing='0'><tbody>";
+                for(var b = 0; b < pixelDigit.height; b++){
+                    pixels += "<tr>";
+                    for(var c = 0; c < pixelDigit.width; c++){
+                        pixels += " <td id='LCD_digitPixel_symbol_"+(c+(b*pixelDigit.width))+"'></td> ";
+                    }
+                    pixels += "</tr>";
+                }
+                pixels += " </tbody></table>";
+
+                document.getElementById('LCD_digitContainer_symbol').innerHTML = pixels;
+            //reset
+                digitDisplay.reset();
+    </script>
+
+<!-- progress bar - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->  
+    <table id='LCD_container' class='progressBar_background' style='width:100%; height:3%;' cellspacing='0'><tbody>
+        <tr>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_0' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_1' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_2' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_3' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_4' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_5' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_6' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+            <td class='progressBar_pixel_container'> <div id='progressBar_pixel_7' class='progressBar_pixel progressBar_pixel_dark'></div> </td>
+        </tr>
+    </tbody></table>
+    
+<!-- buttons - //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->
+    <table id='button_container' class='button_background' style='width:100%; height:78%;' cellspacing='0' cellpadding='0'><tbody>
+        <tr>    <td id='button_15' class='button' onclick='calculatorInput(this.innerHTML)'>7</td>
+                <td id='button_14' class='button' onclick='calculatorInput(this.innerHTML)'>8</td>
+                <td id='button_13' class='button' onclick='calculatorInput(this.innerHTML)'>9</td>
+                <td id='button_12' class='button' onclick='calculatorInput(this.innerHTML)'>+</td> </tr>
+        <tr>    <td id='button_11' class='button' onclick='calculatorInput(this.innerHTML)'>4</td>
+                <td id='button_10' class='button' onclick='calculatorInput(this.innerHTML)'>5</td>
+                <td id='button_9'  class='button' onclick='calculatorInput(this.innerHTML)'>6</td>
+                <td id='button_8'  class='button' onclick='calculatorInput(this.innerHTML)'>-</td> </tr>
+        <tr>    <td id='button_7'  class='button' onclick='calculatorInput(this.innerHTML)'>1</td>
+                <td id='button_6'  class='button' onclick='calculatorInput(this.innerHTML)'>2</td>
+                <td id='button_5'  class='button' onclick='calculatorInput(this.innerHTML)'>3</td>
+                <td id='button_4'  class='button' onclick='calculatorInput(this.innerHTML)'>*</td> </tr>
+        <tr>    <td id='button_3'  class='button' onclick='calculatorInput(this.innerHTML)'>C</td>
+                <td id='button_2'  class='button' onclick='calculatorInput(this.innerHTML)'>0</td>
+                <td id='button_1'  class='button' onclick='calculatorInput(this.innerHTML)'>=</td>
+                <td id='button_0'  class='button' onclick='calculatorInput(this.innerHTML)'>/</td> </tr>
+    </tbody></table>
+<!-- //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// //// -->
+
+</body>
+
+</html>
