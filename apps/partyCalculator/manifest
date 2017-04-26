@@ -4,5 +4,4 @@
 {"name":"style.css","type":"file"}
 {"name":"tracks","type":"dir"}
 {"name":"tracks.js","type":"file"}
-{"name":"wiibrew-banner-intro-part.wav","type":"file"}
-{"name":"wiibrew-banner-loop-part.wav","type":"file"}
+{"name":"v2","type":"dir"}
