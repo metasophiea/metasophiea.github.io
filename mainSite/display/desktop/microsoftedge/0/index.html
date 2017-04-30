@@ -40,7 +40,7 @@
 			console.log('hello');
 			adjustCanvas(document.getElementById('pixelMatrix'));
 			pixelMatrix.attachCanvas(document.getElementById('pixelMatrix'));
-			pixelMatrix.screenDimentions({'width':200,'height':200});
+			pixelMatrix.screenDimensions({'width':200,'height':200});
 			pixelMatrix.FPS(15);
 			pixelMatrix.autoRender(true);
 			printStartingText();
@@ -49,11 +49,11 @@
 		}
 
 		function addLine(data){;
-			if(pixelMatrix.drawString_calculateSize(data.text).width > pixelMatrix.screenDimentions().width){
+			if(pixelMatrix.drawString_calculateSize(data.text).width > pixelMatrix.screenDimensions().width){
 				var lineArray = data.text.split(' '); var workingLine = [];
 				for(var a = 0; a < lineArray.length; a++){
 					workingLine.push(lineArray[a]);
-					if(pixelMatrix.drawString_calculateSize(workingLine.join(' ')).width > pixelMatrix.screenDimentions().width){
+					if(pixelMatrix.drawString_calculateSize(workingLine.join(' ')).width > pixelMatrix.screenDimensions().width){
 						workingLine.pop(); a--; log.push({'text':workingLine.join(' '),'colour':data.colour}); workingLine = [];
 					}
 				}
@@ -67,12 +67,12 @@
 			for(var a = 0; a < log.length; a++){
 				height += pixelMatrix.drawString({'x':1,'y':scroll+height},log[a].text,log[a].colour).height;
 			}
-			if(height > pixelMatrix.screenDimentions().height-10){
-				scroll = pixelMatrix.screenDimentions().height-10 - height;
+			if(height > pixelMatrix.screenDimensions().height-10){
+				scroll = pixelMatrix.screenDimensions().height-10 - height;
 			}
 
-			var width = pixelMatrix.drawString({'x':1,'y':pixelMatrix.screenDimentions().height-6},workingCode,'ffffff').width;
-			if(flash){pixelMatrix.drawString({'x':width+2,'y':pixelMatrix.screenDimentions().height-6},'|','ffffff');}
+			var width = pixelMatrix.drawString({'x':1,'y':pixelMatrix.screenDimensions().height-6},workingCode,'ffffff').width;
+			if(flash){pixelMatrix.drawString({'x':width+2,'y':pixelMatrix.screenDimensions().height-6},'|','ffffff');}
 			if(flashCount > 4){flashCount = 0;if(flash){flash = false;}else{flash = true;}}
 			flashCount++;
 		}

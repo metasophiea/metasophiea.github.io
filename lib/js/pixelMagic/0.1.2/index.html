@@ -34,7 +34,7 @@
 				console.log('Hello');
 				adjustCanvas(document.getElementById('pixelMatrix'));
 				pixelMatrix.attachCanvas(document.getElementById('pixelMatrix'));
-				pixelMatrix.screenDimentions({'width':200,'height':200});
+				pixelMatrix.screenDimensions({'width':200,'height':200});
 				pixelMatrix.FPS(15);
 				pixelMatrix.autoRender(true);	
 
@@ -44,21 +44,21 @@
 				setInterval(function(){
 					pixelMatrix.setAllPixels('000000'); var height = 0;
 					for(var a = 0; a < log.length; a++){
-						if(pixelMatrix.drawString_calculateSize(log[a].text).width > pixelMatrix.screenDimentions().width){
+						if(pixelMatrix.drawString_calculateSize(log[a].text).width > pixelMatrix.screenDimensions().width){
 							var lineColour = log[a].colour; printingArray = log[a].text.split(' '); log.pop(); var temp = [];
 							for(var i = 0; i <= printingArray.length; i++){
 								temp.push(printingArray[i]);
-								if(pixelMatrix.drawString_calculateSize(temp).width+pixelMatrix.drawString_calculateSize(' ').width*temp.length > pixelMatrix.screenDimentions().width){temp.pop();log.push({'text':temp.join(' '),'colour':lineColour}); temp = [printingArray[i]];}
+								if(pixelMatrix.drawString_calculateSize(temp).width+pixelMatrix.drawString_calculateSize(' ').width*temp.length > pixelMatrix.screenDimensions().width){temp.pop();log.push({'text':temp.join(' '),'colour':lineColour}); temp = [printingArray[i]];}
 							}
 							temp.pop();log.push({'text':temp.join(' '),'colour':lineColour});
 						}else{height += pixelMatrix.drawString({'x':1,'y':scroll+height},log[a].text,log[a].colour).height;}
 					}
-					if(height > pixelMatrix.screenDimentions().height-10){
-						scroll = pixelMatrix.screenDimentions().height-10 - height;
+					if(height > pixelMatrix.screenDimensions().height-10){
+						scroll = pixelMatrix.screenDimensions().height-10 - height;
 					}
 
-					var width = pixelMatrix.drawString({'x':1,'y':pixelMatrix.screenDimentions().height-6},workingCode,'ffffff').width;
-					if(flash){pixelMatrix.drawString({'x':width+2,'y':pixelMatrix.screenDimentions().height-6},'|','ffffff');}
+					var width = pixelMatrix.drawString({'x':1,'y':pixelMatrix.screenDimensions().height-6},workingCode,'ffffff').width;
+					if(flash){pixelMatrix.drawString({'x':width+2,'y':pixelMatrix.screenDimensions().height-6},'|','ffffff');}
 					if(flashCount > 4){flashCount = 0;if(flash){flash = false;}else{flash = true;}}
 					flashCount++;
 				},100);		
