@@ -84,7 +84,7 @@ var articles = [
 		"text":["Interested in what you see? Check out my CV!"],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(245,245,245,0.65)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/CV",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/CV.png",
 		"link_url":"http://metasophiea.com/theAuthor/CV/"		
 	},
 ];
