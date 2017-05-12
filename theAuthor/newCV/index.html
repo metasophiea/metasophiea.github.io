@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+	<script>function Go(){console.log('hello');}</script>
+
+	<style>
+        html,body{width:100%; height:100%; margin:0px; font-size: 99px; font-family: 'Raleway';}
+        .sectionDivider{ background-color:#e0e0e0;}
+
+        .layerZero{z-index:0; height:100%; width:100%; position: absolute;}
+        .layerOne{z-index:1; height:100%; width:100%; position: absolute;}
+        .layerTwo{z-index:2; height:100%; width:100%; position: absolute;}
+        .layerThree{z-index:3; height:100%; width:100%; position: absolute;}
+
+        .sharp{ 
+                background-color:rgb(249, 235, 235);
+                position: absolute;
+                transform: rotate(20deg);
+        }
+        .sharpChangingDetails{width: 2000px; height: 2000px; left: 100px; top: 500px;}
+
+        .leftBar{height:100%; width: 30%; float: left;}
+        .rightBar{height:100%; width: 70%; float: right;}
+
+        .barHeading{color:#ffffff; font-size:90%; margin: 4% 10% 0% 10%; text-align:left;}
+        .barSubHeading{color:#ffffff}
+        .barContact{color:#f0f0f0; font-size:50%; text-align:center;}
+        .barContent{color:#d0d0d0; font-size:50%; text-align:left; margin: 0% 10% 0% 10%}
+
+        .stripMainName{font-weight: 100; font-size: 200%; text-align:center; margin: 8% 8% 0% 8%}
+        .stripHeading{color:#a0a0a0; font-size:90%; margin: 0% 4% 1% 4%; text-align:left;}
+        .stripSubHeading1{color:#101010;}
+        .stripSubHeading2{color:#bbbbbb; font-style: italic;}
+        .stripContent{color:#666666; font-size:55%; text-align:left; margin: 0% 4% 3% 4%; padding: 0% 0% 0% 2%;}
+        .stripReferences{color:#666666; font-size:47.5%; text-align:left; margin: 0% 4% 4% 4%}
+    </style>
+
+    <style type="text/css" media="print">
+        @page{
+            size: auto;
+            margin: -1px;
+        }
+        html,body{font-size: 31px; width:100%; height:100%;}
+        .sharpChangingDetails{width: 600px; height: 600px; left: 70px; top: 160px;}
+    </style>
+</head>
+
+<body onLoad="Go()">
+
+    <section class='layerZero'><section id='rightBar' class='rightBar' style='background-color:#fcfaf7;'></section></section>
+    <section class='layerOne'><section class='sharp sharpChangingDetails'></section></section>
+    <section class='layerTwo'><section id='leftBar' class='leftBar' style='background-color:#666666;'></section></section>
+    <section class='layerThree'>
+        <!-- Left bar -->
+        <section id='leftBar' class='leftBar'>
+            <!-- headshot -->
+                <img id='headshot' style='height: 15%; margin: 15% 15% 0% 15%;' src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAiNAAAAJDVlNTFiMTA3LTBhN2YtNGJiYi1hMDJlLTVmNWY1ZTk0NjY0ZQ.jpg"></img>    
+
+            <!-- contact details and links -->
+                <p id='contact' class='barContact'>
+                    brandon.walsh43@mail.dcu.ie<br/>
+                    089 255 1282<br/>
+                    linkedin.com/in/metasophiea<br/>
+                    github.com/metasophiea<br/>
+                    metasophiea.com<br/>
+                    <br/>
+                    Drogheda - Dublin
+                </p>
+
+            <!-- section divider -->
+                <section style='height: 0.15%; width: 80%; margin: 0% auto;' class='sectionDivider'></section>
+
+            <!-- education -->
+                <h3 class='barHeading'>Education</h3>
+                <p id='education' class='barContent'>
+                    <span class='barSubHeading'>Bachelor of Engineering</span><br/>
+                    Electronic And Computer Engineering<br/>
+                    Dublin City University<br/>
+                    2013 - 2017<br/>
+                    <br/>
+                    <span class='barSubHeading'>Front End Development Certification</span><br/>
+                    Free Code Camp<br/>
+                    2015<br/>
+                </p>
+
+            <!-- skills -->
+                <h3 class='barHeading'>Skills</h3>
+                <p id='skills' class='barContent'>
+                    JavaScript<br/>
+                    HTML<br/>
+                    C/C++<br/>
+                    Java<br/>
+                    VHDL<br/>
+                    Assembly<br/>
+                    Graphic Design<br/>
+                    Creativity<br/>
+                    Video/Music Production<br/>
+                    Drawing/Painting<br/>
+                    Arduino<br/>
+                    Public Speaking<br/>
+                    Theatre Production
+                </p>
+
+            <!-- interests -->
+                <h3 class='barHeading'>Interests</h3>
+                <p id='interests' class='barContent'>
+                    Podcasts<br/>
+                    Reading<br/>
+                    Video Games<br/>
+                    Spirituality<br/>
+                    Design<br/>
+                    Hiking<br/>
+                    Rock Climbing</br>
+                </p>
+        </section>
+
+        <!-- Right bar -->
+        <section id='rightBar' class='rightBar'>
+            <!-- Title and divider -->
+                <h1 id='name' class='stripMainName'>Brandon Walsh</h1>
+                <section style='height: 0.25%; width: 80%; margin: 0% auto 4%;' class='sectionDivider'></section>
+
+            <!-- Profile -->
+                <h2 class='stripHeading'>Profile</h2>
+                <p id='profile' class='stripContent'>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Fourth year Electronic & Computer Engineering Student currently performing at a 2.1 level. Passionate programmer and artist, Seeking to leverage love of computer design to provide fresh ideas for your company
+                </p>
+
+            <!-- Experience -->
+                <h2 class='stripHeading'>Professional Experience</h2>
+                <p id='experience' class='stripContent'>
+                    <span class='stripSubHeading1'>IT Intern</span><br/>
+                    <span class='stripSubHeading2'>Alexion Pharmaceuticals  -  April-September 2016</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- Provided highly personal and friendly technical support for over 3000 global employees, local and global
+                    <br/>
+                    <br/>
+                    <span class='stripSubHeading1'>Office Assistant</span><br/>
+                    <span class='stripSubHeading2'>G4S - December 2014  –  January 2015</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- Processed contact schedules for over 1000 clients<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;- Updated internal address database with over 1500 GPS coordinates
+                    <br/>
+                </p>
+
+            <!-- Projets -->
+                <h2 class='stripHeading'>Projects</h2>
+                <p id='projects' class='stripContent'>
+                    <span class='stripSubHeading1'>Computational</span><br/>
+                    <span class='stripSubHeading2'>Final Year Project  -  Implementation of the Simon Block Ciphers</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Mixed language project, centring around the design of various hardware encryption modules and connecting software interfaces and applications<br/>
+                    <span class='stripSubHeading2'>metasophiea.com  -  Personal Website</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Online portfolio of projects, including Javascript web apps, links to GitHub projects and artistic pieces<br/>
+                    <span class='stripSubHeading2'>Nigel  -  Programming Langauge</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;An as yet unfinished, interpreted programming language written in assembly for PIC and Arduino<br/>
+                    <br/>
+                    <span class='stripSubHeading1'>Artistic</span><br/>
+                    <span class='stripSubHeading2'>Music</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Written and produced three albums and numerous individual pieces. Currently working on part two of my personal symphony<br/>
+                    <span class='stripSubHeading2'>Podcast</span><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Set up CommonRoomRadio podcast with college friends, for the people of the DCU eng/rb common room<br/>
+                </p>
+
+            <!-- References -->
+                <h2 class='stripHeading'>References</h2>
+                <p id='references' class='stripReferences'>
+                    - Tony McDonagh  -  Director of IT, Alexion  -  tony.mcdonagh@alexion.com<br/>
+                    - Sharon Jones -  Manager, G4S  -  01 2179114
+                </p>
+        </section>
+    </section>
+
+</body>
+</html>
