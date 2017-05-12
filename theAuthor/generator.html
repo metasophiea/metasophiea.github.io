@@ -18,7 +18,7 @@
         .layerThree{z-index:3; height:100%; width:100%; position: absolute;}
 
         .sharp{ 
-                background-color:rgb(249, 235, 235);
+                background-color:rgb(251, 229, 229);
                 position: absolute;
                 transform: rotate(20deg);
         }
@@ -34,9 +34,10 @@
 
         .stripMainName{font-weight: 100; font-size: 200%; text-align:center; margin: 8% 8% 0% 8%}
         .stripHeading{color:#a0a0a0; font-size:90%; margin: 0% 4% 1% 4%; text-align:left;}
-        .stripSubHeading1{color:#101010;}
-        .stripSubHeading2{color:#bbbbbb; font-style: italic;}
-        .stripContent{color:#666666; font-size:55%; text-align:left; margin: 0% 4% 3% 4%; padding: 0% 0% 0% 2%;}
+        .stripSubHeading1{color:#101010; margin:0px;}
+        .stripSubHeading2{color:#bbbbbb; font-style: italic; margin:0px;}
+        .stripContent{color:#666666; font-size:55%; text-align:left; margin: 0% 4% 2% 4%; padding: 0% 0% 0% 2%;}
+        .stripContentText{padding: 0% 0% 0% 0%; margin:0% 0% 1% 0%; padding: 0% 0% 0% 2.5%;}
         .stripReferences{color:#666666; font-size:47.5%; text-align:left; margin: 0% 4% 4% 4%}
     </style>
 
@@ -59,7 +60,7 @@
         <!-- Left bar -->
         <section id='leftBar' class='leftBar'>
             <!-- headshot -->
-                <img id='headshot' style='height: 15%; margin: 15% 15% 0% 15%;' src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAiNAAAAJDVlNTFiMTA3LTBhN2YtNGJiYi1hMDJlLTVmNWY1ZTk0NjY0ZQ.jpg"></img>    
+                <img id='headshot' style='height: 15%; margin: 15% 15% 0% 15%;' src="./profile.jpg"></img>    
 
             <!-- contact details and links -->
                 <p id='contact' class='barContact'>
@@ -148,21 +149,24 @@
 
             <!-- Projets -->
                 <h2 class='stripHeading'>Projects</h2>
-                <p id='projects' class='stripContent'>
-                    <span class='stripSubHeading1'>Computational</span><br/>
-                    <span class='stripSubHeading2'>Final Year Project  -  Implementation of the Simon Block Ciphers</span><br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Mixed language project, centring around the design of various hardware encryption modules and connecting software interfaces and applications<br/>
-                    <span class='stripSubHeading2'>metasophiea.com  -  Personal Website</span><br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Online portfolio of projects, including Javascript web apps, links to GitHub projects and artistic pieces<br/>
-                    <span class='stripSubHeading2'>Nigel  -  Programming Langauge</span><br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;An as yet unfinished, interpreted programming language written in assembly for PIC and Arduino<br/>
+                <section id='projects' class='stripContent'>
+                    <p class='stripSubHeading2'>Computational</p>
+                        <p class='stripSubHeading1'>Final Year Project  -  Implementation of the Simon Block Ciphers</p>
+                        <p class='stripContentText'>&nbsp;&nbsp;&nbsp;&nbsp;Mixed language project, centring around the design of various hardware encryption modules and connecting software interfaces and applications</p>
+  
+                        <p class='stripSubHeading1'>metasophiea.com  -  Personal Website</p>
+                        <p class='stripContentText'>&nbsp;&nbsp;&nbsp;&nbsp;Online portfolio of projects, including Javascript web apps, links to GitHub projects and artistic pieces</p>
+
+                        <p class='stripSubHeading1'>Nigel  -  Programming Langauge</p>
+                        <p class='stripContentText'>&nbsp;&nbsp;&nbsp;&nbsp;An as yet unfinished, interpreted programming language written in assembly for PIC and Arduino</p>
                     <br/>
-                    <span class='stripSubHeading1'>Artistic</span><br/>
-                    <span class='stripSubHeading2'>Music</span><br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Written and produced three albums and numerous individual pieces. Currently working on part two of my personal symphony<br/>
-                    <span class='stripSubHeading2'>Podcast</span><br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Set up CommonRoomRadio podcast with college friends, for the people of the DCU eng/rb common room<br/>
-                </p>
+                    <p class='stripSubHeading2'>Artistic</p>
+                        <p class='stripSubHeading1'>Music</p>
+                        <p class='stripContentText'>&nbsp;&nbsp;&nbsp;&nbsp;Written and produced three albums and numerous individual pieces. Currently working on part two of my personal symphony</p>
+
+                        <p class='stripSubHeading1'>Podcast</p>
+                        <p class='stripContentText'>&nbsp;&nbsp;&nbsp;&nbsp;Set up CommonRoomRadio podcast with college friends, for the people of the DCU eng/rb common room</p>
+                </section>
 
             <!-- References -->
                 <h2 class='stripHeading'>References</h2>
