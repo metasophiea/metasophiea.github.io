@@ -78,6 +78,14 @@ var articles = [
 		"backerFill":"rgba(245,245,245,0.65)",
 		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/metasophiea.github.io.png",
 		"link_url":"https://github.com/metasophiea/metasophiea.github.io"		
+	},	
+	{	"id":"article_20170512-a",
+		"headline":"The Author's CV",
+		"text":["Interested in what you see? Check out my CV!"],
+		"textcolour":"rgb(0,0,0)",
+		"backerFill":"rgba(245,245,245,0.65)",
+		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/CV",
+		"link_url":"http://metasophiea.com/theAuthor/CV/"		
 	},
 ];
 
