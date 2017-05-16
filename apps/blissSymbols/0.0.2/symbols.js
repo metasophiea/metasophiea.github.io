@@ -24,6 +24,12 @@ var symbols = [
                     "position":{"y":0,"x":0},
                     "angle":1
                 },
+                {
+                    "id":0,
+                    "size":{"height":0.25,"width":0.25},
+                    "position":{"y":0,"x":0},
+                    "angle":1
+                }
             ]
     },
 

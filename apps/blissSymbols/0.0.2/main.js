@@ -29,7 +29,7 @@ function produceImage(symbolObject){
                 context.save();
                 context.translate((symbolSize.width*0.5) + this.subSymbol.position.x,(symbolSize.height*0.5) + this.subSymbol.position.y);
                 context.rotate(this.subSymbol.angle);
-                context.drawImage(this,-0.5*width,-0.5*height,width,height);
+                context.drawImage(this,(-0.5*width),(-0.5*height),width,height);
                 context.restore();
 
                 count++;
