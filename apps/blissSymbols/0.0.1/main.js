@@ -1,4 +1,4 @@
-var imageFolderAddress = 'http://metasophiea.com/apps/blissSymbols/0.0.1/testImages/';
+var imageFolderAddress = 'http://metasophiea.com/apps/blissSymbols/testImages/';
 
 function Go(){
     console.log('Hello');
