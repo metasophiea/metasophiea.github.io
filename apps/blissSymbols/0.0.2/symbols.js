@@ -5,8 +5,15 @@ var symbols = [
     {"id":3,"name":"squigle","isCharacter":true,"madeOf":"3.png"},
     {"id":4,"name":"zag","isCharacter":true,"madeOf":"4.png"},
 
-    {"id":5,"name":"circle and line","isCharacter":false,"madeOf":[0,1]},
-    {"id":5,"name":"zag and vee","isCharacter":false,"madeOf":[4,2]},
-    {"id":5,"name":"circle, line and squigle","isCharacter":false,"madeOf":[0,1,3]},
+    {
+        "id":5,
+        "name":"circle with line",
+        "isCharacter":false,
+        "madeOf":
+            [
+                {"id":0,"size":1,"y":0,"x":0},
+                {"id":1,"size":0.5,"y":0,"x":0}
+            ]
+    },
 
 ]

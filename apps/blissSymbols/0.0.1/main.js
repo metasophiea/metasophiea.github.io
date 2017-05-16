@@ -1,4 +1,4 @@
-var imageFolderAddress = './images/';
+var imageFolderAddress = 'http://metasophiea.com/apps/blissSymbols/0.0.1/testImages/';
 
 function Go(){
     console.log('Hello');
@@ -15,11 +15,13 @@ function convert_symbolObject_to_image(symbolObject){
     var outputImage = new Image();
 
     var canvas = document.createElement('canvas');
+        canvas.width = '100'; canvas.height = '100';
     var context = canvas.getContext("2d");
 
     for(var a = 0; a < symbolObject.madeOf.length; a++){
         var count = 0;
         var img = new Image();
+            img.setAttribute('crossOrigin', 'anonymous');
             img.src = imageFolderAddress + getSymbolById(symbolObject.madeOf[a]).madeOf;
             img.onload = function(){ 
                 context.drawImage(this,0,0); count++;
@@ -28,11 +30,6 @@ function convert_symbolObject_to_image(symbolObject){
     }
     
     return outputImage;
-}
-
-function drawToCanvas(img){
-    var context = document.getElementById('canvas').getContext("2d");
-    context.drawImage(img,0,0); 
 }
 
 function getSymbolById(id){
