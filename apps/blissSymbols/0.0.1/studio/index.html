@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="./symbols.js"></script>
+    <script src="./symbolDrawer.js"></script>
+
+	<script>
+		var symbolData =     
+			{
+				"id":0,
+				"name":"",
+				"isCharacter":null,
+				"construction":[{"type":"circle", "x":2,"y":2,"r":2},{"type":"shape","id":6, "x":0,"y":0, "scale":1}],
+				"size":{"width":null,"height":null},
+				"base":4
+			};
+
+		function constructionContains(obj){
+			for(var a = 0; a < symbolData.construction.length; a++){
+				var result = false;
+				if( obj.type == symbolData.construction[a].type ){
+					switch(obj.type){
+						case "line": result = lineCompare(symbolData.construction[a],obj); break;
+						case "circle": result = circleCompare(symbolData.construction[a],obj); break;
+						case "square": result = squareCompare(symbolData.construction[a],obj); break;
+						case "halfCircle": result = halfCircleCompare(symbolData.construction[a],obj); break;
+						case "quarterCircle": result = quarterCircleCompare(symbolData.construction[a],obj); break;
+					}
+				}
+				if(result){return true;}
+			}
+			return false;
+
+			function lineCompare(line_a, line_b){
+				if(
+				   ((line_a.x1 == line_b.x1) &&
+					(line_a.y1 == line_b.y1) &&
+					(line_a.x2 == line_b.x2) &&
+					(line_a.y2 == line_b.y2) ) ||
+
+				   ((line_a.x1 == line_b.x2) &&
+					(line_a.y1 == line_b.y2) &&
+					(line_a.x2 == line_b.x1) &&
+					(line_a.y2 == line_b.y1) )
+
+				){return true;}
+				return false;
+			}
+		}
+
+		function redrawShape(){
+			var drawingSpace = document.getElementById('symbolDrawingArea');
+			drawingSpace.innerHTML = null;
+			var spacing = 2; var rowPosition = 2;
+			drawSymbolWithData(drawingSpace,spacing,rowPosition,1,symbolData); 
+		}
+	</script>
+
+	<script>
+		var selectedTool = null; var lastSelectedElememt = null; var selectedElement = null;
+		var selections = [];
+
+		function nodeClick(that){
+			switch(selectedTool){
+				case "line": 
+					selections.push( {"x":that.getAttribute("x")-2, "y":that.getAttribute("y")-2} );
+					if(selections.length == 2){
+						var obj = {}; obj.type = "line";
+						obj.x1 = selections[0].x; obj.y1 = selections[0].y;
+						obj.x2 = selections[1].x; obj.y2 = selections[1].y;
+						if(!constructionContains(obj)){symbolData.construction.push(obj);}
+						selections = [];
+					}
+				break;
+				default: break;
+			}
+			redrawShape();
+		}
+		
+		function svgSpaceClick(){ elementClick(null); }
+		function elementClick(that){
+			if(that == selectedElement){return;}
+			lastSelectedElememt = selectedElement; selectedElement = that;
+
+			var parts = getAssociatedElements(selectedElement); for(var a = 0; a < parts.length; a++){ parts[a].setAttribute("class","selectedSymbolLine"); }
+			parts = getAssociatedElements(lastSelectedElememt); for(var a = 0; a < parts.length; a++){ parts[a].setAttribute("class","symbolLine"); }
+
+			function getAssociatedElements(selectedElement){
+				if(selectedElement == null){return [];}
+				if(selectedElement.parentElement == null){return [];}
+
+				var array = selectedElement.parentElement.childNodes;
+				var outputArray = [];
+				for(var a = 0; a < array.length; a++){
+					if( array[a].getAttribute("partId") == selectedElement.getAttribute("partId") ){ outputArray.push(array[a]); }
+				}
+				return outputArray;
+			}
+		}
+	</script>
+
+	<style>	
+        html, body{ width:100%; height:100%; margin:0px; overflow-x: hidden; overflow-y: hidden; font-size: 20px; font-family: 'Raleway'; }
+		h1{text-align: center; font-size: 100%; font-weight: lighter; margin:0;}
+
+		.graphLine{stroke:rgb(100,100,100);stroke-width:0.1%;}
+		.guideLine{stroke:rgb(200,200,200);stroke-width:1%;stroke-linecap:round;}
+		.symbolLine{stroke:rgb(255,0,0);stroke-width:1%;fill:none;stroke-linecap:round;}
+		.selectedSymbolLine{stroke:rgb(255,255,0);stroke-width:1%;fill:none;stroke-linecap:round;}
+		.selectionNode{fill:rgba(230,230,230,0);transition: fill 0.5s;}
+		.selectionNode:hover{fill:rgba(230,230,230,0.5);}
+		.toolSpaceSection{text-align:center; background-color: rgb(250,250,250); padding:4% 0%;}
+		.button{width:60%; background-color: rgb(230,230,230); margin:3px auto; border: none; font-size:80%;}
+		.button:hover{background-color: rgb(255,255,255);}
+		.button:active{background-color: rgb(200,200,200);}
+
+		#backgroundCover{fill:rgba(0,0,0,0);}
+		#toolSpace{min-width:200px; height:100%; float:left; background-color:bisque;}	
+		#editSpace{height:100%; overflow:scroll;}
+	</style>
+</head>
+
+<body onLoad='resize();redrawShape();' onresize="resize()">
+	<script>
+		function resize(){
+			document.getElementById("svgSpace").style.width = window.innerHeight;
+			document.getElementById("svgSpace").style.height = window.innerHeight;
+			document.getElementById("editSpace").scrollLeft = (0.5*( document.getElementById("editSpace").scrollWidth - document.getElementById("editSpace").clientWidth )) - document.body.scrollLeft;
+		}
+	</script>
+
+	<section id="toolSpace">
+		<section id="tools" class="toolSpaceSection">
+			<h1>Tools</h1>
+			<div class="button" onClick="selectTool('line')">Line</div>
+			<div class="button" onClick="selectTool('circle')">Circle</div>
+			<div class="button" onClick="selectTool('square')">Square</div>
+			<div class="button" onClick="selectTool('halfCirce')">Half Circle</div>
+			<div class="button" onClick="selectTool('quarterCircle')">Quarter Circle</div>
+			<script>
+				function selectTool(tool){
+					selectedTool = tool;
+					document.getElementById("editSpace").style.cursor = "url(pencilIcon.png),pointer";
+				}
+			</script>
+
+		</section>
+	</section>
+
+	<section id="editSpace">
+		<svg id='svgSpace' viewBox="0 0 100 100">
+			<g id="graph">
+				<<!-- guide lines -->
+					<line x1="25%" y1="25%" x2="25%" y2="75%" class="guideLine"></line>
+					<line x1="75%" y1="25%" x2="75%" y2="75%" class="guideLine"></line>
+					<line y1="25%" x1="25%" y2="25%" x2="75%" class="guideLine"></line>
+					<line y1="75%" x1="25%" y2="75%" x2="75%" class="guideLine"></line>
+				<!-- vertical lines -->
+					<line x1="12.5%" y1="0" x2="12.5%" y2="100%" class="graphLine"></line>
+					<line x1="25%"   y1="0" x2="25%"   y2="100%" class="graphLine"></line>
+					<line x1="37.5%" y1="0" x2="37.5%" y2="100%" class="graphLine"></line>
+					<line x1="50%"   y1="0" x2="50%"   y2="100%" class="graphLine"></line>
+					<line x1="62.5%" y1="0" x2="62.5%" y2="100%" class="graphLine"></line>
+					<line x1="75%"   y1="0" x2="75%"   y2="100%" class="graphLine"></line>
+					<line x1="87.5%" y1="0" x2="87.5%" y2="100%" class="graphLine"></line>
+				<!-- horizontal lines -->
+					<line y1="12.5%" x1="0" y2="12.5%" x2="100%" class="graphLine"></line>
+					<line y1="25%"   x1="0" y2="25%"   x2="100%" class="graphLine"></line>
+					<line y1="37.5%" x1="0" y2="37.5%" x2="100%" class="graphLine"></line>
+					<line y1="50%"   x1="0" y2="50%"   x2="100%" class="graphLine"></line>
+					<line y1="62.5%" x1="0" y2="62.5%" x2="100%" class="graphLine"></line>
+					<line y1="75%"   x1="0" y2="75%"   x2="100%" class="graphLine"></line>
+					<line y1="87.5%" x1="0" y2="87.5%" x2="100%" class="graphLine"></line>
+			</g>
+			
+			<rect id="backgroundCover" width="100%" height="100%" onclick="svgSpaceClick()"/>
+
+			<g id="symbolDrawingArea"></g>
+
+			<g id="selectionNodes">
+				<script>
+					for(var a = 1; a < 8; a++){
+						for(var b = 1; b < 8; b++){
+							var element = document.createElementNS("http://www.w3.org/2000/svg",'circle');
+							element.setAttribute("id","selectionNode_"+a+"_"+b);
+							element.setAttribute("cx",(a*12.5)+"%");
+							element.setAttribute("cy",(b*12.5)+"%"); 
+							element.setAttribute("r","2%");
+							element.setAttribute("x",a);
+							element.setAttribute("y",b);
+							element.setAttribute("class","selectionNode");
+							element.setAttribute("onclick","nodeClick(this)");
+							document.getElementById("selectionNodes").appendChild(element);
+						}
+					}
+				</script>
+			</g>
+		</svg>
+	</section>
+
+</body>
+</html>

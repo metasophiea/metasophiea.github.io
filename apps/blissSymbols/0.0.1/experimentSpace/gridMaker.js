@@ -2,8 +2,8 @@ var drawBasicShape = new function(){
     var gridSpacing = 10;
     function washIncomingGraphValues(value){
         switch( typeof value){
-            case "number": return value*gridSpacing; break;
-            case "string": return value; break;
+            case "number": return value*gridSpacing;
+            case "string": return value;
             default: break;
         }
     }
