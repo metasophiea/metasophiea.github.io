@@ -10,10 +10,9 @@
 //  letters, numbers and symbols
 //  subshapes
 
-function drawElement(SVGelement, x,y, scale,data,partId){
+function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
     var gridSpacing = 12.5;
-    var symbolClass = "symbolLine";
-    var onClickAction = ""; var onMouseDownAction = "elementMouseDown(event,this)"; var onMouseUpAction = ""; var onMouseMoveAction = "";
+    var onClickAction = ""; var onMouseDownAction = "moveElement_mouseDown(event,this)"; var onMouseUpAction = ""; var onMouseMoveAction = "";
 
     switch(data.type){
         case "line":                drawLine(SVGelement, (data.x1*scale)+x,(data.y1*scale)+y,(data.x2*scale)+x,(data.y2*scale)+y, symbolClass,partId); break;
@@ -46,6 +45,9 @@ function drawElement(SVGelement, x,y, scale,data,partId){
         }
 
         function drawRectangle(SVGelement, x,y,width,height, symbolClass,partId){
+            if(width < 0){ x = x + width; width = -width; }
+            if(height < 0){ y = y + height; height = -height; }
+
             var element = document.createElementNS("http://www.w3.org/2000/svg",'rect');
             element.setAttribute("partId",partId);
             element.setAttribute('x',x*gridSpacing); 
@@ -63,6 +65,8 @@ function drawElement(SVGelement, x,y, scale,data,partId){
         }
 
         function drawDiamond(VGelement, x,y,r, symbolClass,partId){
+            r = Math.abs(r);
+
             var sideLength = Math.sqrt( gridSpacing*gridSpacing*2 )*r;
             var element = document.createElementNS("http://www.w3.org/2000/svg",'rect');
             element.setAttribute("partId",partId);
@@ -212,7 +216,7 @@ function drawElement(SVGelement, x,y, scale,data,partId){
 
         function drawSymbol(SVGelement, id,x,y,scale, symbolClass,partId){
             var symbol = getSymbolById(id); 
-            for(var a = 0; a < symbol.construction.length; a++){ drawElement(document.getElementById("symbolDrawingArea"), x,y,scale, symbol.construction[a],partId); }
+            for(var a = 0; a < symbol.construction.length; a++){ drawElement(document.getElementById("symbolDrawingArea"), x,y,scale, symbol.construction[a],symbolClass,partId); }
 
             function getSymbolById(id){
                 for(var a = 0; a < symbols.length; a++){ if(symbols[a].id == id){return symbols[a];} }
