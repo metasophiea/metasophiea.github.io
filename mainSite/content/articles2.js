@@ -64,8 +64,8 @@ var articles = [
 		"link_url":"http://metasophiea.com/projects/nigel/"		
 	},
 	{	"id":"article_20160616-a",
-		"headline":"Curve and Curve 2 Beta",
-		"text":["my soundcloud, where I store 2 of my latest musical works, i haven't worked on this for a while..unfortunately (I'm in a band now though)"],
+		"headline":"Soundcloud",
+		"text":["my soundcloud, where I store 2 of my latest musical works"],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,128,60,0.65)",
 		"image_url":"http://4.bp.blogspot.com/-D57hGYq5DY0/VnhfsqXYZbI/AAAAAAAAKyg/YXj6uQf8DnU/s1600/curve_1.bmp",
