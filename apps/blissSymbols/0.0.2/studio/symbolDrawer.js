@@ -12,7 +12,7 @@
 
 function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
     var gridSpacing = 12.5;
-    var onClickAction = ""; var onMouseDownAction = "moveElement_mouseDown(event,this)"; var onMouseUpAction = ""; var onMouseMoveAction = "";
+    var onClickAction = "selectElement(event,this)"; var onMouseDownAction = ""; var onMouseUpAction = ""; var onMouseMoveAction = "";
 
     switch(data.type){
         case "line":                drawLine(SVGelement, (data.x1*scale)+x,(data.y1*scale)+y,(data.x2*scale)+x,(data.y2*scale)+y, symbolClass,partId); break;
@@ -216,7 +216,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
 
         function drawSymbol(SVGelement, id,x,y,scale, symbolClass,partId){
             var symbol = getSymbolById(id); 
-            for(var a = 0; a < symbol.construction.length; a++){ drawElement(document.getElementById("symbolDrawingArea"), x,y,scale, symbol.construction[a],symbolClass,partId); }
+            for(var a = 0; a < symbol.construction.length; a++){ drawElement(SVGelement, x,y,scale, symbol.construction[a],symbolClass,partId); }
 
             function getSymbolById(id){
                 for(var a = 0; a < symbols.length; a++){ if(symbols[a].id == id){return symbols[a];} }

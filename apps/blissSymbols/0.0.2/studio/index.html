@@ -36,7 +36,7 @@
 
 </head>
 
-<body onLoad="resize();redraw();" onresize="resize()">
+<body onLoad="resize();redraw();" onresize="resize()" onkeydown="keyDownHandler(event)">
     <script>
 		function resize(){
 			document.getElementById("svgSpace").style.width = window.innerHeight;
