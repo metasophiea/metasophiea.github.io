@@ -1,14 +1,15 @@
-//element types
-//  line
-//  rectangle
-//  dimond
-//  circle
-//  half circle
-//  quarter circle
-//  right angle triangle
-//  isosceles triangle
-//  letters, numbers and symbols
-//  subshapes
+var availableElements = [
+    {"name":"line",                 "amount":1, "example":{"type":"line", "x1":0,"y1":4,"x2":4,"y2":0}},
+    {"name":"rectangle",            "amount":1, "example":{"type":"rectangle", "x":0,"y":0,"width":4,"height":4}},
+    {"name":"dimond",               "amount":1, "example":{"type":"dimond", "x":2,"y":2,"r":2}},
+    {"name":"circle",               "amount":1, "example":{"type":"circle", "x":2,"y":2,"r":2}},
+    {"name":"halfCircle",           "amount":1, "example":{"type":"halfCircle", "x":1,"y":0,"orientation":0,"width":2,"height":4}},
+    {"name":"quarterCircle",        "amount":1, "example":{"type":"quarterCircle", "x":0,"y":0,"orientation":3,"width":4,"height":4}},
+    {"name":"rightAngleTriangle",   "amount":1, "example":{"type":"rightAngleTriangle", "x":0,"y":0,"width":4,"height":4}},
+    {"name":"isoscelesTriangle",    "amount":1, "example":{"type":"isoscelesTriangle", "x":0,"y":0,"orientation":0,"width":4,"height":4}},
+    {"name":"letterNumberSymbol",   "amount":0, "example":null}
+    //  subshapes
+];
 
 function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
     var gridSpacing = 12.5;

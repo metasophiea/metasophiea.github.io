@@ -14,29 +14,59 @@
 
         .graphLine{stroke:rgb(100,100,100);stroke-width:0.1%;}
 		.guideLine{stroke:rgb(200,200,200);stroke-width:1%;stroke-linecap:round;fill:none;}
-		.symbolLine{stroke:rgb(255,0,0);stroke-width:1%;fill:none;stroke-linecap:round;}
+		.symbolLine{stroke:rgb(0,0,0);stroke-width:1%;fill:none;stroke-linecap:round;}
 		.selectedSymbolLine{stroke:rgb(255,255,0);stroke-width:1%;fill:none;stroke-linecap:round;}
 		.newElementLine{stroke:rgb(255,0,255);stroke-width:1%;fill:none;stroke-linecap:round;}
 
 		.selectionNode{fill:rgba(230,230,230,0);transition: fill 0.5s;}
 		.selectionNode:hover{fill:rgba(230,230,230,0.75);}
 
-        #backgroundCover{fill:rgba(0,0,0,0);}
-		#toolSpace{width:200px; height:100%; float:left; background-color:bisque;}	
-		#editSpace{height:100%; overflow:scroll;}
-	</style>
+		.button{
+			background-color:rgb(230,230,230);
+			stroke:rgb(50,50,50);stroke-width:5%;fill:none;stroke-linecap:round;
+		}
+		.button:hover{ background-color:rgb(255,230,255); stroke-width:3%;}
 
-    <script>
-        function buttonClick(button){}
-        function nodeClick(that){console.log(that);elementSelect(null);}
-    </script>
+		.detailsBox{
+			padding:0% 10%;
+			font-size: 12px;
+		}
+		.detailsBox_style{
+			border:0px;
+			background-color: rgb(240,240,240);
+			margin: 1px;
+		}
+		.detailsBox_inputBox{ width: 100%; }
+		.detailsBox_inputArea{ width: 100%; resize: none; height:80px; }
+
+		#codeViewer{
+			position: absolute;
+			top: 25%; left: 25%;
+			width: 50%; height: 50%;
+			background-color:rgb(255,255,255);
+			resize: none;
+			visibility: hidden;
+			opacity: 0;
+		}
+        #backgroundCover{fill:rgba(0,0,0,0);}
+		#toolSpace{width:200px; height:100%; float:left; background-color:rgb(250,250,250);}	
+		#editSpace{height:100%; overflow:scroll;}
+		#elementSelectionBox{
+			width: 80%; height: 500px;
+			margin: 0px auto 10px auto;
+			background-color:rgb(250,250,250);
+			
+			overflow:scroll;
+		}
+	</style>
 
     <script src="./elementEditing.js"></script>
     <script src="./rendering.js"></script>
+    <script src="./toolbarFunctions.js"></script>
 
 </head>
 
-<body onLoad="resize();redraw();" onresize="resize()" onkeydown="keyDownHandler(event)">
+<body onLoad="resize();redraw();populateElementSelectionBox();" onresize="resize()" onkeydown="keyDownHandler(event)">
     <script>
 		function resize(){
 			document.getElementById("svgSpace").style.width = window.innerHeight;
@@ -46,6 +76,43 @@
 	</script>
 
 	<section id="toolSpace">
+		<section>
+			<table style="width:100%; height:20%;" cellpadding="0"><tbody>
+				<tr>
+					<td>
+						<svg id="newButton" class="button" viewBox="0 0 100 100" onclick="buttonPress({'type':'new'});">
+							<line x1="30%" y1="20%" x2="30%" y2="80%"/>
+							<line x1="70%" y1="40%" x2="70%" y2="80%"/>
+							<line x1="30%" y1="80%" x2="70%" y2="80%"/>
+							<line x1="30%" y1="20%" x2="50%" y2="20%"/>
+							<line x1="50%" y1="40%" x2="70%" y2="40%"/>
+							<line x1="50%" y1="20%" x2="50%" y2="40%"/>
+							<line x1="50%" y1="20%" x2="70%" y2="40%"/>
+						</svg>
+					</td>
+					<td>
+						<svg id="viewCodeButton" class="button" viewBox="0 0 100 100" onclick="buttonPress({'type':'viewCode'});">
+							<line x1="70%" y1="50%" x2="60%" y2="60%"/>
+							<line x1="70%" y1="50%" x2="60%" y2="40%"/>
+							<line x1="55%" y1="30%" x2="45%" y2="70%"/>
+							<line x1="30%" y1="50%" x2="40%" y2="60%"/>
+							<line x1="30%" y1="50%" x2="40%" y2="40%"/>
+						</svg>
+					</td>
+				</tr>
+			</tbody></table>
+
+			<section id="elementSelectionBox">
+				<table id="elementSelectionBox_table" style="width:100%; height:20%;" cellpadding="0"></table>
+			</section>
+
+			<section class="detailsBox">
+				<input id="details_code" class="detailsBox_style detailsBox_inputBox" type="text" placeholder="code">
+				<input id="details_name" class="detailsBox_style detailsBox_inputBox" type="text" placeholder="name">
+				<input id="details_character" class="detailsBox_style detailsBox_checkBox" type="checkbox">character?
+				<textarea id="details_description" class="detailsBox_style detailsBox_inputArea" placeholder="description"></textarea>
+			</section>
+		</section>
 	</section>
 
 	<section id="editSpace">
@@ -96,6 +163,8 @@
             <g id="surface"></g>
 		</svg>
 	</section>
+
+	<textarea id="codeViewer"></textarea>
 
 </body>
 </html>

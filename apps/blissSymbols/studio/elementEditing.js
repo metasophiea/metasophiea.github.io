@@ -14,11 +14,21 @@ var previousAction = null;
     function keyDownHandler(event){
 
         if(selectedElement != null){
-            switch(event.key){
+            switch(event.code){
                 case "Backspace": case "Delete": 
                     var obj = workingDrawing.construction.splice(selectedElement.getAttribute("partId"), 1)[0];
                     previousAction = {"type":"delete","object":obj};
                     elementSelect(null);
+                break;
+                case "Space":
+                    if( workingDrawing.construction[selectedElement.getAttribute("partId")].hasOwnProperty("orientation") ){
+                        workingDrawing.construction[selectedElement.getAttribute("partId")].orientation++;
+                        if(workingDrawing.construction[selectedElement.getAttribute("partId")].orientation > 3){workingDrawing.construction[selectedElement.getAttribute("partId")].orientation = 0;}
+                        var temp = workingDrawing.construction[selectedElement.getAttribute("partId")].width;
+                        workingDrawing.construction[selectedElement.getAttribute("partId")].width = workingDrawing.construction[selectedElement.getAttribute("partId")].height;
+                        workingDrawing.construction[selectedElement.getAttribute("partId")].height = temp;
+                        previousAction = {"type":"rotate","partId":selectedElement.getAttribute("partId")};
+                    }
                 break;
                 case "ArrowUp":
                     if(workingDrawing.construction[selectedElement.getAttribute("partId")].type == "line"){
@@ -59,8 +69,17 @@ var previousAction = null;
             if(previousAction != null){
                 switch(previousAction.type){
                     case "delete": workingDrawing.construction.push(previousAction.object); redraw(); break;
+                    case "rotate": 
+                        if( workingDrawing.construction[previousAction.partId].hasOwnProperty("orientation") ){
+                            workingDrawing.construction[previousAction.partId].orientation--;
+                            if(workingDrawing.construction[previousAction.partId].orientation < 0){workingDrawing.construction[previousAction.partId].orientation = 3;}
+                            var temp = workingDrawing.construction[selectedElement.getAttribute("partId")].width;
+                            workingDrawing.construction[selectedElement.getAttribute("partId")].width = workingDrawing.construction[selectedElement.getAttribute("partId")].height;
+                            workingDrawing.construction[selectedElement.getAttribute("partId")].height = temp;
+                        }
+                    break;
                     case "arrowMove": 
-                        switch(action.direction){
+                        switch(previousAction.direction){
                             case "up": 
                                 if(workingDrawing.construction[previousAction.partId].type == "line"){
                                     workingDrawing.construction[previousAction.partId].y1 += 0.5;
