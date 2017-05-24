@@ -26,7 +26,7 @@ var previousAction = null;
                         workingDrawing.construction[selectedElement.getAttribute("partId")].y2 -= 0.5;
                     }
                     else{ workingDrawing.construction[selectedElement.getAttribute("partId")].y -= 0.5; }
-                    actionsList = {"type":"arrowMove","direction":"up","partId":selectedElement.getAttribute("partId")};
+                    previousAction = {"type":"arrowMove","direction":"up","partId":selectedElement.getAttribute("partId")};
                 break;
                 case "ArrowDown":
                     if(workingDrawing.construction[selectedElement.getAttribute("partId")].type == "line"){
@@ -34,7 +34,7 @@ var previousAction = null;
                         workingDrawing.construction[selectedElement.getAttribute("partId")].y2 += 0.5;
                     }
                     else{ workingDrawing.construction[selectedElement.getAttribute("partId")].y += 0.5; }
-                    actionsList = {"type":"arrowMove","direction":"down","partId":selectedElement.getAttribute("partId")};
+                    previousAction = {"type":"arrowMove","direction":"down","partId":selectedElement.getAttribute("partId")};
                 break;
                 case "ArrowLeft":
                     if(workingDrawing.construction[selectedElement.getAttribute("partId")].type == "line"){
@@ -42,7 +42,7 @@ var previousAction = null;
                         workingDrawing.construction[selectedElement.getAttribute("partId")].x2 -= 0.5;
                     }
                     else{ workingDrawing.construction[selectedElement.getAttribute("partId")].x -= 0.5; }
-                    actionsList = {"type":"arrowMove","direction":"left","partId":selectedElement.getAttribute("partId")};
+                    previousAction = {"type":"arrowMove","direction":"left","partId":selectedElement.getAttribute("partId")};
                 break;
                 case "ArrowRight":
                     if(workingDrawing.construction[selectedElement.getAttribute("partId")].type == "line"){
@@ -50,7 +50,7 @@ var previousAction = null;
                         workingDrawing.construction[selectedElement.getAttribute("partId")].x2 += 0.5;
                     }
                     else{ workingDrawing.construction[selectedElement.getAttribute("partId")].x += 0.5; }
-                    actionsList = {"type":"arrowMove","direction":"right","partId":selectedElement.getAttribute("partId")};
+                    previousAction = {"type":"arrowMove","direction":"right","partId":selectedElement.getAttribute("partId")};
                 break;
             }
         }
