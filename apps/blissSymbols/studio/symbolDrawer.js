@@ -15,21 +15,21 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
     var gridSpacing = 12.5;
 
     switch(data.type){
-        case "line":                drawLine(SVGelement, (data.x1*scale)+x,(data.y1*scale)+y,(data.x2*scale)+x,(data.y2*scale)+y, symbolClass,partId); break;
-        case "rectangle":           drawRectangle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.width*scale),(data.height*scale), symbolClass,partId); break;
-        case "dimond":              drawDiamond(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId); break;
-        case "circle":              drawCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId); break;
-        case "halfCircle":          drawHalfCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId); break;
-        case "quarterCircle":       drawQuarterCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId); break;
-        case "rightAngleTriangle":  drawRightAngleTriangle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.width*scale),(data.height*scale), symbolClass,partId); break;
-        case "isoscelesTriangle":   drawIsoscelesTriangle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId); break;
+        case "line":                drawLine(SVGelement, (data.x1*scale)+x,(data.y1*scale)+y,(data.x2*scale)+x,(data.y2*scale)+y, symbolClass,partId,onClickAction); break;
+        case "rectangle":           drawRectangle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
+        case "dimond":              drawDiamond(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId,onClickAction); break;
+        case "circle":              drawCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId,onClickAction); break;
+        case "halfCircle":          drawHalfCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
+        case "quarterCircle":       drawQuarterCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
+        case "rightAngleTriangle":  drawRightAngleTriangle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
+        case "isoscelesTriangle":   drawIsoscelesTriangle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
         case "letterNumberSymbol":  break;
-        case "shape":               drawSymbol(SVGelement, data.id, (data.x*scale)+x,(data.y*scale)+y,data.scale*scale,symbolClass,partId); break;
+        case "shape":               drawSymbol(SVGelement, data.id, (data.x*scale)+x,(data.y*scale)+y,data.scale*scale,symbolClass,partId,onClickAction); break;
         default: break;
     }
 
     //drawing functions
-        function drawLine(SVGelement, x1,y1,x2,y2, symbolClass,partId){
+        function drawLine(SVGelement, x1,y1,x2,y2, symbolClass,partId,onClickAction=""){
             var element = document.createElementNS("http://www.w3.org/2000/svg",'line');
             element.setAttribute("partId",partId);
             element.setAttribute('x1',x1*gridSpacing); 
@@ -41,7 +41,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
             SVGelement.appendChild(element);
         }
 
-        function drawRectangle(SVGelement, x,y,width,height, symbolClass,partId){
+        function drawRectangle(SVGelement, x,y,width,height, symbolClass,partId,onClickAction=""){
             if(width < 0){ x = x + width; width = -width; }
             if(height < 0){ y = y + height; height = -height; }
 
@@ -58,7 +58,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
             SVGelement.appendChild(element);
         }
 
-        function drawDiamond(VGelement, x,y,r, symbolClass,partId){
+        function drawDiamond(VGelement, x,y,r, symbolClass,partId,onClickAction=""){
             r = Math.abs(r);
 
             var sideLength = Math.sqrt( gridSpacing*gridSpacing*2 )*r;
@@ -76,7 +76,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
             SVGelement.appendChild(element);
         }
 
-        function drawCircle(SVGelement, x,y,r, symbolClass,partId){
+        function drawCircle(SVGelement, x,y,r, symbolClass,partId,onClickAction=""){
             var element = document.createElementNS("http://www.w3.org/2000/svg",'circle');
             element.setAttribute("partId",partId);
             element.setAttribute("cx",x*gridSpacing); 
@@ -87,7 +87,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
             SVGelement.appendChild(element);
         }
 
-        function drawArc(SVGelement, x1,y1,x2,y2,x3,y3,x4,y4, symbolClass,partId){
+        function drawArc(SVGelement, x1,y1,x2,y2,x3,y3,x4,y4, symbolClass,partId,onClickAction=""){
             var element = document.createElementNS("http://www.w3.org/2000/svg",'path');
             element.setAttribute("partId",partId);
             element.setAttribute('d', 'M ' + x1*gridSpacing +' '+ y1*gridSpacing + ' C ' + x2*gridSpacing +' '+ y2*gridSpacing +', '+ x3*gridSpacing +' '+ y3*gridSpacing +', '+ x4*gridSpacing +' '+ y4*gridSpacing );
@@ -96,7 +96,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
             SVGelement.appendChild(element);
         }
 
-        function drawHalfCircle(SVGelement, x,y,orientation,width,height, symbolClass,partId){
+        function drawHalfCircle(SVGelement, x,y,orientation,width,height, symbolClass,partId,onClickAction=""){
             if(orientation < 0){ orientation = 0; } if(orientation > 3){ orientation = orientation%4; }
             var widthCurve = 0.33; var heightCurve = 0.03;
             
@@ -127,10 +127,10 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
                 ],
             ][orientation];
 
-            drawArc(SVGelement, matrix[0][0],matrix[0][1],matrix[1][0],matrix[1][1],matrix[2][0],matrix[2][1],matrix[3][0],matrix[3][1], symbolClass,partId);
+            drawArc(SVGelement, matrix[0][0],matrix[0][1],matrix[1][0],matrix[1][1],matrix[2][0],matrix[2][1],matrix[3][0],matrix[3][1], symbolClass,partId,onClickAction);
         }
 
-        function drawQuarterCircle(SVGelement, x,y,orientation,width,height, symbolClass,partId){
+        function drawQuarterCircle(SVGelement, x,y,orientation,width,height, symbolClass,partId,onClickAction=""){
             if(orientation < 0){ orientation = 0; } if(orientation > 3){ orientation = orientation%4; }
             var ratio = 0.4;
             var matrix = [
@@ -165,22 +165,22 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
                 matrix[a][1] = matrix[a][1]*height + y;
             }
 
-            drawArc(SVGelement, matrix[0][0],matrix[0][1],matrix[1][0],matrix[1][1],matrix[2][0],matrix[2][1],matrix[3][0],matrix[3][1], symbolClass,partId);
+            drawArc(SVGelement, matrix[0][0],matrix[0][1],matrix[1][0],matrix[1][1],matrix[2][0],matrix[2][1],matrix[3][0],matrix[3][1], symbolClass,partId,onClickAction);
         }
 
-        function drawRightAngleTriangle(SVGelement, x,y,width,height, symbolClass,partId){
+        function drawRightAngleTriangle(SVGelement, x,y,width,height, symbolClass,partId,onClickAction=""){
             var points = { 
                     "x1":x,         "y1":y, 
                     "x2":x,         "y2":(y+height), 
                     "x3":(x+width), "y3":(y+height)
                 };
 
-            drawLine(SVGelement, points.x1,points.y1,points.x2,points.y2, symbolClass,partId);
-            drawLine(SVGelement, points.x2,points.y2,points.x3,points.y3, symbolClass,partId);
-            drawLine(SVGelement, points.x3,points.y3,points.x1,points.y1, symbolClass,partId);
+            drawLine(SVGelement, points.x1,points.y1,points.x2,points.y2, symbolClass,partId,onClickAction);
+            drawLine(SVGelement, points.x2,points.y2,points.x3,points.y3, symbolClass,partId,onClickAction);
+            drawLine(SVGelement, points.x3,points.y3,points.x1,points.y1, symbolClass,partId,onClickAction);
         }
 
-        function drawIsoscelesTriangle(SVGelement, x,y,orientation,width,height, symbolClass,partId){
+        function drawIsoscelesTriangle(SVGelement, x,y,orientation,width,height, symbolClass,partId,onClickAction=""){
             if(orientation < 0){ orientation = 0; } if(orientation > 1){ orientation = orientation%2; }
             var points = [
                 { 
@@ -195,14 +195,14 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
                 }
             ][orientation];
 
-            drawLine(SVGelement, points.x1,points.y1,points.x2,points.y2, symbolClass,partId);
-            drawLine(SVGelement, points.x2,points.y2,points.x3,points.y3, symbolClass,partId);
-            drawLine(SVGelement, points.x3,points.y3,points.x1,points.y1, symbolClass,partId);
+            drawLine(SVGelement, points.x1,points.y1,points.x2,points.y2, symbolClass,partId,onClickAction);
+            drawLine(SVGelement, points.x2,points.y2,points.x3,points.y3, symbolClass,partId,onClickAction);
+            drawLine(SVGelement, points.x3,points.y3,points.x1,points.y1, symbolClass,partId,onClickAction);
         }
 
-        function drawSymbol(SVGelement, id,x,y,scale, symbolClass,partId){
+        function drawSymbol(SVGelement, id,x,y,scale, symbolClass,partId,onClickAction){
             var symbol = getSymbolById(id); 
-            for(var a = 0; a < symbol.construction.length; a++){ drawElement(SVGelement, x,y,scale, symbol.construction[a],symbolClass,partId); }
+            for(var a = 0; a < symbol.construction.length; a++){ drawElement(SVGelement, x,y,scale, symbol.construction[a],symbolClass,partId,onClickAction); }
 
             function getSymbolById(id){
                 for(var a = 0; a < symbols.length; a++){ if(symbols[a].id == id){return symbols[a];} }

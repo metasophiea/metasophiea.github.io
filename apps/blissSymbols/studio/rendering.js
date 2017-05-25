@@ -4,10 +4,7 @@ var workingDrawing =
         "name":"",
         "description":"",
         "isCharacter":null,
-        "construction":[
-            {"type":"halfCircle","x":4,"y":2,"orientation":3,"width":4,"height":2},
-            {"type":"circle","x":2,"y":2,"r":2}
-        ],
+        "construction":[],
         "size":{"width":0,"height":0}
     };
 
