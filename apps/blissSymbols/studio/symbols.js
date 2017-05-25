@@ -2,6 +2,7 @@ var symbols = [
     {
         "id":0,
         "name":"circle",
+	    "description":"it's just a circle",
         "isCharacter":true,
         "construction":
         [
@@ -12,6 +13,7 @@ var symbols = [
     {
         "id":1,
         "name":"line",
+	    "description":"straight and true",
         "isCharacter":true,
         "construction":
         [
@@ -22,6 +24,7 @@ var symbols = [
     {
         "id":2,
         "name":"vee",
+	    "description":"it dips a bit in the middle, but you'll get through it",
         "isCharacter":true,
         "construction":
         [
@@ -33,6 +36,7 @@ var symbols = [
     {
         "id":3,
         "name":"square",
+	    "description":"notably not a round",
         "isCharacter":true,
         "construction":
         [
@@ -46,6 +50,7 @@ var symbols = [
     {
         "id":4,
         "name":"round-box",
+	    "description":"the best of circles and squares",
         "isCharacter":true,
         "construction":
         [
@@ -63,6 +68,7 @@ var symbols = [
     {
         "id":5,
         "name":"mug",
+	    "description":"for drinking out of",
         "isCharacter":true,
         "construction":
         [
@@ -76,6 +82,7 @@ var symbols = [
     {
         "id":6,
         "name":"mug in box",
+	    "description":"it looks like a delivery of a mug",
         "isCharacter":false,
         "construction":
         [
@@ -87,6 +94,7 @@ var symbols = [
     {
         "id":7,
         "name":"circle in circle in circle",
+	    "description":"it looks like a delivery of a delivery of a ball",
         "isCharacter":false,
         "construction":
         [
@@ -99,6 +107,7 @@ var symbols = [
     {
         "id":8,
         "name":"mug in box in circle",
+	    "description":"it looks like a delivery of a delivery of a mug",
         "isCharacter":false,
         "construction":
         [
@@ -106,5 +115,22 @@ var symbols = [
             {"type":"shape","id":6, "x":1,"y":1, "scale":0.5}
         ],
         "size":{"width":3,"height":4}
+    },
+    {
+        "id":9,
+        "name":"Swirl",
+        "description":"This is a swirl",
+        "isCharacter":true,
+        "construction":[
+            {"type":"quarterCircle","x":2,"y":4,"orientation":3,"width":2,"height":-2},
+            {"type":"quarterCircle","x":2,"y":4,"orientation":3,"width":-2,"height":-2},
+            {"type":"quarterCircle","x":2.5,"y":1.5,"orientation":3,"width":-0.5,"height":0.5},
+            {"type":"quarterCircle","x":2.5,"y":1.5,"orientation":3,"width":0.5,"height":0.5},
+            {"type":"quarterCircle","x":2,"y":3,"orientation":3,"width":1,"height":-1},
+            {"type":"quarterCircle","x":2,"y":3,"orientation":3,"width":-1,"height":-1},
+            {"type":"quarterCircle","x":2.5,"y":0.5,"orientation":3,"width":-1.5,"height":1.5},
+            {"type":"quarterCircle","x":2.5,"y":0.5,"orientation":3,"width":1.5,"height":1.5}
+        ],
+        "size":{"width":0,"height":0}
     }
 ];

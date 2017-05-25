@@ -24,9 +24,6 @@ var previousAction = null;
                     if( workingDrawing.construction[selectedElement.getAttribute("partId")].hasOwnProperty("orientation") ){
                         workingDrawing.construction[selectedElement.getAttribute("partId")].orientation++;
                         if(workingDrawing.construction[selectedElement.getAttribute("partId")].orientation > 3){workingDrawing.construction[selectedElement.getAttribute("partId")].orientation = 0;}
-                        var temp = workingDrawing.construction[selectedElement.getAttribute("partId")].width;
-                        workingDrawing.construction[selectedElement.getAttribute("partId")].width = workingDrawing.construction[selectedElement.getAttribute("partId")].height;
-                        workingDrawing.construction[selectedElement.getAttribute("partId")].height = temp;
                         previousAction = {"type":"rotate","partId":selectedElement.getAttribute("partId")};
                     }
                 break;
@@ -73,9 +70,6 @@ var previousAction = null;
                         if( workingDrawing.construction[previousAction.partId].hasOwnProperty("orientation") ){
                             workingDrawing.construction[previousAction.partId].orientation--;
                             if(workingDrawing.construction[previousAction.partId].orientation < 0){workingDrawing.construction[previousAction.partId].orientation = 3;}
-                            var temp = workingDrawing.construction[selectedElement.getAttribute("partId")].width;
-                            workingDrawing.construction[selectedElement.getAttribute("partId")].width = workingDrawing.construction[selectedElement.getAttribute("partId")].height;
-                            workingDrawing.construction[selectedElement.getAttribute("partId")].height = temp;
                         }
                     break;
                     case "arrowMove": 
@@ -134,7 +128,7 @@ var previousAction = null;
     function writeElement_mouseDown(that){
         elementSelect(null);
         startingPosition.x = parseFloat(that.getAttribute("x")); 
-        startingPosition.y = parseFloat(that.getAttribute("y")); 
+        startingPosition.y = parseFloat(that.getAttribute("y"));
 
         var element = document.createElementNS("http://www.w3.org/2000/svg",'rect');
         element.setAttribute("id","movementSurface"); 
@@ -153,9 +147,7 @@ var previousAction = null;
         var xFactor = (event.x-toolBarWidth)/(that.getBoundingClientRect().width);
         var yFactor = (event.y)/(that.getBoundingClientRect().width);
         currentPosition.x = Math.round((gridWidthCount*xFactor)*2)/2 -2;
-        currentPosition.y = Math.round((gridWidthCount*yFactor)*2)/2 -2;
-
-        var data = {};
+        currentPosition.y = Math.round((gridWidthCount*yFactor)*2)/2 -2; 
 
         switch(currentTool.name){
             case "line": data = {"type":"line", "x1":(startingPosition.x+2),"y1":(startingPosition.y+2),"x2":(currentPosition.x+2),"y2":(currentPosition.y+2)}; break;
