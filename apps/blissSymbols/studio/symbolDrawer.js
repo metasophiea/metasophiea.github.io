@@ -11,9 +11,8 @@ var availableElements = [
     //  subshapes
 ];
 
-function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
+function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickAction=""){
     var gridSpacing = 12.5;
-    var onClickAction = "selectElement(event,this)"; var onMouseDownAction = ""; var onMouseUpAction = ""; var onMouseMoveAction = "";
 
     switch(data.type){
         case "line":                drawLine(SVGelement, (data.x1*scale)+x,(data.y1*scale)+y,(data.x2*scale)+x,(data.y2*scale)+y, symbolClass,partId); break;
@@ -39,9 +38,6 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
             element.setAttribute('y2',y2*gridSpacing);
             element.setAttribute("class",symbolClass);
             element.setAttribute("onclick",onClickAction);
-            element.setAttribute("onmousedown",onMouseDownAction);
-            element.setAttribute("onmouseup",onMouseUpAction);
-            element.setAttribute("onmousemove",onMouseMoveAction);
             SVGelement.appendChild(element);
         }
 
@@ -59,9 +55,6 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
             element.setAttribute("ry","0.25");
             element.setAttribute("class",symbolClass);
             element.setAttribute("onclick",onClickAction);
-            element.setAttribute("onmousedown",onMouseDownAction);
-            element.setAttribute("onmouseup",onMouseUpAction);
-            element.setAttribute("onmousemove",onMouseMoveAction);
             SVGelement.appendChild(element);
         }
 
@@ -80,9 +73,6 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
             element.setAttribute("transform","translate(0 -"+r*gridSpacing+") rotate(45 "+x*gridSpacing+" "+y*gridSpacing+")");
             element.setAttribute("class",symbolClass);
             element.setAttribute("onclick",onClickAction);
-            element.setAttribute("onmousedown",onMouseDownAction);
-            element.setAttribute("onmouseup",onMouseUpAction);
-            element.setAttribute("onmousemove",onMouseMoveAction);
             SVGelement.appendChild(element);
         }
 
@@ -94,9 +84,6 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
             element.setAttribute("r",r*gridSpacing);
             element.setAttribute("class",symbolClass);
             element.setAttribute("onclick",onClickAction);
-            element.setAttribute("onmousedown",onMouseDownAction);
-            element.setAttribute("onmouseup",onMouseUpAction);
-            element.setAttribute("onmousemove",onMouseMoveAction);
             SVGelement.appendChild(element);
         }
 
@@ -106,38 +93,36 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId){
             element.setAttribute('d', 'M ' + x1*gridSpacing +' '+ y1*gridSpacing + ' C ' + x2*gridSpacing +' '+ y2*gridSpacing +', '+ x3*gridSpacing +' '+ y3*gridSpacing +', '+ x4*gridSpacing +' '+ y4*gridSpacing );
             element.setAttribute("class",symbolClass);
             element.setAttribute("onclick",onClickAction);
-            element.setAttribute("onmousedown",onMouseDownAction);
-            element.setAttribute("onmouseup",onMouseUpAction);
-            element.setAttribute("onmousemove",onMouseMoveAction);
             SVGelement.appendChild(element);
         }
 
         function drawHalfCircle(SVGelement, x,y,orientation,width,height, symbolClass,partId){
             if(orientation < 0){ orientation = 0; } if(orientation > 3){ orientation = orientation%4; }
-            var ratio = 0.35;
+            var widthCurve = 0.33; var heightCurve = 0.03;
+            
             var matrix = [
                 [
-                    [x,                 y],
-                    [x+ratio+width,     y],
-                    [x+ratio+width,     y+height],
-                    [x,                 y+height]
+                    [x,                                 y],
+                    [x+widthCurve*width+width,          y+heightCurve*height],
+                    [x+widthCurve*width+width,          y+height-heightCurve*height],
+                    [x,                                 y+height]
+                ],
+                [
+                    [x,                             y],
+                    [x+heightCurve*width,           y-height-widthCurve*height],
+                    [x+width-heightCurve*width,     y-height-widthCurve*height],
+                    [x+width,                       y]
+                ],
+                [
+                    [x,                                 y],
+                    [x-widthCurve*width-width,          y-heightCurve*height],
+                    [x-widthCurve*width-width,          y-height+heightCurve*height],
+                    [x,                                 y-height]
                 ],
                 [
                     [x,           y],
-                    [x,           y-height-ratio],
-                    [x+width,     y-height-ratio],
-                    [x+width,     y]
-                ],
-                [
-                    [x,                 y],
-                    [x-ratio-width,     y],
-                    [x-ratio-width,     y-height],
-                    [x,                 y-height]
-                ],
-                [
-                    [x,           y],
-                    [x,           y+height+ratio],
-                    [x-width,     y+height+ratio],
+                    [x-heightCurve*width,           y+height+widthCurve*height],
+                    [x-width+heightCurve*width,     y+height+widthCurve*height],
                     [x-width,     y]
                 ],
             ][orientation];
