@@ -149,6 +149,7 @@ var previousAction = null;
         currentPosition.x = Math.round((gridWidthCount*xFactor)*2)/2 -2;
         currentPosition.y = Math.round((gridWidthCount*yFactor)*2)/2 -2; 
 
+        var data;
         switch(currentTool.name){
             case "line": data = {"type":"line", "x1":(startingPosition.x+2),"y1":(startingPosition.y+2),"x2":(currentPosition.x+2),"y2":(currentPosition.y+2)}; break;
             case "rectangle": data = {"type":"rectangle", "x":(startingPosition.x+2),"y":(startingPosition.y+2),"width":(currentPosition.x-startingPosition.x),"height":(currentPosition.y-startingPosition.y)}; break;
@@ -193,7 +194,7 @@ var previousAction = null;
                 var xAbs = Math.abs(Math.abs(currentPosition.x) - Math.abs(startingPosition.x)); 
                 var yAbs = Math.abs(Math.abs(currentPosition.y) - Math.abs(startingPosition.y));
                 var absMax = xAbs > yAbs ? xAbs : yAbs; 
-                data = {"type":"dimond", "x":(startingPosition.x),"y":(startingPosition.y),"r":absMax}; 
+                data = {"type":"diamond", "x":(startingPosition.x),"y":(startingPosition.y),"r":absMax}; 
             break;
             case "circle": 
                 var xAbs = Math.abs(Math.abs(currentPosition.x) - Math.abs(startingPosition.x)); 

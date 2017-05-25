@@ -102,7 +102,7 @@ var symbols = [
             {"type":"shape","id":0, "x":1,"y":1, "scale":0.5},
             {"type":"shape","id":0, "x":1.5,"y":1.5, "scale":0.25}
         ],
-        "size":{"width":3,"height":4}
+        "size":{"width":4,"height":4}
     },
     {
         "id":8,
@@ -132,5 +132,17 @@ var symbols = [
             {"type":"quarterCircle","x":2.5,"y":0.5,"orientation":3,"width":1.5,"height":1.5}
         ],
         "size":{"width":0,"height":0}
+    },
+    {
+        "id":8484,
+        "name":"percent,percentage,%",
+        "description":"international mathematical symbol",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":0.5,"r":0.5},
+            {"type":"line","x1":0,"y1":4,"x2":2,"y2":0},
+            {"type":"circle","x":1.5,"y":3.5,"r":0.5}
+        ],
+        "size":{"width":2,"height":4}
     }
 ];

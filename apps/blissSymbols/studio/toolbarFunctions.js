@@ -131,8 +131,63 @@ function printWorkingDrawing(){
     }
 
     output += "\t],\n";
-    output += "\t\"size\":" + JSON.stringify(workingDrawing.size) + "\n";
+
+    var symbolExtent = getExtentOfSymbol();
+    output += "\t\"size\":{\"width\":"+symbolExtent.width+",\"height\":"+symbolExtent.height+"}\n";
     output += "}";
 
     return output;
+}
+
+function getExtentOfSymbol(data=null,scale=1,x=0,y=0){
+    var results = [];
+
+    if(data == null){
+        var r;
+        for(var a = 0; a < workingDrawing.construction.length; a++){ 
+            r = getExtentOfSymbol(workingDrawing.construction[a]); 
+            if(r.length != undefined){ for(var b = 0; b < r.length; b++){ results.push(r[b]); } }
+            else{ results.push(r); }
+        }
+    }else if( data.type == "shape" ){
+        var symbol = getSymbolById(data.id); 
+        var subResults = [];
+        for(var a = 0; a < symbol.construction.length; a++){  subResults.push( {"top":data.y,"bottom":data.y+symbol.size.height*data.scale,"left":data.x,"right":data.x+symbol.size.width*data.scale} ); }
+        return subResults;
+    }else{
+        var d = {"top":x,"bottom":x,"left":y,"right":y};
+        switch(data.type){
+            case "line": 
+                if(data.x1 < data.x2){ d.left += data.x1*scale; d.right += data.x2*scale; }else{ d.left += data.x2*scale; d.right += data.x1*scale; }
+                if(data.y1 < data.y2){ d.top += data.y1*scale; d.bottom += data.y2*scale; }else{ d.top += data.y2*scale; d.bottom += data.y1*scale; }
+            break;
+            case "rectangle": case "halfCircle": case "quarterCircle": case "rightAngleTriangle": case "isoscelesTriangle":
+                if(data.width > 0){ d.left += data.x; d.right += data.x+data.width*scale; }else{ d.left += data.x+data.width*scale; d.right += data.x; }
+                if(data.height > 0){ d.top += data.y; d.bottom += data.y+data.height*scale; }else{ d.top += data.y+data.height*scale; d.bottom += data.y; }
+            break;
+            case "diamond": case "circle":
+                d.left += data.x-data.r*scale; d.right += data.x+data.r*scale;
+                d.top += data.y-data.r*scale; d.bottom += data.y+data.r*scale;
+            break;
+        }
+
+        return d;
+    }
+
+    //console.log("----");
+    var ans = {"top":10,"bottom":0,"left":10,"right":0};
+    for(var a = 0; a < results.length; a++){
+        if( results[a].top < ans.top ){ ans.top = results[a].top; }
+        if( results[a].left < ans.left ){ ans.left = results[a].left; }
+        if( results[a].bottom > ans.bottom ){ ans.bottom = results[a].bottom; }
+        if( results[a].right > ans.right ){ ans.right = results[a].right; }
+        //console.log(results[a]);
+    }
+    //console.log("----");
+    //console.log(ans);
+
+
+
+
+    return {"width":ans.right-ans.left, "height":ans.bottom-ans.top};
 }

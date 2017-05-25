@@ -1,7 +1,7 @@
 var availableElements = [
     {"name":"line",                 "amount":1, "example":{"type":"line", "x1":0,"y1":4,"x2":4,"y2":0}},
     {"name":"rectangle",            "amount":1, "example":{"type":"rectangle", "x":0,"y":0,"width":4,"height":4}},
-    {"name":"dimond",               "amount":1, "example":{"type":"dimond", "x":2,"y":2,"r":2}},
+    {"name":"diamond",              "amount":1, "example":{"type":"diamond", "x":2,"y":2,"r":2}},
     {"name":"circle",               "amount":1, "example":{"type":"circle", "x":2,"y":2,"r":2}},
     {"name":"halfCircle",           "amount":1, "example":{"type":"halfCircle", "x":1,"y":0,"orientation":0,"width":2,"height":4}},
     {"name":"quarterCircle",        "amount":1, "example":{"type":"quarterCircle", "x":0,"y":0,"orientation":3,"width":4,"height":4}},
@@ -17,7 +17,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
     switch(data.type){
         case "line":                drawLine(SVGelement, (data.x1*scale)+x,(data.y1*scale)+y,(data.x2*scale)+x,(data.y2*scale)+y, symbolClass,partId,onClickAction); break;
         case "rectangle":           drawRectangle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
-        case "dimond":              drawDiamond(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId,onClickAction); break;
+        case "diamond":              drawDiamond(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId,onClickAction); break;
         case "circle":              drawCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId,onClickAction); break;
         case "halfCircle":          drawHalfCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
         case "quarterCircle":       drawQuarterCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
@@ -108,22 +108,22 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
                     [x,                                 y+height]
                 ],
                 [
-                    [x,                             y],
-                    [x+heightCurve*width,           y-height-widthCurve*height],
-                    [x+width-heightCurve*width,     y-height-widthCurve*height],
-                    [x+width,                       y]
+                    [x,                             y+height],
+                    [x+heightCurve*width,           y-widthCurve*height],
+                    [x+width-heightCurve*width,     y-widthCurve*height],
+                    [x+width,                       y+height]
                 ],
                 [
-                    [x,                                 y],
-                    [x-widthCurve*width-width,          y-heightCurve*height],
-                    [x-widthCurve*width-width,          y-height+heightCurve*height],
-                    [x,                                 y-height]
+                    [x+width,                     y],
+                    [x-widthCurve*width,          y+heightCurve*height],
+                    [x-widthCurve*width,          y+height+heightCurve*height],
+                    [x+width,                     y+height]
                 ],
                 [
-                    [x,           y],
-                    [x-heightCurve*width,           y+height+widthCurve*height],
-                    [x-width+heightCurve*width,     y+height+widthCurve*height],
-                    [x-width,     y]
+                    [x+width,                       y],
+                    [x+width-heightCurve*width,     y+height+widthCurve*height],
+                    [x+heightCurve*width,           y+height+widthCurve*height],
+                    [x,                             y]
                 ],
             ][orientation];
 
@@ -203,10 +203,10 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
         function drawSymbol(SVGelement, id,x,y,scale, symbolClass,partId,onClickAction){
             var symbol = getSymbolById(id); 
             for(var a = 0; a < symbol.construction.length; a++){ drawElement(SVGelement, x,y,scale, symbol.construction[a],symbolClass,partId,onClickAction); }
-
-            function getSymbolById(id){
-                for(var a = 0; a < symbols.length; a++){ if(symbols[a].id == id){return symbols[a];} }
-                return null;
-            }
         }
+}
+
+function getSymbolById(id){
+    for(var a = 0; a < symbols.length; a++){ if(symbols[a].id == id){return symbols[a];} }
+    return null;
 }
