@@ -1,137 +1,36 @@
 var symbols = [
     {
-        "id":0,
-        "name":"circle",
-	    "description":"it's just a circle",
+        "id":-1,
+        "name":"line for circles - ascending",
+	    "description":"this 45 degree line will connect to curves",
         "isCharacter":true,
         "construction":
         [
-            {"type":"circle", "x":2,"y":2,"r":2}
+            {"type":"line", "x1":0.59,"y1":3.41,"x2":3.41,"y2":0.59}
         ],
         "size":{"width":4,"height":4}
     },
     {
-        "id":1,
-        "name":"line",
-	    "description":"straight and true",
+        "id":-2,
+        "name":"line for circles - descending",
+	    "description":"this 45 degree line will connect to curves",
         "isCharacter":true,
         "construction":
         [
-            {"type":"line", "x1":0,"y1":4,"x2":4,"y2":0}
+            {"type":"line", "x1":0.59,"y1":0.59,"x2":3.41,"y2":3.41}
         ],
         "size":{"width":4,"height":4}
     },
     {
-        "id":2,
-        "name":"vee",
-	    "description":"it dips a bit in the middle, but you'll get through it",
-        "isCharacter":true,
-        "construction":
-        [
-            {"type":"line", "x1":0,"y1":0,"x2":2,"y2":4},
-            {"type":"line", "x1":2,"y1":4,"x2":4,"y2":0}
-        ],
-        "size":{"width":4,"height":4}
-    },  
-    {
-        "id":3,
-        "name":"square",
-	    "description":"notably not a round",
-        "isCharacter":true,
-        "construction":
-        [
-            {"type":"line", "x1":0,"y1":0,"x2":0,"y2":4},
-            {"type":"line", "x1":0,"y1":4,"x2":4,"y2":4},
-            {"type":"line", "x1":4,"y1":4,"x2":4,"y2":0},
-            {"type":"line", "x1":4,"y1":0,"x2":0,"y2":0}
-        ],
-        "size":{"width":4,"height":4}
-    },  
-    {
-        "id":4,
-        "name":"round-box",
-	    "description":"the best of circles and squares",
-        "isCharacter":true,
-        "construction":
-        [
-            {"type":"quarterCircle", "x":0,"y":0,"orientation":0,"width":1,"height":1},
-            {"type":"line", "x1":1,"y1":0,"x2":3,"y2":0},
-            {"type":"quarterCircle", "x":3,"y":0,"orientation":3,"width":1,"height":1},
-            {"type":"line", "x1":4,"y1":1,"x2":4,"y2":3},
-            {"type":"quarterCircle", "x":3,"y":3,"orientation":2,"width":1,"height":1},
-            {"type":"line", "x1":1,"y1":4,"x2":3,"y2":4},
-            {"type":"quarterCircle", "x":0,"y":3,"orientation":1,"width":1,"height":1},
-            {"type":"line", "x1":0,"y1":1,"x2":0,"y2":3}
-        ],
-        "size":{"width":4,"height":4}
-    },  
-    {
-        "id":5,
-        "name":"mug",
-	    "description":"for drinking out of",
-        "isCharacter":true,
-        "construction":
-        [
-            {"type":"line", "x1":0,"y1":0,"x2":0,"y2":4},
-            {"type":"line", "x1":0,"y1":4,"x2":2,"y2":4},
-            {"type":"line", "x1":2,"y1":0,"x2":2,"y2":4},
-            {"type":"halfCircle", "x":2,"y":1,"orientation":0,"width":1,"height":2}
-        ],
-        "size":{"width":3,"height":4}
-    },
-    {
-        "id":6,
-        "name":"mug in box",
-	    "description":"it looks like a delivery of a mug",
-        "isCharacter":false,
-        "construction":
-        [
-            {"type":"shape","id":3, "x":0,"y":0, "scale":1},
-            {"type":"shape","id":5, "x":1.5,"y":1, "scale":0.5}
-        ],
-        "size":{"width":3,"height":4}
-    },
-    {
-        "id":7,
-        "name":"circle in circle in circle",
-	    "description":"it looks like a delivery of a delivery of a ball",
-        "isCharacter":false,
-        "construction":
-        [
-            {"type":"shape","id":0, "x":0,"y":0, "scale":1},
-            {"type":"shape","id":0, "x":1,"y":1, "scale":0.5},
-            {"type":"shape","id":0, "x":1.5,"y":1.5, "scale":0.25}
-        ],
-        "size":{"width":4,"height":4}
-    },
-    {
-        "id":8,
-        "name":"mug in box in circle",
-	    "description":"it looks like a delivery of a delivery of a mug",
-        "isCharacter":false,
-        "construction":
-        [
-            {"type":"shape","id":0, "x":0,"y":0, "scale":1},
-            {"type":"shape","id":6, "x":1,"y":1, "scale":0.5}
-        ],
-        "size":{"width":3,"height":4}
-    },
-    {
-        "id":9,
-        "name":"Swirl",
-        "description":"This is a swirl",
+        "id":8483,
+        "name":"exclamation_mark",
+        "description":"punctuation mark - 1. used as punctuation in symbol sentences; 2. used to indicate that the symbol statement that follows it is in the imperative form",
         "isCharacter":true,
         "construction":[
-            {"type":"quarterCircle","x":2,"y":4,"orientation":3,"width":2,"height":-2},
-            {"type":"quarterCircle","x":2,"y":4,"orientation":3,"width":-2,"height":-2},
-            {"type":"quarterCircle","x":2.5,"y":1.5,"orientation":3,"width":-0.5,"height":0.5},
-            {"type":"quarterCircle","x":2.5,"y":1.5,"orientation":3,"width":0.5,"height":0.5},
-            {"type":"quarterCircle","x":2,"y":3,"orientation":3,"width":1,"height":-1},
-            {"type":"quarterCircle","x":2,"y":3,"orientation":3,"width":-1,"height":-1},
-            {"type":"quarterCircle","x":2.5,"y":0.5,"orientation":3,"width":-1.5,"height":1.5},
-            {"type":"quarterCircle","x":2.5,"y":0.5,"orientation":3,"width":1.5,"height":1.5}
+            {"type":"line","x1":0,"y1":0,"x2":0,"y2":3},
+            {"type":"dot","x":0,"y":4}
         ],
-        "size":{"width":0,"height":0}
+        "size":{"width":0,"height":4}
     },
     {
         "id":8484,
@@ -144,5 +43,1159 @@ var symbols = [
             {"type":"circle","x":1.5,"y":3.5,"r":0.5}
         ],
         "size":{"width":2,"height":4}
+    },
+    {
+        "id":8485,
+        "name":"question_mark",
+        "description":"punctuation mark - used as punctuation in symbol sentences",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0,"y":1,"orientation":3,"width":2,"height":-1},
+            {"type":"quarterCircle","x":1,"y":2,"orientation":3,"width":1,"height":-1},
+            {"type":"line","x1":1,"y1":2,"x2":1,"y2":3},
+            {"type":"dot","x":1,"y":4}
+        ],
+        "size":{"width":2,"height":4}
+    },
+    {
+        "id":8486,
+        "name":"period,point,full_stop,decimal_point",
+        "description":"punctuation mark - 1. used as punctuation in symbol sentences; 2. international mathematical symbol",
+        "isCharacter":true,
+        "construction":[
+            {"type":"dot","x":0,"y":4}
+        ],
+        "size":{"width":0,"height":0}
+    },
+    {
+        "id":8487,
+        "name":"comma",
+        "description":"punctuation mark - 1. used as punctuation in symbol sentences; 2. used to divide component parts of compound and combined symbols, in order to clarify meaning",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":4,"x2":0,"y2":4.5}
+        ],
+        "size":{"width":0,"height":0.5}
+    },
+    {
+        "id":8488,
+        "name":"colon",
+        "description":"punctuation mark",
+        "isCharacter":true,
+        "construction":[
+            {"type":"dot","x":0,"y":4},
+            {"type":"dot","x":0,"y":3}
+        ],
+        "size":{"width":0,"height":1}
+    },
+    {
+        "id":8496,
+        "name":"zero_(digit),0",
+        "description":"Arabic numeral 0",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0,"y":2.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":0.5},
+            {"type":"line","x1":0,"y1":2.5,"x2":0,"y2":3.5},
+            {"type":"line","x1":1,"y1":2.5,"x2":1,"y2":3.5},
+            {"type":"line","x1":0,"y1":2.5,"x2":1,"y2":3.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8497,
+        "name":"one_(digit),1",
+        "description":"Arabic numeral 1",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0.5,"y1":2,"x2":0.5,"y2":4},
+            {"type":"line","x1":0,"y1":4,"x2":1,"y2":4},
+            {"type":"line","x1":0,"y1":2.5,"x2":0.5,"y2":2}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8498,
+        "name":"two_(digit),2",
+        "description":"Arabic numeral 2",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0,"y":2.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"line","x1":0,"y1":4,"x2":1,"y2":4},
+            {"type":"line","x1":0,"y1":4,"x2":1,"y2":2.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8499,
+        "name":"three_(digit),3",
+        "description":"Arabic numeral 3",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0.5,"y":2,"orientation":0,"width":0.5,"height":1},
+            {"type":"halfCircle","x":0.5,"y":3,"orientation":0,"width":0.5,"height":1},
+            {"type":"quarterCircle","x":0.5,"y":2,"orientation":3,"width":-0.5,"height":0.5},
+            {"type":"quarterCircle","x":0.5,"y":4,"orientation":3,"width":-0.5,"height":-0.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8500,
+        "name":"four_(digit),4",
+        "description":"Arabic numeral 4",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":3},
+            {"type":"line","x1":0,"y1":3,"x2":1,"y2":3},
+            {"type":"line","x1":1,"y1":2,"x2":1,"y2":4}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8501,
+        "name":"five_(digit),5",
+        "description":"Arabic numeral 5",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":1,"y1":2,"x2":0,"y2":2},
+            {"type":"line","x1":0,"y1":3,"x2":0,"y2":2},
+            {"type":"line","x1":0,"y1":3,"x2":0.5,"y2":3},
+            {"type":"line","x1":0.5,"y1":4,"x2":0,"y2":4},
+            {"type":"halfCircle","x":0.5,"y":3,"orientation":0,"width":0.5,"height":1}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8502,
+        "name":"six_(digit),6",
+        "description":"Arabic numeral 6",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0,"y":2.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":0.5},
+            {"type":"line","x1":0,"y1":3.5,"x2":0,"y2":2.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8503,
+        "name":"seven_(digit),7",
+        "description":"Arabic numeral 7",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":1,"y2":2},
+            {"type":"line","x1":0.5,"y1":4,"x2":1,"y2":2}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8504,
+        "name":"eight_(digit),8",
+        "description":"Arabic numeral 8",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":2.5,"r":0.5},
+            {"type":"circle","x":0.5,"y":3.5,"r":0.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8505,
+        "name":"nine_(digit),9",
+        "description":"Arabic numeral 9",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":2.5,"r":0.5},
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":0.5},
+            {"type":"line","x1":1,"y1":2.5,"x2":1,"y2":3.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+
+
+
+
+
+    {
+        "id":8510,
+        "name":"zero_(index_number)",
+        "description":"Arabic numeral 0 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8496","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8511,
+        "name":"one_(index_number)",
+        "description":"Arabic numeral 1 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8497","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8512,
+        "name":"two_(index_number)",
+        "description":"Arabic numeral 2 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8498","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8513,
+        "name":"three_(index_number)",
+        "description":"Arabic numeral 3 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8499","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8514,
+        "name":"four_(index_number)",
+        "description":"Arabic numeral 4 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8500","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8515,
+        "name":"five_(index_number)",
+        "description":"Arabic numeral 5 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8501","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8516,
+        "name":"six_(index_number)",
+        "description":"Arabic numeral 6 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8502","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8517,
+        "name":"seven_(index_number)",
+        "description":"Arabic numeral 7 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8503","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8518,
+        "name":"eigth_(index_number)",
+        "description":"Arabic numeral 8 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8504","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8519,
+        "name":"nine_(index_number)",
+        "description":"Arabic numeral 9 - small",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8505","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":0.5,"height":1}
+    },
+    {
+        "id":8521,
+        "name":"a_(lowercase)",
+        "description":"Latin English lowercase letter a",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":3.5,"r":0.5},
+            {"type":"line","x1":1,"y1":3,"x2":1,"y2":4},
+        ],
+        "size":{"width":1.5,"height":1}
+    },
+    {
+        "id":8522,
+        "name":"b_(lowercase)",
+        "description":"Latin English lowercase letter b",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"circle","x":0.5,"y":3.5,"r":0.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8523,
+        "name":"c_(lowercase)",
+        "description":"Latin English lowercase letter c",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0.5,"y":3,"orientation":0,"width":-0.5,"height":1},
+            {"type":"line","x1":1,"y1":4,"x2":0.5,"y2":4},
+            {"type":"line","x1":0.5,"y1":3,"x2":1,"y2":3}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8524,
+        "name":"d_(lowercase)",
+        "description":"Latin English lowercase letter d",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":3.5,"r":0.5},
+            {"type":"line","x1":1,"y1":2,"x2":1,"y2":4}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8525,
+        "name":"e_(lowercase)",
+        "description":"Latin English lowercase letter e",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":1,"y1":3.5,"x2":0,"y2":3.5},
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"quarterCircle","x":0.5,"y":4,"orientation":3,"width":-0.5,"height":-0.5},
+            {"type":"line","x1":1,"y1":4,"x2":0.5,"y2":4}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8526,
+        "name":"f_(lowercase)",
+        "description":"Latin English lowercase letter f",
+        "isCharacter":true,
+        "construction":[
+            {"type":"quarterCircle","x":1,"y":2,"orientation":3,"width":-0.5,"height":0.5},
+            {"type":"line","x1":0.5,"y1":2.5,"x2":0.5,"y2":4},
+            {"type":"line","x1":1,"y1":3,"x2":0,"y2":3}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8527,
+        "name":"g_(lowercase)",
+        "description":"Latin English lowercase letter g",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":3.5,"r":0.5},
+            {"type":"halfCircle","x":0,"y":4.5,"orientation":3,"width":1,"height":0.5},
+            {"type":"line","x1":1,"y1":3,"x2":1,"y2":4.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8528,
+        "name":"h_(lowercase)",
+        "description":"Latin English lowercase letter h",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"line","x1":1,"y1":3.5,"x2":1,"y2":4}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8529,
+        "name":"i_(lowercase)",
+        "description":"Latin English lowercase letter i",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":0,"y2":4},
+            {"type":"dot","x":0,"y":2.5}
+        ],
+        "size":{"width":0,"height":1.5}
+    },
+    {
+        "id":8530,
+        "name":"j_(lowercase)",
+        "description":"Latin English lowercase letter j",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":0,"y2":4},
+            {"type":"dot","x":0,"y":2.5},
+            {"type":"quarterCircle","x":-0.5,"y":4.5,"orientation":3,"width":0.5,"height":-0.5}
+        ],
+        "size":{"width":0.5,"height":2}
+    },
+    {
+        "id":8531,
+        "name":"k_(lowercase)",
+        "description":"Latin English lowercase letter k",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":0,"y1":3.5,"x2":1,"y2":3},
+            {"type":"line","x1":0,"y1":3.5,"x2":1,"y2":4}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8532,
+        "name":"l_(lowercase)",
+        "description":"Latin English lowercase letter l",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4}
+        ],
+        "size":{"width":0,"height":2}
+    },
+    {
+        "id":8533,
+        "name":"m_(lowercase)",
+        "description":"Latin English lowercase letter m",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":0,"y2":4},
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"halfCircle","x":1,"y":3.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"line","x1":1,"y1":4,"x2":1,"y2":3.5},
+            {"type":"line","x1":2,"y1":4,"x2":2,"y2":3.5}
+        ],
+        "size":{"width":2,"height":1}
+    },
+    {
+        "id":8534,
+        "name":"n_(lowercase)",
+        "description":"Latin English lowercase letter n",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":0,"y2":4},
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":-0.5},
+            {"type":"line","x1":1,"y1":4,"x2":1,"y2":3.5}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8535,
+        "name":"o_(lowercase)",
+        "description":"Latin English lowercase letter o",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":3.5,"r":0.5}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8536,
+        "name":"p_(lowercase)",
+        "description":"Latin English lowercase letter p",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":3.5,"r":0.5},
+            {"type":"line","x1":0,"y1":3,"x2":0,"y2":4.5}
+        ],
+        "size":{"width":1,"height":1.5}
+    },
+    {
+        "id":8537,
+        "name":"q_(lowercase)",
+        "description":"Latin English lowercase letter q",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":0.5,"y":3.5,"r":0.5},
+            {"type":"line","x1":1,"y1":3,"x2":1,"y2":4.5}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8538,
+        "name":"r_(lowercase)",
+        "description":"Latin English lowercase letter r",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":4,"x2":0,"y2":3},
+            {"type":"quarterCircle","x":0.5,"y":3,"orientation":3,"width":-0.5,"height":0.5},
+            {"type":"line","x1":0.5,"y1":3,"x2":1,"y2":3}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8539,
+        "name":"s_(lowercase)",
+        "description":"Latin English lowercase letter s",
+        "isCharacter":true,
+        "construction":[
+            {"type":"quarterCircle","x":0.5,"y":3,"orientation":3,"width":-0.5,"height":0.5},
+            {"type":"quarterCircle","x":0.5,"y":4,"orientation":3,"width":0.5,"height":-0.5},
+            {"type":"line","x1":0.5,"y1":3,"x2":1,"y2":3},
+            {"type":"line","x1":1,"y1":3.5,"x2":0,"y2":3.5},
+            {"type":"line","x1":0,"y1":4,"x2":0.5,"y2":4}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8540,
+        "name":"t_(lowercase)",
+        "description":"Latin English lowercase letter t",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2.5,"x2":1,"y2":2.5},
+            {"type":"line","x1":0.5,"y1":2,"x2":0.5,"y2":3.5},
+            {"type":"quarterCircle","x":1,"y":4,"orientation":3,"width":-0.5,"height":-0.5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8541,
+        "name":"u_(lowercase)",
+        "description":"Latin English lowercase letter u",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0,"y":3.5,"orientation":3,"width":1,"height":0.5},
+            {"type":"line","x1":0,"y1":3,"x2":0,"y2":3.5},
+            {"type":"line","x1":1,"y1":3,"x2":1,"y2":4}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8542,
+        "name":"v_(lowercase)",
+        "description":"Latin English lowercase letter v",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":0.5,"y2":4},
+            {"type":"line","x1":0.5,"y1":4,"x2":1,"y2":3}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8543,
+        "name":"w_(lowercase)",
+        "description":"Latin English lowercase letter w",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":0.5,"y2":4},
+            {"type":"line","x1":0.5,"y1":4,"x2":1,"y2":3},
+            {"type":"line","x1":1,"y1":3,"x2":1.5,"y2":4},
+            {"type":"line","x1":1.5,"y1":4,"x2":2,"y2":3}
+        ],
+        "size":{"width":2,"height":1}
+    },
+    {
+        "id":8544,
+        "name":"x_(lowercase)",
+        "description":"Latin English lowercase letter x",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":1,"y2":4},
+            {"type":"line","x1":1,"y1":3,"x2":0,"y2":4}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8545,
+        "name":"y_(lowercase)",
+        "description":"Latin English lowercase letter y",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":0.5,"y2":4},
+            {"type":"line","x1":1,"y1":3,"x2":0,"y2":5}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8546,
+        "name":"z_(lowercase)",
+        "description":"Latin English lowercase letter z",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":3,"x2":1,"y2":3},
+            {"type":"line","x1":1,"y1":4,"x2":0,"y2":4},
+            {"type":"line","x1":0,"y1":4,"x2":1,"y2":3}
+        ],
+        "size":{"width":1,"height":1}
+    },
+    {
+        "id":8551,
+        "name":"A_(uppercase)",
+        "description":"Latin English uppercase letter A",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":4,"x2":1,"y2":2},
+            {"type":"line","x1":1,"y1":2,"x2":2,"y2":4},
+            {"type":"line","x1":1.5,"y1":3,"x2":0.5,"y2":3}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8552,
+        "name":"B_(uppercase)",
+        "description":"Latin English uppercase letter B",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"halfCircle","x":0.5,"y":2,"orientation":0,"width":0.5,"height":1},
+            {"type":"halfCircle","x":1,"y":3,"orientation":0,"width":0.5,"height":1},
+            {"type":"line","x1":1,"y1":3,"x2":0,"y2":3},
+            {"type":"line","x1":0,"y1":4,"x2":1,"y2":4},
+            {"type":"line","x1":0.5,"y1":2,"x2":0,"y2":2}
+        ],
+        "size":{"width":1.5,"height":2}
+    },
+    {
+        "id":8553,
+        "name":"C_(uppercase)",
+        "description":"Latin English uppercase letter C",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":1,"y":2,"orientation":0,"width":-1,"height":2},
+            {"type":"line","x1":1,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":2,"y1":4,"x2":1,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8554,
+        "name":"D_(uppercase)",
+        "description":"Latin English uppercase letter D",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":1,"y1":4,"x2":0,"y2":4},
+            {"type":"line","x1":1,"y1":2,"x2":0,"y2":2},
+            {"type":"halfCircle","x":1,"y":2,"orientation":0,"width":1,"height":2}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8555,
+        "name":"E_(uppercase)",
+        "description":"Latin English uppercase letter E",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":0,"y1":4,"x2":2,"y2":4},
+            {"type":"line","x1":0,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":0,"y1":3,"x2":1.5,"y2":3}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8556,
+        "name":"F_(uppercase)",
+        "description":"Latin English uppercase letter F",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":0,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":1.5,"y1":3,"x2":0,"y2":3}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8557,
+        "name":"G_(uppercase)",
+        "description":"Latin English uppercase letter G",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":1,"y":2,"orientation":0,"width":-1,"height":2},
+            {"type":"line","x1":1,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":2,"y1":3,"x2":2,"y2":4},
+            {"type":"line","x1":1,"y1":4,"x2":2,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8558,
+        "name":"H_(uppercase)",
+        "description":"Latin English uppercase letter H",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":2,"y1":4,"x2":2,"y2":2},
+            {"type":"line","x1":2,"y1":3,"x2":0,"y2":3}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8559,
+        "name":"I_(uppercase)",
+        "description":"Latin English uppercase letter I",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":0,"y1":4,"x2":2,"y2":4},
+            {"type":"line","x1":1,"y1":2,"x2":1,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8560,
+        "name":"J_(uppercase)",
+        "description":"Latin English uppercase letter J",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":1,"y1":2,"x2":1,"y2":3},
+            {"type":"quarterCircle","x":0,"y":4,"orientation":3,"width":1,"height":-1}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8561,
+        "name":"K_(uppercase)",
+        "description":"Latin English uppercase letter K",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":0,"y1":3,"x2":2,"y2":2},
+            {"type":"line","x1":1,"y1":2.5,"x2":2,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8562,
+        "name":"L_(uppercase)",
+        "description":"Latin English uppercase letter M",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":0,"y1":2,"x2":1,"y2":4},
+            {"type":"line","x1":1,"y1":4,"x2":2,"y2":2},
+            {"type":"line","x1":2,"y1":2,"x2":2,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8564,
+        "name":"N_(uppercase)",
+        "description":"Latin English uppercase letter N",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":2,"y1":2,"x2":2,"y2":4},
+            {"type":"line","x1":2,"y1":4,"x2":0,"y2":2}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8565,
+        "name":"O_(uppercase)",
+        "description":"Latin English uppercase letter O",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":1,"y":3,"r":1}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8566,
+        "name":"P_(uppercase)",
+        "description":"Latin English uppercase letter P",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"halfCircle","x":1.5,"y":2,"orientation":0,"width":0.5,"height":1},
+            {"type":"line","x1":1.5,"y1":2,"x2":0,"y2":2},
+            {"type":"line","x1":0,"y1":3,"x2":1.5,"y2":3}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8567,
+        "name":"Q_(uppercase)",
+        "description":"Latin English uppercase letter Q",
+        "isCharacter":true,
+        "construction":[
+            {"type":"circle","x":1,"y":3,"r":1},
+            {"type":"line","x1":1.5,"y1":3.5,"x2":2,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8568,
+        "name":"R_(uppercase)",
+        "description":"Latin English uppercase letter R",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":4},
+            {"type":"line","x1":0,"y1":2,"x2":1.5,"y2":2},
+            {"type":"line","x1":1.5,"y1":3,"x2":0,"y2":3},
+            {"type":"halfCircle","x":1.5,"y":2,"orientation":0,"width":0.5,"height":1},
+            {"type":"line","x1":1,"y1":3,"x2":2,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8569,
+        "name":"S_(uppercase)",
+        "description":"Latin English uppercase letter S",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0.5,"y":3,"orientation":0,"width":-0.5,"height":-1},
+            {"type":"halfCircle","x":1.5,"y":3,"orientation":0,"width":0.5,"height":1},
+            {"type":"line","x1":0,"y1":4,"x2":1.5,"y2":4},
+            {"type":"line","x1":1.5,"y1":3,"x2":0.5,"y2":3},
+            {"type":"line","x1":0.5,"y1":2,"x2":2,"y2":2}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8570,
+        "name":"T_(uppercase)",
+        "description":"Latin English uppercase letter T",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":1,"y1":2,"x2":1,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8571,
+        "name":"U_(uppercase)",
+        "description":"Latin English uppercase letter U",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0,"y":3,"orientation":3,"width":2,"height":1},
+            {"type":"line","x1":0,"y1":2,"x2":0,"y2":3},
+            {"type":"line","x1":2,"y1":3,"x2":2,"y2":2}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8572,
+        "name":"V_(uppercase)",
+        "description":"Latin English uppercase letter V",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":1,"y2":4},
+            {"type":"line","x1":1,"y1":4,"x2":2,"y2":2}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8573,
+        "name":"W_(uppercase)",
+        "description":"Latin English uppercase letter W",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":0.5,"y2":4},
+            {"type":"line","x1":0.5,"y1":4,"x2":1,"y2":2},
+            {"type":"line","x1":1,"y1":2,"x2":1.5,"y2":4},
+            {"type":"line","x1":1.5,"y1":4,"x2":2,"y2":2}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8574,
+        "name":"X_(uppercase)",
+        "description":"Latin English uppercase letter X",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":2,"y2":4},
+            {"type":"line","x1":2,"y1":2,"x2":0,"y2":4}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8575,
+        "name":"Y_(uppercase)",
+        "description":"Latin English uppercase letter Y",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":1,"y2":3},
+            {"type":"line","x1":0,"y1":4,"x2":2,"y2":2}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8576,
+        "name":"Z_(uppercase)",
+        "description":"Latin English uppercase letter Z",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":0,"y1":4,"x2":2,"y2":4},
+            {"type":"line","x1":0,"y1":4,"x2":2,"y2":2}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":8993,
+        "name":"indicator_(action)",
+        "description":"action [quarter-sized]: placed above a symbol to create (1) the infinitive form of a verb, and (2) the present tense of a verb",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":-1,"x2":0.5,"y2":-2},
+            {"type":"line","x1":0.5,"y1":-2,"x2":1,"y2":-1}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8994,
+        "name":"indicator_(active)",
+        "description":"action indicator [modified], turned on its side and pointing forward: placed above another symbol to emphasize that something is acting on something else. The symbol is logically related to about.",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":-1,"x2":1,"y2":-1.5},
+            {"type":"line","x1":1,"y1":-1.5,"x2":0,"y2":-2}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8995,
+        "name":"indicator_(conditional)",
+        "description":"question mark [quarter-sized]: placed above a symbol to indicate the equivalent of the English present conditional form",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8485","x":0,"y":-2,"scale":0.25}
+        ],
+        "size":{"width":0.5,"height":2}
+    },
+    {
+        "id":8996,
+        "name":"indicator_(description_after_fact)",
+        "description":"description indicator + dot: placed above another symbol to indicate meanings equivalent to an English past participle, usually with an -ed or - en ending",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8998","x":0,"y":0,"scale":1},
+            {"type":"dot","x":1.5,"y":-2}
+        ],
+        "size":{"width":1.5,"height":4}
+    },
+    {
+        "id":8997,
+        "name":"indicator_(description_before_fact)",
+        "description":"dot + description indicator: the dot comes before the indicator: placed above another symbol to produce meanings equivalent to English words ending in -able",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8998","x":0.5,"y":0,"scale":1},
+            {"type":"dot","x":0,"y":-2}
+        ],
+        "size":{"width":1.5,"height":4}
+    },
+    {
+        "id":8998,
+        "name":"indicator_(description)",
+        "description":"evaluation [quarter-sized]: placed above another symbol to show that it is describing or evaluating something. This indicator produces meanings equivalent to English adjectives and adverbs.",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":-2,"x2":0.5,"y2":-1},
+            {"type":"line","x1":0.5,"y1":-1,"x2":1,"y2":-2}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":8999,
+        "name":"indicator_(future_action)",
+        "description":"future [quarter-sized]: placed above another symbol to indicate future action",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0.5,"y":-2,"orientation":0,"width":-0.25,"height":1}
+        ],
+        "size":{"width":0.25,"height":2}
+    },
+    {
+        "id":9000,
+        "name":"indicator_(future_conditional)",
+        "description":"conditional indicator + future action indicator: placed above another symbol to indicate the future conditional form",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8999","x":0.5,"y":0,"scale":1},
+            {"type":"shape","id":"8485","x":0,"y":-2,"scale":0.25}
+        ],
+        "size":{"width":0.75,"height":4}
+    },
+    {
+        "id":9001,
+        "name":"indicator_(future_passive)",
+        "description":"passive indicator + future action indicator",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"8999","x":1,"y":0,"scale":1},
+            {"type":"shape","id":"9003","x":0,"y":0,"scale":1}
+        ],
+        "size":{"width":1.25,"height":2}
+    },
+    {
+        "id":9002,
+        "name":"indicator_(future_passive_conditional)",
+        "description":"passive indicator + future conditional indicator",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"9003","x":0,"y":0,"scale":1},
+            {"type":"shape","id":"9000","x":1,"y":0,"scale":1}
+        ],
+        "size":{"width":1.75,"height":4}
+    },
+    {
+        "id":9003,
+        "name":"indicator_(passive)",
+        "description":"action indicator [modified], turned on its side and pointing backward: placed above another symbol to emphasize that something is being acted upon. The symbol is logically related to by.",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":-1.5,"x2":1,"y2":-1},
+            {"type":"line","x1":0,"y1":-1.5,"x2":1,"y2":-2}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":9004,
+        "name":"indicator_(past_action)",
+        "description":"past [quarter-sized]: placed above another symbol to indicate past action",
+        "isCharacter":true,
+        "construction":[
+            {"type":"halfCircle","x":0,"y":-2,"orientation":0,"width":0.25,"height":1}
+        ],
+        "size":{"width":0.25,"height":2}
+    },
+    {
+        "id":9005,
+        "name":"indicator_(past_conditional)",
+        "description":"conditional indicator + past action indicator: placed above a symbol to indicate the past conditional form",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"9004","x":1,"y":0,"scale":1},
+            {"type":"shape","id":"8995","x":0,"y":0,"scale":1}
+        ],
+        "size":{"width":1.25,"height":2}
+    },
+    {
+        "id":9006,
+        "name":"indicator_(past_passive_conditional)",
+        "description":"passive indicator + past conditional indicator",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"9005","x":1,"y":0,"scale":1},
+            {"type":"shape","id":"9003","x":0,"y":0,"scale":1}
+        ],
+        "size":{"width":2.25,"height":2}
+    },
+    {
+        "id":9007,
+        "name":"indicator_(past_passive)",
+        "description":"passive indicator + past action indicator",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"9004","x":1.5,"y":0,"scale":1},
+            {"type":"shape","id":"9003","x":0,"y":0,"scale":1}
+        ],
+        "size":{"width":1.75,"height":2}
+    },
+    {
+        "id":9008,
+        "name":"indicator_(present_passive_conditional)",
+        "description":"passive indicator + conditional indicator",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"9003","x":0,"y":0,"scale":1},
+            {"type":"shape","id":"8995","x":1.5,"y":0,"scale":1}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":9009,
+        "name":"indicator_(thing)",
+        "description":"thing [quarter-sized]: placed above another symbol to represent a concrete object",
+        "isCharacter":true,
+        "construction":[
+            {"type":"rectangle","x":0,"y":-1,"width":1,"height":-1}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":9010,
+        "name":"indicator_(things)",
+        "description":"thing indicator + plural indicator",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"9009","x":0,"y":0,"scale":1},
+            {"type":"shape","id":"9011","x":1.5,"y":0,"scale":1}
+        ],
+        "size":{"width":2.5,"height":2}
+    },
+    {
+        "id":9011,
+        "name":"indicator_(plural)",
+        "description":"multiplication [quarter-sized]: placed above another symbol to indicate a plural form",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":-1,"x2":1,"y2":-2},
+            {"type":"line","x1":1,"y1":-1,"x2":0,"y2":-2}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":12321,
+        "name":"a,an,any",
+        "description":"diagonal line suggests an index finger pointing at something unspecific. The diagonal line has the opposite orientation to the one used in the, this and that",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":-2,"x2":1,"y2":-1}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":12324,
+        "name":"about,concerning,in_relation_to,of,on",
+        "description":"relation [half-sized], pointing forward: used to mean on when the symbol refers to time, e.g. on Wednesday",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":1,"x2":1,"y2":2},
+            {"type":"line","x1":1,"y1":2,"x2":0,"y2":3}
+        ],
+        "size":{"width":1,"height":2}
+    },
+    {
+        "id":12333,
+        "name":"across",
+        "description":"a vertical line with two horizontal lines [half sized] across it: CKB says this is a small road crossing a main road",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":1,"y1":1,"x2":1,"y2":4},
+            {"type":"line","x1":0,"y1":2,"x2":2,"y2":2},
+            {"type":"line","x1":2,"y1":3,"x2":0,"y2":3}
+        ],
+        "size":{"width":2,"height":3}
+    },
+    {
+        "id":12334,
+        "name":"action,act,deed",
+        "description":"symbol suggests the shape of a volcano cone, which CKB says represents \"one of the primeval actions of our earth\". The Action [full-sized], is used primarily as the source of activity - action [half-sized]",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":4,"x2":2,"y2":0},
+            {"type":"line","x1":2,"y1":0,"x2":4,"y2":4}
+        ],
+        "size":{"width":4,"height":4}
+    },
+    {
+        "id":12335,
+        "name":"activity,male_gender_(in_combinations)",
+        "description":"action [half-sized]) (Also used as part of other characters to indicate male gender",
+        "isCharacter":true,
+        "construction":[
+            {"type":"shape","id":"12334","x":0,"y":2,"scale":0.5}
+        ],
+        "size":{"width":2,"height":2}
+    },
+    {
+        "id":12339,
+        "name":"addition,gain",
+        "description":"based upon the international mathematical symbol",
+        "isCharacter":true,
+        "construction":[
+            {"type":"line","x1":0,"y1":2,"x2":4,"y2":2},
+            {"type":"line","x1":2,"y1":0,"x2":2,"y2":4}
+        ],
+        "size":{"width":4,"height":4}
     }
 ];

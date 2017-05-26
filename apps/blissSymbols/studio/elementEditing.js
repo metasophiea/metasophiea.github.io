@@ -65,6 +65,7 @@ var previousAction = null;
         if(event.key == "z" && event.ctrlKey == true){
             if(previousAction != null){
                 switch(previousAction.type){
+                    case "create": workingDrawing.construction.pop(); break;
                     case "delete": workingDrawing.construction.push(previousAction.object); redraw(); break;
                     case "rotate": 
                         if( workingDrawing.construction[previousAction.partId].hasOwnProperty("orientation") ){
@@ -151,6 +152,7 @@ var previousAction = null;
 
         var data;
         switch(currentTool.name){
+            case "dot": data = {"type":"dot", "x":(startingPosition.x+2),"y":(startingPosition.y+2)}; break;
             case "line": data = {"type":"line", "x1":(startingPosition.x+2),"y1":(startingPosition.y+2),"x2":(currentPosition.x+2),"y2":(currentPosition.y+2)}; break;
             case "rectangle": data = {"type":"rectangle", "x":(startingPosition.x+2),"y":(startingPosition.y+2),"width":(currentPosition.x-startingPosition.x),"height":(currentPosition.y-startingPosition.y)}; break;
             case "diamond": 
@@ -180,14 +182,28 @@ var previousAction = null;
         document.getElementById("tempDrawPlane").innerHTML = null; 
         drawElement(document.getElementById("tempDrawPlane"), 0,0, 1,data,"newElementLine",0);
     }
+    function writeElement_onClick(that){
+        document.getElementById("surface").innerHTML = null;
+        document.getElementById("tempDrawPlane").innerHTML = null;
+        var data = {};
+        switch(currentTool.name){
+            case "dot": data = {"type":"dot", "x":(startingPosition.x),"y":(startingPosition.y)}; break;
+        }
+
+        workingDrawing.construction.push(data);
+        previousAction = {"type":"create","object":data};
+        redraw();
+
+    }
     function writeElement_stopMouse(){
         document.getElementById("surface").innerHTML = null;
         document.getElementById("tempDrawPlane").innerHTML = null;
-        if( startingPosition.x == currentPosition.x && startingPosition.y == currentPosition.y ){return;}
+        if( startingPosition.x == currentPosition.x && startingPosition.y == currentPosition.y && currentTool.type != "dot" ){return;}
 
         var data = {};
 
         switch(currentTool.name){
+            case "dot": data = {"type":"dot", "x":(startingPosition.x),"y":(startingPosition.y)}; break;
             case "line": data = {"type":"line", "x1":(startingPosition.x),"y1":(startingPosition.y),"x2":(currentPosition.x),"y2":(currentPosition.y)}; break;
             case "rectangle": data = {"type":"rectangle", "x":(startingPosition.x),"y":(startingPosition.y),"width":(currentPosition.x-startingPosition.x),"height":(currentPosition.y-startingPosition.y)}; break;
             case "diamond": 
@@ -215,6 +231,7 @@ var previousAction = null;
         }
 
         workingDrawing.construction.push(data);
+        previousAction = {"type":"create","object":data};
         redraw();
     }
 

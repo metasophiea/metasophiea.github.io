@@ -16,6 +16,7 @@ function populateElementSelectionBox(){
                 svg_1.setAttribute("onclick","buttonPress({'type':'drawElement','element':'"+availableElements[a].name+"'});");
                 drawElement(svg_1, 2,2,1, availableElements[a].example,"",0);
                 td_1.appendChild(svg_1);
+                td_1.setAttribute("title",availableElements[a].title);
                 tr.appendChild(td_1);
                 buttonCount++;
             }}
@@ -26,6 +27,7 @@ function populateElementSelectionBox(){
                 svg_2.setAttribute("onclick","buttonPress({'type':'drawElement','element':'"+availableElements[a+1].name+"'});");
                 drawElement(svg_2, 2,2,1, availableElements[a+1].example,"",0);
                 td_2.appendChild(svg_2);
+                td_2.setAttribute("title",availableElements[a+1].title);
                 tr.appendChild(td_2);
                 tbody.appendChild(tr);
                 buttonCount++;
@@ -34,26 +36,28 @@ function populateElementSelectionBox(){
 
     //exsisting symbols
         for(var a = 0; a < symbols.length+1; a+=2){
-            tr = document.createElement("tr");
-            td_1 = document.createElement("td");
-            td_2 = document.createElement("td");
 
             if( buttonCount%2 == 1){buttonCount++;
                 if( symbols[a] != null){
-                    svg_1 = document.createElement("svg");
-                    svg_1.setAttribute("class","button");
-                    svg_1.setAttribute("viewBox","0 0 100 100");
-                    svg_1.setAttribute("onclick","buttonPress({'type':'drawSymbol','element':'"+symbols[a].construction.type+"'});");
+                    svg_2 = document.createElement("svg");
+                    svg_2.setAttribute("class","button");
+                    svg_2.setAttribute("viewBox","0 0 100 100");
+                    svg_2.setAttribute("onclick","buttonPress({'type':'drawSymbol','id':'"+symbols[a].id+"'});");
                     for(var b = 0; b < symbols[a].construction.length; b++){
-                        drawElement(svg_1, 2,2,1, symbols[a].construction[b],"",a);
+                        drawElement(svg_2, 2,2,1, symbols[a].construction[b],"",a);
                     }
-                    td_1.appendChild(svg_1);
+                    td_2.appendChild(svg_2);
+                    td_2.setAttribute("title",symbols[a].name);
                 }
                 a--;
-                tr.appendChild(td_1);
+                tr.appendChild(td_2);
                 tbody.appendChild(tr);
             }else{
-                if( symbols[a] != null){
+                tr = document.createElement("tr");
+                td_1 = document.createElement("td");
+                td_2 = document.createElement("td");
+
+                if( symbols[a] != null){ 
                     svg_1 = document.createElement("svg");
                     svg_1.setAttribute("class","button");
                     svg_1.setAttribute("viewBox","0 0 100 100");
@@ -62,8 +66,9 @@ function populateElementSelectionBox(){
                         drawElement(svg_1, 2,2,1, symbols[a].construction[b],"",a);
                     }
                     td_1.appendChild(svg_1);
+                    td_1.setAttribute("title",symbols[a].name);
                 }
-                if( symbols[a+1] != null){
+                if( symbols[a+1] != null){ 
                     svg_2 = document.createElement("svg");
                     svg_2.setAttribute("class","button");
                     svg_2.setAttribute("viewBox","0 0 100 100");
@@ -72,6 +77,7 @@ function populateElementSelectionBox(){
                         drawElement(svg_2, 2,2,1, symbols[a+1].construction[b],"",a);
                     }
                     td_2.appendChild(svg_2);
+                    td_2.setAttribute("title",symbols[a+1].name);
                 }
 
                 tr.appendChild(td_1);
@@ -86,7 +92,14 @@ function populateElementSelectionBox(){
 
 function buttonPress(data){
     switch(data.type){
-        case "new": workingDrawing.construction = []; redraw(); break;
+        case "new": 
+            workingDrawing.construction = []; 
+            document.getElementById("details_code").value = "";
+            document.getElementById("details_name").value = "";
+            document.getElementById("details_description").value = "";
+            document.getElementById("details_character").checked = false;
+            redraw(); 
+        break;
         case "viewCode": 
             if( document.getElementById("codeViewer").style.visibility == "visible" ){
                 document.getElementById("viewCodeButton").style["background-color"] = "";
@@ -157,6 +170,10 @@ function getExtentOfSymbol(data=null,scale=1,x=0,y=0){
     }else{
         var d = {"top":x,"bottom":x,"left":y,"right":y};
         switch(data.type){
+            case "dot": 
+                d.top += data.y; d.bottom += data.y;
+                d.left += data.x; d.right += data.x;
+            break;
             case "line": 
                 if(data.x1 < data.x2){ d.left += data.x1*scale; d.right += data.x2*scale; }else{ d.left += data.x2*scale; d.right += data.x1*scale; }
                 if(data.y1 < data.y2){ d.top += data.y1*scale; d.bottom += data.y2*scale; }else{ d.top += data.y2*scale; d.bottom += data.y1*scale; }
@@ -174,20 +191,13 @@ function getExtentOfSymbol(data=null,scale=1,x=0,y=0){
         return d;
     }
 
-    //console.log("----");
     var ans = {"top":10,"bottom":0,"left":10,"right":0};
     for(var a = 0; a < results.length; a++){
         if( results[a].top < ans.top ){ ans.top = results[a].top; }
         if( results[a].left < ans.left ){ ans.left = results[a].left; }
         if( results[a].bottom > ans.bottom ){ ans.bottom = results[a].bottom; }
         if( results[a].right > ans.right ){ ans.right = results[a].right; }
-        //console.log(results[a]);
     }
-    //console.log("----");
-    //console.log(ans);
-
-
-
 
     return {"width":ans.right-ans.left, "height":ans.bottom-ans.top};
 }

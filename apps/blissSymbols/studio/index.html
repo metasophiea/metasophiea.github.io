@@ -153,6 +153,7 @@
 							element.setAttribute("x",(a/2)-2);
 							element.setAttribute("y",(b/2)-2);
 							element.setAttribute("class","selectionNode");
+							element.setAttribute("onClick","writeElemen_onClick(this)");
 							element.setAttribute("onmousedown","writeElement_mouseDown(this)");
 							document.getElementById("selectionNodes").appendChild(element);
 						}

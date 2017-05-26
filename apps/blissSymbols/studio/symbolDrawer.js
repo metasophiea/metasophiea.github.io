@@ -1,13 +1,14 @@
 var availableElements = [
-    {"name":"line",                 "amount":1, "example":{"type":"line", "x1":0,"y1":4,"x2":4,"y2":0}},
-    {"name":"rectangle",            "amount":1, "example":{"type":"rectangle", "x":0,"y":0,"width":4,"height":4}},
-    {"name":"diamond",              "amount":1, "example":{"type":"diamond", "x":2,"y":2,"r":2}},
-    {"name":"circle",               "amount":1, "example":{"type":"circle", "x":2,"y":2,"r":2}},
-    {"name":"halfCircle",           "amount":1, "example":{"type":"halfCircle", "x":1,"y":0,"orientation":0,"width":2,"height":4}},
-    {"name":"quarterCircle",        "amount":1, "example":{"type":"quarterCircle", "x":0,"y":0,"orientation":3,"width":4,"height":4}},
-    {"name":"rightAngleTriangle",   "amount":1, "example":{"type":"rightAngleTriangle", "x":0,"y":0,"width":4,"height":4}},
-    {"name":"isoscelesTriangle",    "amount":1, "example":{"type":"isoscelesTriangle", "x":0,"y":0,"orientation":0,"width":4,"height":4}},
-    {"name":"letterNumberSymbol",   "amount":0, "example":null}
+    {"title":"Dot"                 , "name":"dot",                  "amount":1, "example":{"type":"dot", "x":2,"y":2}},
+    {"title":"Line"                , "name":"line",                 "amount":1, "example":{"type":"line", "x1":0,"y1":4,"x2":4,"y2":0}},
+    {"title":"Rectangle"           , "name":"rectangle",            "amount":1, "example":{"type":"rectangle", "x":0,"y":0,"width":4,"height":4}},
+    {"title":"Diamond"             , "name":"diamond",              "amount":1, "example":{"type":"diamond", "x":2,"y":2,"r":2}},
+    {"title":"Circle"              , "name":"circle",               "amount":1, "example":{"type":"circle", "x":2,"y":2,"r":2}},
+    {"title":"Half-Circle"         , "name":"halfCircle",           "amount":1, "example":{"type":"halfCircle", "x":1,"y":0,"orientation":0,"width":2,"height":4}},
+    {"title":"Quarter Circle"      , "name":"quarterCircle",        "amount":1, "example":{"type":"quarterCircle", "x":0,"y":0,"orientation":3,"width":4,"height":4}},
+    {"title":"Right Angle Triangle", "name":"rightAngleTriangle",   "amount":1, "example":{"type":"rightAngleTriangle", "x":0,"y":0,"width":4,"height":4}},
+    {"title":"Isosceles Triangle"  , "name":"isoscelesTriangle",    "amount":1, "example":{"type":"isoscelesTriangle", "x":0,"y":0,"orientation":0,"width":4,"height":4}},
+    {"title":"Letter/Number Symbol", "name":"letterNumberSymbol",   "amount":0, "example":null}
     //  subshapes
 ];
 
@@ -15,9 +16,10 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
     var gridSpacing = 12.5;
 
     switch(data.type){
+        case "dot":                 drawDot(SVGelement, (data.x*scale)+x,(data.y*scale)+y, symbolClass,partId,onClickAction); break;
         case "line":                drawLine(SVGelement, (data.x1*scale)+x,(data.y1*scale)+y,(data.x2*scale)+x,(data.y2*scale)+y, symbolClass,partId,onClickAction); break;
         case "rectangle":           drawRectangle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
-        case "diamond":              drawDiamond(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId,onClickAction); break;
+        case "diamond":             drawDiamond(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId,onClickAction); break;
         case "circle":              drawCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,(data.r*scale), symbolClass,partId,onClickAction); break;
         case "halfCircle":          drawHalfCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
         case "quarterCircle":       drawQuarterCircle(SVGelement, (data.x*scale)+x,(data.y*scale)+y,data.orientation,(data.width*scale),(data.height*scale), symbolClass,partId,onClickAction); break;
@@ -29,6 +31,18 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
     }
 
     //drawing functions
+        function drawDot(SVGelement, x,y, symbolClass,partId,onClickAction=""){
+            var element = document.createElementNS("http://www.w3.org/2000/svg",'line');
+            element.setAttribute("partId",partId);
+            element.setAttribute('x1',x*gridSpacing); 
+            element.setAttribute('y1',y*gridSpacing); 
+            element.setAttribute('x2',x*gridSpacing); 
+            element.setAttribute('y2',y*gridSpacing);
+            element.setAttribute("class",symbolClass);
+            element.setAttribute("onclick",onClickAction);
+            SVGelement.appendChild(element);
+        } 
+
         function drawLine(SVGelement, x1,y1,x2,y2, symbolClass,partId,onClickAction=""){
             var element = document.createElementNS("http://www.w3.org/2000/svg",'line');
             element.setAttribute("partId",partId);
