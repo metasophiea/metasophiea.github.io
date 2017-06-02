@@ -31,21 +31,25 @@ var content = {
                     ]
                 },
             ],
-            'projects':[
+            'projects':[    
                 {
-                    'title':'metasophiea.com',
-                    'link':'http://metasophiea.com',
-                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My home on the web. Hosted on a pages.github.com, this is my main storage/showcase for all my web programming projects, as well as one or two non-programming projects.']
+                    'title':'riomhaireRua - Virtual Machine',
+                    'link':'https://github.com/metasophiea/riomhaireRua',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An in development mini virtual machine project']
                 },
-
                 {
                     'title':'Final Year Project - Implementing the Simon Cipher In VHDL',
                     'link':'https://github.com/metasophiea/SIMON_VHDL',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For my final year project, I have been asked to develop an implementation of the SIMON block ciphers in VHDL, and review my design’s performance in regards to how fast the system can encrypt information, the hardware costs involved and power consumption. On this git (<a href="https://github.com/metasophiea/SIMON_VHDL">https://github.com/metasophiea/SIMON_VHDL</a>), you can find all the development work I’ve done on the system to date, plus some of the reports and documents I’ve made as part of the project.',
                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In addition to this; as I was researching the cipher I developed a JavaScript version and created an online encoder/decoder tool for encrypting and decrypting messages using the cipher; <a href="http://metasophiea.com/apps/encryption/SIMON/translater/">http://metasophiea.com/apps/encryption/SIMON/translater/</a>. The unencrypted message can be any text, though the encrypted message is hexadecimal as is the password used for encryption. I also had the idea of encoding entire websites using this system. This experiment page demonstrates an encrypted site being downloaded, decrypted and displayed in an iFrame; <a href="http://metasophiea.com/apps/encryption/SIMON/siteviewer/">http://metasophiea.com/apps/encryption/SIMON/siteviewer/</a>',
-                    '&nbsp;','&nbsp;','&nbsp;'//,'&nbsp;','&nbsp;','&nbsp;','&nbsp;'
+                    //'&nbsp;','&nbsp;','&nbsp;','&nbsp;'//,'&nbsp;','&nbsp;','&nbsp;'
                     ]
+                },
+                {
+                    'title':'metasophiea.com',
+                    'link':'http://metasophiea.com',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My home on the web. Hosted on a pages.github.com, this is my main storage/showcase for all my web programming projects, as well as one or two non-programming projects.']
                 },
                 {
                     'title':'Canvas Viewing Space / Presenter',
@@ -59,19 +63,7 @@ var content = {
                     'title':'Ongoing Music Projects',
                     'link':'https://soundcloud.com/metasophiea',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I\'ve always enjoyed writing and recording music as sort of a hobby project. I\'ve recorded (around) 2.8 hours of music to date, including 2 albums and two album-length pieces, though only the most recent stuff is on my SoundCloud profile.']
-                },
-                {
-                    'title':'Nigel',
-                    'link':'http://metasophiea.com/projects/nigel/',
-                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An old assembly language project I started a few years ago but decided to stop when I began learning web programming (as I felt that was a more employable skill)',
-                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can find the (currently undocumented) code here: <a href=\'https://github.com/metasophiea/nigel\'>https://github.com/metasophiea/nigel</a>'
-                    ]
-                },    
-                {
-                    'title':'Anica',
-                    'link':'http://metasophiea.blogspot.ie/',
-                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A log of my explorations into designing a computer. I try not to take designs from other places just ideas, and slowly work to put it all together.']
-                },
+                }
             ],
             'education':[
                 {
