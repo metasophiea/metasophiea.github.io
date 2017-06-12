@@ -33,12 +33,12 @@ var content = {
             ],
             'projects':[    
                 {
-                    'title':'riomhaireRua - Virtual Machine',
+                    'title':'riomhaireRua - Virtual Machine - c++/rua',
                     'link':'https://github.com/metasophiea/riomhaireRua',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An in development mini virtual machine project']
                 },
                 {
-                    'title':'Final Year Project - Implementing the Simon Cipher In VHDL',
+                    'title':'Final Year Project - Implementing the Simon Cipher In VHDL - java/c++/vhdl',
                     'link':'https://github.com/metasophiea/SIMON_VHDL',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For my final year project, I have been asked to develop an implementation of the SIMON block ciphers in VHDL, and review my design’s performance in regards to how fast the system can encrypt information, the hardware costs involved and power consumption. On this git (<a href="https://github.com/metasophiea/SIMON_VHDL">https://github.com/metasophiea/SIMON_VHDL</a>), you can find all the development work I’ve done on the system to date, plus some of the reports and documents I’ve made as part of the project.',
                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
@@ -47,12 +47,12 @@ var content = {
                     ]
                 },
                 {
-                    'title':'metasophiea.com',
+                    'title':'metasophiea.com - html/javascript',
                     'link':'http://metasophiea.com',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My home on the web. Hosted on a pages.github.com, this is my main storage/showcase for all my web programming projects, as well as one or two non-programming projects.']
                 },
                 {
-                    'title':'Canvas Viewing Space / Presenter',
+                    'title':'Canvas Viewing Space / Presenter - html/javascript',
                     'link':'http://metasophiea.com/lib/js/canvasViewingSpace/',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Over the summer of 2016, while I was employed with Alexion as an intern; one of the end of employment tasks that my college set for me was to make a 5-6 minute presentation on my time there. Before I began at Alexion I had already been experimenting with 2d graphics, and had the idea to create my own presentation software with which to make a presentation.',
                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Although not very featured, this is that program. Its presentation style is akin to Prezi, though with a UI that is border-agnostic.',
