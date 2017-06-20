@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- chrome 54 -->
+	<title>metasophiea</title>
+	<meta charset="utf-8"></meta>
+	<meta name="theme-color" content="#202020"></meta>
+	<link rel="icon" href="http://metasophiea.com/lib/image/icon.gif" type="image/gif"></link>
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Bitter">
+	<script type='text/javascript' src="./contentDisplay.js"></script>
+	<script type='text/javascript' src="../../../../content/articles2.js"></script>
+
+	<script>
+		var RegularSquareSize = 100; var squareOpen = false;
+		var ChangeClours = true;
+		var backing = document.createElementNS('http://www.w3.org/2000/svg','rect');
+			backing.id = "backing";
+			backing.style.fill = "rgb(20,20,20)";
+			backing.style.height = '100%';
+			backing.style.width = '100%';
+
+		var SpinningSquare = document.createElementNS('http://www.w3.org/2000/svg','rect');
+			SpinningSquare.id = "SpinningSquare";
+			SpinningSquare.style.fill = "rgb(153,0,204)";
+			SpinningSquare.style.x = window.innerWidth/3;
+			SpinningSquare.style.y = window.innerHeight/2;
+			SpinningSquare.style.height = 0;
+			SpinningSquare.style.width = 0;
+			SpinningSquare.setAttribute("onclick","SquareClick();");
+			SpinningSquare.setAttribute("clicked",false);
+
+		var MainText = document.createElementNS('http://www.w3.org/2000/svg','text');
+			MainText.id = "MainText";
+			MainText.style.fill = "rgba(255,255,255,0.9)";
+			MainText.innerHTML = "metasophiea.com";
+			MainText.style["font-size"] = "60";
+			MainText.style["font-family"] = "Bitter";
+			MainText.setAttribute("x", window.innerWidth/2.5); MainText.setAttribute("y", (window.innerHeight/2+(60/4)));
+
+		function Go(){
+			document.getElementById('MainSVG').appendChild(backing);			
+			document.getElementById('MainSVG').appendChild(MainText);
+			document.getElementById('MainSVG').appendChild(SpinningSquare);
+			setTimeout(function(){SetSquareSize(RegularSquareSize);},1);
+			setInterval(function(){
+				if(ChangeClours){document.getElementById('SpinningSquare').style.fill = "rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";}
+				else{document.getElementById('SpinningSquare').style.fill = "rgb(255,255,255)";}				
+			},1000);
+		}
+		
+		function WindowAdjust(){console.log('Adjusting window');
+			document.getElementById('MainText').setAttribute("x",window.innerWidth/3);
+			document.getElementById('MainText').setAttribute("y",window.innerHeight/2+(60/4) );	
+			if(!squareOpen){ SetSquareSize(RegularSquareSize); }
+		}
+
+		function SetSquareSize(size){
+			document.getElementById('SpinningSquare').style.x = document.getElementById('MainText').getBoundingClientRect().left - size*1.25;
+			document.getElementById('SpinningSquare').style.y = (window.innerHeight/2 -size/2);
+			document.getElementById('SpinningSquare').style.height = size;
+			document.getElementById('SpinningSquare').style.width = size;	
+		}
+
+		function SquareClick(){console.log('Square clicked');
+			if(document.getElementById('SpinningSquare').getAttribute("clicked") == "true"){CloseSquare();}
+			else{OpenSquare();}
+		}
+		function OpenSquare(){console.log('Opening square'); squareOpen = true;
+			var size = 3000;
+        	document.getElementById('SpinningSquare').setAttribute("clicked","true");
+			document.getElementById('SpinningSquare').style.x = (window.innerWidth/2 -size/2);
+			document.getElementById('SpinningSquare').style.y = (window.innerHeight/2 -size/2);
+			document.getElementById('SpinningSquare').style.height = size;
+			document.getElementById('SpinningSquare').style.width = size;	
+			ChangeClours=false;
+			setTimeout(function(){
+				ShowSite();
+				document.body.style.overflowY = 'visible';
+			},1750);
+		}
+		function CloseSquare(){console.log('Closing square'); squareOpen = false;
+        	document.getElementById('SpinningSquare').setAttribute("clicked","false");
+			SetSquareSize(RegularSquareSize);
+			ChangeClours=true;
+			document.body.style.overflowY = 'hidden';
+		}
+	</script>
+
+	<style title="Main">
+		body{width:100%; height:100%; margin:0px;overflow-x: hidden; background:rgb(255,255,255);}
+		@keyframes example {
+    		from {transform: rotate(0deg);}
+   			to {transform: rotate(360deg);}
+		}
+
+		#SpinningSquare{
+			 fill:rgba(255,0,0,1);
+			 animation-name: example;
+			 animation-duration: 4s;
+			 animation-iteration-count: infinite;
+			 animation-timing-function: linear;
+			 transform-origin: 50% 50%;
+			 transition: x 4s, y 4s, height 4s, width 4s, fill 1s;
+		}
+
+		#MainText{
+			fill: rgba(255,0,255,1);
+			font-size: 100%;
+			-webkit-touch-callout: none;
+  			-webkit-user-select:none;
+  			-khtml-user-select:none;
+  			-moz-user-select:none;
+  			-ms-user-select:none;
+  			-o-user-select:none;
+  			user-select:none;
+		}
+		#MainSVG{
+			position: absolute;
+    		left: 0px;
+    		top: 0px;
+		}
+
+		.menu{transition: opacity 1s, fill 1s, x 0.5s, y 0.5s;}
+		.imageoct{transition: opacity 1s;}
+
+		.articleHeading{
+			margin: 0px;
+			font-size: 30px;
+			font-family: "Bitter";
+		}
+		.articleBody{
+			margin: 0px;
+			font-size: 16px;
+			font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		}		
+	</style>
+</head>
+
+<body onLoad="Go()" onresize="WindowAdjust();" style='overflow-y: hidden;'>
+	<svg id="MainSVG" width="100%" height="100%"  xmlns="http://www.w3.org/2000/svg"></svg>
+</body>
+</html>
