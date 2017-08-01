@@ -73,7 +73,7 @@ var articles = [
 	},
 	{	"id":"article_20160616-a",
 		"headline":"Soundcloud",
-		"text":["my soundcloud, where I store 2 of my latest musical works"],
+		"text":[""],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,128,60,0.65)",
 		"image_url":"http://4.bp.blogspot.com/-D57hGYq5DY0/VnhfsqXYZbI/AAAAAAAAKyg/YXj6uQf8DnU/s1600/curve_1.bmp",
