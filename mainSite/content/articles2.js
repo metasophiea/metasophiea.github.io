@@ -1,7 +1,7 @@
 var articles = [
 	{	"id":"article_20170604-a",
 		"headline":"RiomhaireRua",
-		"text":["A fun little VM with 8 bits, 7 commands; and lots of potential"],	
+		"text":["A fun little VM with 8 bits, 32 commands; and lots of potential"],	
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(255,0,0,0.99)",
 		"image_url":"https://raw.githubusercontent.com/metasophiea/riomhaireRua/master/images/logo.png",
