@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Bitter">
 	<script type='text/javascript' src="./contentDisplay.js"></script>
 	<script type='text/javascript' src="../../../../content/articles2.js"></script>
+	<script type='text/javascript' src="../../../../../lib/js/liveEdit/CSS_Edit.js"></script>
 
 	<script>
 		var RegularSquareSize = 100; var squareOpen = false;
@@ -56,10 +57,20 @@
 		}
 
 		function SetSquareSize(size){
-			document.getElementById('SpinningSquare').style.x = document.getElementById('MainText').getBoundingClientRect().left - size*1.25;
-			document.getElementById('SpinningSquare').style.y = (window.innerHeight/2 -size/2);
+			//determine top left corner for the spinning square
+			var x = document.getElementById('MainText').getBoundingClientRect().left - size*1.25;
+			var y = (window.innerHeight/2 -size/2);
+
+			//apply variables to the shape
+			document.getElementById('SpinningSquare').style.x = x;
+			document.getElementById('SpinningSquare').style.y = y;
 			document.getElementById('SpinningSquare').style.height = size;
 			document.getElementById('SpinningSquare').style.width = size;	
+
+			//adjustments for Apple Safari, which thinks "transform-origin" is the position on the page, instead of the shape
+			var xPercantage = ((x+(size/2))/window.innerWidth)*100;
+			var yPercantage = ((y+(size/2))/window.innerHeight)*100;
+  			ChangeCSSCode("Main","#SpinningSquare","transform-origin", xPercantage+"% " + yPercantage + "%", "");
 		}
 
 		function SquareClick(){console.log('Square clicked');
@@ -89,14 +100,14 @@
 
 	<style title="Main">
 		body{width:100%; height:100%; margin:0px;overflow-x: hidden; background:rgb(255,255,255);}
-		@keyframes example {
+		@keyframes rotateSquare {
     		from {transform: rotate(0deg);}
    			to {transform: rotate(360deg);}
 		}
 
 		#SpinningSquare{
 			 fill:rgba(255,0,0,1);
-			 animation-name: example;
+			 animation-name: rotateSquare;
 			 animation-duration: 4s;
 			 animation-iteration-count: infinite;
 			 animation-timing-function: linear;

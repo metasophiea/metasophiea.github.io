@@ -53,6 +53,10 @@
 			document.getElementById('MainText').setAttribute("x",window.innerWidth/3);
 			document.getElementById('MainText').setAttribute("y",window.innerHeight/2+(60/4) );	
 			if(!squareOpen){ SetSquareSize(RegularSquareSize); }
+
+			//Fix for background shape, which isn't responding to changes in window size
+			document.getElementById("backing").style.width = window.innerWidth;
+			document.getElementById("backing").style.height = window.innerHeight;
 		}
 
 		function SetSquareSize(size){
