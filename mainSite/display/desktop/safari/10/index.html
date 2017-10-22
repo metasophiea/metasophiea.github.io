@@ -68,6 +68,7 @@
 			document.getElementById('SpinningSquare').style.width = size;	
 
 			//adjustments for Apple Safari, which thinks "transform-origin" is the position on the page, instead of the shape
+			//(doesn't work because of safari)
 			var xPercantage = ((x+(size/2))/window.innerWidth)*100;
 			var yPercantage = ((y+(size/2))/window.innerHeight)*100;
 			ChangeCSSCode("Main","#SpinningSquare","transform-origin", xPercantage+"% " + yPercantage + "%", "");
