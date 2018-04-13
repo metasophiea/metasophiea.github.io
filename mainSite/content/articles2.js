@@ -3,7 +3,7 @@ var articles = [
 		"headline":"Curve/Workspace",
 		"text":["A musical workstation and the framework being built to make it"],	
 		"textcolour":"rgb(255,255,255)",
-		"backerFill":"rgba0,0,0,0.25)",
+		"backerFill":"rgba(0,0,0,0.25)",
 		"image_url":"/lib/image/mainSiteImagery/workspace.png",
 		"link_url":"https://github.com/metasophiea/curve"
 	},
