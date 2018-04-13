@@ -1,4 +1,12 @@
 var articles = [
+	{	"id":"article_20180413-a",
+		"headline":"Workspace/Curve",
+		"text":["A fun little VM with 8 bits, 32 commands; and lots of potential"],	
+		"textcolour":"rgb(255,255,255)",
+		"backerFill":"rgba(255,0,0,0.99)",
+		"image_url":"/lib/image/mainSiteImagery/workspace.png",
+		"link_url":"dud"
+	},
 	{	"id":"article_20170604-a",
 		"headline":"RiomhaireRua",
 		"text":["A fun little VM with 8 bits, 32 commands; and lots of potential"],	
