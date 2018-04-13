@@ -53,6 +53,10 @@
 		function WindowAdjust(){console.log('Adjusting window');
 			document.getElementById('MainText').setAttribute("x",window.innerWidth/3);
 			document.getElementById('MainText').setAttribute("y",window.innerHeight/2+(60/4) );	
+
+			document.getElementById('backing').setAttribute("height",window.innerWidth);
+			document.getElementById('backing').setAttribute("width",window.innerHeight);	
+
 			if(!squareOpen){ SetSquareSize(RegularSquareSize); }
 		}
 
@@ -99,7 +103,7 @@
 	</script>
 
 	<style title="Main">
-		body{width:100%; height:100%; margin:0px;overflow-x: hidden; background:rgb(255,255,255);}
+		body{width:100%; height:100%; margin:0px;overflow-x: hidden; background:rgb(255, 255, 255);}
 		@keyframes rotateSquare {
     		from {transform: rotate(0deg);}
    			to {transform: rotate(360deg);}
