@@ -1,8 +1,8 @@
 {"name":"audiophile.js","type":"file"}
-{"name":"axioms.js","type":"file"}
 {"name":"boot.js","type":"file"}
-{"name":"controllers","type":"dir"}
-{"name":"index.html","type":"file"}
-{"name":"modules","type":"dir"}
-{"name":"synths","type":"dir"}
 {"name":"tools","type":"dir"}
+{"name":"index.html","type":"file"}
+{"name":"synths","type":"dir"}
+{"name":"axioms.js","type":"file"}
+{"name":"modules","type":"dir"}
+{"name":"controllers","type":"dir"}
