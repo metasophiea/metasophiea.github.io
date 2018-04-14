@@ -114,7 +114,8 @@
 					else if(commandParts[1] >= articles.length || commandParts[1] < 0 || isNaN(commandParts[1])){addLine({'text':'bad article number','colour':'ff8888'}); return;}
 					else if(commandParts[2] == 'go'){
 						// window.location = articles[commandParts[1]].link_url;
-						window.open(articles[commandParts[1]].link_url);
+						console.log(window.location);
+						// window.open(articles[commandParts[1]].link_url);
 					}
 					else if(commandParts[2] == 'view'){
 						var article = articles[commandParts[1]];
