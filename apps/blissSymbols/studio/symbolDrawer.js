@@ -32,7 +32,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
 
     //drawing functions
         function drawDot(SVGelement, x,y, symbolClass,partId,onClickAction=""){
-            var element = document.createElementNS("https://www.w3.org/2000/svg",'line');
+            var element = document.createElementNS("http://www.w3.org/2000/svg",'line');
             element.setAttribute("partId",partId);
             element.setAttribute('x1',x*gridSpacing); 
             element.setAttribute('y1',y*gridSpacing); 
@@ -44,7 +44,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
         } 
 
         function drawLine(SVGelement, x1,y1,x2,y2, symbolClass,partId,onClickAction=""){
-            var element = document.createElementNS("https://www.w3.org/2000/svg",'line');
+            var element = document.createElementNS("http://www.w3.org/2000/svg",'line');
             element.setAttribute("partId",partId);
             element.setAttribute('x1',x1*gridSpacing); 
             element.setAttribute('y1',y1*gridSpacing); 
@@ -59,7 +59,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
             if(width < 0){ x = x + width; width = -width; }
             if(height < 0){ y = y + height; height = -height; }
 
-            var element = document.createElementNS("https://www.w3.org/2000/svg",'rect');
+            var element = document.createElementNS("http://www.w3.org/2000/svg",'rect');
             element.setAttribute("partId",partId);
             element.setAttribute('x',x*gridSpacing); 
             element.setAttribute('y',y*gridSpacing);
@@ -76,7 +76,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
             r = Math.abs(r);
 
             var sideLength = Math.sqrt( gridSpacing*gridSpacing*2 )*r;
-            var element = document.createElementNS("https://www.w3.org/2000/svg",'rect');
+            var element = document.createElementNS("http://www.w3.org/2000/svg",'rect');
             element.setAttribute("partId",partId);
             element.setAttribute('x',x*gridSpacing);
             element.setAttribute('y',y*gridSpacing);
@@ -91,7 +91,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
         }
 
         function drawCircle(SVGelement, x,y,r, symbolClass,partId,onClickAction=""){
-            var element = document.createElementNS("https://www.w3.org/2000/svg",'circle');
+            var element = document.createElementNS("http://www.w3.org/2000/svg",'circle');
             element.setAttribute("partId",partId);
             element.setAttribute("cx",x*gridSpacing); 
             element.setAttribute("cy",y*gridSpacing);
@@ -102,7 +102,7 @@ function drawElement(SVGelement, x,y, scale,data,symbolClass,partId,onClickActio
         }
 
         function drawArc(SVGelement, x1,y1,x2,y2,x3,y3,x4,y4, symbolClass,partId,onClickAction=""){
-            var element = document.createElementNS("https://www.w3.org/2000/svg",'path');
+            var element = document.createElementNS("http://www.w3.org/2000/svg",'path');
             element.setAttribute("partId",partId);
             element.setAttribute('d', 'M ' + x1*gridSpacing +' '+ y1*gridSpacing + ' C ' + x2*gridSpacing +' '+ y2*gridSpacing +', '+ x3*gridSpacing +' '+ y3*gridSpacing +', '+ x4*gridSpacing +' '+ y4*gridSpacing );
             element.setAttribute("class",symbolClass);

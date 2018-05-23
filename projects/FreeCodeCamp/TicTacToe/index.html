@@ -5,7 +5,7 @@
 	<title>X's And O's</title>
 	<meta charset="utf-8"></meta>
 	<link href="https://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css"> <!-- for Google fonts-->
-	<!-- add: xmlns="https://www.w3.org/2000/svg" to SVG element -->
+	<!-- add: xmlns="http://www.w3.org/2000/svg" to SVG element -->
 
 	<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <!-- for JSON -->
@@ -381,7 +381,7 @@
 
 <body onLoad="Go()">
 
-	<svg style="z-index:0; width:100%; height:100%;" viewbox="0 0 99 99" xmlns="https://www.w3.org/2000/svg">
+	<svg style="z-index:0; width:100%; height:100%;" viewbox="0 0 99 99" xmlns="http://www.w3.org/2000/svg">
 		<rect id="TopLeft_Colour" class="ColourSquare" x="0" y="0" width="33" height="33" style="fill:rgb(200,240,240);"></rect>
 			<line class="TopLeft_X GameSymbol" x1="5" y1="5" x2="28" y2="28"></line>
 			<line class="TopLeft_X GameSymbol" x1="28" y1="5" x2="5" y2="28"></line>
@@ -438,7 +438,7 @@
 		<line id="WinningLine" x1=0 y1=0 x2=99 y2=99></line>		
 	</svg>
 
-	<svg class="ActionPlaneItems" style="position:fixed; top:0px; left:0px; z-index:1; width:100%; height:100%;" viewbox="0 0 99 99" xmlns="https://www.w3.org/2000/svg">
+	<svg class="ActionPlaneItems" style="position:fixed; top:0px; left:0px; z-index:1; width:100%; height:100%;" viewbox="0 0 99 99" xmlns="http://www.w3.org/2000/svg">
 		<rect id="ActionPlane" class="ActionPlaneItems" x="10" y="10" width="79" height="79"></rect>
 		<text id="IntroText" x="50" y="30" text-anchor="middle" class="ActionPlaneItems">Choose Your Weapon</text>
 		<rect id="selectionSquareBackground" x="20" y="40" width="20" height="20" class="ActionPlaneItems"></rect>

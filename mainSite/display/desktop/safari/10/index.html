@@ -15,13 +15,13 @@
 	<script>
 		var RegularSquareSize = 100; var squareOpen = false;
 		var ChangeClours = true;
-		var backing = document.createElementNS('https://www.w3.org/2000/svg','rect');
+		var backing = document.createElementNS('http://www.w3.org/2000/svg','rect');
 			backing.id = "backing";
 			backing.style.fill = "rgb(20,20,20)";
 			backing.style.height = '100%';
 			backing.style.width = '100%';
 
-		var SpinningSquare = document.createElementNS('https://www.w3.org/2000/svg','rect');
+		var SpinningSquare = document.createElementNS('http://www.w3.org/2000/svg','rect');
 			SpinningSquare.id = "SpinningSquare";
 			SpinningSquare.style.fill = "rgb(153,0,204)";
 			SpinningSquare.style.x = window.innerWidth/3;
@@ -31,7 +31,7 @@
 			SpinningSquare.setAttribute("onclick","SquareClick();");
 			SpinningSquare.setAttribute("clicked",false);
 
-		var MainText = document.createElementNS('https://www.w3.org/2000/svg','text');
+		var MainText = document.createElementNS('http://www.w3.org/2000/svg','text');
 			MainText.id = "MainText";
 			MainText.style.fill = "rgba(255,255,255,0.9)";
 			MainText.innerHTML = "metasophiea.com";
@@ -149,6 +149,6 @@
 </head>
 
 <body onLoad="Go()" onresize="WindowAdjust();" style='overflow-y: hidden;'>
-	<svg id="MainSVG" width="100%" height="100%"  xmlns="https://www.w3.org/2000/svg"></svg>
+	<svg id="MainSVG" width="100%" height="100%"  xmlns="http://www.w3.org/2000/svg"></svg>
 </body>
 </html>
