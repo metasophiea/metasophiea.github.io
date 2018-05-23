@@ -4,14 +4,14 @@
 <head>
 	<title>The Feed</title>
 	<meta charset="utf-8"></meta>
-	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
 
-	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
 		//JSON Keys: id, headline, timePosted, link, metaDescription, description, rank, upVotes, author, image, storyLink
 		var ArticleRowSelector = 0;//ArticleRow_Upper and ArticleRow_Lower
-		$(document).ready(function() {$.getJSON("http://www.freecodecamp.com/news/hot", function(json){Go(json)});});
+		$(document).ready(function() {$.getJSON("https://www.freecodecamp.com/news/hot", function(json){Go(json)});});
 		function Go(JsonData){
 			AdjustArticleSize();
 			for(var a = 0; a < JsonData.length/2; a++){
@@ -251,7 +251,7 @@
 	<tr style="width:100%;"><td>
 		<table><tbody><tr>
 			<td>
-				<svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" height="50px" onClick="CloseViewer();">
+				<svg viewbox="0 0 100 100" xmlns="https://www.w3.org/2000/svg" height="50px" onClick="CloseViewer();">
 					<rect width="100" height="100" style="fill:rgb(100,100,100);"></rect>
 					<line x1="10" y1="10" x2="90" y2="90" style="stroke:rgb(255,255,255); stroke-width:8;"></line>
 					<line x1="90" y1="10" x2="10" y2="90" style="stroke:rgb(255,255,255); stroke-width:8;"></line>
@@ -263,7 +263,7 @@
 		</tr></tbody></table>
 	</td></tr>
 	<tr style="width:100%; height:95%;"><td>
-		<iframe id="viewer_iframe" src="#" style="background:url('http://vignette1.wikia.nocookie.net/nintendo/images/4/49/Error.png/revision/latest?cb=20090923185137&path-prefix=en') no-repeat center; background-size:cover; width:100%; height:100%; padding:0px; border:0px;">error</iframe>
+		<iframe id="viewer_iframe" src="#" style="background:url('https://vignette1.wikia.nocookie.net/nintendo/images/4/49/Error.png/revision/latest?cb=20090923185137&path-prefix=en') no-repeat center; background-size:cover; width:100%; height:100%; padding:0px; border:0px;">error</iframe>
 	</td></tr>
 </section>
 

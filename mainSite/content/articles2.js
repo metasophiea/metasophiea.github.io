@@ -36,32 +36,32 @@ var articles = [
 		"text":["For my final year engineering project, I've been asked to impliment the SIMON cipher in VHDL. To understand how the cipher works I've implimented it in pure Javascript. This site is an encoder/decoder tool for encrypting and decrypting messages using the SIMON cipher","The unencrypted message can be any text, though the encrypted message is hexadecimal as is the password used for encryption"],	
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/SIMONencryption.png",
-		"link_url":"http://metasophiea.com/apps/encryption/SIMON/translater"
+		"image_url":"https://metasophiea.com/lib/image/mainSiteImagery/SIMONencryption.png",
+		"link_url":"https://metasophiea.com/apps/encryption/SIMON/translater"
 	},
 	{	"id":"article_20160919-a",
 		"headline":"Light Cycles",
 		"text":["Simple but fun game of skill for two players","(red uses Q and W, yellow uses O and P)"],	
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/lightcycles.png",
-		"link_url":"http://metasophiea.com/apps/lightcycles"
+		"image_url":"https://metasophiea.com/lib/image/mainSiteImagery/lightcycles.png",
+		"link_url":"https://metasophiea.com/apps/lightcycles"
 	},
 	{	"id":"article_20160807-a",
 		"headline":"Canvas Viewing Space Project",
 		"text":["A pure JS 2d graphics engine, currently developing into a dynamic presentation app"],	
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/canvasViewingSpace_splash1.bmp",
-		"link_url":"http://metasophiea.com/lib/js/canvasViewingSpace"
+		"image_url":"https://metasophiea.com/lib/image/mainSiteImagery/canvasViewingSpace_splash1.bmp",
+		"link_url":"https://metasophiea.com/lib/js/canvasViewingSpace"
 	},
 	{	"id":"article_20160807-b",
 		"headline":"Word Stats",
 		"text":["A mini webapp showing you some info on things you write in ... not particularly useful..but somewhat handy n_n"],
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,100,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/wordstats_splash1.bmp",
-		"link_url":"http://metasophiea.com/apps/wordstats"
+		"image_url":"https://metasophiea.com/lib/image/mainSiteImagery/wordstats_splash1.bmp",
+		"link_url":"https://metasophiea.com/apps/wordstats"
 	},	
 	{	"id":"article_20160614-a",
 		"headline":"Free Code Camp Project Archive",
@@ -69,22 +69,22 @@ var articles = [
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,255,255,0.75)",
 		"image_url":"/lib/image/mainSiteImagery/freecodecamp_logo.png",
-		"link_url":"http://metasophiea.com/projects/FreeCodeCamp/"		
+		"link_url":"https://metasophiea.com/projects/FreeCodeCamp/"		
 	},
 	{	"id":"article_20161023-a",
 		"headline":"Nigel",
 		"text":["An old assembly language project I started a few years ago but decided to stop when I began learning web programming (as I felt that was a more employable skill)","These two posts are taken from my old blogspot blog, and have been recreated here for your reading pleasure. I will be uploading more posts from old blogs as time goes on (though Nigel wasn't developed beyond what is there now... I fully intend to return to the project when I get the opportunity)"],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,255,255,0.75)",
-		"image_url":"http://metasophiea.com/projects/nigel/images/20150814/16.jpg",
-		"link_url":"http://metasophiea.com/projects/nigel/"		
+		"image_url":"https://metasophiea.com/projects/nigel/images/20150814/16.jpg",
+		"link_url":"https://metasophiea.com/projects/nigel/"		
 	},
 	{	"id":"article_20160616-a",
 		"headline":"Soundcloud",
 		"text":[""],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,128,60,0.65)",
-		"image_url":"http://4.bp.blogspot.com/-D57hGYq5DY0/VnhfsqXYZbI/AAAAAAAAKyg/YXj6uQf8DnU/s1600/curve_1.bmp",
+		"image_url":"https://4.bp.blogspot.com/-D57hGYq5DY0/VnhfsqXYZbI/AAAAAAAAKyg/YXj6uQf8DnU/s1600/curve_1.bmp",
 		"link_url":"https://soundcloud.com/metasophiea/"		
 	},
 	{	"id":"article_20160820-a",
@@ -92,7 +92,7 @@ var articles = [
 		"text":["Ever wonder how all this magic works? Turns out its a controlled mess! Check it out for yourself on the github.com repo"],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(245,245,245,0.65)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/metasophiea.github.io.png",
+		"image_url":"https://metasophiea.com/lib/image/mainSiteImagery/metasophiea.github.io.png",
 		"link_url":"https://github.com/metasophiea/metasophiea.github.io"		
 	},	
 	{	"id":"article_20170512-a",
@@ -100,8 +100,8 @@ var articles = [
 		"text":["Interested in what you see? Check out my CV!"],
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(245,245,245,0.65)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/CV.png",
-		"link_url":"http://metasophiea.com/theAuthor/CV/"		
+		"image_url":"https://metasophiea.com/lib/image/mainSiteImagery/CV.png",
+		"link_url":"https://metasophiea.com/theAuthor/CV/"		
 	},
 ];
 

@@ -8,7 +8,7 @@ var content = [
 				{'type':'h2', 'innerHTML':'Heading 2'},
 				{'type':'h3', 'innerHTML':'Heading 3'},
 				{'type':'p', 'innerHTML':'A large section of words about many important things, such as cheese, milk and other dairy products'},
-				{'type':'img', 'src':'http://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/myst.jpg', 'caption':'unrelated to cheese'},
+				{'type':'img', 'src':'https://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/myst.jpg', 'caption':'unrelated to cheese'},
 				{'type':'p', 'innerHTML':'A large section of words about many important things, such as cheese, milk and other dairy products'},
 				{'type':'list','form':'unordered','notation':'I','items':[
 						{'type':'h1', 'innerHTML':'Heading 1'},
@@ -34,7 +34,7 @@ var content = [
 				{'type':'h2', 'innerHTML':'Heading 2'},
 				{'type':'h3', 'innerHTML':'Heading 3'},
 				{'type':'p', 'innerHTML':'A large section of words about <i>many important things</i>, such as cheese, milk and other dairy products'},
-				{'type':'img', 'src':'http://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/myst.jpg', 'caption':'unrelated to cheese'},
+				{'type':'img', 'src':'https://s3.amazonaws.com/digitaltrends-uploads-prod/2014/10/myst.jpg', 'caption':'unrelated to cheese'},
 				{'type':'p', 'innerHTML':'A large section of words about many important things, such as cheese, milk and other dairy products'},
 				{'type':'list','form':'unordered','notation':'I','items':[
 						{'type':'h1', 'innerHTML':'Heading 1'},

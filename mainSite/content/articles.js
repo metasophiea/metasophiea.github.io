@@ -14,8 +14,8 @@ var articles = {
 		"text_line2":"currently developing into dynamic presentation app",
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,0,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/canvasViewingSpace_splash1.bmp",
-		"link_url":"http://metasophiea.com/lib/js/canvasViewingSpace"
+		"image_url":"https://metasophiea.com/lib/image/mainSiteImagery/canvasViewingSpace_splash1.bmp",
+		"link_url":"https://metasophiea.com/lib/js/canvasViewingSpace"
 	},
 	"article_20160807-b":{
 		"headline":"Word Stats",
@@ -23,8 +23,8 @@ var articles = {
 		"text_line2":"not particularly useful..but somewhat handy n_n",
 		"textcolour":"rgb(255,255,255)",
 		"backerFill":"rgba(0,0,100,0.75)",
-		"image_url":"http://metasophiea.com/lib/image/mainSiteImagery/wordstats_splash1.bmp",
-		"link_url":"http://metasophiea.com/apps/wordstats"
+		"image_url":"https://metasophiea.com/lib/image/mainSiteImagery/wordstats_splash1.bmp",
+		"link_url":"https://metasophiea.com/apps/wordstats"
 	},
 	"article_20160614-a":{
 		"headline":"Free Code Camp Project Archive",
@@ -32,8 +32,8 @@ var articles = {
 		"text_line2":"from when I was first learning HTML, JS and CSS",
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,255,255,0.75)",
-		"image_url":"http://newbornstartups.com/wp-content/uploads/2015/06/fcc-logo.png",
-		"link_url":"http://metasophiea.com/Projects/FreeCodeCamp/"		
+		"image_url":"https://newbornstartups.com/wp-content/uploads/2015/06/fcc-logo.png",
+		"link_url":"https://metasophiea.com/Projects/FreeCodeCamp/"		
 	},
 	"article_20160616-a":{
 		"headline":"Curve and Curve 2 Beta",
@@ -41,7 +41,7 @@ var articles = {
 		"text_line2":"worked on this for a while..unfortunately (I'm in a band now though)",
 		"textcolour":"rgb(0,0,0)",
 		"backerFill":"rgba(255,128,60,0.65)",
-		"image_url":"http://4.bp.blogspot.com/-D57hGYq5DY0/VnhfsqXYZbI/AAAAAAAAKyg/YXj6uQf8DnU/s1600/curve_1.bmp",
+		"image_url":"https://4.bp.blogspot.com/-D57hGYq5DY0/VnhfsqXYZbI/AAAAAAAAKyg/YXj6uQf8DnU/s1600/curve_1.bmp",
 		"link_url":"https://soundcloud.com/metasophiea/"		
 	},
 };	

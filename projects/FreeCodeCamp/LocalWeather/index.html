@@ -3,7 +3,7 @@
 <head>
 	<title>Weather</title>
 	<meta charset="UTF-8">
-	<link href="http://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=*" rel="stylesheet" type="text/css">
 	<style>
 		html, body {
 			height: 100%;
@@ -30,7 +30,7 @@
 	<script>
 		//the API key: 37de64f097dac5deb87dd5e7030804c6
 		//API link: api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&APPID={APIKEY} 
-		//Example: http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=API_ID
+		//Example: https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=API_ID
 		var API_ID = "37de64f097dac5deb87dd5e7030804c6";
 
 		$(document).ready(function() {go();});
@@ -40,7 +40,7 @@
 		function go(){
 			getLocation();
 			document.getElementById("LatLong").innerHTML = "Latitude: " + latitude +" Longitude: "+ longitude;
-			$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
+			$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
 
 			map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 			var MapMarker = new google.maps.Marker({position:{lat: latitude, lng: longitude}, map:map})
@@ -49,7 +49,7 @@
 				latitude = map.getCenter().lat(); longitude = map.getCenter().lng();
 				document.getElementById("LatLong").innerHTML = "Latitude: " + latitude +" <br>Longitude: "+ longitude;
 				MapMarker.setPosition({lat: latitude, lng: longitude});
-				$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
+				$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
   			});
 
 
@@ -91,7 +91,7 @@
 			}else{var pointer_x = 50; var pointer_y = 50;}
 
 			document.getElementById("Wind").innerHTML = "Wind Speed: " + jsonData.wind.speed + "m/s" + "<br>" + 
-				'<svg id="WindDirection" width="25%" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">' + 
+				'<svg id="WindDirection" width="25%" viewbox="0 0 100 100" xmlns="https://www.w3.org/2000/svg">' + 
 					'<circle cx="50" cy="50" r="50" style="fill:rgb(230,230,230)"></circle>' + 
 					'<line x1="50" y1="0" x2="50" y2="10"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
 					'<line x1="'+(Math.sin(Math.PI*(45/180))*50 + 50)+'" y1="'+(50 - Math.cos(Math.PI*(45/180))*50)+'" x2="'+(Math.sin(Math.PI*(45/180))*45 + 50)+'" y2="'+(50 - Math.cos(Math.PI*(45/180))*45)+'"  style="stroke:rgb(0,0,0);stroke-width:2" />' +
@@ -111,7 +111,7 @@
 
 		function SwitchTempType(){
 			if(TempInFahrenheit){TempInFahrenheit = false;}else{TempInFahrenheit = true;}
-			$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
+			$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&APPID=" + API_ID + "&units=metric", function(json){DoTheWeatherReport(json)});
 		}
 	
 		function UpdateBackground(code){
@@ -119,13 +119,13 @@
 			switch(code){
 				case "01d": case "01n":{imageURL = "https://aakashtyagi.files.wordpress.com/2012/01/clear-sky.jpg"; break;}
 				case "02n": case "02d":{imageURL = "https://shawnwashere.files.wordpress.com/2010/03/img_88301.jpg"; break;}
-				case "03d": case "03n":{imageURL = "http://cloud-maven.com/wp-content/uploads/2013/02/DSC05619.jpg"; break;}
-				case "04n": case "04n":{imageURL = "http://www.carlwozniak.com/clouds/Graphics/New%20Pix/clouds09.jpg"; break;}
+				case "03d": case "03n":{imageURL = "https://cloud-maven.com/wp-content/uploads/2013/02/DSC05619.jpg"; break;}
+				case "04n": case "04n":{imageURL = "https://www.carlwozniak.com/clouds/Graphics/New%20Pix/clouds09.jpg"; break;}
 				case "09d": case "09n":{imageURL = "https://i.ytimg.com/vi/ITOILbsyon8/maxresdefault.jpg"; break;}
-				case "10n": case "10n":{imageURL = "http://weknowyourdreams.com/images/rain/rain-08.jpg"; break;}
-				case "11d": case "11n":{imageURL = "http://www.hdwallpaperscool.com/wp-content/uploads/2015/09/black-and-blue-high-quality-wallpaper-download-black-and-blue-images-free.jpg"; break;}
-				case "13d": case "13n":{imageURL = "http://www.brotherslawncareservices.com/Winter-snow-flakes-winter-22231258-1238-768.jpg"; break;}
-				case "50n": case "50n":{imageURL = "http://vignette1.wikia.nocookie.net/demigodshaven/images/f/f5/Mist.jpg/revision/latest?cb=20110102163040"; break;}
+				case "10n": case "10n":{imageURL = "https://weknowyourdreams.com/images/rain/rain-08.jpg"; break;}
+				case "11d": case "11n":{imageURL = "https://www.hdwallpaperscool.com/wp-content/uploads/2015/09/black-and-blue-high-quality-wallpaper-download-black-and-blue-images-free.jpg"; break;}
+				case "13d": case "13n":{imageURL = "https://www.brotherslawncareservices.com/Winter-snow-flakes-winter-22231258-1238-768.jpg"; break;}
+				case "50n": case "50n":{imageURL = "https://vignette1.wikia.nocookie.net/demigodshaven/images/f/f5/Mist.jpg/revision/latest?cb=20110102163040"; break;}
 			}
 			document.getElementsByTagName("html")[0].style.background = "url("+imageURL+")"; 
 			document.getElementsByTagName("html")[0].style.backgroundSize = "cover";

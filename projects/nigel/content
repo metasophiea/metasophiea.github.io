@@ -5,22 +5,22 @@ var content = [
 		'title':'How To Build a Computer (Probably) - Nigel - Chapter 2: Graphically Speaking..',
 		'content':[
 			{'type':'h1', 'innerHTML':"How To Build a Computer (Probably) - Nigel - Chapter 2: Graphically Speaking.."},		
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/1.jpg', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/1.jpg', 'caption':''},
 			{'type':'p', 'innerHTML':"(We assume chapter one is those two 'side quest' posts from before...I may rewrite them into a proper chapter in future, but keeping with my new found drive to post weekly,  lets start here)"},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obviously any computer we make needs a graphic display...something to help the user interact with the machine, let them know whats going on and what their options are; so begins the Nigel Graphics Card, made using two of the tmega328p chips (same as before) one to talk to the screen and one that does that actual drawing...I'll show you what I mean.."},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/2.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/2.png', 'caption':''},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The output chip, is connected to the actual screen through a VGA port, and talks to the screen using the VGA protocols (we'll get to that a little later) this chip contains the information for every pixel that's to be displayed, and instructs the screen to display them. The input chip receives commands from the main Nigel system and stores them in its own graphic language (commands like; draw a circle here of this size and colour) all coded in a similar way to Nigel. This chip then communicates with the output chip to change its stored pixel information."},				
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So far, I've only written the output chip, and am working on the input chip, and inter-chip communication...hopefully it'll go well."},
 			{'type':'h2', 'innerHTML':"The Output Chip"},
 			{'type':'h3', 'innerHTML':"The Prolonged VGA Port/Protocol Problem Which Previously Pushed My Patience With Practical Powered Products, But Proved Pretty Plainly Psychologically Palpable And Programmable"},				
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VGA ports (and cables and protocols and whatever) were invented back in the 80's by IBM for their fresh new personal computers, to connect their shiny new computers to their glistening new screens."},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/3.jpg', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/3.jpg', 'caption':''},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Originally it was just for PS/2 (Personal System/2) IBM machines and screens, but eventually became a global standard and is used in almost every computer since then as an available (and quite nifty) graphical output port. I think it's gradually being replaced by HDMI and DVI-I ports, but mostly all computers and screens still support good 'ol VGA."},
 			{'type':'h3', 'innerHTML':"The Plug"},				
 			{'type':'p', 'innerHTML':"VGA looks like this:"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/4.jpg', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/4.jpg', 'caption':''},
 			{'type':'p', 'innerHTML':"There's 15 little connections, or Pins "},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/5.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/5.png', 'caption':''},
 			{'type':'list','form':'ordered','notation':'1','items':[
 				{'type':'p','style':'color:red; margin:0px;','innerHTML':"Red"},
 				{'type':'p','style':'color:lime;  margin:0px;','innerHTML':"Green"},
@@ -52,16 +52,16 @@ var content = [
 				{'type':'p', 'innerHTML':"The gun shoots from left to right (in the viewers perspective) then goes down a line, and starts from the left again. Once at the bottom, it starts back from the top."}					
 				]
 			},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/6.png', 'caption':''},		
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/6.png', 'caption':''},		
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Now, here's the confusing bit; we have to use the Horizontal and Vertical sync pins, to teach the screen how long its journey from left to right, and top to bottom should take. It needs a signal from the Horizontal Pin every time e want a new line, and from the Vertical Pin every time we're finished the whole screen. This timing, coupled with how many Horizontal signals occur between Vertical signals, enable the screen to figure out what resolution it should be using."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Honestly; I've no idea as to how to select any resolution I want..maybe it has something to do with the I2C pins, but I've yet to figure it out. I have (through blind luck) gotten it to assume a 800x600 pixel resolution, which we can stick with for now (the chips are too slow to get above around 96x96 pixels anyway) "},
 
 			{'type':'h3', 'innerHTML':"But Anyway"},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Horizontal and Vertical Sync pins (which I'll be calling HSync and VSync) are normally at 5v, and a signal, is a pulse of 0v. The three colour pins are also important to the timing."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There's quite a specific layout for the timing of when these pulses and colour occur. I've divided it into three basic tables, or 'loops' (which makes programming it easy) and I've included the timings that I'm using for the 800x600 output."},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/7.png', 'caption':''},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/8.png', 'caption':''},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/9.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/7.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/8.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/9.png', 'caption':''},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When running; the Video time, governs how wide the image is, while the combination of Blank and nonBlank HSyncLoops allows you to change its height."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Through experimentation, I've discovered a little bit of leeway with the timings. I plan on finding the maximum values possible, though for the most part it doesn't really matter. Two of note however: "},
 			{'type':'list','form':'unordered','notation':'disc','items':[
@@ -76,13 +76,13 @@ var content = [
 
 			{'type':'h3', 'innerHTML':"The Prototype"},
 			{'type':'p', 'innerHTML':"It took me days to get the screen to do anything at all, but once I did, I got it together pretty fast:"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/10.jpg', 'caption':"First ever image created. It didn't work properly, it would flash random redish squares, and that text box was the screen telling me that the signal was broken. You can see my little Arduino in the bottom right."},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/11.jpg', 'caption':"The Error Message"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/12.jpg', 'caption':"Finally Getting It Stabilized"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/13.jpg', 'caption':"Attempting To Get It To Read Data From The Memory (The pixels are all stretched as I hadn't figured out how to square them yet)"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/14.jpg', 'caption':"Squared!...ish"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/15.jpg', 'caption':"The Test Card - After some time, I'd gotten the chip to output cohesive colour"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/16.jpg', 'caption':"Nigel's First Message To The World"},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/10.jpg', 'caption':"First ever image created. It didn't work properly, it would flash random redish squares, and that text box was the screen telling me that the signal was broken. You can see my little Arduino in the bottom right."},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/11.jpg', 'caption':"The Error Message"},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/12.jpg', 'caption':"Finally Getting It Stabilized"},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/13.jpg', 'caption':"Attempting To Get It To Read Data From The Memory (The pixels are all stretched as I hadn't figured out how to square them yet)"},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/14.jpg', 'caption':"Squared!...ish"},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/15.jpg', 'caption':"The Test Card - After some time, I'd gotten the chip to output cohesive colour"},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/16.jpg', 'caption':"Nigel's First Message To The World"},
 
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;These screens were at 51x40 pixels, but I've since gotten this up to 74x55 (I don't think I can go higher, I'll explain why soon)"},
 
@@ -96,13 +96,13 @@ var content = [
 			},
 
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So during the Video section of the HSyncLoop, the program first checks to see what line its on, then it goes to its memory and loads the next pixel byte of that line. A pixel byte (being quite simplistic) is made up of 3 bits, one for each colour (Red Green Blue) (with the other 5 going to waste) Using a combination of these three colours, 8 colours can be produced (as you can see in the 'Test Card' picture above)"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/17.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/17.png', 'caption':''},
 
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This pixel byte is then loaded into the chip's output port (a couple of pins coming out of the chip) displaying a colour on screen. The program then gathers and outputs the next pixel byte."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The amount of time between outputting each pixel byte, determines how wide each pixel is."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This little action happens 51 times, then the end of the HSyncLoop is reached, and we start again."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HSyncLoop happens 608 times, each time creating a horizontal line of colour on screen. Each loop consults a counter to figure out what part of the screen its on, and what set of Pixels it should be looking for for the line its drawing."},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/13.jpg', 'caption':""},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/13.jpg', 'caption':""},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This image shows us that process. Here, I hadn't written in the counter checker, so each HSyncLoop thinks \"better go to the next set of pixels\""},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"There's two main reasons I can't get a higher resolution:"},
 			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
@@ -118,11 +118,11 @@ var content = [
 
 			{'type':'h3', 'innerHTML':"Squashing In More"},			
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;But then I had an idea. Each byte uses 3 bits for pixel data, and the rest goes to waste...why don't we use that space? Then we could have double the amount of pixels!"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/18.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/18.png', 'caption':''},
 			{'type':'p', 'innerHTML':"Turns out; the amount of time if takes to gather a new byte, is double what it takes to do a 'swap'  of the current byte"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/19.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/19.png', 'caption':''},
 			{'type':'p', 'innerHTML':"So it's actually quite easy to do this little trick. "},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/20.jpg', 'caption':'The Larger 74x55 Resolution'},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/20.jpg', 'caption':'The Larger 74x55 Resolution'},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"So now, we have double the pixel space to use."},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2048x2=4096"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;74x55=4070 (2035 bytes)"},
@@ -132,7 +132,7 @@ var content = [
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is all well and good, but we need to find a way of changing the pixel data in the chip..This means both finding a way for chips to talk to eachother, and figuring out how the input chip's graphical code will work.."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It's somewhat easy to simply transfer in new pixels one by one into the memory, but we need to draw things into the memory..a more complex task."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Currently, I have a simple system that looks at the input port of the chip (there's three ports and you can define the direction yourself) and collects all 2035 bytes during the Vertical Sync Pulse; and replaces the ones in the memory as it goes. It works, but is kinda useless, as each frame is deleted and there's no way to say \"don't delete this byte\". It all just gets wiped. So we need a more advanced system; I'm thinking \"Change Bits\""},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/21.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/21.png', 'caption':''},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This way, we can program the chip to collect the byte as normal, but then check each pixel byte before putting it in the memory. If a pixel byte has a Change Bit set (as 1) then the program will replace the existing pixel byte with the new one; if not, then it doesn't. It would have to do this for both pixel bytes per byte. "},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This way, the input chip doesn't have to refresh every pixel for every new frame, it can just change the ones it wants to change, leaving the others as they are."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This particular idea is still in development."},
@@ -147,7 +147,7 @@ var content = [
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not particularly, I wanna make this more regular. So expect updates weekly..or fortnightly..or whenever I actually have a development. I think shorter posts more often is probably easier than long ones more spaced out."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We'll see how it goes :)"},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Until next time:"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150814/22.jpg', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150814/22.jpg', 'caption':''},
 
 			{'type':'p','style':'margin:0px; text-align: right;', 'innerHTML':"Posted 14th August 2015"},
 
@@ -159,7 +159,7 @@ var content = [
 		'title':'How to Build a Computer (Probably) - Side Quest 2 - Nigel (upgraded)',
 		'content':[
 			{'type':'h1', 'innerHTML':"How to Build a Computer (Probably) - Side Quest 2 - Nigel (upgraded)"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/1.jpg', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/1.jpg', 'caption':''},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So here's what happened; I was happily programming away and I'd just finished the SquareF command, when I encountered an odd error. Apparently, Nigel had gotten so big that I'd filled the chip's program memory, and the software I was using to write the program wouldn't let me compile anything until I shortened the code. I did, and the final version of Nigel for the PIC16F84A (the proper name of the chip I was working on) will work properly."},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;But I wasn't finished, I wanted Nigel to be bigger and smarter, so I started looking through the website where you can get the PIC16F84A, to see if I could find a bigger one. Two things happened;"},
 			{'type':'list','style':'margin:0px;','form':'ordered','notation':'1','items':[
@@ -168,7 +168,7 @@ var content = [
 				]
 			},
 			{'type':'p', 'innerHTML':"So I was feeling down about that, when I realized; hay, Arduino's have the same sorta chip in them...so I got one of those :D"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/2.jpg', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/2.jpg', 'caption':''},
 			{'type':'h2', 'innerHTML':"Arduino"},	
 			{'type':'p', 'innerHTML':
 				"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An Arduino, is a cheap little development board. It comes with a microprocessor (the little computer, you can see it there, it's the big chip in the board), usb port (for uploading programs to it), power plug (so you can plug it into a battery), and pins (those black rectangles along the sides)" +"<br>"+
@@ -181,7 +181,7 @@ var content = [
 			},
 
 			{'type':'p', 'innerHTML':"And it was here, that we began to build our masterpiece; introducing;"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/3.jpg', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/3.jpg', 'caption':''},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is still a work in progress, but is already more functional that the previous one (and from here on out, this is the main version too) The chip is alot more complicated, there's alot more features, and I still don't know what much of it does..but I'm learning, and Nigel is coming along well. There's a slightly different code layout, and a few fundamental differences in the new chip means none of the old code could be transferred over. So, I guess we'll start again. Strap yourselves in for a wild ride! (in a sorta, gentle and a little boring sort way)"},
 
 			{'type':'h2', 'innerHTML':"(Hot Out Of The Oven) Overview"},
@@ -209,7 +209,7 @@ var content = [
 
 			{'type':'h2', 'innerHTML':"(New And Improved) Bendy Code"},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(similar to last time) There are five sections to Nigel;"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/4.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/4.png', 'caption':''},
 			{'type':'list','style':'margin:0px;','form':'unordered','notation':'disc','items':[
 				{'type':'p','style':'margin:0px;','innerHTML':
 					"Goto" +"<br>"+
@@ -443,31 +443,31 @@ var content = [
 			{'type':'p','style':'margin:0px; word-break: break-all;', 'innerHTML':"IsF_F - |ComHigh8|ComLow8|Com|F_High8|F_Low8|F_High8|F_Low8|FirstCommandAfterIf'dCodeAddress_High8|FirstCommandAfterIf'dCodeAddress_Low8|"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- This command judges the first byte |F_High8|F_Low8| off the second byte |F_High8|F_Low8|, if it returns true, the code contained in the If statement is run, if not, it jumps to the first command after the code contained in the If statement. You have to use your imagination a little for this one too, but not as much."},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/5.png', 'caption':''},			
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/5.png', 'caption':''},			
 			
 			{'type':'h3', 'innerHTML':"- If With Else -"},
 			{'type':'p', 'innerHTML':""},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There is no specific command for this, you need to use an 'if' statement with a 'Goto' command to achieve this."},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/6.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/6.png', 'caption':''},
 
 			{'type':'h3', 'innerHTML':"- Do While Loop -"},
 			{'type':'p', 'innerHTML':""},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To do a dowhile loop, use a While statement, and set the \"FirstCommandOfWhile'dCodeAddress\" to a location before the While statement begins (and don't forget a way to change the byte |F_High8|F_Low8| so you don't get an infinite loop)"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the statement returns false, the loop starts again."},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/7.png', 'caption':''},	
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/7.png', 'caption':''},	
 
 			{'type':'h3', 'innerHTML':"- While Loop -"},
 			{'type':'p', 'innerHTML':""},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To do a while loop, use a While statement, and set the \"FirstCommandOfWhile'dCodeAddress\" to a location before the While statement begins. Then before this point, add in a Goto command to bring you to the start of the if statement (and don't forget a way to change the byte |F_High8|F_Low8| so you don't get an infinite loop)"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the statement returns false, the loop starts again."},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/8.png', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/8.png', 'caption':''},
 
 			{'type':'h3', 'innerHTML':"- For Loop -"},
 			{'type':'p', 'innerHTML':""},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are a few different flavors of the ForLoop, but they all basically work the same way. You write the code you want to loop before the For command, then tell the For command where this code starts. The command needs a byte as a counter for itself - I, an EndNumber (a value to judge this counter off (it can be a simple value or an address to a byte)) and a StepSize (a value that it added to the counter at the end of each loop (it also can be a simple value or an address to a byte))"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/9.png', 'caption':''},			
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/9.png', 'caption':''},			
 			{'type':'p','style':'margin:2px; word-break: break-all;', 'innerHTML':"For_ - |ComHigh8|ComLow8|Com|i_F_High8|i_F_Low8|EndNumber|StepSize|FirstCommandOfFor'dCodeAddress_High8|FirstCommandOfFor'dCodeAddress_Low8|"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--- For so long as byte |i_F_High8|i_F_Low8| is |Com| than value |EndNumber|, perform code in For loop, when completed add value |StepSize| to byte |i_F_High8|i_F_Low8| and start again"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com Switches: 00 = 01 > 02 < 03 >= 04 <= 05 !="},			
@@ -494,14 +494,14 @@ var content = [
 			{'type':'p','style':'margin:0px;', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I'm still gonna make this project public, so you can go see the Nigel Develpoment Log and download the workspace to look at and mess around with from here: "},
 			{'type':'p','style':'margin:0px; word-break: break-all;', 'innerHTML':"<a href='https://drive.google.com/folderview?id=0B7-r9goff8SZfi1wdEQwQXRFeHRIRTlzdThGRjA1MW5mZkxyRmpzWlgzbTVEbU85anpNWnc&usp=sharing'>https://drive.google.com/folderview?id=0B7-r9goff8SZfi1wdEQwQXRFeHRIRTlzdThGRjA1MW5mZkxyRmpzWlgzbTVEbU85anpNWnc&usp=sharing</a>"},
 			{'type':'p','style':'margin:0px;', 'innerHTML':"You're also going to need a version of Atmel Studio "},
-			{'type':'p','style':'margin:0px;', 'innerHTML':"<a href='http://www.atmel.com/microsite/atmel_studio6/'>http://www.atmel.com/microsite/atmel_studio6/</a>"},
+			{'type':'p','style':'margin:0px;', 'innerHTML':"<a href='https://www.atmel.com/microsite/atmel_studio6/'>https://www.atmel.com/microsite/atmel_studio6/</a>"},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This could be the start of something very interesting. We have a chip that we can program easily, that has plenty of space and is quite fast (20MHz). We have a language that shows real promise, and we have a clear direct vision (ish) of where we're going. Chaps; this could be really cool :D"},
 			
 			{'type':'h2', 'innerHTML':"Remember Anica?"},	
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yeah..the Anica project has essentially been shelved, but it is not forgotten. Having a chip that we can program and wire into things, brings us way forward, but we lose alot of the control and complete features that we would have gotten from the custom architecture. What is does do though, is give us a better insight into what is really required from a chip. By programming this one, and going as far and as advanced as we can go, we will learn more about what the Anica architecture needs to be, when we return. "},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Till then, let's keep coding, working on Nigel. There needs to be some way of writing Nigel code, using the machine, so graphics and an input device are required. I'm hoping to make a higher language that can convert into Nigel code, allowing for programs to be less machine like, and more natural to how people think. That is, ofcourse, way down the line (but maybe not that far)"},
 			{'type':'p', 'innerHTML':"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anyway, until next time,"},
-			{'type':'img', 'src':'http://metasophiea.com/projects/nigel/images/20150605/10.jpg', 'caption':''},
+			{'type':'img', 'src':'https://metasophiea.com/projects/nigel/images/20150605/10.jpg', 'caption':''},
 
 			{'type':'p','style':'margin:0px; text-align: right;', 'innerHTML':"Posted 5th June 2015"},
 		]

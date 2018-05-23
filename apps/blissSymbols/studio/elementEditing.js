@@ -131,7 +131,7 @@ var previousAction = null;
         startingPosition.x = parseFloat(that.getAttribute("x")); 
         startingPosition.y = parseFloat(that.getAttribute("y"));
 
-        var element = document.createElementNS("http://www.w3.org/2000/svg",'rect');
+        var element = document.createElementNS("https://www.w3.org/2000/svg",'rect');
         element.setAttribute("id","movementSurface"); 
         element.setAttribute('x',0); 
         element.setAttribute('y',0);
@@ -271,7 +271,7 @@ var previousAction = null;
 
 //// moving elements ////
     function moveElement_mouseDown(event, that){
-        var element = document.createElementNS("http://www.w3.org/2000/svg",'rect');
+        var element = document.createElementNS("https://www.w3.org/2000/svg",'rect');
         element.setAttribute("id","movementSurface"); 
         element.setAttribute('x',0); 
         element.setAttribute('y',0);

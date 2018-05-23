@@ -42,18 +42,18 @@ var content = {
                     'link':'https://github.com/metasophiea/SIMON_VHDL',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For my final year project, I have been asked to develop an implementation of the SIMON block ciphers in VHDL, and review my design’s performance in regards to how fast the system can encrypt information, the hardware costs involved and power consumption. On this git (<a href="https://github.com/metasophiea/SIMON_VHDL">https://github.com/metasophiea/SIMON_VHDL</a>), you can find all the development work I’ve done on the system to date, plus some of the reports and documents I’ve made as part of the project.',
                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
-                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In addition to this; as I was researching the cipher I developed a JavaScript version and created an online encoder/decoder tool for encrypting and decrypting messages using the cipher; <a href="http://metasophiea.com/apps/encryption/SIMON/translater/">http://metasophiea.com/apps/encryption/SIMON/translater/</a>. The unencrypted message can be any text, though the encrypted message is hexadecimal as is the password used for encryption. I also had the idea of encoding entire websites using this system. This experiment page demonstrates an encrypted site being downloaded, decrypted and displayed in an iFrame; <a href="http://metasophiea.com/apps/encryption/SIMON/siteviewer/">http://metasophiea.com/apps/encryption/SIMON/siteviewer/</a>',
+                    '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In addition to this; as I was researching the cipher I developed a JavaScript version and created an online encoder/decoder tool for encrypting and decrypting messages using the cipher; <a href="https://metasophiea.com/apps/encryption/SIMON/translater/">https://metasophiea.com/apps/encryption/SIMON/translater/</a>. The unencrypted message can be any text, though the encrypted message is hexadecimal as is the password used for encryption. I also had the idea of encoding entire websites using this system. This experiment page demonstrates an encrypted site being downloaded, decrypted and displayed in an iFrame; <a href="https://metasophiea.com/apps/encryption/SIMON/siteviewer/">https://metasophiea.com/apps/encryption/SIMON/siteviewer/</a>',
                     //'&nbsp;','&nbsp;','&nbsp;','&nbsp;'//,'&nbsp;','&nbsp;','&nbsp;'
                     ]
                 },
                 {
                     'title':'metasophiea.com - html/javascript',
-                    'link':'http://metasophiea.com',
+                    'link':'https://metasophiea.com',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My home on the web. Hosted on a pages.github.com, this is my main storage/showcase for all my web programming projects, as well as one or two non-programming projects.']
                 },
                 {
                     'title':'Canvas Viewing Space / Presenter - html/javascript',
-                    'link':'http://metasophiea.com/lib/js/canvasViewingSpace/',
+                    'link':'https://metasophiea.com/lib/js/canvasViewingSpace/',
                     'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Over the summer of 2016, while I was employed with Alexion as an intern; one of the end of employment tasks that my college set for me was to make a 5-6 minute presentation on my time there. Before I began at Alexion I had already been experimenting with 2d graphics, and had the idea to create my own presentation software with which to make a presentation.',
                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Although not very featured, this is that program. Its presentation style is akin to Prezi, though with a UI that is border-agnostic.',
                     '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A little bulky at times, and not super user-friendly, it has all the ability that I need to create my presentation. In future I hope to update it with new objects and editing features.'

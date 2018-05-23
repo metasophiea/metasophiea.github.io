@@ -1,4 +1,4 @@
-var URLpreface = 'http://metasophiea.com/apps/partyCalculator/tracks/';
+var URLpreface = 'https://metasophiea.com/apps/partyCalculator/tracks/';
 var tracks = [
     [
         URLpreface+'silence.wav',
