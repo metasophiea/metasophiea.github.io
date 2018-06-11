@@ -30,7 +30,7 @@
     window.onresize = function(){
         var links = document.getElementsByClassName('imageLink');
         for(var a = 0; a < links.length; a++){
-            links[a].style.width = window.innerWidth/3 + 'px';
+            links[a].style.width = document.body.clientWidth/3 + 'px';
         }
     };
     window.onresize();
