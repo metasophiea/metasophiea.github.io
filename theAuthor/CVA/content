@@ -1,6 +1,14 @@
 var content = {
             'experience':[
                 {
+                    'title':'Openmind Networks – Deployment/Support Engineer',
+                    'details':{'address':'4 Westland Square, Pearse Street, Dublin 2','time':'November 2017 – Present'},
+                    'description':[
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As a member of the Openmind Graduate Program, I was introduce to all technical aspects of the company\'s lead product; Traffic Control, after which I was moved into the Deployment department to help out with the installiation of Openmind software into customer networks; which included installation, integration, test and go-live; along with writing a number of scripts to help these processes.',
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After this, I was selected to move into the Support department. This task involved working with various customers of Openmind to solve  issues they had encountered with their deployed systems.'
+                    ]
+                },              
+                {
                     'title':'Alexion Pharmaceuticals – IT Intern',
                     'details':{'address':'College Business & Technology Park, Bóthar Bhaile Bhlainséir Thuaidh, Dublin 15','time':'April-September 2016'},
                     'description':[
@@ -27,15 +35,25 @@ var content = {
                     'title':'Walsh\'s Shop - Shop Assistant',
                     'details':{'address':'Knightstown, Co. Kerry','time':'Summer 2014'},
                     'description':[
-                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A seasonal position within own family store.  Main duties include stock replenishment, merchandising, pricing and stock rotation.'
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A seasonal position within own family store.  Main duties included stock replenishment, merchandising, pricing and stock rotation.'
                     ]
                 },
             ],
-            'projects':[    
+            'projects':[
+                {
+                    'title':'curve/workspace/core - Webapp/Framework/Graphical Library - javascript/glsl',
+                    'link':'https://github.com/metasophiea/curve',
+                    'description':[
+                        'A Project In Three Parts:',
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Curve is a musical workstation designed to be like real-world music making machines. There\'s synthesizers and effect units and keyboards and all sorts of stuff you can plug together and play with.',
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Workspace is a interface framework that is being written alongside Curve. With it, one can create graphical objects and have them interact with one another and the user, in a visual and natural way. Just play around with Curve and you\'ll understand.',
+                        '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• Core is a canvas-based graphical framework written to replace the project\'s reliance on SVG. It\'s a bit shakey - and is certianly not the best replacement of SVG - but for the needs of the project it works just fine, and has already allowed the system to work on more browsers and machines. Right now, I am re-writing it to use webGL while refining functionality and working on stablity; hopefully increasing the speed of the render and the usefulness overall.',
+                    ]
+                },
                 {
                     'title':'riomhaireRua - Virtual Machine - c++/rua',
                     'link':'https://github.com/metasophiea/riomhaireRua',
-                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An in development mini virtual machine project']
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A fun little virtual machine project with the custom language \'Rua\', a little console access and some graphical ability']
                 },
                 {
                     'title':'Final Year Project - Implementing the Simon Cipher In VHDL - java/c++/vhdl',
@@ -69,13 +87,13 @@ var content = {
                 {
                     'school':'Dublin City University',
                     'degree':'B.Eng in Electronic and Computer Engineering',
-                    'time':'2013-present',
-                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This program - where I have selected the major \'Digital Interaction\' - replaces and combines the best of DCU\'s previous offerings in Electronic Engineering, Digital Media Engineering and Information and Communications Engineering. As well as knowledge of the science and mathematics foundations needed by the electronic and computer engineer; this course develops a wide knowledge in computer systems; from digital & analogue circuitry embedded software and hardware design, to Human Computer Interface Technology, Web Application Development and Image Processing & Analysis']
+                    'time':'2013 – 2017',
+                    'description':['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This program - where I have selected the major \'Digital Interaction\' - replaces and combines the best of DCU\'s previous offerings in Electronic Engineering, Digital Media Engineering and Information and Communications Engineering. As well as knowledge of the science and mathematics foundations needed by the electronic and computer engineer; this course develops a wide knowledge in computer systems; from digital & analogue circuitry embedded software and hardware design, to human-computer interface technology, web application development and image processing & analysis']
                 },
                 {
                     'school':'St. Mary\'s Diocesan School',
                     'degree':'Leaving Certificate',
-                    'time':'2007-2013',
+                    'time':'2007 – 2013',
                     'description':[]
                 },
                 {
