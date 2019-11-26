@@ -15,14 +15,14 @@
     </head>
 
     <body>
-        <a href="https://archive.org/download/CommonRoomRadio/ep1.mp3"><img class='imageLink' src="./images/default.png" style="width:33%;" ></img></a>
-        <a href="https://archive.org/download/CommonRoomRadio/ep2.mp3"><img class='imageLink' src="./images/default.png" style="width:33%;" ></img></a>
-        <a href="https://archive.org/download/CommonRoomRadio/ep3.mp3"><img class='imageLink' src="./images/ep3.png" style="width:33%;" ></img></a>
-        <a href="https://archive.org/download/CommonRoomRadio/ep4.mp3"><img class='imageLink' src="./images/ep4.png" style="width:33%;" ></img></a>
-        <a href="https://archive.org/download/CommonRoomRadio/ep5.mp3"><img class='imageLink' src="./images/ep5.jpg" style="width:33%;" ></img></a>
-        <a href="https://archive.org/download/CommonRoomRadio/ep6.mp3"><img class='imageLink' src="./images/ep6.jpg" style="width:33%;" ></img></a>
-        <a href="https://archive.org/download/CommonRoomRadio/ep7.mp3"><img class='imageLink' src="./images/ep7.jpg" style="width:33%;" ></img></a>
-        <a href="https://archive.org/download/CommonRoomRadio/ep8.mp3"><img class='imageLink' src="./images/ep8.jpg" style="width:33%;" ></img></a>
+        <a href="https://archive.org/download/CommonRoomRadio/ep1.mp3"><img class='imageLink' src="./images/default.png"></img></a>
+        <a href="https://archive.org/download/CommonRoomRadio/ep2.mp3"><img class='imageLink' src="./images/default.png"></img></a>
+        <a href="https://archive.org/download/CommonRoomRadio/ep3.mp3"><img class='imageLink' src="./images/ep3.png"    ></img></a>
+        <a href="https://archive.org/download/CommonRoomRadio/ep4.mp3"><img class='imageLink' src="./images/ep4.png"    ></img></a>
+        <a href="https://archive.org/download/CommonRoomRadio/ep5.mp3"><img class='imageLink' src="./images/ep5.jpg"    ></img></a>
+        <a href="https://archive.org/download/CommonRoomRadio/ep6.mp3"><img class='imageLink' src="./images/ep6.jpg"    ></img></a>
+        <a href="https://archive.org/download/CommonRoomRadio/ep7.mp3"><img class='imageLink' src="./images/ep7.jpg"    ></img></a>
+        <a href="https://archive.org/download/CommonRoomRadio/ep8.mp3"><img class='imageLink' src="./images/ep8.jpg"    ></img></a>
     </body>
 </html>
 
@@ -30,7 +30,7 @@
     window.onresize = function(){
         var links = document.getElementsByClassName('imageLink');
         for(var a = 0; a < links.length; a++){
-            links[a].style.width = document.body.clientWidth/3 + 'px';
+            links[a].style.width = document.body.clientWidth/2 + 'px';
         }
     };
     setTimeout(window.onresize,1);
