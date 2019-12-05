@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Offical Openmind Christmas Website 2004</title>
+        <meta charset="utf-8"></meta>
+        <link href="https://fonts.googleapis.com/css?family=Gupter&display=swap" rel="stylesheet">
+        <style>
+            html {
+                overflow-x:hidden;
+                overflow-y:hidden;
+            }
+            #mainText{
+                position: relative;
+                transition-duration: 1s;
+                text-align: center;
+                z-index: 10;
+            }
+            #video{
+                position:absolute;
+                top:0;
+                left:0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 id='mainText'></h1>
+        <iframe 
+            id='video'
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/geDhhWvl1II?iv_load_policy=3"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+        ></iframe>
+    </body>
+
+    <script>
+        const font = 'Gupter';
+        const mainTextElement = document.getElementById('mainText');
+        const width = window.innerWidth;
+
+        mainTextElement.style.fontFamily = font;
+        mainTextElement.innerHTML = 'An Openmind Christmas';
+        mainTextElement.style.color = 'rgb(0,0,0)';
+        document.body.style.backgroundColor = 'rgb(255,255,255)';
+        mainTextElement.style.fontSize = '100px';
+
+        document.getElementById('video').width = window.innerWidth;
+        document.getElementById('video').height = window.innerHeight;
+
+        setTimeout(() => {
+            mainTextElement.style.margin = ( (window.innerHeight - mainTextElement.clientHeight)/2 )+'px 0px';
+        }, 100);
+
+        setInterval(() => {
+            mainTextElement.style.color = 'rgb('+Math.random()*255+','+Math.random()*255+','+Math.random()*255+')';
+        },2000);
+    </script>
+
+</html>
