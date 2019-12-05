@@ -43,13 +43,17 @@
         const width = window.innerWidth;
 
         mainTextElement.style.fontFamily = font;
-        mainTextElement.innerHTML = 'An Openmind Christmas';
+
+        mainTextElement.innerHTML = new URL(window.location.href).searchParams.get("text");
+        if(mainTextElement.innerHTML == ''){mainTextElement.innerHTML = 'An Openmind Christmas';}
         mainTextElement.style.color = 'rgb(0,0,0)';
         document.body.style.backgroundColor = 'rgb(255,255,255)';
         mainTextElement.style.fontSize = '100px';
 
+        const videoURL = new URL(window.location.href).searchParams.get("videoURL");
         document.getElementById('video').width = window.innerWidth;
         document.getElementById('video').height = window.innerHeight;
+        if(videoURL != undefined){document.getElementById('video').src = videoURL;}
 
         setTimeout(() => {
             mainTextElement.style.margin = ( (window.innerHeight - mainTextElement.clientHeight)/2 )+'px 0px';
