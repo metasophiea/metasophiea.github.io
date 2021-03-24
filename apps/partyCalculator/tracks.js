@@ -1,5 +1,5 @@
-var URLpreface = 'https://metasophiea.com/apps/partyCalculator/tracks/';
-var tracks = [
+const URLpreface = '/apps/partyCalculator/tracks/';
+const tracks = [
     [
         URLpreface+'silence.wav',
         URLpreface+'0-drums_01.wav',

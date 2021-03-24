@@ -42,6 +42,7 @@ function Go(){
     );
 
     resize();
+    checkAudioContextIsActive();
 }
 
 function resize(){
@@ -49,4 +50,11 @@ function resize(){
         document.getElementById("wrongWayOverlay").style.height = '100%';
     }
     else{document.getElementById("wrongWayOverlay").style.height = '0%';}
+}
+
+function checkAudioContextIsActive(){
+    if(audioMachine.audioContext.state != "running"){
+        document.getElementById("activateAudioContextOverlay").style.height = '100%';
+    }
+    else{document.getElementById("activateAudioContextOverlay").style.height = '0%';}
 }

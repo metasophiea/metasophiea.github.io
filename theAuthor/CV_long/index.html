@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Brandon Walsh - CV</title>
+	<meta charset="utf-8"></meta>
+    <script type='text/javascript' src="./content"></script>
+	<script>
+        function Go(){
+            //fill experience
+            for(var a = 0; a < content.experience.length; a++){ document.getElementById('workExperience').appendChild(createExperiencePanel(content.experience[a])); }
+            //fill projects
+            for(var a = 0; a < content.projects.length; a++){ document.getElementById('projects').appendChild(createProjectPanel(content.projects[a])); }
+            //fill education
+            for(var a = 0; a < content.education.length; a++){ document.getElementById('education').appendChild(createEducationPanel(content.education[a])); }
+        }
+        function createProjectPanel(data){
+            var articleElement = document.createElement('article');
+                articleElement.setAttribute('class','articlePanel');  
+            //title
+            var a = document.createElement('a');
+                a.setAttribute('href',data.link); 
+                a.innerHTML = data.title;
+            var title = document.createElement('h2');
+                title.setAttribute('class','articleTitle');
+                title.appendChild(a);   
+                articleElement.appendChild(title);   
+            //description
+            for(var a = 0; a < data.description.length; a++){
+                var p = document.createElement('p');
+                    p.setAttribute('class','articleText');
+                    p.innerHTML = data.description[a];
+                    articleElement.appendChild(p);
+            }
+            return articleElement;
+        }
+        function createEducationPanel(data){
+            var articleElement = document.createElement('article');
+                articleElement.setAttribute('class','articlePanel');
+            //title
+            var title = document.createElement('h2');
+                title.setAttribute('class','articleTitle');
+                title.innerHTML = data.degree;
+                articleElement.appendChild(title);
+            //school and dates
+            var table = document.createElement('table');
+                table.width = '100%';
+            var tbody = document.createElement('tbody');
+            var tr = document.createElement('tr');
+            var td_1 = document.createElement('td'); td_1.innerHTML = data.school;
+            var td_2 = document.createElement('td'); td_2.innerHTML = data.time; td_2.style['text-align'] = 'right';
+                tr.appendChild(td_1); tr.appendChild(td_2);
+                tbody.appendChild(tr); table.appendChild(tbody);
+                articleElement.appendChild(table); 
+            //description
+            for(var a = 0; a < data.description.length; a++){
+                var p = document.createElement('p');
+                    p.setAttribute('class','articleText');
+                    p.innerHTML = data.description[a];
+                    articleElement.appendChild(p);
+            }
+            return articleElement;
+        }
+        function createExperiencePanel(data){
+            var articleElement = document.createElement('article');
+                articleElement.setAttribute('class','articlePanel');
+            //title
+            var title = document.createElement('h2');
+                title.setAttribute('class','articleTitle');
+                title.innerHTML = data.title;
+                articleElement.appendChild(title);
+            //address and dates
+            var table = document.createElement('table');
+                table.width = '100%';
+            var tbody = document.createElement('tbody');
+            var tr = document.createElement('tr');
+            var td_1 = document.createElement('td'); td_1.innerHTML = data.details.address;
+            var td_2 = document.createElement('td'); td_2.innerHTML = data.details.time; td_2.style['text-align'] = 'right';
+                tr.appendChild(td_1); tr.appendChild(td_2);
+                tbody.appendChild(tr); table.appendChild(tbody);
+                articleElement.appendChild(table); 
+            //description
+            for(var a = 0; a < data.description.length; a++){
+                var p = document.createElement('p');
+                    p.setAttribute('class','articleText');
+                    p.innerHTML = data.description[a];
+                    articleElement.appendChild(p);
+            }
+            return articleElement;
+        }
+    </script>
+	<style>
+        html{font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:14px;}
+        body{
+            width: 70%;
+            margin: 10px auto;
+            background: #fcfcfc;
+            min-width: 600px; max-width: 850px;
+            padding: 10px;
+        }
+        a{color:rgb(0,0,0); text-decoration:none;}
+        a:hover{color:rgb(150,0,150); text-decoration:underline;}
+        .sectionTitle{color:rgb(150,150,150);font-weight: normal; margin: 14px 0px;}
+        .sectionDivider{height:1px; background-color:rgb(220,220,220);}
+        .articlePanel{margin:10px;}
+        .articleTitle{margin:0px;font-weight: normal;}
+        .articleDetails{color:rgb(150,150,150);}
+        .articleText{margin:0px;}
+    </style>
+
+    <style type="text/css" media="print">
+        @page{
+            size: auto;
+            margin: 20px;
+        }
+        html{font-family: 'Helvetica Neue Light', 'HelveticaNeue-Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:12px;}
+        body{min-width: 500px; width: 90%;}
+    </style>
+</head>
+
+<body onLoad="Go()">
+
+    <section id='leadInfo'>
+        <article class='articlePanel'>
+            <table width='100%'><tbody>
+                <tr>
+                    <td>
+                        <h1 style='font-weight: normal; font-size:25px; margin: 10px 0px;'>Brandon Walsh</h1>
+
+                        <table width='100%'><tbody>
+                            <!-- <tr><td>Mobile: 089 255 1282</td></tr> -->
+                            <tr><td>Email: metasophiea@gmail.com</td></tr>
+                            <tr><td>Website: <a href='https://metasophiea.com/'>metasophiea.com</a></td></tr>
+                            <tr><td>LinkedIn: <a href='https://www.linkedin.com/in/metasophiea'>linkedin.com/in/metasophiea</a></td></tr>
+                            <tr><td>Github: <a href='https://www.github.com/metasophiea'>github.com/metasophiea</a></td></tr>
+                        </tbody></table>
+
+                        <p>
+<<<<<<< HEAD:theAuthor/CV_long/index.html
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DCU Electronic & Computer Engineering graduate, Deployment Engineer at Openmind Networks, fan of Radex Sort, avid programmer and designer, all round cool guy.
+                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Language skills: Rust, JavaScript, Bash, Python, HTML, VHDL, Assembly, C++, Java
+=======
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DCU Electronic & Computer Engineering graduate, Support Engineer at Openmind Networks, fan of Radex Sort, avid programmer and designer, all round cool guy
+                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Language skills: JavaScript, Bash, Python, HTML, VHDL, C/C++, Java, Assembly
+>>>>>>> 35fae7e9c62fa0a8c8d7960088ff5d7deb79121c:theAuthor/CVA/index.html
+                        </p>
+                    </td>
+                    <td width='20%'>
+                         <img src="./profile.jpg" height="150"></img>
+                    </td>
+                </tr>
+           </tbody></table>
+        </article>
+    </section>
+
+    <section class='sectionDivider'></section>
+    <section id='workExperience'><h1 class='sectionTitle'>Experience</h1></section>
+    <section class='sectionDivider'></section>
+    <section id='projects'><h1 class='sectionTitle'>Projects</h1></section>
+    <section class='sectionDivider'></section>
+    <section id='education'><h1 class='sectionTitle'>Education</h1></section>
+    <section class='sectionDivider'></section>
+
+    <section id='tailInfo'>
+        <table width='100%'><tbody>
+            <tr><td style='text-align: right;'><a class='sectionTitle' href="https://metasophiea.com/theAuthor/CV">https://metasophiea.com/theAuthor/CV</a></td> </tr>
+        </tbody></table>
+    </section>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 var audioMachine = new function(){
-    var AudioContext = new window.AudioContext();
+    this.audioContext = new window.AudioContext();
+    var AudioContext = this.audioContext; //new window.AudioContext();
 	var mainOutput = AudioContext.destination;
 
     //tracks and buffers
@@ -79,10 +80,10 @@ var audioMachine = new function(){
 
         function play(callback=null){
             for(var a = 0; a < trackCount-1; a++){
-                    sources[a] = AudioContext.createBufferSource();
-                    sources[a].buffer = buffers[a][performingTracks[a]];
-                    sources[a].connect(mainOutput);
-                    sources[a].start(0);
+                sources[a] = AudioContext.createBufferSource();
+                sources[a].buffer = buffers[a][performingTracks[a]];
+                sources[a].connect(mainOutput);
+                sources[a].start(0);
             }
 
             sources[(trackCount-1)] = AudioContext.createBufferSource();
