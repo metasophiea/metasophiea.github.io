@@ -40,16 +40,16 @@
 		var players = [];
 		switch(count){
 			case 6:
-				players.push( makePlayer('Yellow Three','yellow',{'x':Math.floor(pixelMatrix.screenDimentions().width/1.85),'y':0},'south','aaff00',{'left':'3','right':'2'}) );
+				players.push( makePlayer('Yellow Three','yellow',{'x':Math.floor(pixelMatrix.screenDimensions().width/1.85),'y':0},'south','aaff00',{'left':'3','right':'2'}) );
 			case 5:
-				players.push( makePlayer('Red Three','red',{'x':Math.floor(pixelMatrix.screenDimentions().width/1.85),'y':pixelMatrix.screenDimentions().height-1},'north','ff0055',{'left':'b','right':'n'}) );
+				players.push( makePlayer('Red Three','red',{'x':Math.floor(pixelMatrix.screenDimensions().width/1.85),'y':pixelMatrix.screenDimensions().height-1},'north','ff0055',{'left':'b','right':'n'}) );
 			case 4:
-				players.push( makePlayer('Yellow Two','yellow',{'x':Math.floor(pixelMatrix.screenDimentions().width/2.15),'y':0},'south','ffff99',{'left':'7','right':'8'}) );
+				players.push( makePlayer('Yellow Two','yellow',{'x':Math.floor(pixelMatrix.screenDimensions().width/2.15),'y':0},'south','ffff99',{'left':'7','right':'8'}) );
 			case 3:
-				players.push( makePlayer('Red Two','red',{'x':Math.floor(pixelMatrix.screenDimentions().width/2.15),'y':pixelMatrix.screenDimentions().height-1},'north','ff5500',{'left':'d','right':'f'}) );
+				players.push( makePlayer('Red Two','red',{'x':Math.floor(pixelMatrix.screenDimensions().width/2.15),'y':pixelMatrix.screenDimensions().height-1},'north','ff5500',{'left':'d','right':'f'}) );
 			case 2: 
-				players.push( makePlayer('Yellow One','yellow',{'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':5},'south','ffff00',{'left':'o','right':'p'}) );
-				players.push( makePlayer('Red One','red',{'x':Math.floor(pixelMatrix.screenDimentions().width/2),'y':pixelMatrix.screenDimentions().height-5},'north','ff0000',{'left':'q','right':'w'}) );
+				players.push( makePlayer('Yellow One','yellow',{'x':Math.floor(pixelMatrix.screenDimensions().width/2),'y':5},'south','ffff00',{'left':'o','right':'p'}) );
+				players.push( makePlayer('Red One','red',{'x':Math.floor(pixelMatrix.screenDimensions().width/2),'y':pixelMatrix.screenDimensions().height-5},'north','ff0000',{'left':'q','right':'w'}) );
 			break;
 			default: console.error('incompatible player count specified'); break;
 		}
@@ -94,7 +94,7 @@
 		adjustCanvas(document.getElementById('screen'));
 		pixelMatrix.attachCanvas(document.getElementById('screen'));
 		wallMatrix = new Array(spaceDimentions.width);for(var a = 0; a < wallMatrix.length; a++){wallMatrix[a] = new Array(spaceDimentions.height);for(var b = 0; b < wallMatrix[a].length; b++){wallMatrix[a][b] = '000000';}}
-		pixelMatrix.screenDimentions({'width':wallMatrix.length,'height':wallMatrix[0].length});
+		pixelMatrix.screenDimensions({'width':wallMatrix.length,'height':wallMatrix[0].length});
 		pixelMatrix.FPS(15);
 		pixelMatrix.autoRender(true);
 		background = produceBackground();
@@ -127,7 +127,7 @@
 						case 'west': player[a].nextStep = {'x':player[a].pos.x-1,'y':player[a].pos.y}; break;
 					}
 
-					if(player[a].nextStep.x < 0 || player[a].nextStep.x >= pixelMatrix.screenDimentions().width || player[a].nextStep.y < 0 || player[a].nextStep.y >= pixelMatrix.screenDimentions().height){player[a].alive = false; derezList.push(a);}
+					if(player[a].nextStep.x < 0 || player[a].nextStep.x >= pixelMatrix.screenDimensions().width || player[a].nextStep.y < 0 || player[a].nextStep.y >= pixelMatrix.screenDimensions().height){player[a].alive = false; derezList.push(a);}
 				}
 				if(player[a].alive){
 					if(wallMatrix[player[a].nextStep.x][player[a].nextStep.y] != '000000'){player[a].alive = false; derezList.push(a);}	

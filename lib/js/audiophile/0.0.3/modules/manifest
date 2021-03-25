@@ -1,12 +1,12 @@
+{"name":"oscillator.js","type":"file"}
 {"name":"basic_108osc_synth.js","type":"file"}
-{"name":"basic_8osc_synth.js","type":"file"}
 {"name":"basic_oscilloscope.js","type":"file"}
-{"name":"conversionTable.js","type":"file"}
+{"name":"matrixRoll.js","type":"file"}
 {"name":"distortionModule.js","type":"file"}
+{"name":"basic_8osc_synth.js","type":"file"}
+{"name":"performer.js","type":"file"}
+{"name":"conversionTable.js","type":"file"}
 {"name":"gainModule.js","type":"file"}
 {"name":"globalOutputPort.js","type":"file"}
-{"name":"matrixRoll.js","type":"file"}
 {"name":"moduleCasing.js","type":"file"}
-{"name":"oscillator.js","type":"file"}
-{"name":"performer.js","type":"file"}
 {"name":"reverbModule.js","type":"file"}

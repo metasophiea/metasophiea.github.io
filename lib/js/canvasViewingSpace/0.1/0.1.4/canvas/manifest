@@ -1,5 +1,5 @@
 {"name":"canvasElement.js","type":"file"}
 {"name":"mouseInterface.js","type":"file"}
-{"name":"objects","type":"dir"}
 {"name":"render.js","type":"file"}
+{"name":"objects","type":"dir"}
 {"name":"viewportControl","type":"dir"}
